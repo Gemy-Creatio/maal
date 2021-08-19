@@ -1,0 +1,60 @@
+{% extends 'loginlayout.html' %}
+
+{% block title %} إنشاء حساب  {% endblock title %}
+
+
+{% block body %}
+<div class="row d-flex">
+    <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+        <div class="card card-plain mt-8">
+            <div class="card-body">
+                <form method="post">
+                   {% csrf_token %}
+                    <label for="email">البريد الألكترونى</label>
+                    <div class="mb-3">
+                        <input type="email" name="email" id="email" class="form-control" placeholder=">البريد الألكترونى" aria-label=">البريد الألكترونى" aria-describedby="email-addon">
+
+                    </div>
+                    <label for="password">كلمة المرور</label>
+                    <div class="mb-3">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="كلمة المرور" aria-label="كلمة المرور" aria-describedby="password-addon">
+
+                    </div>
+                    <label for="first_name">الأسم</label>
+                    <div class="mb-3">
+                        <input type="text" id="first_name" name="first_name" class="form-control" placeholder="الأسم" aria-label="الأسم" aria-describedby="email-addon">
+
+                    </div>
+                       <label for="last_name">اللقب</label>
+                    <div class="mb-3">
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="الأسم" aria-label="الأسم" aria-describedby="email-addon">
+
+                    </div>
+                    <label id="phone">الجوال</label>
+                    <div class="mb-3">
+                        <input type="number" id="phone" name="phone" class="form-control" placeholder="تاريخ الميلاد" aria-label="تاريخ الميلاد" aria-describedby="email-addon">
+
+                    </div>
+                    <label for="address"> العنوان</label>
+                    <div class="mb-3">
+                        <input type="text" id="address" name="address" class="form-control" placeholder="العنوان" aria-label="العنوان" aria-describedby="email-addon">
+
+                    </div>
+
+
+                    <div class="text-center">
+                        <button type="submit" class="btn bg-maal  w-100 mt-4 mb-0">إنشاء حساب </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6 back-ryad"></div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

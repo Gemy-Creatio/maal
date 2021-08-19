@@ -1,0 +1,107 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} التقييم البحثى {% endblock title %}
+
+
+{% block body %}
+<div class="col-12 mt-4">
+    <div class="card mb-4">
+        <div class="card-header pb-0 p-3">
+            <h6 class="mb-1 text-bolder">تعديل</h6>
+        </div>
+        <div class="card-body p-3">
+            <div class="row">
+                <div class="col-xl-10 col-md-10 mb-xl-0 mb-2">
+                    <div class="card card-blog card-plain">
+                        <div class="card-body px-1 pb-0">
+                            <form method="post" enctype="multipart/form-data">
+                             {% csrf_token %}
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="CompanyEntered">
+                                            الشركة
+                                            المدرجة
+                                        </label>
+                                        <input value="{{ rate.CompanyEntered }}"  name="CompanyEntered" id="CompanyEntered" type="text" class="form-control text-black-50" asp-for="CompanyEntered" />
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="ResearchCompany">
+                                            شركة الأبحاث
+                                        </label>
+                                        <input value="{{ rate.ResearchCompany }}"  type="text" id="ResearchCompany" name="ResearchCompany" class="form-control text-black-50" asp-for="ResearchCompany" />
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="AnalayticName">
+                                            إسم المحلل
+                                        </label>
+                                        <input value="{{ rate.AnalayticName }}"  id="AnalayticName" name="AnalayticName" type="text" class="form-control text-black-50" asp-for="AnalayticName" />
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="Recommendation">
+                                            التوصية
+                                        </label>
+                                        <input value="{{ rate.Recommendation }}"  id="Recommendation" name="Recommendation" type="text" class="form-control text-black-50" asp-for="Recommendation" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="FairValue">
+                                            القيمة العادلة
+                                        </label>
+                                        <input value="{{ rate.FairValue }}"  id="FairValue" name="FairValue" type="text" class="form-control text-black-50" asp-for="FairValue" placeholder="بالريال السعودى" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="CurrenncyValue">
+                                            السعر وقت التوصية
+                                        </label>
+                                        <input value="{{ rate.CurrenncyValue }}"  id="CurrenncyValue" name="CurrenncyValue" type="text" class="form-control text-black-50" asp-for="CurrenncyValue" placeholder="بالريال السعودى" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="MarketValue">
+                                            السعر السوقى
+                                        </label>
+                                        <input value="{{ rate.MarketValue }}"  id="MarketValue" name="MarketValue" type="text" class="form-control text-black-50" asp-for="MarketValue" placeholder="بالريال السعودى" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="report">
+                                            التقرير
+                                        </label>
+                                        <input name="report" value="{{ rate.report }}" id="report" type="file" class="form-control text-black-50"  placeholder="التقرير" />
+                                    </div>
+                                </div>
+                                <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column justify-content-center">
+                                            <input type="submit" class="btn btn-primary text-black-50 bg-maal" value="تعديل"/>
+
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
