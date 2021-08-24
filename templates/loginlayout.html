@@ -39,25 +39,36 @@
                         </button>
                         <div class="collapse navbar-collapse ps" id="navigation">
                             <ul class="navbar-nav mx-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="../pages/dashboard.html">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1" aria-hidden="true"></i>
-                                        لوحة التحكم
+                                    {% if request.user.first_name %}
+                                                                        <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'logout' %}">
+                                        <i class="fas fa-power-off opacity-6 text-dark me-1" aria-hidden="true"></i>
+                                        تسجيل خروج
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                                                        <li class="nav-item">
                                     <a class="nav-link me-2" href="../pages/profile.html">
                                         <i class="fa fa-user opacity-6 text-dark me-1" aria-hidden="true"></i>
                                         الملف الشخصى
                                     </a>
                                 </li>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="../pages/dashboard.html">
+                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1" aria-hidden="true"></i>
+                                        لوحة التحكم
+                                    </a>
+                                </li>
 
-                                <li class="nav-item">
+
+                                        {% else %}
+                                                                                    <li class="nav-item">
                                     <a class="nav-link me-2" href="{% url 'login' %}">
                                         <i class="fas fa-key opacity-6 text-dark me-1" aria-hidden="true"></i>
                                         تسجيل دخول
                                     </a>
                                 </li>
+                                    {% endif %}
+
                             </ul>
                             <ul class="navbar-nav d-lg-block d-none">
                                 <li class="nav-item">

@@ -16,6 +16,37 @@ def RatesList(request):
     return render(request, 'office/rates-list.html', context={"rates": rates})
 
 
+def Company_List(request):
+    companies = FinicialCompany.objects.all()
+    return render(request, 'office/company_list.html', context={"companies": companies})
+
+
+def AddCompany(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        company = FinicialCompany(name=name, EmpEntered_id=request.user.pk)
+        company.save()
+        if company.pk:
+            return redirect('company-list')
+        else:
+            return render(request, 'office/add-company.html')
+    return render(request, 'office/add-company.html')
+
+
+def EditCompany(request, pk):
+    company = FinicialCompany.objects.get(pk=pk)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        company.name = name
+        company.EmpEntered_id = request.user.pk
+        company.save()
+        if company.pk:
+            return redirect('company-list')
+        else:
+            return render(request, 'office/edit-company.html', context={"company": company})
+    return render(request, 'office/edit-company.html', context={"company": company})
+
+
 def AnalystsList(request):
     analayts = FinicialAnalyst.objects.all()
     return render(request, 'office/analysts-list.html', context={"analayts": analayts})
@@ -133,6 +164,12 @@ def RateDetails(request, pk):
     return render(request, 'office/rate-detail.html', context={"rate": rate})
 
 
+def CompanyDetails(request, pk):
+    company = FinicialCompany.objects.get(pk=pk)
+    codes = CompanyCode.objects.filter(company=company)
+    return render(request, 'office/company-detail.html', context={"company": company, "codes": codes})
+
+
 def AnalystDetails(request, pk):
     analyst = FinicialAnalyst.objects.get(pk=pk)
     return render(request, 'office/analyst-detail.html', context={"analyst": analyst})
@@ -162,7 +199,6 @@ class RatesAllReport(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
-
 
 
 class AnalystsAllReport(View):
