@@ -28,7 +28,9 @@
 
                     </div>
                     <div class="ms-auto text-end">
+                       {% if request.user.user_type == 1 %}
                         <a class="btn btn-link text-danger  px-3 mb-0" href="#"><i class="far fa-trash-alt text-danger me-2" aria-hidden="true"></i>مسح</a>
+                       {% endif %}
                         <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-update' rate.pk %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>تعديل</a>
                     </div>
                 </li>

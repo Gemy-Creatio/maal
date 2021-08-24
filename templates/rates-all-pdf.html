@@ -106,15 +106,15 @@ td, th { border: 1px solid #666666; font-size:11px; line-height:13px; border-bot
                                             <div class="d-flex px-2 py-1">
 
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.CompanyEntered }}</h6>
+                                                    <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany.name }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
+                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName.name }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>

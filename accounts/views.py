@@ -41,4 +41,18 @@ def register_empolyee(request):
     return render(request, 'accounts/register.html', context)
 
 
-
+def register_admin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_superuser(email=email, first_name=first_name, last_name=last_name,
+                                             address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+    context = {}
+    return render(request, 'accounts/register-admin.html', context)

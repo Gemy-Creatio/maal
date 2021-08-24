@@ -7,3 +7,7 @@ def home_page(request):
 
 def reports_page(request):
     return render(request, 'main/reports.html')
+
+
+def user_page(request):
+    return render(request, 'main/user-home.html')

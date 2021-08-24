@@ -1,0 +1,169 @@
+g{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<head>
+
+    <title>{{ title }}</title>
+    <style type="text/css">
+        {#@import "../static/lib/bootstrap/dist/css/bootstrap.css";#}
+        {#@import "../static/css/soft-ui-dashboard.css";#}
+body{
+    font-family: ;
+}
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #B8A228;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            /* text-align: right;*/
+            padding: 10px 20px 0px 20px;
+        }
+
+        .title span {
+            color: #B8A228;
+        }
+
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: right !important;
+            /*margin-left: 40%;*/
+        }
+
+        .hrItem {
+            border: none;
+            height: 1px;
+            /* Set the hr color */
+            color: #333;
+            /* old IE */
+            background-color: #fff;
+            /* Modern Browsers */
+        }
+
+        @font-face {
+            font-family: RTLFont;
+   src: url('../static/css/fonts/helveticaneuelt-arabic-55-roman.ttf')
+        }
+
+        body {
+            font-weight: 200 !important;
+            font-size: 14px !important;
+            font-family: RTLFont !important;
+        }
+
+        table { border: 1px solid #666666;  border-collapse:collapse; border-color:#ccc; }
+td, th { border: 1px solid #666666; font-size:11px; line-height:13px; border-bottom:1px solid #666666; vertical-align:top; padding:5px; }
+
+    </style>
+</head>
+
+<body>
+<div class='wrapper'>
+    <div class='header'>
+        <pdf:language name="arabic"/>
+        <h3 > {{ company }}</h3>
+    </div>
+    <div>
+        <div class='details'>
+            <pdf:language name="arabic"/>
+        المملكة العربية السعودية
+            <br>
+                صحفية مال الأقتصادية
+                    <br>
+           التاريخ : {{ today }}
+                    <br>
+
+            <hr class='hrItem'/>
+                <h3 class="header"> {{ topic }}</h3>
+            <br>
+            <div class="body">
+                                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث الحالية</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظيفة</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">شركات أبحاث سابقة</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظيفة</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الهاتف</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">البريد الألكترونى</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الحساب على تويتر </th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for item in analayts %}
+                              <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ item.name }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.currentCompany.name }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.CurrentJob }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">{{ item.pervCompany.name }}</span>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.pervJob }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.phone }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.email |urlize}}</p>
+                                        </td>
+                                        <td>
+
+                                           <a style="cursor: pointer; text-decoration: none;" href="https://twitter.com/{{ item.tiwtterAccount }}"><i  style="color: #0c5460" class="fab fa-twitter text-xl font-weight-bold mb-0">{{ item.tiwtterAccount }}</i></a>
+                                        </td>
+
+                                        <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'analyst-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+
+                                        </td>
+
+
+                                    </tr>
+                               {% endfor %}
+
+                            </tbody>
+                        </table>
+
+            </div>
+                    <hr class='hrItem'/>
+
+            <div class="card">
+                <div class="card-body">
+                    انشاء بواسطة:
+                    {{ user.first_name }} {{ user.last_name }}
+                <br>
+                    {% if user.user_type == 1 %}
+                        الوظيفة : مدير المؤسسه
+                    {% endif %}
+                    {% if user.user_type == 2 %}
+                        الوظيفة : موظف
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -23,7 +23,12 @@
                                             الشركة
                                             المدرجة
                                         </label>
-                                        <input name="CompanyEntered" id="CompanyEntered" type="text" class="form-control text-black-50" asp-for="CompanyEntered" />
+<select name="CompanyEntered" id="CompanyEntered" class="form-control text-black-50">
+  {% for company in companies %}
+          <option value="{{ company.pk }}">{{ company.name }}</option>
+
+    {% endfor  %}
+</select>
                                     </div>
                                 </div>
                                 <div class="form-group row ">
@@ -31,15 +36,22 @@
                                         <label for="ResearchCompany">
                                             شركة الأبحاث
                                         </label>
-                                        <input type="text" id="ResearchCompany" name="ResearchCompany" class="form-control text-black-50" asp-for="ResearchCompany" />
-                                    </div>
+<select name="ResearchCompany" id="ResearchCompany" class="form-control text-black-50">
+  {% for company in companies %}
+          <option value="{{ company.pk }}">{{ company.name }}</option>
+    {% endfor  %}
+</select>                                    </div>
                                 </div>
                                 <div class="form-group row ">
                                     <div class="col-10 d-flex flex-column">
                                         <label for="AnalayticName">
                                             إسم المحلل
                                         </label>
-                                        <input id="AnalayticName" name="AnalayticName" type="text" class="form-control text-black-50" asp-for="AnalayticName" />
+<select name="AnalayticName" id="AnalayticName" class="form-control text-black-50" >
+  {% for analyst in analysts %}
+          <option value="{{ analyst.pk }}">{{ analyst.name }}</option>
+    {% endfor  %}
+</select>
                                     </div>
                                 </div>
                                 <div class="form-group row ">

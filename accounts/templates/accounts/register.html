@@ -1,12 +1,15 @@
-{% extends 'loginlayout.html' %}
+{% extends 'main.html' %}
 
 {% block title %} إنشاء حساب  {% endblock title %}
 
 
 {% block body %}
 <div class="row d-flex">
-    <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+    <div class="col-xl-10 col-lg-10 col-md-8 d-flex flex-column mx-auto">
         <div class="card card-plain mt-8">
+              <div class="card-header pb-0">
+                <h6>محرر</h6>
+            </div>
             <div class="card-body">
                 <form method="post">
                    {% csrf_token %}
@@ -49,12 +52,5 @@
             </div>
         </div>
     </div>
-
-    <div class="col-md-6">
-        <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6 back-ryad"></div>
-        </div>
-    </div>
-
 </div>
 {% endblock body %}

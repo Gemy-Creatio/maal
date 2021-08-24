@@ -83,11 +83,6 @@ class UserManager(BaseUserManager):
         return user
 
 
-
-
-
-
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name=_('email address'), max_length=255, unique=True
@@ -104,7 +99,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_emp = models.BooleanField(_('Employee'), default=False, help_text=_(
         'Designates whether this user should be treated as an Secondary Employee. '
     ))
-
 
     USER_TYPE_CHOICES = (
         (1, 'ممثل المؤسسة'),
@@ -164,5 +158,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Does the user have permissions to view the app `app_label`?"""
         # Simplest possible answer: Yes, always
         return True
-
-

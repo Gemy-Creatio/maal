@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+المحللين المالين
+{% endblock %}
+
+
+{% block body %}
+<div class="col-md-10 mt-2">
+    <div class="card">
+        <div class="card-header pb-0 px-3">
+            <h6 class="mb-0">تفاصيل {{ analyst.name }}</h6>
+        </div>
+        <div class="card-body pt-4 p-3">
+            <ul class="list-group">
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                    <div class="d-flex flex-column">
+                        <span class="mb-2 text-xl">الأسم <span class="text-dark font-weight-bold ms-sm-2">{{ analyst.name }}</span></span>
+                        <span class="mb-2 text-lg">شركة الأبحاث الحالية<span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.currentCompany.name }}</span></span>
+                        <span class="text-lg">الوظيفة<span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.CurrentJob }}</span></span>
+                        <span class="mb-2 text-lg">شركة الأبحاث السابقة<span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.pervCompany.name }}</span></span>
+                        <span class="text-lg">الوظيفة<span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.pervJob }}</span></span>
+                        <span class="text-lg">الهاتف <span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.phone }}</span></span>
+                        <span class="text-lg">البريد الألكترونى <span class="text-dark ms-sm-2 font-weight-bold">{{ analyst.email }}</span></span>
+                        <span class="text-lg">الحساب على تويتر <span class="text-dark ms-sm-2 font-weight-bold">
+                            <a style="cursor: pointer; text-decoration: none;" href="https://twitter.com/{{ analyst.tiwtterAccount }}"><i  style="color: #0c5460" class="fab fa-twitter text-xl font-weight-bold mb-0">{{ analyst.tiwtterAccount }}</i></a>
+                        </span></span>
+                    </div>
+                    <div class="ms-auto text-end">
+                       {% if request.user.user_type == 1 %}
+                        <a class="btn btn-link text-danger  px-3 mb-0" href="#"><i class="far fa-trash-alt text-danger me-2" aria-hidden="true"></i>مسح</a>
+                       {% endif %}
+                        <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'analyst-update' analyst.pk %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>تعديل</a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,4 +1,7 @@
 from django.contrib import admin
-from .models import Rates
+from . import models
 
-admin.site.register(Rates)
+admin.site.register(models.Rates)
+admin.site.register(models.FinicialAnalyst)
+admin.site.register(models.FinicialCompany)
+admin.site.register(models.CompanyCode)
