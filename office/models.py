@@ -67,4 +67,4 @@ class Rates(models.Model):
         return (self.MarketValue / self.CurrenncyValue) * 100
 
     def __str__(self):
-        return self.CompanyEntered
+        return self.CompanyEntered.name
