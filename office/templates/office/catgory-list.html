@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-شركات الأبحاث
+القطاعات
 {% endblock %}
 
 {% block body %}
@@ -10,11 +10,11 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>شركات الأبحاث</h6>
+                <h6>القطاعات</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    {% if companies.count.bit_length < 0 %}
+                    {% if categories.count.bit_length < 0 %}
 
                         <p>لا توجد بيانات</p>
                     {% else %}
@@ -25,15 +25,15 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="numbers">
-<a style="cursor: pointer;text-decoration: none" href="{% url 'company-add' %}">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة شركة</p>
+<a style="cursor: pointer;text-decoration: none" href="{% url 'category-add' %}">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة قطاع</p>
 
 </a>
                         </div>
                     </div>
                     <div class="col-4 text-start">
                         <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                           <a href="{% url 'company-add' %}" style="cursor: pointer; text-decoration: none">
+                           <a href="{% url 'category-add' %}" style="cursor: pointer; text-decoration: none">
                                 <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
                            </a>
                         </div>
@@ -49,13 +49,12 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم الشركة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> القطاع</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم القطاع</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                             {% for item in companies %}
+                             {% for item in categories %}
                               <tr>
                                         <td>
                                             <div class="d-flex">
@@ -65,16 +64,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                                       <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.category.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'company-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'category-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
                                         </td>
                                     </tr>
                                {% endfor %}

@@ -7,7 +7,7 @@ from django.template.loader import get_template
 from django.views import View
 from accounts.models import User
 from django.shortcuts import render, redirect
-from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode
+from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory
 from django.core.files.storage import FileSystemStorage
 
 
@@ -21,30 +21,69 @@ def Company_List(request):
     return render(request, 'office/company_list.html', context={"companies": companies})
 
 
-def AddCompany(request):
+def Category_List(request):
+    category = CompanyCategory.objects.all()
+    return render(request, 'office/catgory-list.html', context={"categories": category})
+
+
+def AddCategory(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        company = FinicialCompany(name=name, EmpEntered_id=request.user.pk)
+        category = CompanyCategory(name=name, EmpEntered_id=request.user.pk)
+        category.save()
+        if category.pk:
+            return redirect('category-list')
+        else:
+            return render(request, 'office/add-category.html')
+    return render(request, 'office/add-category.html')
+
+
+def AddCompany(request):
+    categories = CompanyCategory.objects.all()
+    context = {"categories": categories}
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category = request.POST.get('category')
+        company = FinicialCompany(name=name, EmpEntered_id=request.user.pk, category_id=category)
         company.save()
         if company.pk:
             return redirect('company-list')
         else:
-            return render(request, 'office/add-company.html')
-    return render(request, 'office/add-company.html')
+            return render(request, 'office/add-company.html', context=context)
+    return render(request, 'office/add-company.html', context=context)
 
 
 def EditCompany(request, pk):
     company = FinicialCompany.objects.get(pk=pk)
+    categories = CompanyCategory.objects.all()
     if request.method == 'POST':
         name = request.POST.get('name')
+        category = request.POST.get('category')
         company.name = name
+        company.category_id = category
         company.EmpEntered_id = request.user.pk
         company.save()
         if company.pk:
             return redirect('company-list')
         else:
-            return render(request, 'office/edit-company.html', context={"company": company})
-    return render(request, 'office/edit-company.html', context={"company": company})
+            return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
+    return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
+
+
+def EditCategory(request, pk):
+    catgeory = CompanyCategory.objects.get(pk=pk)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category_id = request.POST.get('category')
+        catgeory.name = name
+        catgeory.category_id = category_id
+        catgeory.EmpEntered_id = request.user.pk
+        catgeory.save()
+        if catgeory.pk:
+            return redirect('category-list')
+        else:
+            return render(request, 'office/edit-category.html', context={"category": catgeory})
+    return render(request, 'office/edit-category.html', context={"category": catgeory})
 
 
 def AnalystsList(request):
@@ -168,6 +207,12 @@ def CompanyDetails(request, pk):
     company = FinicialCompany.objects.get(pk=pk)
     codes = CompanyCode.objects.filter(company=company)
     return render(request, 'office/company-detail.html', context={"company": company, "codes": codes})
+
+
+def CategoryDetails(request, pk):
+    category = CompanyCategory.objects.get(pk=pk)
+    companies = FinicialCompany.objects.filter(category=category)
+    return render(request, 'office/category-detail.html', context={"category": category, "companies": companies})
 
 
 def AnalystDetails(request, pk):

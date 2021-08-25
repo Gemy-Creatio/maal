@@ -56,3 +56,29 @@ def register_admin(request):
             return redirect('home-page')
     context = {}
     return render(request, 'accounts/register-admin.html', context)
+
+
+def user_profile(request):
+    user = User.objects.get(pk=request.user.pk)
+    return render(request, 'accounts/profile.html', context={"user": user})
+
+
+def edit_user(request, pk):
+    user = User.objects.get(pk=pk)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user.email = email
+        user.phone = phone
+        user.address = address
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        if user is not None:
+            login(request, user)
+            return redirect('home-page')
+    context = {}
+    return render(request, 'accounts/user-edit.html', context={"user":user})

@@ -19841,6 +19841,11 @@ fieldset:disabled .btn {
   color: #fff;
   transition: bottom 0.35s ease;
 }
+.background_card{
+        background-image: url('../images/logo-maaal.png') !important;
+    background-position: center;
+    background-repeat: no-repeat !important;
+}
 .logo_login {
     height:auto;
     width:3rem;

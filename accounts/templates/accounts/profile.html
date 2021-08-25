@@ -1,0 +1,84 @@
+{% extends 'loginlayout.html' %}
+{% load static %}
+{% block title %}  الصفحة الشخية {% endblock title %}
+
+
+{% block body %}
+
+<div class="row pt-10">
+<div class="col-lg-10 col-md-10">
+          <div class="card h-100 background_card">
+            <div class="card-header pb-0">
+              <h6>صحفية مال الأقتصادية</h6>
+              <p class="text-xl-center">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</span>
+              </p>
+            </div>
+            <div class="card-body p-3">
+              <div class="timeline timeline-one-side">
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="fas fa-envelope-open-text"></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">البريد الألكترونى</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ user.email }}</p>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="fas fa-building "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">العنوان</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ user.address }}</p>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="fas fa-calendar-times"></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">تاريخ الأنضمام</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ user.date_joined }}</p>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="fas fa-phone "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">الهاتف</h6>
+                    <p class="text-secondary ">{{ user.phone }}</p>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="fas fa-building "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">الوظيفة</h6>
+                      {% if user.user_type == 1 %}
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">أدمن</p>
+                          {% else %}
+                                              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">محرر</p>
+
+                      {% endif %}
+                  </div>
+                </div>
+                <div class="timeline-block">
+                  <span class="timeline-step">
+                    <i class="fas fa-user-edit "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <a href="{% url 'user-edit' user.pk %}" class="text-dark text-sm font-weight-bold mb-0">تعديل</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+
+{% endblock body %}
