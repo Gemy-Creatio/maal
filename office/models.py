@@ -43,10 +43,18 @@ class FinicialAnalyst(models.Model):
         return self.name
 
 
+class ResearchCompany(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Rates(models.Model):
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='CompanyEntered',
                                        null=True)
-    ResearchCompany = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='ResearchCompany',
+    ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE, related_name='ResearchCompany',
                                         null=True)
     AnalayticName = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE, related_name='AnalayticName',
                                       null=True)

@@ -7,13 +7,18 @@ from django.template.loader import get_template
 from django.views import View
 from accounts.models import User
 from django.shortcuts import render, redirect
-from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory
+from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany
 from django.core.files.storage import FileSystemStorage
 
 
 def RatesList(request):
     rates = Rates.objects.all()
     return render(request, 'office/rates-list.html', context={"rates": rates})
+
+
+def Research_List(request):
+    companies = ResearchCompany.objects.all()
+    return render(request, 'office/research_list.html', context={"companies": companies})
 
 
 def Company_List(request):
@@ -36,6 +41,18 @@ def AddCategory(request):
         else:
             return render(request, 'office/add-category.html')
     return render(request, 'office/add-category.html')
+
+
+def AddResearch(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        company = ResearchCompany(name=name, EmpEntered_id=request.user.pk)
+        company.save()
+        if company.pk:
+            return redirect('research-list')
+        else:
+            return render(request, 'office/add-research.html')
+    return render(request, 'office/add-research.html')
 
 
 def AddCompany(request):
@@ -86,6 +103,20 @@ def EditCategory(request, pk):
     return render(request, 'office/edit-category.html', context={"category": catgeory})
 
 
+def EditResearch(request, pk):
+    company = ResearchCompany.objects.get(pk=pk)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        company.name = name
+        company.EmpEntered_id = request.user.pk
+        company.save()
+        if company.pk:
+            return redirect('research-list')
+        else:
+            return render(request, 'office/edit-research.html', context={"company": company})
+    return render(request, 'office/edit-research.html', context={"company": company})
+
+
 def AnalystsList(request):
     analayts = FinicialAnalyst.objects.all()
     return render(request, 'office/analysts-list.html', context={"analayts": analayts})
@@ -115,6 +146,7 @@ def AddAnalyst(request):
 
 
 def AddRate(request):
+    research = ResearchCompany.objects.all()
     company = FinicialCompany.objects.all()
     analyst = FinicialAnalyst.objects.all()
     if request.method == 'POST' and request.FILES['report']:
@@ -122,21 +154,23 @@ def AddRate(request):
         report = request.FILES['report']
         fs = FileSystemStorage()
         filename = fs.save(report.name, report)
-        ResearchCompany = request.POST.get('ResearchCompany')
+        researchCompany = request.POST.get('ResearchCompany')
         AnalayticName = request.POST.get('AnalayticName')
         Recommendation = request.POST.get('Recommendation')
         CurrenncyValue = request.POST.get('CurrenncyValue')
         FairValue = request.POST.get('FairValue')
         MarketValue = request.POST.get('MarketValue')
         rate = Rates(CompanyEntered_id=CompanyEntered, EmpEntered_id=request.user.pk, Recommendation=Recommendation,
-                     ResearchCompany_id=ResearchCompany, AnalayticName_id=AnalayticName, report=report,
+                     ResearchCompany_id=researchCompany, AnalayticName_id=AnalayticName, report=report,
                      CurrenncyValue=float(CurrenncyValue), MarketValue=float(MarketValue), FairValue=float(FairValue))
         rate.save()
         if rate.pk:
             return redirect('rates-list')
         else:
-            return render(request, 'office/add-rate.html', context={"companies": company, "analysts": analyst})
-    return render(request, 'office/add-rate.html', context={"companies": company, "analysts": analyst})
+            return render(request, 'office/add-rate.html',
+                          context={"researches": research, "companies": company, "analysts": analyst})
+    return render(request, 'office/add-rate.html',
+                  context={"researches": research, "companies": company, "analysts": analyst})
 
 
 def UpdateAnalyst(request, pk):
@@ -167,6 +201,7 @@ def UpdateAnalyst(request, pk):
 
 
 def UpdateRate(request, pk):
+    research = ResearchCompany.objects.all()
     rate = Rates.objects.get(pk=pk)
     company = FinicialCompany.objects.all()
     analyst = FinicialAnalyst.objects.all()
@@ -175,7 +210,7 @@ def UpdateRate(request, pk):
         report = request.FILES['report']
         fs = FileSystemStorage()
         filename = fs.save(report.name, report)
-        ResearchCompany = request.POST.get('ResearchCompany')
+        researchCompany = request.POST.get('ResearchCompany')
         AnalayticName = request.POST.get('AnalayticName')
         Recommendation = request.POST.get('Recommendation')
         CurrenncyValue = request.POST.get('CurrenncyValue')
@@ -188,14 +223,15 @@ def UpdateRate(request, pk):
         rate.MarketValue = float(MarketValue)
         rate.CurrenncyValue = float(CurrenncyValue)
         rate.Recommendation = Recommendation
-        rate.ResearchCompany_id = ResearchCompany.pk
+        rate.ResearchCompany_id = researchCompany
         rate.EmpEntered_id = request.user.pk
         rate.save()
         if rate.pk:
             return redirect('rate-list')
         else:
             return render(request, 'office/update-rate.html')
-    return render(request, 'office/update-rate.html', context={"rate": rate, "companies": company, "analysts": analyst})
+    return render(request, 'office/update-rate.html',
+                  context={"researches": research, "rate": rate, "companies": company, "analysts": analyst})
 
 
 def RateDetails(request, pk):

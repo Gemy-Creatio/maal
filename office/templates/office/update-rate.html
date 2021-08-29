@@ -43,7 +43,7 @@
                                             شركة الأبحاث
                                         </label>
 <select name="ResearchCompany" id="ResearchCompany" class="form-control text-black-50" >
-  {% for company in companies %}
+  {% for company in researches %}
     {% if rate.CompanyEntered.pk == company.pk %}
         <option selected="selected" value="{{ company.pk }}">{{ company.name }}</option>
     {% else %}
