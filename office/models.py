@@ -30,14 +30,18 @@ class CompanyCode(models.Model):
 class FinicialAnalyst(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
-    pervCompany = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='pervCompany', null=True)
-    currentCompany = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='currentCompany',
-                                       null=True)
+    pervCompany = models.ManyToManyField(FinicialCompany, related_name='pervCompany', null=True)
+    currentCompany = models.ForeignKey(FinicialCompany, related_name='currentCompany', null=True,
+                                       on_delete=models.CASCADE)
     pervJob = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
     tiwtterAccount = models.CharField(max_length=255, null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        verbose_name_plural = "Analysts"
+        ordering = ["id", ]
 
     def __str__(self):
         return self.name

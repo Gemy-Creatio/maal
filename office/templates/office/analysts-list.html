@@ -77,7 +77,10 @@
                                             <span class="badge badge-sm bg-gradient-secondary">{{ item.CurrentJob }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ item.pervCompany.name }}</span>
+                                            {% for comp in item.pervCompany.all  %}
+                                            <span class="text-secondary text-xs font-weight-bold">{{ comp.name }}</span>
+                                                <hr/>
+                                      {% endfor %}
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.pervJob }}</p>

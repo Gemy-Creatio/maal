@@ -55,7 +55,7 @@
                                         <label for="pervCompany">
 شركة الأبحاث السابقة
                                         </label>
-<select name="pervCompany" id="pervCompany" class="form-control text-black-50">
+<select name="pervCompany" id="pervCompany" multiple class="form-control text-black-50">
   {% for company in companies %}
           <option value="{{ company.pk }}">{{ company.name }}</option>
 

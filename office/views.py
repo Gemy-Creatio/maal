@@ -128,16 +128,17 @@ def AddAnalyst(request):
         name = request.POST.get('name')
         currentCompany = request.POST.get('currentCompany')
         currentJob = request.POST.get('currentJob')
-        pervCompany = request.POST.get('pervCompany')
+        pervCompany = request.POST.getlist('pervCompany')
         pervJob = request.POST.get('pervJob')
         phone = int(request.POST.get('phone'))
         email = request.POST.get('email')
         twitterAccount = request.POST.get('twitterAccount')
 
-        analyst = FinicialAnalyst(name=name, phone=phone, tiwtterAccount=twitterAccount, email=email,
-                                  currentCompany_id=currentCompany, currentJob=currentJob,
-                                  pervCompany_id=pervCompany, pervJob=pervJob)
-        analyst.save()
+        analyst = FinicialAnalyst.objects.create(name=name, phone=phone, tiwtterAccount=twitterAccount, email=email,
+                                                 currentCompany_id=currentCompany, CurrentJob=currentJob,
+                                                 pervJob=pervJob)
+        companies = FinicialCompany.objects.filter(pk__in=pervCompany)
+        analyst.pervCompany.add(*companies)
         if analyst.pk:
             return redirect('analyst-list')
         else:
