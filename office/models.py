@@ -30,10 +30,8 @@ class CompanyCode(models.Model):
 class FinicialAnalyst(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
-    pervCompany = models.ManyToManyField(FinicialCompany, related_name='pervCompany', null=True)
     currentCompany = models.ForeignKey(FinicialCompany, related_name='currentCompany', null=True,
                                        on_delete=models.CASCADE)
-    pervJob = models.CharField(max_length=255, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
     tiwtterAccount = models.CharField(max_length=255, null=True, blank=True)
@@ -80,3 +78,12 @@ class Rates(models.Model):
 
     def __str__(self):
         return self.CompanyEntered.name
+
+
+class PerviousCompany(models.Model):
+    job = models.CharField(max_length=255, null=True, blank=True, )
+    analyst = models.ForeignKey(FinicialAnalyst ,on_delete=models.CASCADE)
+    company = models.CharField(max_length=255, null=True, blank=True, )
+
+    def __str__(self):
+        return self.analyst.name

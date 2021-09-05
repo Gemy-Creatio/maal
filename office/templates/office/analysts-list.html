@@ -51,8 +51,7 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث الحالية</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظيفة</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">شركات أبحاث سابقة</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظيفة</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظائف السابقة</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الهاتف</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">البريد الألكترونى</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الحساب على تويتر </th>
@@ -76,14 +75,8 @@
                                         <td class="align-middle text-center text-sm">
                                             <span class="badge badge-sm bg-gradient-secondary">{{ item.CurrentJob }}</span>
                                         </td>
-                                        <td class="align-middle text-center">
-                                            {% for comp in item.pervCompany.all  %}
-                                            <span class="text-secondary text-xs font-weight-bold">{{ comp.name }}</span>
-                                                <hr/>
-                                      {% endfor %}
-                                        </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.pervJob }}</p>
+                                            <p class="text-xs font-weight-bold mb-0"><a href="{% url 'pervcompany-list' item.pk %}" class="cursor-pointer"><i class="fas fa-briefcase"></i>المزيد</a></p>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.phone }}</p>

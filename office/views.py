@@ -1,13 +1,12 @@
 from datetime import datetime
-
 from django.http import HttpResponse
-
 from maal.utils import render_to_pdf
 from django.template.loader import get_template
 from django.views import View
 from accounts.models import User
 from django.shortcuts import render, redirect
-from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany
+from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany, \
+    PerviousCompany
 from django.core.files.storage import FileSystemStorage
 
 
@@ -128,17 +127,12 @@ def AddAnalyst(request):
         name = request.POST.get('name')
         currentCompany = request.POST.get('currentCompany')
         currentJob = request.POST.get('currentJob')
-        pervCompany = request.POST.getlist('pervCompany')
-        pervJob = request.POST.get('pervJob')
         phone = int(request.POST.get('phone'))
         email = request.POST.get('email')
         twitterAccount = request.POST.get('twitterAccount')
 
         analyst = FinicialAnalyst.objects.create(name=name, phone=phone, tiwtterAccount=twitterAccount, email=email,
-                                                 currentCompany_id=currentCompany, CurrentJob=currentJob,
-                                                 pervJob=pervJob)
-        companies = FinicialCompany.objects.filter(pk__in=pervCompany)
-        analyst.pervCompany.add(*companies)
+                                                 currentCompany_id=currentCompany, CurrentJob=currentJob)
         if analyst.pk:
             return redirect('analyst-list')
         else:
@@ -181,16 +175,12 @@ def UpdateAnalyst(request, pk):
         name = request.POST.get('name')
         currentCompany = request.POST.get('currentCompany')
         currentJob = request.POST.get('currentJob')
-        pervCompany = request.POST.get('pervCompany')
-        pervJob = request.POST.get('pervJob')
         phone = int(request.POST.get('phone'))
         email = request.POST.get('email')
         twitterAccount = request.POST.get('twitterAccount')
         analyst.name = name
         analyst.currentCompany_id = currentCompany
         analyst.CurrentJob = currentJob
-        analyst.pervJob = pervJob
-        analyst.pervCompany_id = pervCompany
         analyst.phone = phone
         analyst.email = email
         analyst.tiwtterAccount = twitterAccount
@@ -307,3 +297,22 @@ class AnalystsAllReport(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
+
+
+def PervCompanyList(request, pk):
+    pervcopmainies = PerviousCompany.objects.filter(analyst_id=pk)
+    analyst = FinicialAnalyst.objects.get(pk=pk)
+    return render(request, 'office/percompany-list.html', context={"companies": pervcopmainies, 'analyst': analyst})
+
+
+def addPervCompany(request, pk):
+    if request.method == 'POST':
+        company = request.POST.get('company')
+        job = request.POST.get('job')
+        perv = PerviousCompany(job=job, company=company, analyst_id=pk)
+        perv.save()
+        if perv.pk:
+            return redirect('pervcompany-list', pk=pk)
+        else:
+            return render(request, 'office/add-pervcompany.html')
+    return render(request, 'office/add-pervcompany.html')

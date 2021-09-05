@@ -23,5 +23,7 @@ urlpatterns = [
     path('analayst/list', views.AnalystsList, name='analyst-list'),
     path('rates/report', views.RatesAllReport.as_view(), name='rates-report'),
     path('analysts/report', views.AnalystsAllReport.as_view(), name='analysts-report'),
+    path('pervcompany/list/<int:pk>', views.PervCompanyList, name='pervcompany-list'),
+    path('pervcompany/add/<int:pk>', views.addPervCompany, name='pervcompany-add'),
 
 ]
