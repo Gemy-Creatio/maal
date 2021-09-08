@@ -16,6 +16,7 @@ class CompanyCategory(models.Model):
 
 
 class FinicialCompany(models.Model):
+    logo = models.ImageField(null=True, )
     name = models.CharField(max_length=255, null=True, blank=True)
     category = models.ForeignKey(CompanyCategory, on_delete=models.CASCADE, null=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -43,6 +44,7 @@ class CompanyCode(models.Model):
 
 
 class FinicialAnalyst(models.Model):
+    logo = models.ImageField(null=True, )
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
     currentCompany = models.ForeignKey(FinicialCompany, related_name='currentCompany', null=True,

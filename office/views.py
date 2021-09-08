@@ -57,10 +57,13 @@ def AddResearch(request):
 def AddCompany(request):
     categories = CompanyCategory.objects.all()
     context = {"categories": categories}
-    if request.method == 'POST':
+    if request.method == 'POST' and request.FILES['logo']:
         name = request.POST.get('name')
+        logo = request.FILES['logo']
+        fs = FileSystemStorage()
+        filename = fs.save(logo.name, logo)
         category = request.POST.get('category')
-        company = FinicialCompany(name=name, EmpEntered_id=request.user.pk, category_id=category)
+        company = FinicialCompany(logo=logo,name=name, EmpEntered_id=request.user.pk, category_id=category)
         company.save()
         if company.pk:
             return redirect('company-list')
@@ -123,15 +126,19 @@ def AnalystsList(request):
 
 def AddAnalyst(request):
     company = FinicialCompany.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST' and request.FILES['logo']:
         name = request.POST.get('name')
+        logo = request.FILES['logo']
+        fs = FileSystemStorage()
+        filename = fs.save(logo.name, logo)
         currentCompany = request.POST.get('currentCompany')
         currentJob = request.POST.get('currentJob')
         phone = int(request.POST.get('phone'))
         email = request.POST.get('email')
         twitterAccount = request.POST.get('twitterAccount')
 
-        analyst = FinicialAnalyst.objects.create(name=name, phone=phone, tiwtterAccount=twitterAccount, email=email,
+        analyst = FinicialAnalyst.objects.create(logo=logo, name=name, phone=phone, tiwtterAccount=twitterAccount,
+                                                 email=email,
                                                  currentCompany_id=currentCompany, CurrentJob=currentJob)
         if analyst.pk:
             return redirect('analyst-list')

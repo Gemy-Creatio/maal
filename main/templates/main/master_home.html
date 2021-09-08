@@ -89,7 +89,12 @@
                {% for analyst in analysts %}
                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                   <div class="avatar me-3">
-                    <img src="{% static 'images/maal.png' %}" alt="kal" class="border-radius-lg shadow">
+                      {% if  analyst.logo %}
+                    <img src="{{ analyst.logo.url }}" alt="kal" class="border-radius-lg shadow">
+                          {% else %}
+                                              <img src="{% static 'images/maal.png' %}" alt="kal" class="border-radius-lg shadow">
+
+                      {% endif %}
                   </div>
                   <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">{{ analyst.name }}</h6>
@@ -103,55 +108,111 @@
               </ul>
             </div>
           <div class="card-footer d-flex justify-content-center">
-              <a href="{% url 'all-user-analyst' %}" class="btn btn-sm btn-round mb-0 me-1 bg-maal">المزيد</a>
+              <a href="{% url 'all-user-analyst' %}" class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
           </div>
           </div>
 
 
         </div>
           <div class="col-xl-6 col-lg-5 col-md-7 pt-3">
-              <div class="card h-100 mb-4 z-index-0">
-            <div class="card-header pb-0 px-3">
+                    <div class="card h-100 mb-4 z-index-0">
+            <div class="card-header pb-0">
               <div class="row">
-                <div class="col-md-6">
-                  <h6 class="mb-0">التقييمات البحثية</h6>
-                </div>
-                <div class="col-md-6 d-flex justify-content-end align-items-center">
-                  <i class="far fa-calendar-alt me-2" aria-hidden="true"></i>
-                  <small>{{ today }}</small>
+                <div class="col-lg-6 col-7">
+                  <h6>التقيمات البحثية</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                    <span class="font-weight-bold ms-1">{{ high_rated.count }}</span> أحدث التقييمات
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="card-body justify-content-center pt-4 p-3">
-              <ul class="list-group">
-                  {% for rate in high_rated %}
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-<a href="{% url 'user-rate' rate.pk %}">
-                      <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down" aria-hidden="true"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-black-50 text-sm">{{ rate.CompanyEntered }}</h6>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
 
-                      <span class="text-xs">{{ rate.RecommendDate }}</span>
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التوصية</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">القيمة العادلة</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر وقت التوصية</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر السوقى </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التقرير</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاريخ التوصية</th>
 
-                    </div>
-                  </div>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for item in high_rated %}
+                              <tr>
+                                                                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ item.CompanyEntered.logo.url }}" class="avatar avatar-sm me-3" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
+                            <p class="text-xs text-secondary mb-0">{{ item.email |urlize }}</p>
+                          </div>
+                        </div>
+                      </td>
 
-</a>
-                  <div class="d-flex align-items-center text-black-50  text-sm font-weight-bold">
-                    {{ rate.market_percentage |floatformat:-2  }}
-                  </div>
-                </li>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                           <a href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                                <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
+                                           </a>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.FairValue }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.CurrenncyValue }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.MarketValue }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.market_percentage |floatformat:-2  }}</p>
+                                        </td>
+                                        <td>
+                                            <a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ item.RecommendDate.Date }}</p>
 
-                  {% endfor %}
+                                        </td>
+                                        <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'user-rate' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+                                        </td>
 
-              </ul>
+                                    </tr>
+                               {% endfor %}
 
+                            </tbody>
+                        </table>
+
+              </div>
             </div>
-                 <div class="card-footer d-flex justify-content-center">
-              <a href="{% url 'all-user-rate' %}" class="btn btn-sm btn-round mb-0 me-1 bg-maal">المزيد</a>
+                       <div class="card-footer d-flex justify-content-center">
+              <a href="{% url 'all-user-rate' %}" class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
           </div>
           </div>
+
           </div>
       </div>
 

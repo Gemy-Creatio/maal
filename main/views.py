@@ -1,11 +1,17 @@
 import datetime
 
 from django.shortcuts import render
-from office.models import FinicialAnalyst, FinicialCompany, Rates
+from office.models import FinicialAnalyst, FinicialCompany, Rates, User
 
 
 def home_page(request):
-    return render(request, 'main/home.html')
+    context = {
+        "rate_count": Rates.objects.all().count(),
+        "analysts_count": FinicialAnalyst.objects.all().count(),
+        "companies_count": FinicialCompany.objects.all().count(),
+        "emp_count": User.objects.filter(user_type=2).count()
+    }
+    return render(request, 'main/home.html', context=context)
 
 
 def reports_page(request):

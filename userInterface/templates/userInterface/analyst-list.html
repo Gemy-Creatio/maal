@@ -26,12 +26,11 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث الحالية</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظيفة</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الوظائف السابقة</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الهاتف</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">البريد الألكترونى</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الحساب على تويتر </th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -39,14 +38,17 @@
                             <tbody>
                              {% for item in analysts %}
                               <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
+                                     <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="{{ item.logo.url }}" class="avatar avatar-sm me-3" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ item.name }}</h6>
+                            <p class="text-xs text-secondary mb-0">{{ item.email |urlize }}</p>
+                          </div>
+                        </div>
+                      </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.currentCompany.name }}</p>
                                         </td>
@@ -58,9 +60,6 @@
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.phone }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.email |urlize}}</p>
                                         </td>
                                         <td>
 

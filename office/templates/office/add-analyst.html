@@ -16,7 +16,7 @@
                 <div class="col-xl-10 col-md-10 mb-xl-0 mb-2">
                     <div class="card card-blog card-plain">
                         <div class="card-body px-1 pb-0">
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                              {% csrf_token %}
                                 <div class="form-group row ">
                                     <div class="col-10 d-flex flex-column">
@@ -24,6 +24,15 @@
                                             إسم المحلل
                                         </label>
                                         <input id="name" name="name" type="text" class="form-control text-black-50"  />
+
+                                    </div>
+                                </div>
+                                 <div class="form-group row ">
+                                    <div class="col-10 d-flex flex-column">
+                                        <label for="name">
+                                            صورة المحلل
+                                        </label>
+                                        <input id="logo" name="logo" type="file" class="form-control text-black-50"  />
 
                                     </div>
                                 </div>
