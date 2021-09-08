@@ -6,6 +6,11 @@ class CompanyCategory(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ])
+        ]
+
     def __str__(self):
         return self.name
 
@@ -15,6 +20,11 @@ class FinicialCompany(models.Model):
     category = models.ForeignKey(CompanyCategory, on_delete=models.CASCADE, null=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', 'category', ])
+        ]
+
     def __str__(self):
         return self.name
 
@@ -22,6 +32,11 @@ class FinicialCompany(models.Model):
 class CompanyCode(models.Model):
     code = models.CharField(null=True, max_length=255, blank=True)
     company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company', null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['code', 'company', ])
+        ]
 
     def __str__(self):
         return self.code
@@ -40,6 +55,9 @@ class FinicialAnalyst(models.Model):
     class Meta:
         verbose_name_plural = "Analysts"
         ordering = ["id", ]
+        indexes = [
+            models.Index(fields=['name', 'phone', 'tiwtterAccount', 'email'])
+        ]
 
     def __str__(self):
         return self.name
@@ -48,6 +66,11 @@ class FinicialAnalyst(models.Model):
 class ResearchCompany(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ])
+        ]
 
     def __str__(self):
         return self.name
@@ -68,6 +91,11 @@ class Rates(models.Model):
     RecommendDate = models.DateField(auto_now_add=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['FairValue', 'AnalayticName', 'CompanyEntered'])
+        ]
+
     @property
     def fair_percentage(self):
         return (self.FairValue / self.CurrenncyValue) * 100
@@ -82,8 +110,13 @@ class Rates(models.Model):
 
 class PerviousCompany(models.Model):
     job = models.CharField(max_length=255, null=True, blank=True, )
-    analyst = models.ForeignKey(FinicialAnalyst ,on_delete=models.CASCADE)
+    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
     company = models.CharField(max_length=255, null=True, blank=True, )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['job', 'analyst', 'company'])
+        ]
 
     def __str__(self):
         return self.analyst.name

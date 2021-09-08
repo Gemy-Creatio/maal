@@ -9970,6 +9970,9 @@ fieldset:disabled .btn {
 .bg-maal {
     background-color: #aa952d !important;
 }
+.color-maal {
+    color: #aa952d !important;
+}
 
 .user-select-all {
   user-select: all !important;
@@ -24795,7 +24798,9 @@ pre[class*="language-"] {
 .token.deleted {
   color: #905;
 }
-
+.maal-yello {
+    color: #6d5b0c;
+}
 .token.selector,
 .token.attr-name,
 .token.string,

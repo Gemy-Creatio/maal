@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('user/', include('accounts.urls')),
     path('office/', include('office.urls')),
+    path('userInterface/', include('userInterface.urls')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
