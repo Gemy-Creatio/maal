@@ -1,50 +1,28 @@
-{% extends 'main.html' %}
-
-{% block title %}
-التقييم البحثى
-{% endblock %}
+{% extends 'userlayout.html' %}
+{% load static %}
+{% block title %} صحيفة مال  {% endblock title %}
 
 {% block body %}
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
+       <div class="m position-relative" style="background-image: url('../../../static/images/tadawel.jpg') ; background-size: cover;">
+    <main class="main-content border-radius-sm">
+      <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
+        <div class="container">
+         <div class="row pt-8">
+               <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+          <div class="card">
             <div class="card-header pb-0">
-                <h6>القيم العادلة الخاصة بشركات الأبحاث</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    {% if rates.count.as_integer_ratio < 0 %}
-
-                        <p>لا توجد بيانات</p>
-                    {% else %}
-                        <div class="row">
-    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="numbers">
-<a style="cursor: pointer;text-decoration: none" href="{% url 'rate-add' %}">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة تقييم</p>
-
-</a>
-                        </div>
-                    </div>
-                    <div class="col-4 text-start">
-                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                           <a href="{% url 'rate-add' %}" style="cursor: pointer; text-decoration: none">
-                                <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                    </div>
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>التقيمات البحثية</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                    <span class="font-weight-bold ms-1">{{ rates.count }}</span> العدد المسجل
+                  </p>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="table-responsive">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
 
                         <table class="table align-items-center mb-0">
                             <thead>
@@ -79,7 +57,9 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
+                                           <a href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                                <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
+                                           </a>
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>
@@ -107,22 +87,22 @@
 
                                         </td>
                                         <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
-
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'user-rate' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
                                         </td>
-
 
                                     </tr>
                                {% endfor %}
 
                             </tbody>
                         </table>
-</div>
-                  {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-{% endblock %}
+              </div>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </main>
+       </div>
+{% endblock body %}
+          

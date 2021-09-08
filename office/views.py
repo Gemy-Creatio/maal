@@ -153,11 +153,13 @@ def AddRate(request):
         AnalayticName = request.POST.get('AnalayticName')
         Recommendation = request.POST.get('Recommendation')
         CurrenncyValue = request.POST.get('CurrenncyValue')
+        rdate = request.POST.get('rdate')
         FairValue = request.POST.get('FairValue')
         MarketValue = request.POST.get('MarketValue')
         rate = Rates(CompanyEntered_id=CompanyEntered, EmpEntered_id=request.user.pk, Recommendation=Recommendation,
                      ResearchCompany_id=researchCompany, AnalayticName_id=AnalayticName, report=report,
-                     CurrenncyValue=float(CurrenncyValue), MarketValue=float(MarketValue), FairValue=float(FairValue))
+                     CurrenncyValue=float(CurrenncyValue), RecommendDate=rdate, MarketValue=float(MarketValue),
+                     FairValue=float(FairValue))
         rate.save()
         if rate.pk:
             return redirect('rates-list')
@@ -206,11 +208,13 @@ def UpdateRate(request, pk):
         Recommendation = request.POST.get('Recommendation')
         CurrenncyValue = request.POST.get('CurrenncyValue')
         FairValue = request.POST.get('FairValue')
+        rdate = request.POST.get('rdate')
         MarketValue = request.POST.get('MarketValue')
-        rate.CompanyEntered_id = CompanyEntered.pk
+        rate.CompanyEntered_id = CompanyEntered
         rate.report = report
-        rate.AnalayticName_id = AnalayticName.pk
+        rate.AnalayticName_id = AnalayticName
         rate.FairValue = float(FairValue)
+        rate.RecommendDate = rdate
         rate.MarketValue = float(MarketValue)
         rate.CurrenncyValue = float(CurrenncyValue)
         rate.Recommendation = Recommendation
@@ -218,7 +222,7 @@ def UpdateRate(request, pk):
         rate.EmpEntered_id = request.user.pk
         rate.save()
         if rate.pk:
-            return redirect('rate-list')
+            return redirect('rates-list')
         else:
             return render(request, 'office/update-rate.html')
     return render(request, 'office/update-rate.html',

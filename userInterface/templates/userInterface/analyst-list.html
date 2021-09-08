@@ -1,50 +1,28 @@
-{% extends 'main.html' %}
-
-{% block title %}
-المحللين المالين
-{% endblock %}
+{% extends 'userlayout.html' %}
+{% load static %}
+{% block title %} صحيفة مال  {% endblock title %}
 
 {% block body %}
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
+       <div class="m position-relative" style="background-image: url('../../../static/images/tadawel.jpg') ; background-size: cover;">
+    <main class="main-content border-radius-sm">
+      <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
+        <div class="container">
+         <div class="row pt-8">
+             <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+          <div class="card">
             <div class="card-header pb-0">
-                <h6>المحللين المالين</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    {% if analayts.count.bit_length < 0 %}
-
-                        <p>لا توجد بيانات</p>
-                    {% else %}
-                        <div class="row">
-    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="numbers">
-<a style="cursor: pointer;text-decoration: none" href="{% url 'analyst-add' %}">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة محلل</p>
-
-</a>
-                        </div>
-                    </div>
-                    <div class="col-4 text-start">
-                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                           <a href="{% url 'analyst-add' %}" style="cursor: pointer; text-decoration: none">
-                                <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                    </div>
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>المحللين</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                    <span class="font-weight-bold ms-1">{{ analysts.count }}</span> العدد المسجل
+                  </p>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="table-responsive">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -59,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                             {% for item in analayts %}
+                             {% for item in analysts %}
                               <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -76,7 +54,7 @@
                                             <span class="badge badge-sm bg-gradient-secondary">{{ item.CurrentJob }}</span>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0"><a href="{% url 'pervcompany-list' item.pk %}" class="cursor-pointer"><i class="fas fa-briefcase"></i>المزيد</a></p>
+                                            <p class="text-xs font-weight-bold mb-0"><a href="{% url 'user-old-company' item.pk %}" class="cursor-pointer"><i class="fas fa-briefcase"></i>المزيد</a></p>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.phone }}</p>
@@ -90,7 +68,7 @@
                                         </td>
 
                                         <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'analyst-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'user-interface' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
 
                                         </td>
 
@@ -101,13 +79,13 @@
                             </tbody>
                         </table>
 
-</div>
-
-                  {% endif %}
-                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-
-{% endblock %}
+         </div>
+        </div>
+      </div>
+    </main>
+       </div>
+{% endblock body %}

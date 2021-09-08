@@ -38,9 +38,8 @@
 
 
 
-            <div class="row pt-lg-6">
-      <div class="row">
-        <div class="col-12 col-xl-4  pt-6">
+            <div class="row pt-3 pt-lg-3 pb-3">
+     <div class="col-12 col-xl-4  pt-6">
                       <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">الوظائف السابقة</h6>
@@ -101,14 +100,13 @@
                     <h6 class="mb-0 text-sm">تقييم بتاريخ</h6>
                     <p class="mb-0 text-xs">{{ rate.RecommendDate }}</p>
                   </div>
-                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto maal-yello" href="javascript:;">المزيد</a>
+                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto maal-yello" href="{% url 'user-rate' rate.pk %}">المزيد</a>
                 </li>
                {% endfor %}
               </ul>
             </div>
           </div>
         </div>
-      </div>
     </div>
 
         </div>

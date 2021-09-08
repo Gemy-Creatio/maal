@@ -1,0 +1,116 @@
+{% extends 'userlayout.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+         <div class="m position-relative" style="background-image: url('../../../static/images/tadawel.jpg') ; background-size: cover;">
+    <main class="main-content border-radius-sm">
+      <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
+        <div class="container pt-7">
+    <div class="row my-4">
+        <div class="col-lg-12 col-md-12">
+          <div class="card h-100">
+            <div class="card-header pb-0">
+              <h6>التقييم البحثى</h6>
+              <p class="text-sm">
+                <i class="fa fa-calender text-success" aria-hidden="true"></i>
+                <span class="font-weight-bold">{{ rate.RecommendDate }}</span>
+              </p>
+            </div>
+            <div class="card-body p-3">
+              <div class="timeline timeline-one-side">
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-user-run text-success "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <a  href="{% url 'user-interface' rate.AnalayticName.pk %}">
+                        <h6 class="text-dark text-sm font-weight-bold mb-0"> اسم المحلل</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.AnalayticName.name }}</p>
+                    </a>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-building text-danger "></i>
+                  </span>
+                  <div class="timeline-content">
+                   <a href="">
+                        <h6 class="text-dark text-sm font-weight-bold mb-0"> الشركة المدرجة</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0"> {{ rate.CompanyEntered.name }}</p>
+                            <h6 class="text-dark text-sm font-weight-bold mb-0"> القطاع</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0"> {{ rate.CompanyEntered.category.name }}</p>
+                   </a>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-cart text-info "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0"> شركة البحث</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0"> {{ rate.ResearchCompany.name }}</p>
+                  </div>
+                </div>
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-money-coins text-warning "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0"> القيمة العادلة</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.FairValue }}</p>
+                  </div>
+                </div>
+                                  <div class="timeline-block">
+                  <span class="timeline-step">
+                    <i class="ni ni-chat-round text-dark "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0"> % الفارق</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.fair_percentage |floatformat:-2  }} </p>
+                  </div>
+                </div>
+
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-money-coins text-primary "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0"> السعر السوقى</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.MarketValue }}</p>
+                  </div>
+                </div>
+                                                    <div class="timeline-block">
+                  <span class="timeline-step">
+                    <i class="ni ni-chat-round text-dark "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0">  % الفارق</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.market_percentage |floatformat:-2  }}</p>
+                  </div>
+                </div>
+
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    <i class="ni ni-paper-diploma text-dark "></i>
+                  </span>
+                  <div class="timeline-content">
+                    <h6 class="text-dark text-sm font-weight-bold mb-0"> التوصية</h6>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ rate.Recommendation }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+    </main>
+         </div>
+
+
+{% endblock body %}

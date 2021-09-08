@@ -18,9 +18,11 @@ def user_page(request):
 
 def master_home(request):
     context = {
-        "high_rated": Rates.objects.all().order_by('-AnalayticName')[:10],
+        "high_rated": Rates.objects.all().order_by('-RecommendDate')[:10],
         "analysts": FinicialAnalyst.objects.all().order_by('-name')[:10],
-        "today": datetime.datetime.now().date()
-
+        "today": datetime.datetime.now().date(),
+        "rates_count": Rates.objects.count(),
+        "analysts__count": FinicialAnalyst.objects.count(),
+        "companies_count": FinicialCompany.objects.count()
     }
     return render(request, 'main/master_home.html', context=context)
