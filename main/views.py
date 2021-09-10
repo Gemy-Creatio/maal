@@ -23,12 +23,29 @@ def user_page(request):
 
 
 def master_home(request):
+    labels = []
+    data = []
+    Ratelabels = []
+    RateData = []
+
+    rates = Rates.objects.order_by('-MarketValue')[:5]
+    for rate in rates:
+        Ratelabels.append(rate.ResearchCompany.name)
+        RateData.append(rate.MarketValue)
+    queryset = FinicialAnalyst.objects.order_by('-AnalayticName')[:5]
+    for analyst in queryset:
+        labels.append(analyst.name)
+        data.append(analyst.AnalayticName.count())
     context = {
         "high_rated": Rates.objects.all().order_by('-RecommendDate')[:10],
         "analysts": FinicialAnalyst.objects.all().order_by('-name')[:10],
         "today": datetime.datetime.now().date(),
         "rates_count": Rates.objects.count(),
         "analysts__count": FinicialAnalyst.objects.count(),
-        "companies_count": FinicialCompany.objects.count()
+        "companies_count": FinicialCompany.objects.count(),
+        'labels': labels,
+        'data': data,
+        'RateLables': Ratelabels,
+        'RateData': RateData
     }
     return render(request, 'main/master_home.html', context=context)
