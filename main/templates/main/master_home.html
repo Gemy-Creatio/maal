@@ -3,7 +3,7 @@
 {% block title %} صحيفة مال  {% endblock title %}
 
 {% block body %}
-       <div class="m position-relative" style="background-image: url('../../../static/images/tadawel.jpg') ; background-size: cover;">
+       <div class="m position-relative" style="background-image: url('../../../static/images/maal.png') ; background-size: cover;">
     <main class="main-content border-radius-sm">
       <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
         <div class="container">
@@ -293,6 +293,20 @@
           </div>
 
                   </div>
+
+        <div class="row pt-4 mx-auto">
+            <div class="col-lg-12">
+                 <div class="card z-index-0 h-65">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-0">أكثر الشركات المدرجة تقييما</h6>
+            </div>
+            <div class="card-body justify-content-center p-3">
+    <canvas id="company-chart"></canvas>
+
+            </div>
+          </div>
+            </div>
+        </div>
       </div>
 
 
@@ -302,7 +316,6 @@
        </div>
 
 {% endblock body %}
-
 
 {% block scripts %}
 
@@ -327,11 +340,30 @@
       }
     };
 
+      var configCompany = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: {{ companiesData|safe }},
+          backgroundColor: [
+            '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+          ],
+          label: 'اعلى محللين تقييما'
+        }],
+        labels: {{ companiesLables|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
     window.onload = function() {
       var ctx = document.getElementById('pie-chart').getContext('2d');
       window.myPie = new Chart(ctx, config);
             var ctx_rates = document.getElementById('bar-chart').getContext('2d');
       window.myPie = new Chart(ctx_rates, ratesconfig);
+      var company_ctx = document.getElementById('company-chart').getContext('2d');
+      window.myPie = new Chart(company_ctx,configCompany );
     };
 
 

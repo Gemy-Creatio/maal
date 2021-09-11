@@ -1,7 +1,7 @@
 import datetime
 
 from django.shortcuts import render
-from office.models import FinicialAnalyst, FinicialCompany, Rates, User
+from office.models import FinicialAnalyst, FinicialCompany, Rates, User , ResearchCompany
 
 
 def home_page(request):
@@ -27,7 +27,12 @@ def master_home(request):
     data = []
     Ratelabels = []
     RateData = []
-
+    Companieslabels = []
+    CompaniesData = []
+    companies = FinicialCompany.objects.order_by('CompanyEntered')[:5]
+    for company in companies:
+        Companieslabels.append(company.name)
+        CompaniesData.append(company.CompanyEntered.count())
     rates = Rates.objects.order_by('-MarketValue')[:5]
     for rate in rates:
         Ratelabels.append(rate.ResearchCompany.name)
@@ -46,6 +51,8 @@ def master_home(request):
         'labels': labels,
         'data': data,
         'RateLables': Ratelabels,
-        'RateData': RateData
+        'RateData': RateData,
+        'companiesLables': Companieslabels,
+        'companiesData': CompaniesData
     }
     return render(request, 'main/master_home.html', context=context)
