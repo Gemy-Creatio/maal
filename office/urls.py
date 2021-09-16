@@ -25,5 +25,5 @@ urlpatterns = [
     path('analysts/report', views.AnalystsAllReport.as_view(), name='analysts-report'),
     path('pervcompany/list/<int:pk>', views.PervCompanyList, name='pervcompany-list'),
     path('pervcompany/add/<int:pk>', views.addPervCompany, name='pervcompany-add'),
-
+    path('expectations/list', views.ExpectationList, name='expectations-list'),
 ]

@@ -1,7 +1,7 @@
 import datetime
 
 from django.shortcuts import render
-from office.models import FinicialAnalyst, FinicialCompany, Rates, User , ResearchCompany
+from office.models import FinicialAnalyst, FinicialCompany, Rates, User, ResearchCompany, EarningsForecast
 
 
 def home_page(request):
@@ -29,6 +29,13 @@ def master_home(request):
     RateData = []
     Companieslabels = []
     CompaniesData = []
+    expectlabels = []
+    expectData = []
+    expects = EarningsForecast.objects.order_by('ExpectRate')[:5]
+    for expect in expects:
+        expectlabels.append(expect.ResearchCompany.name)
+        expectData.append(expect.ExpectRate)
+
     companies = FinicialCompany.objects.order_by('CompanyEntered')[:5]
     for company in companies:
         Companieslabels.append(company.name)
@@ -53,6 +60,9 @@ def master_home(request):
         'RateLables': Ratelabels,
         'RateData': RateData,
         'companiesLables': Companieslabels,
-        'companiesData': CompaniesData
+        'companiesData': CompaniesData,
+        'expectlables': expectlabels,
+        'expectData': expectData,
+        "expectations": EarningsForecast.objects.all()[:5]
     }
     return render(request, 'main/master_home.html', context=context)

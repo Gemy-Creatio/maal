@@ -6,7 +6,7 @@ from django.views import View
 from accounts.models import User
 from django.shortcuts import render, redirect
 from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany, \
-    PerviousCompany
+    PerviousCompany, EarningsForecast, ExpectYear
 from django.core.files.storage import FileSystemStorage
 
 
@@ -63,7 +63,7 @@ def AddCompany(request):
         fs = FileSystemStorage()
         filename = fs.save(logo.name, logo)
         category = request.POST.get('category')
-        company = FinicialCompany(logo=logo,name=name, EmpEntered_id=request.user.pk, category_id=category)
+        company = FinicialCompany(logo=logo, name=name, EmpEntered_id=request.user.pk, category_id=category)
         company.save()
         if company.pk:
             return redirect('company-list')
@@ -327,3 +327,10 @@ def addPervCompany(request, pk):
         else:
             return render(request, 'office/add-pervcompany.html')
     return render(request, 'office/add-pervcompany.html')
+
+
+def ExpectationList(request):
+    context = {
+        "expectations": EarningsForecast.objects.all()
+    }
+    return render(request, 'office/expectation-list.html', context=context)
