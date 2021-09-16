@@ -51,7 +51,8 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">توقعات الأرباح</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >  الأرباح الفعلية</th>
+
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم المحلل</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">المرفق</th>
                                     <th class="text-secondary opacity-7"></th>
@@ -76,16 +77,15 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.ExpectRate }}</p>
-                                        </td>
                                         <td class="d-flex flex-column align-middle text-center text-sm">
                                         <table class="table align-items-center mb-0">
                                             <thead>
                                               <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السنه</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">الربع</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأرباح الفعلية</th>
+                                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأرباح الفعلية</th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">توقعات الأرباح</th>
                                                                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">مدى الأنحراف</th>
 
                                 </tr>
@@ -101,6 +101,9 @@
                                         </td>
                                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ expect.value }}</p>
+                                        </td>
+                                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ expect.ExpectRate }}</p>
                                         </td>
                                                   <td class="align-middle text-center">
                                             {% if expect.DeviationRange < 0 %}

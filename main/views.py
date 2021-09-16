@@ -29,12 +29,12 @@ def master_home(request):
     RateData = []
     Companieslabels = []
     CompaniesData = []
-    expectlabels = []
-    expectData = []
-    expects = EarningsForecast.objects.order_by('ExpectRate')[:5]
-    for expect in expects:
-        expectlabels.append(expect.ResearchCompany.name)
-        expectData.append(expect.ExpectRate)
+    # expectlabels = []
+    # expectData = []
+    # expects = EarningsForecast.objects.order_by('analyst')[:5]
+    # for expect in expects:
+    #     expectlabels.append(expect.ResearchCompany.name)
+    #     expectData.append(expect.expectyear_set.all().)
 
     companies = FinicialCompany.objects.order_by('CompanyEntered')[:5]
     for company in companies:
@@ -61,8 +61,8 @@ def master_home(request):
         'RateData': RateData,
         'companiesLables': Companieslabels,
         'companiesData': CompaniesData,
-        'expectlables': expectlabels,
-        'expectData': expectData,
+        # 'expectlables': expectlabels,
+        # 'expectData': expectData,
         "expectations": EarningsForecast.objects.all()[:5]
     }
     return render(request, 'main/master_home.html', context=context)

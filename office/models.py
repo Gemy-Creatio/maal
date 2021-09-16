@@ -138,10 +138,9 @@ class EarningsForecast(models.Model):
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
                                         null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
-    ExpectRate = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.ExpectRate)
+        return str(self.CompanyEntered.name)
 
     class Meta:
         indexes = [
@@ -156,14 +155,15 @@ class ExpectYear(models.Model):
         ('الربع الثالث', 'الربع الثالث'),
         ('الربع الرابع', 'الربع الرابع'),
     ]
-    year = models.IntegerField( null=True , default=current_year)
+    year = models.IntegerField(null=True, default=current_year)
     quaratar = models.CharField(max_length=255, choices=QURATARYEARS, default='الربع الأول')
     value = models.PositiveIntegerField(null=True, default=0)
     expectYear = models.ForeignKey(EarningsForecast, on_delete=models.CASCADE, null=True)
+    ExpectRate = models.IntegerField(null=True, blank=True)
 
     @property
     def DeviationRange(self):
-        return ((self.value - self.expectYear.ExpectRate) / self.value) * 100
+        return ((self.value - self.ExpectRate) / self.value) * 100
 
     def __str__(self):
         return self.quaratar

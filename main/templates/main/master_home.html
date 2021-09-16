@@ -16,7 +16,7 @@
                   <h6>التوقعات للأرباح</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-check text-info" aria-hidden="true"></i>
-                    <span class="font-weight-bold ms-1">{{ expects.count }}</span> أحدث التوفعات
+                    <span class="font-weight-bold ms-1">{{ expectations.count }}</span> أحدث التوفعات
                   </p>
                 </div>
               </div>
@@ -24,12 +24,13 @@
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
 
-                                           <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">توقعات الأرباح</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >  الأرباح الفعلية</th>
+
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم المحلل</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">المرفق</th>
                                     <th class="text-secondary opacity-7"></th>
@@ -54,16 +55,15 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.ExpectRate }}</p>
-                                        </td>
                                         <td class="d-flex flex-column align-middle text-center text-sm">
                                         <table class="table align-items-center mb-0">
                                             <thead>
                                               <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السنه</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">الربع</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأرباح الفعلية</th>
+                                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأرباح الفعلية</th>
+
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">توقعات الأرباح</th>
                                                                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">مدى الأنحراف</th>
 
                                 </tr>
@@ -79,6 +79,9 @@
                                         </td>
                                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ expect.value }}</p>
+                                        </td>
+                                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ expect.ExpectRate }}</p>
                                         </td>
                                                   <td class="align-middle text-center">
                                             {% if expect.DeviationRange < 0 %}
@@ -342,7 +345,7 @@
                   </div>
 
         <div class="row pt-4 mx-auto">
-            <div class="col-xl-6 col-lg-5 col-md-7 pt-3">
+            <div class="col-xl-12 col-lg-12 col-md-12 pt-3">
                  <div class="card z-index-0 h-65">
             <div class="card-header pb-0 p-3">
               <h6 class="mb-0">أكثر الشركات المدرجة تقييما</h6>
@@ -353,17 +356,17 @@
             </div>
           </div>
             </div>
-                  <div class="col-xl-6 col-lg-5 col-md-7 pt-3">
-                 <div class="card z-index-0 h-65">
-            <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث </h6>
-            </div>
-            <div class="card-body justify-content-center p-3">
-    <canvas id="expect-chart"></canvas>
-
-            </div>
-          </div>
-            </div>
+{#                  <div class="col-xl-6 col-lg-5 col-md-7 pt-3">#}
+{#                 <div class="card z-index-0 h-65">#}
+{#            <div class="card-header pb-0 p-3">#}
+{#              <h6 class="mb-0">أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث </h6>#}
+{#            </div>#}
+{#            <div class="card-body justify-content-center p-3">#}
+{#    <canvas id="expect-chart"></canvas>#}
+{##}
+{#            </div>#}
+{#          </div>#}
+{#            </div>#}
 
         </div>
       </div>
@@ -381,22 +384,22 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
          <script>
-    var expect_config = {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: {{ expectData|safe }},
-          backgroundColor: [
-            '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
-          ],
-          label: 'أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث'
-        }],
-        labels: {{ expectData|safe }}
-      },
-      options: {
-        responsive: true
-      }
-    };
+    {#var expect_config = {#}
+    {#  type: 'pie',#}
+    {#  data: {#}
+    {#    datasets: [{#}
+    {#      data: {{ expectData|safe }},#}
+    {#      backgroundColor: [#}
+    {#        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'#}
+    {#      ],#}
+    {#      label: 'أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث'#}
+    {#    }],#}
+    {#    labels: {{ expectData|safe }}#}
+    {#  },#}
+    {#  options: {#}
+    {#    responsive: true#}
+    {#  }#}
+    {#};#}
 
 
     var config = {
@@ -440,8 +443,8 @@
       window.myPie = new Chart(ctx_rates, ratesconfig);
       var company_ctx = document.getElementById('company-chart').getContext('2d');
       window.myPie = new Chart(company_ctx,configCompany );
-        var expect_ctx = document.getElementById('expect-chart').getContext('2d');
-      window.myPie = new Chart(expect_ctx,expect_config );
+      {#  var expect_ctx = document.getElementById('expect-chart').getContext('2d');#}
+      {#window.myPie = new Chart(expect_ctx,expect_config );#}
     };
 
 
