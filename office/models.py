@@ -159,11 +159,16 @@ class ExpectYear(models.Model):
     quaratar = models.CharField(max_length=255, choices=QURATARYEARS, default='الربع الأول')
     value = models.PositiveIntegerField(null=True, default=0)
     expectYear = models.ForeignKey(EarningsForecast, on_delete=models.CASCADE, null=True)
-    ExpectRate = models.IntegerField(null=True, blank=True)
+    ExpectPervYear = models.IntegerField(null=True, blank=True)
+    ExpectthisYear = models.IntegerField(null=True, blank=True)
 
     @property
-    def DeviationRange(self):
-        return ((self.value - self.ExpectRate) / self.value) * 100
+    def DeviationRangePastYear(self):
+        return ((self.value - self.ExpectPervYear) / self.ExpectPervYear) * 100
+
+    @property
+    def DeviationRangeThisYear(self):
+        return ((self.value - self.ExpectthisYear) / self.ExpectthisYear) * 100
 
     def __str__(self):
         return self.quaratar
