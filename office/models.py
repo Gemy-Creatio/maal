@@ -130,25 +130,7 @@ def current_year():
     return datetime.date.today().year
 
 
-class EarningsForecast(models.Model):
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
-    CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE,
-                                       null=True)
-    ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
-                                        null=True)
-    report = models.FileField(upload_to='reportspdf/', null=True)
-
-    def __str__(self):
-        return str(self.CompanyEntered.name)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['analyst'])
-        ]
-
-
-class ExpectYear(models.Model):
+class RateQuarter(models.Model):
     QURATARYEARS = [
         ('الربع الأول', 'الربع الأول'),
         ('الربع الثانى', 'الربع الثانى'),
@@ -158,17 +140,27 @@ class ExpectYear(models.Model):
     year = models.IntegerField(null=True, default=current_year)
     quaratar = models.CharField(max_length=255, choices=QURATARYEARS, default='الربع الأول')
     value = models.PositiveIntegerField(null=True, default=0)
-    expectYear = models.ForeignKey(EarningsForecast, on_delete=models.CASCADE, null=True)
-    ExpectPervYear = models.IntegerField(null=True, blank=True)
-    ExpectthisYear = models.IntegerField(null=True, blank=True)
-
-    @property
-    def DeviationRangePastYear(self):
-        return ((self.value - self.ExpectPervYear) / self.ExpectPervYear) * 100
-
-    @property
-    def DeviationRangeThisYear(self):
-        return ((self.value - self.ExpectthisYear) / self.ExpectthisYear) * 100
+    deviation_range = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.quaratar
+
+
+class EarningsForecast(models.Model):
+    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
+    CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE,
+                                       null=True)
+    ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
+                                        null=True)
+    expectYear = models.ManyToManyField(RateQuarter, null=True)
+    expectvalue = models.IntegerField(blank=True, null=True)
+    report = models.FileField(upload_to='reportspdf/', null=True)
+
+    def __str__(self):
+        return str(self.CompanyEntered.name)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['analyst'])
+        ]

@@ -1,177 +1,178 @@
 {% extends 'main.html' %}
 
 {% block title %}
- التوقعات للأرباح
+    التوقعات للأرباح
 {% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header pb-0">
-                <h6>التوقعات للأرباح</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    {% if expectations.count.as_integer_ratio < 0 %}
-
-                        <p>لا توجد بيانات</p>
-                    {% else %}
-                        <div class="row">
-    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="numbers">
-<a style="cursor: pointer;text-decoration: none" href="">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة توقع</p>
-
-</a>
-                        </div>
-                    </div>
-                    <div class="col-4 text-start">
-                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                           <a href="" style="cursor: pointer; text-decoration: none">
-                                <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>التوقعات للأرباح</h6>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        {% if expectations.count.as_integer_ratio < 0 %}
 
-</div>
+                            <p>لا توجد بيانات</p>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+                                    <div class="card">
+                                        <div class="card-body p-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="numbers">
+                                                        <a style="cursor: pointer;text-decoration: none" href="">
+                                                            <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                                                إضافة توقع</p>
 
-<div class="table-responsive">
-
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" >  الأرباح الفعلية</th>
-
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم المحلل</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">المرفق</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {% for item in expectations %}
-                              <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 text-start">
+                                                    <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                                                        <a href="" style="cursor: pointer; text-decoration: none">
+                                                            <i class="fas fa-plus text-lg opacity-10"
+                                                               aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                 <td>
-                                            <div class="d-flex px-2 py-1">
+                                        </div>
+                                    </div>
+                                </div>
 
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.ResearchCompany.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="d-flex flex-column align-middle text-center text-sm">
-                                        <table class="table align-items-center mb-0">
-                                                                                       <thead>
-                                                        <tr>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                السنه
-                                                            </th>
-                                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                                الربع
-                                                            </th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                الأرباح الفعلية
-                                                            </th>
+                            </div>
 
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                توقعات الأرباح للربع المقابل من العام السابق
-                                                            </th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                توقعات الأرباح للربع السابق من العام الحالى
-                                                            </th>
+                            <div class="table-responsive">
 
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                مدى الأنحراف عن الربع المقابل من العام السابق
-                                                            </th>
-                                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                مدى الأنحراف عن الربع السابق من العام الحالى
-                                                            </th>
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            الشركة المدرجة
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            شركة الأبحاث
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            توقعات الأرباح
+                                        </th>
 
-                                                        </tr>
-                                                        </thead>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            توقعات الأرباح
+                                        </th>
 
-                                                            <tbody>
-                                                            {% for expect in item.expectyear_set.all %}
-                                                                <tr>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.year }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.quaratar }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.value }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.ExpectPervYear }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.ExpectThisYear }}</p>
-                                                                    </td>
-                                                                    <td class="align-middle text-center">
-                                                                        {% if expect.DeviationRangePastYear < 0 %}
-                                                                            <span class="text-danger text-lg font-weight-bold">{{ expect.DeviationRangePastYear|floatformat:-2 }} %</span>
-                                                                        {% else %}
-                                                                            <span class="text-success text-lg font-weight-bold">{{ expect.DeviationRangePastYear|floatformat:-2 }} %</span>
-                                                                        {% endif %}
-                                                                    </td>
-                                                                    <td class="align-middle text-center">
-                                                                        {% if expect.DeviationRangeThisYear < 0 %}
-                                                                            <span class="text-danger text-lg font-weight-bold">{{ expect.DeviationRangeThisYear|floatformat:-2 }} %</span>
-                                                                        {% else %}
-                                                                            <span class="text-success text-lg font-weight-bold">{{ expect.DeviationRangeThisYear|floatformat:-2 }} %</span>
-                                                                        {% endif %}
-                                                                    </td>
-
-                                                                </tr>
-                                                            {% endfor %}
-                                                            </tbody>
-                                        </table>
-
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.analyst.name }}</p>
-                                        </td>
-                                        <td>
-                                            <a href="{{ item.report.url }}">
-                                                <p class="text-xs font-weight-bold mb-0"><i class="far fa-file-pdf maal-yello"></i></p>
-                                            </a>
-                                        </td>
-                                        <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href=""><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
-
-                                        </td>
-
-
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            اسم المحلل
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            المرفق
+                                        </th>
+                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
-                               {% endfor %}
+                                    </thead>
+                                    <tbody>
+                                    {% for item in expectations %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
 
-                            </tbody>
-                        </table>
-</div>
-                  {% endif %}
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ item.ResearchCompany.name }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">{{ item.expectvalue }}</h6>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="d-flex flex-column align-middle text-center text-sm">
+                                                <table class="table align-items-center mb-0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            السنه
+                                                        </th>
+                                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            الربع
+                                                        </th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            الأرباح الفعلية
+                                                        </th>
+
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            مدى الأنحراف
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    {% for expect in item.expectYear.all %}
+                                                        <tr>
+                                                            <td>
+                                                                <p class="text-xs font-weight-bold mb-0">{{ expect.year }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xs font-weight-bold mb-0">{{ expect.quaratar }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xs font-weight-bold mb-0">{{ expect.value }}</p>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                {% if expect.deviation_range < 0 %}
+                                                                    <span class="text-danger text-lg font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
+                                                                {% else %}
+                                                                    <span class="text-success text-lg font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">{{ item.analyst.name }}</p>
+                                            </td>
+                                            <td>
+                                                <a href="{{ item.report.url }}">
+                                                    <p class="text-xs font-weight-bold mb-0"><i
+                                                            class="far fa-file-pdf maal-yello"></i></p>
+                                                </a>
+                                            </td>
+                                            <td class="ms-auto text-start">
+                                                <a class="btn btn-link text-dark px-3 mb-0" href=""><i
+                                                        class="fas fa-pencil-alt text-primary me-2"
+                                                        aria-hidden="true"></i>المزيد</a>
+
+                                            </td>
+
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>                           {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

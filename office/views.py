@@ -6,7 +6,7 @@ from django.views import View
 from accounts.models import User
 from django.shortcuts import render, redirect
 from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany, \
-    PerviousCompany, EarningsForecast, ExpectYear
+    PerviousCompany, EarningsForecast, RateQuarter
 from django.core.files.storage import FileSystemStorage
 
 
@@ -334,3 +334,6 @@ def ExpectationList(request):
         "expectations": EarningsForecast.objects.all()
     }
     return render(request, 'office/expectation-list.html', context=context)
+
+
+
