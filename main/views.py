@@ -1,6 +1,9 @@
 import datetime
 
+from django.core import serializers
+from django.http import HttpResponse
 from django.shortcuts import render
+
 from office.models import FinicialAnalyst, FinicialCompany, Rates, User, ResearchCompany, EarningsForecast
 
 
@@ -66,3 +69,9 @@ def master_home(request):
         "expectations": EarningsForecast.objects.all()[:5]
     }
     return render(request, 'main/master_home.html', context=context)
+
+
+def analysts_ajax(request):
+    object_list = FinicialAnalyst.objects.all()
+    json = serializers.serialize('json', object_list)
+    return HttpResponse(json, content_type='application/json;charset=utf-8')

@@ -673,7 +673,9 @@ progress {
 }
 
 @media (min-width: 576px) {
-
+.text-table {
+  font-size: 0.25rem !important;
+}
   .container,
   .container-sm {
     max-width: 540px;
@@ -681,7 +683,9 @@ progress {
 }
 
 @media (min-width: 768px) {
-
+.text-table {
+  font-size: 0.15rem !important;
+}
   .container,
   .container-sm,
   .container-md {
@@ -690,7 +694,9 @@ progress {
 }
 
 @media (min-width: 992px) {
-
+.text-table {
+  font-size: 0.15rem !important;
+}
   .container,
   .container-sm,
   .container-md,
@@ -2450,6 +2456,7 @@ progress {
 }
 
 .table {
+
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
   --bs-table-striped-color: #67748e;
@@ -2473,10 +2480,13 @@ progress {
 }
 
 .table>tbody {
+    height: 50px;
   vertical-align: inherit;
 }
 
+
 .table>thead {
+    height: 50px;
   vertical-align: bottom;
 }
 
@@ -2616,11 +2626,15 @@ progress {
 }
 
 .table-responsive {
+
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 575.98px) {
+    .text-xxs{
+        font-size: 0.2rem !important;
+    }
   .table-responsive-sm {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2628,6 +2642,9 @@ progress {
 }
 
 @media (max-width: 767.98px) {
+     .text-xxs{
+        font-size: 0.2rem !important;
+    }
   .table-responsive-md {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2635,6 +2652,7 @@ progress {
 }
 
 @media (max-width: 991.98px) {
+
   .table-responsive-lg {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -22881,15 +22899,43 @@ hr.horizontal.gray-light {
   color: #329874;
 }
 
-.table thead th {
-  padding: 0.75rem 1.5rem;
-  text-transform: capitalize;
+.table thead th  {
+    border: 1px solid #aa952d !important;
   letter-spacing: 0px;
-  border-bottom: 1px solid #e9ecef;
+}
+.text_black {
+    color:black !important;
+    font-weight: 800;
+}
+
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+    margin-inline:0.2rem ;
+}
+ .form-inline input {
+    border: 1px solid #aa952d !important;
+ }
+/* Add some margins for each label */
+
+
+/* Style the input fields */
+
+/* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .table th {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .table td .progress {
@@ -22900,7 +22946,7 @@ hr.horizontal.gray-light {
 
 .table td,
 .table th {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .table.align-items-center td,
@@ -23009,7 +23055,11 @@ hr.horizontal.gray-light {
 .timeline-one-side .timeline-step {
   left: 1rem;
 }
-
+@media all and (max-width: 699px) and (min-width: 520px), (min-width: 1151px) {
+   .text-xxs {
+    font-size: 0.2rem  !important ;
+  }
+}
 .timeline-one-side .timeline-content {
   width: auto;
 }
@@ -23231,8 +23281,12 @@ p,
 }
 
 .text-xxs {
-  font-size: 0.65rem !important;
+  font-size: 0.65rem !important ;
 }
+table, th, td {
+  border: 1px solid #aa952d !important;
+}
+
 
 p {
   line-height: 1.625;

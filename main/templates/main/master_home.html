@@ -1,291 +1,193 @@
 {% extends 'userlayout.html' %}
 {% load static %}
 {% block title %} صحيفة مال  {% endblock title %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.3/af-2.3.7/b-2.0.1/r-2.2.9/datatables.min.css"/>
+
+ {% endblock style %}
 
 {% block body %}
     <div class="m position-relative"
-         style="background-image: url('../../../static/images/maal.png') ; background-size: cover;">
+         style="background-color: #f4f4f4">
         <main class="main-content border-radius-sm">
             <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
                 <div class="container">
                     <div class="row pt-8">
                         <div class="col-xl-12 col-lg-12 col-md-12">
-                            <div class="card h-100 mb-4 z-index-0">
+                                                        <div class="card h-100 mb-4 z-index-0">
                                 <div class="card-header pb-0">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-7">
-                                            <h6>التوقعات للأرباح</h6>
-                                            <p class="text-sm mb-0">
-                                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                                <span class="font-weight-bold ms-1">{{ expectations.count }}</span> أحدث
-                                                التوفعات
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 pb-2">
-                                    <div class="table-responsive">
-
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    الشركة المدرجة
-                                                </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    شركة الأبحاث
-                                                </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    توقعات الأرباح
-                                                </th>
-
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    توقعات الأرباح
-                                                </th>
-
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    اسم المحلل
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    المرفق
-                                                </th>
-                                                <th class="text-secondary opacity-7"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for item in expectations %}
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{ item.ResearchCompany.name }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{ item.expectvalue }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="d-flex flex-column align-middle text-center text-sm">
-                                                        <table class="table align-items-center mb-0">
-                                                            <thead>
-                                                            <tr>
-                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                    السنه
-                                                                </th>
-                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                                    الربع
-                                                                </th>
-                                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                    الأرباح الفعلية
-                                                                </th>
-
-                                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                    مدى الأنحراف
-                                                                </th>
-                                                            </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                            {% for expect in item.expectYear.all %}
-                                                                <tr>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.year }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.quaratar }}</p>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">{{ expect.value }}</p>
-                                                                    </td>
-                                                                    <td class="align-middle text-center">
-                                                                        {% if expect.deviation_range < 0 %}
-                                                                            <span class="text-danger text-lg font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
-                                                                        {% else %}
-                                                                            <span class="text-success text-lg font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
-                                                                        {% endif %}
-                                                                    </td>
-                                                                </tr>
-                                                            {% endfor %}
-                                                            </tbody>
-                                                        </table>
-
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.analyst.name }}</p>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ item.report.url }}">
-                                                            <p class="text-xs font-weight-bold mb-0"><i
-                                                                    class="far fa-file-pdf maal-yello"></i></p>
-                                                        </a>
-                                                    </td>
-                                                    <td class="ms-auto text-start">
-                                                        <a class="btn btn-link text-dark px-3 mb-0" href=""><i
-                                                                class="fas fa-pencil-alt text-primary me-2"
-                                                                aria-hidden="true"></i>المزيد</a>
-
-                                                    </td>
-
-
-                                                </tr>
-                                            {% endfor %}
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-center">
-                                    <a href="{% url 'all-user-rate' %}"
-                                       class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
-                                </div>
-                            </div>
-
+                                    <div class="row pt-2">
+                                                                          <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">بحث بالمحلل</p>
+                            <h5 class="font-weight-bolder mb-0">
+                                <span class="text-success text-sm font-weight-bolder"></span>
+                            </h5>
                         </div>
-
-
                     </div>
-                    <div class="row  pt-4 mx-auto">
-                        <div class="col-xl-6 col-lg-6 col-md-7">
-                            <div class="card z-index-0 h-100">
-                                <div class="card-header pb-0 p-3">
-                                    <h6 class="mb-0">المحللين</h6>
-                                </div>
-                                <div class="card-body justify-content-center p-3">
-                                    <canvas id="pie-chart"></canvas>
-
-                                </div>
-
-                            </div>
-
-
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                            <i class="fas fa-search text-lg opacity-10" aria-hidden="true"></i>
                         </div>
-                        <div class="col-xl-6 col-lg-5 col-md-7 pt-3">
-                            <div class="card h-100 mb-4 z-index-0">
-                                <div class="card-header pb-0">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-7">
-                                            <h6>التقيمات البحثية</h6>
-                                            <p class="text-sm mb-0">
-                                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                                <span class="font-weight-bold ms-1">{{ high_rated.count }}</span> أحدث
-                                                التقييمات
-                                            </p>
-                                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">بحث  شركة الأبحاث</p>
+                            <h5 class="font-weight-bolder mb-0">
+                                <span class="text-success text-sm font-weight-bolder"></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                            <i class="fas fa-search text-lg opacity-10" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">بحث التقيمات البحثية </p>
+                            <h5 class="font-weight-bolder mb-0">
+                                <span class="text-success text-sm font-weight-bolder"></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                            <i class="fas fa-search text-lg opacity-10" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                              <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-capitalize font-weight-bold">بحث توقعات الأبحاث </p>
+                            <h5 class="font-weight-bolder mb-0">
+                                <span class="text-success text-sm font-weight-bolder"></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                            <i class="fas fa-search text-lg opacity-10" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                    </div>
+                                    <div class="row pt-2">
+<div class="col-6">
+    <span class="badge badge-sm bg-maal text-white">
+    عرض لأفضل القييمات البحثيه
+</span>
+</div>
                                     </div>
                                 </div>
                                 <div class="card-body px-0 pb-2">
                                     <div class="table-responsive">
 
                                         <table class="table align-items-center mb-0">
-                                            <thead>
+                                            <thead class="mal-color bg-maal">
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class=" text-white text-xxs ">
                                                     الشركة المدرجة
                                                 </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                <th class=" text-white text-xxs  ps-2">
                                                     شركة الأبحاث
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     إسم المحلل
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     التوصية
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     القيمة العادلة
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     السعر وقت التوصية
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     الفارق %
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     السعر السوقى
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="text-center  text-white text-xxs ">
                                                     الفارق %
                                                 </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    التقرير
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    تاريخ التوصية
-                                                </th>
+                                                <th>
 
-                                                <th class="text-secondary opacity-7"></th>
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             {% for item in high_rated %}
                                                 <tr>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div>
-                                                                <img src="{{ item.CompanyEntered.logo.url }}"
-                                                                     class="avatar avatar-sm me-3" alt="user1">
-                                                            </div>
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
-                                                                <p class="text-xs text-secondary mb-0">{{ item.email |urlize }}</p>
-                                                            </div>
-                                                        </div>
+                                                    <td class="align-middle text-center text-xxs">
+                                                          <p class="mb-0 text-xxs">{{ item.CompanyEntered.name }}</p>
+                                                        <p class="text-xxs text-secondary mb-0">{{ item.email |urlize }}</p>
                                                     </td>
 
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany }}</p>
                                                     </td>
-                                                    <td class="align-middle text-center text-sm">
-                                                        <a href="">
-                                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <a  href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                                            <p class="text-xxs">{{ item.AnalayticName }}</p>
                                                         </a>
                                                     </td>
-                                                    <td class="align-middle text-center">
-                                                        <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <span class="text-secondary text-xxs ">{{ item.Recommendation }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.FairValue }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
                                                     </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.CurrenncyValue }}</p>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
                                                     </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <a href="{% url 'user-rate' item.pk %}" ><span
+                                                                class="badge badge-sm bg-maal  mb-0">المزيد</span></a>
                                                     </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.MarketValue }}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i
-                                                                class="far fa-file-pdf font-weight-bold mb-0"></i></a>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.RecommendDate.Date }}</p>
 
-                                                    </td>
-                                                    <td class="ms-auto text-start">
-                                                        <a class="btn btn-link text-dark px-3 mb-0"
-                                                           href="{% url 'user-rate' item.pk %}"><i
-                                                                class="fas fa-pencil-alt text-primary me-2"
-                                                                aria-hidden="true"></i>المزيد</a>
-                                                    </td>
+
 
                                                 </tr>
                                             {% endfor %}
@@ -300,10 +202,119 @@
                                        class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
                                 </div>
                             </div>
-
                         </div>
 
 
+                    </div>
+                                    <div class="row pt-4 mx-auto">
+                        <div class="col-xl-12 col-lg-12 col-md-12 pt-3">
+                                                        <div class="card h-100 mb-4 z-index-0">
+                                <div class="card-header pb-0">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-7">
+                                          <span class="badge badge-sm bg-maal text-white">
+                                              عرض لأاحدث المحللين
+                                          </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body px-0 pb-2">
+<div class="table-responsive table-size">
+        <table id="analyst_table" class="table-sm table-bordered " style="width:100%">
+               <thead class="mal-color bg-maal text-white">
+                                            <tr>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    إسم المحلل
+                                                </th>
+                                                <th class=" text-white text-xxs ">
+                                                    شركة الأبحاث الحالية
+                                                </th>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    الوظيفة
+                                                </th>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    الوظائف السابقة
+                                                </th>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    الهاتف
+                                                </th>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    البريد الألكترونى
+                                                </th>
+                                                <th class="text-center  text-white text-xxs ">
+                                                    الحساب على تويتر
+                                                </th>
+                                            </tr>
+                                            </thead>
+        <tbody>
+                                            {% for item in analysts %}
+                                                <tr>
+                                                    <td>
+                                                        <p class="mb-0 text-xxs">{{ item.name }}</p>
+
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xxs  mb-0">{{ item.currentCompany.name }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs">{{ item.CurrentJob }}</p>
+                                                    </td>
+                                                    <td class="text-xxs">
+                                                        <p class="text-xxs  mb-0"><a
+                                                                href="{% url 'user-interface' item.pk %}"
+                                                                class="cursor-pointer"><i class="fas fa-briefcase"></i>المزيد</a>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xxs  mb-0">{{ item.phone }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xxs  mb-0">{{ item.email |urlize }}</p>
+                                                    </td>
+                                                    <td class="text-xxs">
+
+                                                        <a class="text-xxs" style="cursor: pointer; text-decoration: none;"
+                                                           href="https://twitter.com/{{ item.tiwtterAccount }}"><i
+                                                                style="color: #0c5460"
+                                                                class="fab fa-twitter text-xl  mb-0">{{ item.tiwtterAccount }}</i></a>
+                                                    </td>
+
+
+
+                                                </tr>
+                                            {% endfor %}
+
+                                            </tbody>
+
+    </table>
+
+</div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center">
+                                    <a href="{% url 'all-user-analyst' %}"
+                                       class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row  pt-4 mx-auto">
+                        <div class="col-xl-12 col-lg-12 col-md-12 pt-3">
+                                                                                <div class="card z-index-0 h-100">
+                                <div class="card-header pb-0 p-3">
+                                    <h6 class="mb-0">أكثر الشركات المدرجة تقييما</h6>
+                                </div>
+                                <div class="card-body justify-content-center p-3">
+                                    <canvas id="company-chart"></canvas>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
                     <div class="row  pt-4 mx-auto">
                         <div class="col-xl-6 col-lg-6 col-md-7">
@@ -321,138 +332,21 @@
                         </div>
 
                         <div class="col-xl-6 col-lg-5 col-md-7 pt-3">
-                            <div class="card h-100 mb-4 z-index-0">
-                                <div class="card-header pb-0">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-7">
-                                            <h6> أحدث المحللين </h6>
-                                            <p class="text-sm mb-0">
-                                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                                <span class="font-weight-bold ms-1">{{ high_rated.count }}</span>
-                                                المحللين
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0 pb-2">
-                                    <div class="table-responsive">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    إسم المحلل
-                                                </th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    شركة الأبحاث الحالية
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    الوظيفة
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    الوظائف السابقة
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    الهاتف
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    البريد الألكترونى
-                                                </th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    الحساب على تويتر
-                                                </th>
-                                                <th class="text-secondary opacity-7"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for item in analysts %}
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1">
-
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm">{{ item.name }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.currentCompany.name }}</p>
-                                                    </td>
-                                                    <td class="align-middle text-center text-sm">
-                                                        <span class="badge badge-sm bg-gradient-secondary">{{ item.CurrentJob }}</span>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0"><a
-                                                                href="{% url 'user-interface' item.pk %}"
-                                                                class="cursor-pointer"><i class="fas fa-briefcase"></i>المزيد</a>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.phone }}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ item.email |urlize }}</p>
-                                                    </td>
-                                                    <td>
-
-                                                        <a style="cursor: pointer; text-decoration: none;"
-                                                           href="https://twitter.com/{{ item.tiwtterAccount }}"><i
-                                                                style="color: #0c5460"
-                                                                class="fab fa-twitter text-xl font-weight-bold mb-0">{{ item.tiwtterAccount }}</i></a>
-                                                    </td>
-
-                                                    <td class="ms-auto text-start">
-                                                        <a class="btn btn-link text-dark px-3 mb-0"
-                                                           href="{% url 'user-interface' item.pk %}"><i
-                                                                class="fas fa-pencil-alt text-primary me-2"
-                                                                aria-hidden="true"></i>المزيد</a>
-
-                                                    </td>
-
-
-                                                </tr>
-                                            {% endfor %}
-
-                                            </tbody>
-                                        </table>
-
-
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex justify-content-center">
-                                    <a href="{% url 'all-user-analyst' %}"
-                                       class="btn btn-sm btn-round text-white mb-0 me-1 bg-maal">المزيد</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row pt-4 mx-auto">
-                        <div class="col-xl-12 col-lg-12 col-md-12 pt-3">
-                            <div class="card z-index-0 h-65">
+                            <div class="card z-index-0 h-100">
                                 <div class="card-header pb-0 p-3">
-                                    <h6 class="mb-0">أكثر الشركات المدرجة تقييما</h6>
+                                    <h6 class="mb-0">المحللين</h6>
                                 </div>
                                 <div class="card-body justify-content-center p-3">
-                                    <canvas id="company-chart"></canvas>
-
+                                    <canvas id="pie-chart"></canvas>
                                 </div>
+
                             </div>
+
+
                         </div>
-                        {#                  <div class="col-xl-6 col-lg-5 col-md-7 pt-3">#}
-                        {#                 <div class="card z-index-0 h-65">#}
-                        {#            <div class="card-header pb-0 p-3">#}
-                        {#              <h6 class="mb-0">أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث </h6>#}
-                        {#            </div>#}
-                        {#            <div class="card-body justify-content-center p-3">#}
-                        {#    <canvas id="expect-chart"></canvas>#}
-                        {##}
-                        {#            </div>#}
-                        {#          </div>#}
-                        {#            </div>#}
 
                     </div>
+
                 </div>
 
 
@@ -468,28 +362,31 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
     <script>
-        {#var expect_config = {#}
-        {#  type: 'pie',#}
-        {#  data: {#}
-        {#    datasets: [{#}
-        {#      data: {{ expectData|safe }},#}
-        {#      backgroundColor: [#}
-        {#        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'#}
-        {#      ],#}
-        {#      label: 'أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث'#}
-        {#    }],#}
-        {#    labels: {{ expectData|safe }}#}
-        {#  },#}
-        {#  options: {#}
-        {#    responsive: true#}
-        {#  }#}
-        {
-            #};
-            #}
+        var expect_config = {
+            type: 'polarArea',
+            data: {
+                datasets: [{
+                    data: {{ RateData|safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'أكثر التوقعات للأرباح بالنسبة لشركات الأبحاث'
+                }],
+                labels: {{ RateLables|safe }}
+            },
+            options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  }
+        }
+
 
 
             var config = {
-                type: 'bar',
+            type: 'doughnut',
                 data: {
                     datasets: [{
                         data: {{ data|safe }},
@@ -506,12 +403,12 @@
             };
 
             var configCompany = {
-                type: 'bar',
+                type: 'pie',
                 data: {
                     datasets: [{
                         data: {{ companiesData|safe }},
                         backgroundColor: [
-                            '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                            '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
                         ],
                         label: 'اعلى محللين تقييما'
                     }],
@@ -526,7 +423,7 @@
                 var ctx = document.getElementById('pie-chart').getContext('2d');
                 window.myPie = new Chart(ctx, config);
                 var ctx_rates = document.getElementById('bar-chart').getContext('2d');
-                window.myPie = new Chart(ctx_rates, ratesconfig);
+                window.myPie = new Chart(ctx_rates, expect_config);
                 var company_ctx = document.getElementById('company-chart').getContext('2d');
                 window.myPie = new Chart(company_ctx, configCompany);
                 {#  var expect_ctx = document.getElementById('expect-chart').getContext('2d');#}
@@ -534,22 +431,6 @@
             };
 
 
-            var ratesconfig = {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: {{ RateData|safe }},
-                        backgroundColor: [
-                            '#696969', '#A9942A', '#000000', '#808080', '#D3D3D3'
-                        ],
-                        label: 'اعلى محللين تقييما'
-                    }],
-                    labels: {{ RateLables|safe }}
-                },
-                options: {
-                    responsive: true
-                }
-            };
 
     </script>
 {% endblock scripts %}

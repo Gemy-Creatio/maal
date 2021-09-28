@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from office.models import FinicialAnalyst, PerviousCompany, Rates
+from office.models import FinicialAnalyst, PerviousCompany, Rates , FinicialCompany
 
 
 # Create your views here.
@@ -7,6 +7,8 @@ from office.models import FinicialAnalyst, PerviousCompany, Rates
 
 def user_interface(request, pk):
     context = {
+        "data": data,
+        "label": label,
         "analyst": FinicialAnalyst.objects.get(pk=pk),
         "pervcompanies": PerviousCompany.objects.filter(analyst_id=pk),
         "rates": Rates.objects.filter(AnalayticName_id=pk)
@@ -19,6 +21,37 @@ def rate_user_detail(request, pk):
         "rate": Rates.objects.get(pk=pk)
     }
     return render(request, 'userInterface/rate-profile.html', context=context)
+
+
+def user_home(request):
+    label = []
+    data = []
+    rates = Rates.objects.filter(Recommendation__exact=1)[:5]
+    for rate in rates:
+        label.append(rate.CompanyEntered.name)
+        data.append(rate.FairValue)
+    label1 = []
+    data1 = []
+    rates = Rates.objects.filter(Recommendation__exact=2)[:5]
+    for rate in rates:
+        label1.append(rate.CompanyEntered.name)
+        data1.append(rate.FairValue)
+    companylabel = []
+    companydata = []
+    companies = Rates.objects.filter(Recommendation__exact=3)[:5]
+    for company in companies:
+        companylabel.append(company.CompanyEntered.name)
+        data1.append(company.FairValue)
+    context = {
+        "rates": Rates.objects.all()[:10],
+        "label": label,
+        "data": data,
+        "data1": data1,
+        "label1": label1,
+        "companylabel": companylabel,
+        "companydata": companydata
+    }
+    return render(request, 'userInterface/home-page.html', context=context)
 
 
 def analystslist(request):

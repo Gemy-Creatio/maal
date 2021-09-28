@@ -81,19 +81,27 @@ class ResearchCompany(models.Model):
 
 
 class Rates(models.Model):
+    RECOMDATION_CHOICES = (
+        (1, 'زيادة الوزن'),
+        (2, 'تخفيض الوزن'),
+        (3, 'محايد'),
+
+    )
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='CompanyEntered',
                                        null=True)
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE, related_name='ResearchCompany',
                                         null=True)
     AnalayticName = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE, related_name='AnalayticName',
                                       null=True)
-    Recommendation = models.CharField(max_length=255, null=True, blank=True, )
+    Recommendation = models.SmallIntegerField(max_length=255, null=True, blank=True, choices=RECOMDATION_CHOICES)
     FairValue = models.FloatField(null=True, blank=True)
     CurrenncyValue = models.FloatField(null=True, blank=True)
     MarketValue = models.FloatField(null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     RecommendDate = models.DateField(auto_now_add=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
+    changeFair = models.BooleanField(null=True)
+    changeMarket = models.BooleanField(null=True)
 
     class Meta:
         indexes = [
