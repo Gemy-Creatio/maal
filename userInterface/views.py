@@ -1,14 +1,12 @@
 from django.shortcuts import render
 from office.models import FinicialAnalyst, PerviousCompany, Rates , FinicialCompany
-
+from office.filters import RatesFilter
 
 # Create your views here.
 
 
 def user_interface(request, pk):
     context = {
-        "data": data,
-        "label": label,
         "analyst": FinicialAnalyst.objects.get(pk=pk),
         "pervcompanies": PerviousCompany.objects.filter(analyst_id=pk),
         "rates": Rates.objects.filter(AnalayticName_id=pk)
@@ -42,8 +40,12 @@ def user_home(request):
     for company in companies:
         companylabel.append(company.CompanyEntered.name)
         data1.append(company.FairValue)
+    rates = Rates.objects.all()[:10]
+    rate_filter = RatesFilter(request.GET, queryset=rates)
+    rate = rate_filter.qs
     context = {
-        "rates": Rates.objects.all()[:10],
+        "myfilter": rate_filter,
+        "rates": rate,
         "label": label,
         "data": data,
         "data1": data1,

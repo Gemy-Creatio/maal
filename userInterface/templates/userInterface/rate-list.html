@@ -1,13 +1,20 @@
-{% extends 'userlayout.html' %}
+{% extends 'masterpage.html' %}
 {% load static %}
-{% block title %} صحيفة مال  {% endblock title %}
+{% block title %}  صحفية مال {% endblock title %}
+
 
 {% block body %}
-       <div class="m position-relative" style="background-image: url('../../../static/images/maal.png') ; background-size: cover;">
-    <main class="main-content border-radius-sm">
-      <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
-        <div class="container">
-         <div class="row pt-8">
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/home-back.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
           <div class="card">
             <div class="card-header pb-0">
@@ -23,89 +30,93 @@
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive">
+                                        <table style="margin:0 auto;" class="table table-max table-bordered align-items-center mb-auto">
+                                            <thead class="text_black">
+                                            <tr>
+                                                 <th class="text-center text-xxs">
+                                                   الشركة
+                                                </th>
 
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التوصية</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">القيمة العادلة</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر وقت التوصية</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر السوقى </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التقرير</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاريخ التوصية</th>
+                                                <th class="text-center   text-xxs ">
+                                                    التوصية
+                                                </th>
+                                                <th class="text-center   text-xxs ">
+                                                    السعر وقت التوصية
+                                                </th>
+                                                <th class="text-center   text-xxs ">
+                                                   السعر المستهدف
+                                                </th>
+                                                <th class="text-center   text-xxs ">
+                                                   التغير
+                                                </th>
+                                                <th class="text-center   text-xxs ">
+                                                   السعر الحالى
+                                                </th>
+                                                <th class="text-center   text-xxs ">
+                                                    التغير
+                                                </th>
 
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {% for item in rates %}
-                              <tr>
-                                                                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="{{ item.CompanyEntered.logo.url }}" class="avatar avatar-sm me-3" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{ item.CompanyEntered.name }}</h6>
-                            <p class="text-xs text-secondary mb-0">{{ item.email |urlize }}</p>
-                          </div>
-                        </div>
-                      </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                           <a href="{% url 'user-interface' item.AnalayticName.pk %}">
-                                                <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
-                                           </a>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.FairValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.CurrenncyValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.MarketValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.market_percentage |floatformat:-2  }}</p>
-                                        </td>
-                                        <td>
-                                            <a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.RecommendDate.Date }}</p>
+                                                 <th class="text-center   text-xxs ">
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in rates %}
+                                                <tr>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
+                                                    </td>
 
-                                        </td>
-                                        <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'user-rate' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
-                                        </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                       {% if item.changeFair %}
+                                                           <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                                        {% else %}
+                                                           <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-xxs">
+                                                       {% if item.changeMarket %}
+                                                           <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                                        {% else %}
+                                                           <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                                        {% endif %}
+                                                    </td>
 
-                                    </tr>
-                               {% endfor %}
 
-                            </tbody>
-                        </table>
+                                                    <td class="align-middle text-center text-xxs">
+                                                       <a href="{% url 'user-rate' item.pk %}">
+                                                            <span class="badge badge-sm bg-maal">
+                                                            المزيد
+                                                        </span>
+                                                       </a>
+                                                    </td>
+
+                                                </tr>
+
+                                            {% endfor %}
+
+                                            </tbody>
+                                        </table>
+
 
               </div>
             </div>
           </div>
          </div>
-        </div>
+
       </div>
-    </main>
-       </div>
+    </div>
+</section>
 {% endblock body %}
-          

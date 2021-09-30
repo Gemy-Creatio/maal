@@ -1,14 +1,19 @@
-{% extends 'userlayout.html' %}
+{% extends 'masterpage.html' %}
 {% load static %}
 {% block title %} صحيفة مال  {% endblock title %}
 
 {% block body %}
-    <div class="m position-relative"
-         style="background-color: #f4f4f4">
-        <main class="main-content border-radius-sm">
-            <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
-                <div class="container">
-  <div class="row pt-8 justify-content-center">
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/ksa.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
                  <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
         <div class="card">
             <div class="card-body p-3">
@@ -49,65 +54,66 @@
             </div>
         </div>
     </div>
-  </div>
+      </div>
+
                     <div class="row pt-3">
                         <div class="col-12 mx-auto">
-                <div class="card h-100 mb-4 z-index-0">
+                <div class="card h-100 mb-4 z-index-0 box-shadow">
                                 <div class="card-header pb-0">
                                     <div class="row  justify-content-center">
                                         <div class="col-12 justify-content-center">
-                                            <form class="form-inline justify-content-center" >
+                                            <form method="get" class="form-inline justify-content-center" >
       <div class="form-group py-2 ">
-                                                  <select name="cars" id="cars">
+                                                  <select class="form-control" name="cars" id="cars">
   <option value="volvo" disabled selected>البحث برمز الشركة</option>
   <option value="saab">S</option>
 
 </select>
       </div>
                                 <div class="form-group  py-2 ">
-                                                  <select name="cars" id="cars">
+                                                  <select class="form-control" name="cars" id="cars">
   <option value="volvo" disabled selected>  القطاع</option>
   <option value="saab">S</option>
 
 </select>
       </div>
                                                   <div class="form-group  py-2 ">
-                                                  <select name="cars" id="cars">
+                                                  <select class="form-control" name="cars" id="cars">
   <option value="volvo" disabled selected>البحث بشركة الأبحاث</option>
   <option value="saab">S</option>
 
 </select>
       </div>
                                                   <div class="form-group  py-2 ">
-                                                  <select name="cars" id="cars">
+                                                  <select class="form-control" name="cars" id="cars">
   <option value="volvo" disabled selected>البحث  باسم المحلل</option>
   <option value="saab">S</option>
 
 </select>
       </div>
+                                                 {% csrf_token %}
+
+{#                        {% for filed in myfilter.form %}#}
+{#                 <div  class="form-group  py-2">#}
+{##}
+{#                            {{ filed }}#}
+{#                 </div>#}
+{##}
+{#                        {% endfor %}#}
                                                 <button class=" btn btn-primary py-2 bg-maal text-white">بحث</button>
 </form>
                                         </div>
                                     </div>
                                 </div>
 <div class="card-body px-0 pb-2">
-                                    <div class="table-responsive">
 
-                                        <table class="table table-bordered align-items-center mb-auto">
+                                        <table style="margin:0 auto;" class="table table-max table-bordered align-items-center mb-auto">
                                             <thead class="text_black">
                                             <tr>
-                                                <th class="  text-xxs ">
-                                                    شركة الأبحاث
-                                                </th>
-                                                <th class="  text-xxs  ps-2">
+                                                 <th class="text-center text-xxs">
                                                    الشركة
                                                 </th>
-                                                <th class="text-center   text-xxs ">
-                                                    القطاع
-                                                </th>
-                                                <th class="text-center   text-xxs ">
-                                                    المحلل
-                                                </th>
+
                                                 <th class="text-center   text-xxs ">
                                                     التوصية
                                                 </th>
@@ -126,11 +132,8 @@
                                                 <th class="text-center   text-xxs ">
                                                     التغير
                                                 </th>
+
                                                  <th class="text-center   text-xxs ">
-                                                    تحميل
-                                                </th>
-                                                 <th class="text-center   text-xxs ">
-                                                    تاريخ التوصية
                                                 </th>
                                             </tr>
                                             </thead>
@@ -138,20 +141,9 @@
                                             {% for item in rates %}
                                                 <tr>
                                                     <td class="align-middle text-center text-xxs">
-                                                          <p class="mb-0 text-xxs">{{ item.ResearchCompany.name }}</p>
+                                                        <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
                                                     </td>
 
-                                                    <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</p>
-                                                    </td>
-                                                    <td class="align-middle text-center text-xxs">
-                                                            <p class="text-xxs">{{ item.CompanyEntered.category.name }}</p>
-                                                    </td>
-                                                    <td class="align-middle text-center text-xxs">
-                                                  <a  href="{% url 'user-interface' item.AnalayticName.pk %}">
-                                                            <p class="text-xxs">{{ item.AnalayticName.name }}</p>
-                                                        </a>
-                                                    </td>
                                                     <td class="align-middle text-center text-xxs">
                                                         <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                                     </td>
@@ -163,8 +155,10 @@
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.changeFair %}
+                                                           <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
                                                            <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
                                                         {% else %}
+                                                           <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
                                                            <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
                                                         {% endif %}
                                                     </td>
@@ -173,34 +167,44 @@
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.changeMarket %}
+                                                                                                                      <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
                                                            <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
                                                         {% else %}
+                                                                                                                      <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
                                                            <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
                                                         {% endif %}
                                                     </td>
-                                                    <td class="align-middle text-center text-xxs">
-                                                        <a href="../../../static/images/reportspdf/{{ item.report.name }}" >
-                                                            <i class="far fa-file-pdf text-danger"></i>
-                                                        </a>
-                                                    </td>
+
 
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs text-black-50">{{ item.RecommendDate }}</p>
+                                                       <a href="{% url 'user-rate' item.pk %}">
+                                                            <span class="badge badge-sm bg-maal">
+                                                            المزيد
+                                                        </span>
+                                                       </a>
+                                                    </td>
+
                                                 </tr>
+
                                             {% endfor %}
 
                                             </tbody>
                                         </table>
 
-                                    </div>
+
                                 </div>
+                <div class="card-footer">
+                    <div class="col-4 justify-content-lg-start">
+                        <a href="{% url 'all-user-rate' %}"><span class="badge badge-sm bg-maal">المزيد</span></a>
+                    </div>
+                </div>
                 </div>
                         </div>
                     </div>
 
                 <div class="row pt-3">
                     <div class="col-lg-6">
-                        <div class="card z-index-0 mx-auto">
+                        <div class="card z-index-0 mx-auto box-shadow">
                              <div class="card-header">
                                 <div class="col-12 justify-content-center">
                                     <p>أخر 5 شركات تمت التوصية عليها بزيادة الوزن مع السعر المستهدف</p>
@@ -213,7 +217,7 @@
 
                     </div>
                                   <div class="col-lg-6">
-                        <div class="card z-index-0 mx-auto">
+                        <div class="card z-index-0 mx-auto box-shadow">
                             <div class="card-header">
                                 <div class="col-12 justify-content-center">
                                     <p>أخر 5 شركات تمت التوصية عليها بتخفيض الوزن مع السعر المستهدف</p>
@@ -229,7 +233,7 @@
                 </div>
                 <div class="row pt-3">
                                                       <div class="col-lg-6">
-                        <div class="card z-index-0 mx-auto">
+                        <div class="card z-index-0 mx-auto box-shadow">
                             <div class="card-header">
                                 <div class="col-12 justify-content-center">
                                     <p>أخر 5 شركات تمت التوصية عليها بمحايد مع السعر المستهدف</p>
@@ -243,11 +247,10 @@
                     </div>
 
                 </div>
-
-                </div>
-            </div>
-        </main>
     </div>
+
+</section>
+
 {% endblock body %}
 
 {% block scripts %}
