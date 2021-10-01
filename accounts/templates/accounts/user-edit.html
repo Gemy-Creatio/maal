@@ -1,12 +1,22 @@
-{% extends 'loginlayout.html' %}
-
-{% block title %} تعديل حساب  {% endblock title %}
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
 
 
 {% block body %}
-<div class="row d-flex">
-    <div class="col-xl-10 col-lg-10 col-md-8 d-flex flex-column mx-auto">
-        <div class="card card-plain mt-8">
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/tadawel.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+          <div class="col-12 mx-auto">
+                      <div class="card z-index-0">
               <div class="card-header pb-0">
                 <h6>تعديل بيانات</h6>
             </div>
@@ -47,6 +57,13 @@
                 </form>
             </div>
         </div>
+
+          </div>
+      </div>
     </div>
-</div>
+</section>
 {% endblock body %}
+
+
+
+

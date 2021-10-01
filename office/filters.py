@@ -1,23 +1,14 @@
 import django_filters
-from django import forms
 
 from .models import *
 
 
 class RatesFilter(django_filters.FilterSet):
-    code = django_filters.ModelChoiceFilter(field_name='CompanyEntered__code__code',
-                                            queryset=CompanyCode.objects.all(),
-                                            widget=forms.SelectMultiple(attrs={'class': "form-control"}))
-    category = django_filters.ModelChoiceFilter(field_name='CompanyEntered__category',
-                                                queryset=CompanyCategory.objects.all(),
-                                                widget=forms.SelectMultiple(attrs={'class': "form-control"}))
-    CompanyEntered = django_filters.ModelChoiceFilter(field_name='CompanyEntered',
-                                                      queryset=FinicialCompany.objects.all(),
-                                                      widget=forms.SelectMultiple(
-                                                          attrs={'class': "form-control"}))
-    name = django_filters.ModelChoiceFilter(field_name='AnalayticName', queryset=FinicialAnalyst.objects.all(),
-                                            widget=forms.SelectMultiple(attrs={'class': "form-control"}))
+    company = django_filters.CharFilter(field_name='CompanyEntered__name', lookup_expr='iexact')
+    date_of_rate = django_filters.DateFilter(field_name='RecommendDate', lookup_expr='exact')
+    analyst = django_filters.CharFilter(field_name='AnalayticName__name', lookup_expr='iexact')
+    code = django_filters.CharFilter(field_name='CompanyEntered__company__code', lookup_expr='iexact')
 
     class Meta:
         model = Rates
-        fields = ['CompanyEntered', 'category', 'code', 'name']
+        fields = ['company', 'date_of_rate', 'analyst', 'code']

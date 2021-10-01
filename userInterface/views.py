@@ -40,7 +40,7 @@ def user_home(request):
     for company in companies:
         companylabel.append(company.CompanyEntered.name)
         data1.append(company.FairValue)
-    rates = Rates.objects.all()[:10]
+    rates = Rates.objects.all()
     rate_filter = RatesFilter(request.GET, queryset=rates)
     rate = rate_filter.qs
     context = {
@@ -70,7 +70,11 @@ def PervList(request, pk):
 
 
 def rateslist(request):
+    rates = Rates.objects.all()
+    rate_filter = RatesFilter(request.GET, queryset=rates)
+    rate = rate_filter.qs
     context = {
-        "rates": Rates.objects.all(),
+        "myfilter": rate_filter,
+        "rates": rate,
     }
     return render(request, 'userInterface/rate-list.html', context=context)

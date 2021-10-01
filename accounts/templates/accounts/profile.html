@@ -1,15 +1,21 @@
-{% extends 'userlayout.html' %}
+{% extends 'masterpage.html' %}
 {% load static %}
-{% block title %}  الصفحة الشخصية {% endblock title %}
+{% block title %}  صحفية مال {% endblock title %}
 
 
 {% block body %}
-         <div class="m position-relative" style="background-image: url('../../../static/images/logo_back.png') ; background-size: cover;">
-    <main class="main-content border-radius-sm">
-      <div class="section min-vh-100 position-relative transform-scale-0 transform-scale-md-0 m-auto m-0">
-        <div class="container">
-          <div class="row pt-lg-8 pb-lg-5" style="margin: 0 auto;">
-              <div class="col-lg-10 col-md-10">
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/tada.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+                      <div class="col-lg-10 col-md-10">
           <div class="card h-100">
             <div class="card-header pb-0">
               <h6>صحفية مال الأقتصادية</h6>
@@ -82,10 +88,10 @@
             </div>
           </div>
         </div>
-          </div>
-        </div>
-      </div>
-    </main>
-     </div>
 
+      </div>
+    </div>
+</section>
 {% endblock body %}
+
+
