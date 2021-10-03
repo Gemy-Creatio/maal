@@ -1,0 +1,8 @@
+[02:04:32 INF] Appilication is starting
+[02:04:37 INF] Application started. Press Ctrl+C to shut down.
+[02:04:37 INF] Hosting environment: Development
+[02:04:37 INF] Content root path: C:\Users\Gemy\source\repos\dms_api\dms_api
+[02:04:37 INF] Request starting HTTP/2 GET https://localhost:44393/swagger/index.html - -
+[02:04:37 INF] Request finished HTTP/2 GET https://localhost:44393/swagger/index.html - - - 200 - text/html;charset=utf-8 298.2017ms
+[02:04:38 INF] Request starting HTTP/2 GET https://localhost:44393/swagger/v1/swagger.json - -
+[02:04:38 INF] Request finished HTTP/2 GET https://localhost:44393/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 225.3028ms

@@ -39,10 +39,16 @@ def user_home(request):
     companies = Rates.objects.filter(Recommendation__exact=3)[:5]
     for company in companies:
         companylabel.append(company.CompanyEntered.name)
-        data1.append(company.FairValue)
+        companydata.append(company.FairValue)
+    companies = FinicialCompany.objects.order_by('CompanyEntered')[:5]
+    companylabel1 = []
+    companydata1 = []
+    for company in companies:
+        companylabel1.append(company.name)
+        companydata1.append(company.CompanyEntered.count())
     rates = Rates.objects.all()
-    rate_filter = RatesFilter(request.GET, queryset=rates)
-    rate = rate_filter.qs
+    rate_filter = RatesFilter(request.POST, queryset=rates)
+    rate = rate_filter.qs[:5]
     context = {
         "myfilter": rate_filter,
         "rates": rate,
@@ -51,7 +57,9 @@ def user_home(request):
         "data1": data1,
         "label1": label1,
         "companylabel": companylabel,
-        "companydata": companydata
+        "companydata": companydata,
+        "companylabel1": companylabel1,
+        "companydata1": companydata1
     }
     return render(request, 'userInterface/home-page.html', context=context)
 

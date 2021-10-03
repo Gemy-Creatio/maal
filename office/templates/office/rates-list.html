@@ -82,7 +82,7 @@
                                             <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ item.Recommendation }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ item.get_Recommendation_display }}</span>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ item.FairValue }}</p>
@@ -103,7 +103,7 @@
                                             <a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.RecommendDate.Date }}</p>
+                                            <p class="text-xs text-black-50 font-weight-bold mb-0">{{ item.RecommendDate }}</p>
 
                                         </td>
                                         <td class="ms-auto text-start">

@@ -65,11 +65,11 @@
                         <div class="card-header pb-0">
                             <div class="row  justify-content-center">
                                 <div class="col-12 justify-content-center">
-                                    <form method="get" class="form-inline justify-content-center">
+                                    <form method="post" class="form-inline justify-content-center">
                                         {% csrf_token %}
 
                                         {% for filed in myfilter.form %}
-                                            <div class="form-group  py-2">
+                                            <div class="form-group col-2  py-2">
 
                                                 {{ filed }}
                                             </div>
@@ -81,35 +81,38 @@
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
-
                             <table style="margin:0 auto;"
                                    class="table table-max table-bordered align-items-center mb-auto">
                                 <thead class="text_black">
                                 <tr>
-                                    <th class="text-center text-xxs">
+                                    <th class="text-center text-xxs" style="width: 2rem;">
                                         الشركة
                                     </th>
-
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
                                         التوصية
                                     </th>
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
                                         السعر وقت التوصية
                                     </th>
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         السعر المستهدف
                                     </th>
                                     <th class="text-center   text-xxs ">
                                         التغير
                                     </th>
                                     <th class="text-center   text-xxs ">
-                                        السعر الحالى
+                                        أخر إغلاق
                                     </th>
                                     <th class="text-center   text-xxs ">
                                         التغير
                                     </th>
-
-                                    <th class="text-center   text-xxs ">
+ <th class="text-center   text-xxs " style="width: 2rem;">
+     تاريخ التوصية
+                                    </th>
+                                     <th class="text-center   text-xxs " style="width: 1.5rem;">
+                                         التقرير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.5rem;">
                                     </th>
                                 </tr>
                                 </thead>
@@ -119,7 +122,6 @@
                                         <td class="align-middle text-center text-xxs">
                                             <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
                                         </td>
-
                                         <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                         </td>
@@ -150,8 +152,15 @@
                                                 <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
                                             {% endif %}
                                         </td>
-
-
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate }}</p>
+                                        </td>
+ <td class="align-middle text-center text-xxs">
+                                            <a href="../../../static/images/reportspdf/{{ item.report.name }}">
+                                                            <i class="fas fa-file-pdf text-danger">
+                                                        </i>
+                                            </a>
+                                        </td>
                                         <td class="align-middle text-center text-xxs">
                                             <a href="{% url 'user-rate' item.pk %}">
                                                             <span class="badge badge-sm bg-maal">
@@ -166,11 +175,9 @@
 
                                 </tbody>
                             </table>
-
-
                         </div>
                         <div class="card-footer">
-                            <div class="col-4 justify-content-lg-start">
+                            <div class="col-12 d-flex justify-content-end">
                                 <a href="{% url 'all-user-rate' %}"><span
                                         class="badge badge-sm bg-maal">المزيد</span></a>
                             </div>
@@ -218,6 +225,19 @@
                         </div>
                         <div class="card-body justify-content-center">
                             <canvas id="fair2-chart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="card z-index-0 mx-auto box-shadow">
+                        <div class="card-header">
+                            <div class="col-12 justify-content-center">
+                                <p>أكثر الشركات المدرجة  تقييما</p>
+                            </div>
+                        </div>
+                        <div class="card-body justify-content-center">
+                            <canvas id="fair3-chart"></canvas>
                         </div>
                     </div>
 
@@ -274,7 +294,7 @@
             }
         }
         var rateFair2_config = {
-            type: 'pie',
+            type: 'bar',
             data: {
                 datasets: [{
                     data: {{ companydata |safe }},
@@ -292,6 +312,23 @@
                 }
             }
         }
+                    var configCompany = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: {{ companydata1|safe }},
+                        backgroundColor: [
+                            '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
+                        ],
+                        label: 'اعلى شركات الأبحاث تقييما'
+                    }],
+                    labels: {{ companylabel1|safe }}
+                },
+                options: {
+                    responsive: true
+                }
+            };
+
         window.onload = function () {
             var Fairctx = document.getElementById('fair-chart').getContext('2d');
             window.myPie = new Chart(Fairctx, rateFair_config);
@@ -299,6 +336,8 @@
             window.myPie = new Chart(Fair1ctx, rateFair1_config);
             var Fair2ctx = document.getElementById('fair2-chart').getContext('2d');
             window.myPie = new Chart(Fair2ctx, rateFair2_config);
+            var Fair3ctx = document.getElementById('fair3-chart').getContext('2d');
+            window.myPie = new Chart(Fair3ctx, configCompany);
         }
 
     </script>
@@ -309,7 +348,10 @@
         document.getElementById("id_code").setAttribute('placeholder', 'البحث بكود الشركة');
         document.getElementById("id_date_of_rate").className = "form-control";
         document.getElementById("id_date_of_rate").setAttribute('type', 'date');
-        document.getElementById("id_date_of_rate").setAttribute('placeholder', 'تاريخ التوصية');
+        document.getElementById("id_date_of_rate").setAttribute('placeholder', 'التوصية إلى');
+        document.getElementById("id_end_of_rate").className = "form-control";
+        document.getElementById("id_end_of_rate").setAttribute('type', 'date');
+        document.getElementById("id_end_of_rate").setAttribute('placeholder', 'التوصية من');
         document.getElementById("id_analyst").className = "form-control";
         document.getElementById("id_analyst").setAttribute('placeholder', 'البحث باسم المحلل');
 

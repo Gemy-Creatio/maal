@@ -24,7 +24,7 @@
                                         {% csrf_token %}
 
                                         {% for filed in myfilter.form %}
-                                            <div class="form-group  py-2">
+                                            <div class="form-group col-2  py-2">
 
                                                 {{ filed }}
                                             </div>
@@ -135,7 +135,10 @@
         document.getElementById("id_code").setAttribute('placeholder', 'البحث بكود الشركة');
         document.getElementById("id_date_of_rate").className = "form-control";
         document.getElementById("id_date_of_rate").setAttribute('type', 'date');
-        document.getElementById("id_date_of_rate").setAttribute('placeholder', 'تاريخ التوصية');
+        document.getElementById("id_date_of_rate").setAttribute('placeholder', 'التوصية إلى');
+        document.getElementById("id_end_of_rate").className = "form-control";
+        document.getElementById("id_end_of_rate").setAttribute('type', 'date');
+        document.getElementById("id_end_of_rate").setAttribute('placeholder', 'التوصية من');
         document.getElementById("id_analyst").className = "form-control";
         document.getElementById("id_analyst").setAttribute('placeholder', 'البحث باسم المحلل');
 
