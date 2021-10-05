@@ -53,114 +53,102 @@
                                             </form>
                         </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
+                <div class="table-responsive">
 
-                                <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center mb-auto">
-                                    <thead class="text-black">
-                                    <tr>
-                                        <th class="text-dark text-xxs" style="width: 2rem;">
-                                            الشركة المدرجة
-                                        </th>
-                                        <th class="text-dark text-xxs " style="width: 2rem;">
-                                            شركة الأبحاث
-                                        </th>
-                                        <th class="text-dark text-xxs " style="width: 2rem;">
-                                            توقعات الأرباح
-                                        </th>
+                    <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center mb-auto">
+                        <thead class="text-black">
+                        <tr>
+                            <th class="text-dark text-xxs" style="width: 2rem;">
+                                الشركة
+                            </th>
+                            <th class="text-dark text-xxs " style="width: 2rem;">
+                                شركة الأبحاث
+                            </th>
+                            <th class="text-dark text-xxs " style="width: 2rem;">
+                                توقعات الأرباح
+                            </th>
 
-                                        <th class="text-center text-dark text-xxs">
-                                            توقعات الأرباح
-                                        </th>
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                الربع الثالث 2020
+                            </th>
 
-                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                            اسم المحلل
-                                        </th>
-                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                            المرفق
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for item in expects %}
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                مدى الأنحراف
+                            </th>
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                الربع الثانى 2021
+                            </th>
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                مدى الأنحراف
+                            </th>
+                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                               الأرباح الفعلية
+                            </th>
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                المحلل
+                            </th>
+                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                المرفق
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in expects %}
+                            <tr>
+                                <td>
 
-                                                        <p class="mb-0 text-xxs">{{ item.CompanyEntered.name }}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
+                                        <p class="mb-0 text-xxs">{{ item.CompanyEntered.name }}</p>
+                                </td>
+                                <td>
 
-                                                        <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
-                                                </div>
-                                            </td>
-                                            <td>
+                                        <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
+                                </td>
+                                <td>
 
-                                                        <p class="mb-0 text-xxs">{{ item.expectvalue }}</p>
-                                            </td>
-                                            <td class="d-flex flex-column align-middle text-center text-sm">
-                                                <table class="table table-striped align-items-center mb-0">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="text-dark text-xxs" style="width: 2rem;">
-                                                            السنه
-                                                        </th>
-                                                        <th class="text-dark text-xxs " style="width: 2rem;">
-                                                            الربع
-                                                        </th>
-                                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                                            الأرباح الفعلية
-                                                        </th>
+                                    <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="mb-0 text-xxs">{{ item.third2020 }}</p>
 
-                                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                                            مدى الأنحراف
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
+                                </td>
+                                <td class="align-middle text-center">
+                                    {% if item.deviationthird2020 < 0 %}
+                                        <span class="text-danger text-lg font-weight-bold">{{ item.deviationthird2020|floatformat:-2 }} %</span>
+                                    {% else %}
+                                        <span class="text-success text-lg font-weight-bold">{{ item.deviationthird2020|floatformat:-2 }} %</span>
+                                    {% endif %}
+                                </td>
+                              <td class="align-middle text-center text-sm">
+                                    <p class="mb-0 text-xxs">{{ item.second2020 }}</p>
 
-                                                    <tbody>
-                                                    {% for expect in item.expectYear.all %}
-                                                        <tr>
-                                                            <td>
-                                                                <p class="text-xxs">{{ expect.year }}</p>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-xxs">{{ expect.quaratar }}</p>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-xxs">{{ expect.value }}</p>
-                                                            </td>
-                                                            <td class="align-middle text-center">
-                                                                {% if expect.deviation_range < 0 %}
-                                                                    <span class="text-danger text-xxs font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
-                                                                {% else %}
-                                                                    <span class="text-success text-xxs font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
-                                                                {% endif %}
-                                                            </td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                    </tbody>
-                                                </table>
+                                </td>
+                              <td class="align-middle text-center text-sm">
+                                    {% if item.deviationsecond2020 < 0 %}
+                                        <span class="text-danger text-lg font-weight-bold">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
+                                    {% else %}
+                                        <span class="text-success text-lg font-weight-bold">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
+                                    {% endif %}
+                                </td>
+ <td class="align-middle text-center text-sm">
+                                    <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
 
-                                            </td>
-                                            <td>
-                                                <p class="text-xxs">{{ item.analyst.name }}</p>
-                                            </td>
-                                            <td>
-                                                <a href="{{ item.report.url }}">
-                                                    <p class="text-xxs"><i
-                                                            class="far fa-file-pdf maal-yello"></i></p>
-                                                </a>
-                                            </td>
+                                </td>
+                             <td class="align-middle text-center text-sm">
+                                    <p class="mb-0 text-xxs">{{ item.analyst.name }}</p>
 
-                                        </tr>
-                                    {% endfor %}
+                                </td>
+                             <td class="align-middle text-center text-sm">
+                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
+                                </td>
 
-                                    </tbody>
-                                </table>
 
-              </div>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
           </div>
          </div>

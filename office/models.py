@@ -162,9 +162,20 @@ class EarningsForecast(models.Model):
                                        null=True)
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
                                         null=True)
-    expectYear = models.ManyToManyField(RateQuarter, null=True)
-    expectvalue = models.IntegerField(blank=True, null=True)
+    total_earn = models.IntegerField(blank=True, null=True)
+    third2020 = models.IntegerField(blank=True, null=True)
+
+    second2020 = models.IntegerField(blank=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
+    realEarn = models.IntegerField(blank=True, null=True)
+
+    @property
+    def deviationsecond2020(self):
+        return (self.realEarn - self.second2020)/(self.second2020 * 100)
+
+    @property
+    def deviationthird2020(self):
+        return (self.realEarn - self.third2020) / (self.third2020 * 100)
 
     def __str__(self):
         return str(self.CompanyEntered.name)
