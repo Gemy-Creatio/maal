@@ -60,10 +60,11 @@ def AddCompany(request):
     if request.method == 'POST' and request.FILES['logo']:
         name = request.POST.get('name')
         logo = request.FILES['logo']
+        link = request.POST.get('link')
         fs = FileSystemStorage()
         filename = fs.save(logo.name, logo)
         category = request.POST.get('category')
-        company = FinicialCompany(logo=logo, name=name, EmpEntered_id=request.user.pk, category_id=category)
+        company = FinicialCompany(link=link, logo=logo, name=name, EmpEntered_id=request.user.pk, category_id=category)
         company.save()
         if company.pk:
             return redirect('company-list')
@@ -78,8 +79,10 @@ def EditCompany(request, pk):
     if request.method == 'POST':
         name = request.POST.get('name')
         category = request.POST.get('category')
+        link = request.POST.get('link')
         company.name = name
         company.category_id = category
+        company.link=link
         company.EmpEntered_id = request.user.pk
         company.save()
         if company.pk:
@@ -334,6 +337,3 @@ def ExpectationList(request):
         "expectations": EarningsForecast.objects.all()
     }
     return render(request, 'office/expectation-list.html', context=context)
-
-
-

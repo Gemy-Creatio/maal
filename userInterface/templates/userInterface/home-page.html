@@ -16,7 +16,8 @@
         <div class="container">
             <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-                    <div class="card">
+                   <a href="{% url 'all-user-rate' %}">
+                        <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -34,9 +35,11 @@
                             </div>
                         </div>
                     </div>
+                   </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-                    <div class="card">
+               <a href="{% url 'all-user-expect' %}">
+                                       <div class="card">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -56,6 +59,8 @@
                             </div>
                         </div>
                     </div>
+
+               </a>
                 </div>
             </div>
 
@@ -65,11 +70,14 @@
                         <div class="card-header pb-0">
                             <div class="row  justify-content-center">
                                 <div class="col-12 justify-content-center">
+                                <button class="btn btn-primary py-2 bg-maal text-white" onclick="myFunction()"><i class="fas fa-search"></i></button>
+
+<div id="myDIV">
                                     <form method="post" class="form-inline justify-content-center">
                                         {% csrf_token %}
 
                                         {% for filed in myfilter.form %}
-                                            <div class="form-group col-2  py-2">
+                                            <div class="form-group col-12 col-lg-2  py-2">
 
                                                 {{ filed }}
                                             </div>
@@ -77,6 +85,7 @@
                                         {% endfor %}
                                         <button class=" btn btn-primary py-2 bg-maal text-white">بحث</button>
                                     </form>
+</div>
                                 </div>
                             </div>
                         </div>
@@ -85,8 +94,11 @@
                                    class="table table-max table-bordered align-items-center mb-auto">
                                 <thead class="text_black">
                                 <tr>
-                                    <th class="text-center text-xxs" style="width: 2rem;">
+                                    <th class="text-center text-xxs" style="width: 1.5rem;">
                                         الشركة
+                                    </th>
+                                        <th class="text-center text-xxs" style="width: 2rem;">
+                                        شركة الأبحاث
                                     </th>
                                     <th class="text-center   text-xxs " style="width: 2rem;">
                                         التوصية
@@ -97,22 +109,20 @@
                                     <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         السعر المستهدف
                                     </th>
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         التغير
                                     </th>
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         أخر إغلاق
                                     </th>
-                                    <th class="text-center   text-xxs ">
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         التغير
-                                    </th>
- <th class="text-center   text-xxs " style="width: 2rem;">
-     تاريخ التوصية
                                     </th>
                                      <th class="text-center   text-xxs " style="width: 1.5rem;">
                                          التقرير
                                     </th>
-                                    <th class="text-center   text-xxs " style="width: 1.5rem;">
+                                  <th class="text-center   text-xxs " style="width: 2rem;">
+     تاريخ التوصية
                                     </th>
                                 </tr>
                                 </thead>
@@ -120,7 +130,12 @@
                                 {% for item in rates %}
                                     <tr>
                                         <td class="align-middle text-center text-xxs">
-                                            <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
+                                           <a href="{{ item.CompanyEntered.link }}">
+                                               <p class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</p>
+                                           </a>
+                                        </td>
+                                      <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
                                         </td>
                                         <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
@@ -152,21 +167,15 @@
                                                 <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
                                             {% endif %}
                                         </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate }}</p>
-                                        </td>
+
  <td class="align-middle text-center text-xxs">
                                             <a href="../../../static/images/reportspdf/{{ item.report.name }}">
                                                             <i class="fas fa-file-pdf text-danger">
                                                         </i>
                                             </a>
                                         </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <a href="{% url 'user-rate' item.pk %}">
-                                                            <span class="badge badge-sm bg-maal">
-                                                            المزيد
-                                                        </span>
-                                            </a>
+                                     <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d"  }}</p>
                                         </td>
 
                                     </tr>
@@ -187,7 +196,7 @@
             </div>
 
             <div class="row pt-3">
-                <div class="col-lg-6">
+                <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
@@ -200,7 +209,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
@@ -216,7 +225,7 @@
 
             </div>
             <div class="row pt-3">
-                <div class="col-lg-6">
+                <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
@@ -229,7 +238,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
@@ -354,6 +363,14 @@
         document.getElementById("id_end_of_rate").setAttribute('placeholder', 'التوصية من');
         document.getElementById("id_analyst").className = "form-control";
         document.getElementById("id_analyst").setAttribute('placeholder', 'البحث باسم المحلل');
-
+  var x = document.getElementById("myDIV");
+  x.style.display = "none";
+        function myFunction() {
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
     </script>
 {% endblock scripts %}

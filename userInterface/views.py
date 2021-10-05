@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from office.models import FinicialAnalyst, PerviousCompany, Rates , FinicialCompany
+from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast
 from office.filters import RatesFilter
+
 
 # Create your views here.
 
@@ -86,3 +87,8 @@ def rateslist(request):
         "rates": rate,
     }
     return render(request, 'userInterface/rate-list.html', context=context)
+
+
+def expectList(request):
+    expects = EarningsForecast.objects.all()
+    return render(request, 'userInterface/expect-list.html', context={"expects": expects})

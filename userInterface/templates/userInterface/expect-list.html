@@ -1,0 +1,171 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/back_0pHE4R3.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+               <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+          <div class="card z-index-0 ">
+                        <div class="card-header p-3">
+                                                         <div class="row  justify-content-center">
+                                        <div class="col-12 justify-content-center">
+                                            <form method="get" class="form-inline justify-content-center" >
+      <div class="form-group py-2 ">
+                                                  <select class="form-control" name="cars" id="cars">
+  <option value="volvo" disabled selected>البحث برمز الشركة</option>
+  <option value="saab">S</option>
+
+</select>
+      </div>
+                                <div class="form-group  py-2 ">
+                                                  <select class="form-control" name="cars" id="cars">
+  <option value="volvo" disabled selected>  القطاع</option>
+  <option value="saab">S</option>
+
+</select>
+      </div>
+                                                  <div class="form-group  py-2 ">
+                                                  <select class="form-control" name="cars" id="cars">
+  <option value="volvo" disabled selected>البحث بشركة الأبحاث</option>
+  <option value="saab">S</option>
+
+</select>
+      </div>
+                                                  <div class="form-group  py-2 ">
+                                                  <select class="form-control" name="cars" id="cars">
+  <option value="volvo" disabled selected>البحث  باسم المحلل</option>
+  <option value="saab">S</option>
+
+</select>
+      </div>
+                                                                                                <button class=" btn btn-primary py-2 bg-maal text-white">بحث</button>
+                                            </form>
+                        </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive">
+
+                                <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center mb-auto">
+                                    <thead class="text-black">
+                                    <tr>
+                                        <th class="text-dark text-xxs" style="width: 2rem;">
+                                            الشركة المدرجة
+                                        </th>
+                                        <th class="text-dark text-xxs " style="width: 2rem;">
+                                            شركة الأبحاث
+                                        </th>
+                                        <th class="text-dark text-xxs " style="width: 2rem;">
+                                            توقعات الأرباح
+                                        </th>
+
+                                        <th class="text-center text-dark text-xxs">
+                                            توقعات الأرباح
+                                        </th>
+
+                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                            اسم المحلل
+                                        </th>
+                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                            المرفق
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in expects %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+
+                                                        <p class="mb-0 text-xxs">{{ item.CompanyEntered.name }}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+
+                                                        <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+
+                                                        <p class="mb-0 text-xxs">{{ item.expectvalue }}</p>
+                                            </td>
+                                            <td class="d-flex flex-column align-middle text-center text-sm">
+                                                <table class="table table-striped align-items-center mb-0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-dark text-xxs" style="width: 2rem;">
+                                                            السنه
+                                                        </th>
+                                                        <th class="text-dark text-xxs " style="width: 2rem;">
+                                                            الربع
+                                                        </th>
+                                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                                            الأرباح الفعلية
+                                                        </th>
+
+                                                        <th class="text-center text-dark text-xxs" style="width: 2rem;">
+                                                            مدى الأنحراف
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                    {% for expect in item.expectYear.all %}
+                                                        <tr>
+                                                            <td>
+                                                                <p class="text-xxs">{{ expect.year }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xxs">{{ expect.quaratar }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xxs">{{ expect.value }}</p>
+                                                            </td>
+                                                            <td class="align-middle text-center">
+                                                                {% if expect.deviation_range < 0 %}
+                                                                    <span class="text-danger text-xxs font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
+                                                                {% else %}
+                                                                    <span class="text-success text-xxs font-weight-bold">{{ expect.deviation_range|floatformat:-2 }} %</span>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+
+                                            </td>
+                                            <td>
+                                                <p class="text-xxs">{{ item.analyst.name }}</p>
+                                            </td>
+                                            <td>
+                                                <a href="{{ item.report.url }}">
+                                                    <p class="text-xxs"><i
+                                                            class="far fa-file-pdf maal-yello"></i></p>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+
+              </div>
+            </div>
+          </div>
+         </div>
+
+      </div>
+    </div>
+</section>
+{% endblock body %}
