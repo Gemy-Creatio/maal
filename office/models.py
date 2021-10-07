@@ -171,11 +171,15 @@ class EarningsForecast(models.Model):
 
     @property
     def deviationsecond2020(self):
-        return (self.realEarn - self.second2020)/(self.second2020 * 100)
+        return (self.total_earn - self.second2020)/(self.second2020 * 100)
 
     @property
     def deviationthird2020(self):
-        return (self.realEarn - self.third2020) / (self.third2020 * 100)
+        return (self.total_earn - self.third2020) / (self.third2020 * 100)
+
+    @property
+    def deviationreal(self):
+        return (self.total_earn - self.realEarn) / (self.realEarn * 100)
 
     def __str__(self):
         return str(self.CompanyEntered.name)

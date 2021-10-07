@@ -13,3 +13,14 @@ class RatesFilter(django_filters.FilterSet):
     class Meta:
         model = Rates
         fields = ['company', 'date_of_rate', 'analyst', 'code', 'end_of_rate']
+
+
+
+class EarnFilter(django_filters.FilterSet):
+    company = django_filters.CharFilter(field_name='CompanyEntered__name', lookup_expr='icontains')
+    analyst = django_filters.CharFilter(field_name='analyst__name', lookup_expr='icontains')
+    code = django_filters.CharFilter(field_name='CompanyEntered__company__code', lookup_expr='icontains')
+
+    class Meta:
+        model = EarningsForecast
+        fields = ['company',  'analyst', 'code']

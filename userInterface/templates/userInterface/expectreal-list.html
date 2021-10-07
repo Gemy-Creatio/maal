@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="container">
-        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
                    <a href="{% url 'real-user-expect' %}">
                         <div class="card">
@@ -66,7 +66,7 @@
       <div class="row pt-3">
                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
           <div class="card z-index-0 ">
-                        <div class="card-header pb-0">
+  <div class="card-header pb-0">
                             <div class="row  justify-content-center">
                                 <div class="col-12 justify-content-center">
                                 <button class="btn btn-primary py-2 bg-maal text-white" onclick="myFunction()"><i class="fas fa-search"></i></button>
@@ -88,35 +88,33 @@
                                 </div>
                             </div>
                         </div>
-
             <div class="card-body px-0 pb-2">
-                <div class="table-responsive">
+                        <div class="table-responsive">
 
                     <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
                         <thead class="text-black">
                         <tr>
-                            <th class="text-dark text-xxs" style="width: 2rem;">
-                                الشركة
-                            </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
                                 شركة الأبحاث
                             </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
                                 توقعات الأرباح
                             </th>
-
+  <th class="text-dark text-xxs " style="width: 2rem;">
+                           الأرباح الفعلية
+                            </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثالث 2020
+مدى الأنحراف
                             </th>
 
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
-                            </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                                 الربع الثانى 2021
                             </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                                 مدى الأنحراف
+                            </th>
+                             <th class=" text-dark text-xxs" style="width: 2rem;">
+                               الفارق على أساس سنوى
                             </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
@@ -129,39 +127,39 @@
                             <tr>
                                 <td>
 
-                                        <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-                                </td>
-                                <td>
-
                                         <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
                                 </td>
                                 <td>
 
+                                    <p class=" text-xxs">{{ item.total_earn }}</p>
+                                </td>
+                            <td>
+
                                     <p class=" text-xxs">{{ item.realEarn }}</p>
                                 </td>
-                                <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.third2020 }}</p>
+                            <td>
 
-                                </td>
-                                <td>
-                                    {% if item.deviationthird2020 < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-5 }} %</p>
+                                     {% if item.deviationreal < 0 %}
+                                        <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-5 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-5 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-5 }} %</p>
                                     {% endif %}
                                 </td>
-                              <td class="text-xxs">
+                                <td class="text-xxs">
                                     <p class=" text-xxs">{{ item.second2020 }}</p>
 
                                 </td>
-                              <td class="  text-xxs">
+                                <td>
                                     {% if item.deviationsecond2020 < 0 %}
-                                        <p class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
+                                        <p class="text-danger text-xxs ">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
                                     {% else %}
                                         <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
                                     {% endif %}
                                 </td>
+                              <td class="text-xxs">
+                                    <p class=" text-xxs"></p>
 
+                                </td>
                              <td class="  text-xxs">
                                    <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
                                 </td>
@@ -174,6 +172,7 @@
                     </table>
 
                 </div>
+
             </div>
           </div>
          </div>
@@ -268,7 +267,7 @@
         }
 
 </script>
-    <script>
+     <script>
         document.getElementById("id_company").className = "form-control";
         document.getElementById("id_company").setAttribute('placeholder', 'البحث باسم الشركة');
         document.getElementById("id_code").className = "form-control";
@@ -285,6 +284,5 @@
   }
 }
     </script>
+
 {% endblock scripts %}
-
-

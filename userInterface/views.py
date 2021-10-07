@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast
-from office.filters import RatesFilter
+from office.filters import RatesFilter , EarnFilter
 
 
 # Create your views here.
@@ -91,4 +91,57 @@ def rateslist(request):
 
 def expectList(request):
     expects = EarningsForecast.objects.all()
-    return render(request, 'userInterface/expect-list.html', context={"expects": expects})
+    data = EarningsForecast.objects.order_by('realEarn')[:5]
+    expectlabel = []
+    expectdata = []
+    for expect in data:
+        expectlabel.append(expect.CompanyEntered.name)
+        expectdata.append(expect.realEarn)
+    data1 = EarningsForecast.objects.order_by('total_earn')[:5]
+    expectlabel1 = []
+    expectdata1 = []
+    for expect in data1:
+        expectlabel1.append(expect.CompanyEntered.name)
+        expectdata1.append(expect.total_earn)
+    expectss = EarningsForecast.objects.all()
+    expect_filter = EarnFilter(request.POST, queryset=expectss)
+    expectz = expect_filter.qs
+    context = {
+        "expects": expectz,
+        "myfilter": expect_filter,
+        "expectlabel": expectlabel,
+        "expectdata": expectdata,
+        "expectlabel1": expectlabel1,
+        "expectdata1": expectdata1
+
+    }
+    return render(request, 'userInterface/expect-list.html', context=context)
+
+
+def expectrealList(request):
+    expects = EarningsForecast.objects.all()
+    data = EarningsForecast.objects.order_by('realEarn')[:5]
+    expectlabel = []
+    expectdata = []
+    for expect in data:
+        expectlabel.append(expect.CompanyEntered.name)
+        expectdata.append(expect.realEarn)
+    data1 = EarningsForecast.objects.order_by('total_earn')[:5]
+    expectlabel1 = []
+    expectdata1 = []
+    for expect in data1:
+        expectlabel1.append(expect.CompanyEntered.name)
+        expectdata1.append(expect.total_earn)
+    expectss = EarningsForecast.objects.all()
+    expect_filter = EarnFilter(request.POST, queryset=expectss)
+    expectz = expect_filter.qs
+    context = {
+        "expects": expectz,
+        "myfilter": expect_filter,
+        "expectlabel": expectlabel,
+        "expectdata": expectdata,
+        "expectlabel1": expectlabel1,
+        "expectdata1": expectdata1
+
+    }
+    return render(request, 'userInterface/expectreal-list.html', context=context)

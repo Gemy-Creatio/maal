@@ -22902,6 +22902,11 @@ hr.horizontal.gray-light {
     background: #CCCCB2;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to bottom, #757519, #CCCCB2);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to bottom, #757519, #CCCCB2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+height: 2vh !important;
+}
+.table  tr p span div {
+    line-height: 2vh !important;
+    height: 2vh !important;
 
 }
 
@@ -22942,6 +22947,8 @@ background: linear-gradient(to bottom, #757519, #CCCCB2); /* W3C, IE 10+/ Edge, 
   }
 .text-xxs {
     font-size: 0.35rem !important;
+      line-height: 2vh !important;
+    height: 2vh !important;
 }
   .form-inline {
     flex-direction: column;
@@ -23295,6 +23302,8 @@ p,
 
 .text-xxs {
   font-size: 0.65rem ;
+      line-height: 2vh !important;
+    height: 2vh !important;
 }
 table, th, td {
   border: 1px solid #aa952d !important;

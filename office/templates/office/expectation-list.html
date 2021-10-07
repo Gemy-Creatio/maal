@@ -77,9 +77,7 @@
                              <th class="text-center text-dark text-xxs" style="width: 2rem;">
                                الأرباح الفعلية
                             </th>
-                            <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                المحلل
-                            </th>
+
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
                                 المرفق
                             </th>
@@ -100,38 +98,35 @@
 
                                     <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm">
+                                <td class="align-middle text-center text-xxs">
                                     <p class="mb-0 text-xxs">{{ item.third2020 }}</p>
 
                                 </td>
                                 <td class="align-middle text-center">
                                     {% if item.deviationthird2020 < 0 %}
-                                        <span class="text-danger text-lg font-weight-bold">{{ item.deviationthird2020|floatformat:-2 }} %</span>
+                                        <span class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</span>
                                     {% else %}
-                                        <span class="text-success text-lg font-weight-bold">{{ item.deviationthird2020|floatformat:-2 }} %</span>
+                                        <span class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</span>
                                     {% endif %}
                                 </td>
-                              <td class="align-middle text-center text-sm">
+                              <td class="align-middle text-center text-xxs">
                                     <p class="mb-0 text-xxs">{{ item.second2020 }}</p>
 
                                 </td>
-                              <td class="align-middle text-center text-sm">
+                              <td class="align-middle text-center text-xxs">
                                     {% if item.deviationsecond2020 < 0 %}
-                                        <span class="text-danger text-lg font-weight-bold">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
+                                        <span class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
                                     {% else %}
-                                        <span class="text-success text-lg font-weight-bold">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
+                                        <span class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
                                     {% endif %}
                                 </td>
- <td class="align-middle text-center text-sm">
+ <td class="align-middle text-center text-xxs">
                                     <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
 
                                 </td>
-                             <td class="align-middle text-center text-sm">
-                                    <p class="mb-0 text-xxs">{{ item.analyst.name }}</p>
 
-                                </td>
-                             <td class="align-middle text-center text-sm">
-                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf" aria-hidden="true"></i></a>
+                             <td class="align-middle text-center text-xxs">
+                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
                                 </td>
 
 
