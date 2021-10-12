@@ -125,7 +125,9 @@
                                             {% for item in rates %}
                                                 <tr>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
+                                                        <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                                            <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
+                                                        </a>
                                                     </td>
 
                                                     <td class="align-middle text-center text-xxs">
@@ -176,7 +178,6 @@
             </div>
           </div>
          </div>
-
       </div>
     </div>
 </section>

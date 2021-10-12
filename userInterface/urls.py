@@ -10,5 +10,6 @@ urlpatterns = [
     path('home', views.user_home, name='user-home'),
     path('expects/all', views.expectList, name='all-user-expect'),
     path('real/all', views.expectrealList, name='real-user-expect'),
+    path('company/<int:pk>', views.CapitalProfile, name='user-company'),
 
 ]

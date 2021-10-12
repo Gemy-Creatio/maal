@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany, \
     PerviousCompany, EarningsForecast, RateQuarter
 from django.core.files.storage import FileSystemStorage
-
+from django.contrib import messages
 
 def RatesList(request):
     rates = Rates.objects.all()
@@ -35,9 +35,12 @@ def AddCategory(request):
         name = request.POST.get('name')
         category = CompanyCategory(name=name, EmpEntered_id=request.user.pk)
         category.save()
+
         if category.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('category-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/add-category.html')
     return render(request, 'office/add-category.html')
 
@@ -48,8 +51,10 @@ def AddResearch(request):
         company = ResearchCompany(name=name, EmpEntered_id=request.user.pk)
         company.save()
         if company.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('research-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/add-research.html')
     return render(request, 'office/add-research.html')
 
@@ -67,8 +72,10 @@ def AddCompany(request):
         company = FinicialCompany(link=link, logo=logo, name=name, EmpEntered_id=request.user.pk, category_id=category)
         company.save()
         if company.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('company-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/add-company.html', context=context)
     return render(request, 'office/add-company.html', context=context)
 
@@ -86,8 +93,10 @@ def EditCompany(request, pk):
         company.EmpEntered_id = request.user.pk
         company.save()
         if company.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('company-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
     return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
 
@@ -102,8 +111,10 @@ def EditCategory(request, pk):
         catgeory.EmpEntered_id = request.user.pk
         catgeory.save()
         if catgeory.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('category-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/edit-category.html', context={"category": catgeory})
     return render(request, 'office/edit-category.html', context={"category": catgeory})
 
@@ -116,8 +127,10 @@ def EditResearch(request, pk):
         company.EmpEntered_id = request.user.pk
         company.save()
         if company.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('research-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/edit-research.html', context={"company": company})
     return render(request, 'office/edit-research.html', context={"company": company})
 
@@ -144,8 +157,10 @@ def AddAnalyst(request):
                                                  email=email,
                                                  currentCompany_id=currentCompany, CurrentJob=currentJob)
         if analyst.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('analyst-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/add-analyst.html', context={"companies": company})
     return render(request, 'office/add-analyst.html', context={"companies": company})
 
@@ -172,8 +187,10 @@ def AddRate(request):
                      FairValue=float(FairValue))
         rate.save()
         if rate.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('rates-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/add-rate.html',
                           context={"researches": research, "companies": company, "analysts": analyst})
     return render(request, 'office/add-rate.html',
@@ -197,8 +214,10 @@ def UpdateAnalyst(request, pk):
         analyst.email = email
         analyst.tiwtterAccount = twitterAccount
         if analyst.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('analyst-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/update-analyst.html')
     return render(request, 'office/update-analyst.html', context={"analyst": analyst, "companies": company})
 
@@ -232,8 +251,10 @@ def UpdateRate(request, pk):
         rate.EmpEntered_id = request.user.pk
         rate.save()
         if rate.pk:
+            messages.success(request, "تمت بنجاح")
             return redirect('rates-list')
         else:
+            messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/update-rate.html')
     return render(request, 'office/update-rate.html',
                   context={"researches": research, "rate": rate, "companies": company, "analysts": analyst})

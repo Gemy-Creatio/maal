@@ -16,51 +16,51 @@
         <div class="container">
             <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-                   <a href="{% url 'all-user-rate' %}">
+                    <a href="{% url 'all-user-rate' %}">
                         <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold"> التوصيات على
-                                            الأسهم</p>
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="text-sm mb-0 text-capitalize font-weight-bold"> التوصيات على
+                                                الأسهم</p>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-4 text-start">
-                                    <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                                        <i class="fas fa-sticky-note text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="col-4 text-start">
+                                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                                            <i class="fas fa-sticky-note text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                   </a>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-               <a href="{% url 'all-user-expect' %}">
-                                       <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">التوقعات لأرباح
-                                            الشركات</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            <span class="text-success text-sm font-weight-bolder"></span>
-                                        </h5>
+                    <a href="{% url 'all-user-expect' %}">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="text-sm mb-0 text-capitalize font-weight-bold">التوقعات لأرباح
+                                                الشركات</p>
+                                            <h5 class="font-weight-bolder mb-0">
+                                                <span class="text-success text-sm font-weight-bolder"></span>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-4 text-start">
-                                    <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                                        <i class="fas fa-coins text-lg opacity-10" aria-hidden="true"></i>
+                                    <div class="col-4 text-start">
+                                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                                            <i class="fas fa-coins text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-               </a>
+                    </a>
                 </div>
             </div>
 
@@ -70,22 +70,22 @@
                         <div class="card-header pb-0">
                             <div class="row  justify-content-center">
                                 <div class="col-12 justify-content-center">
-                                <button class="btn btn-primary py-2 bg-maal text-white" onclick="myFunction()"><i class="fas fa-search"></i></button>
+                                    <button class="btn btn-primary py-2 bg-maal text-white" onclick="myFunction()"><i
+                                            class="fas fa-search"></i></button>
 
-<div id="myDIV">
-                                    <form method="post" class="form-inline justify-content-center">
-                                        {% csrf_token %}
+                                    <div id="myDIV">
+                                        <form method="post" class="form-inline justify-content-center">
+                                            {% csrf_token %}
 
-                                        {% for filed in myfilter.form %}
-                                            <div class="form-group col-12 col-lg-2  py-2">
+                                            {% for filed in myfilter.form %}
+                                                <div class="form-group col-12 col-lg-2  py-2">
 
-                                                {{ filed }}
-                                            </div>
-
-                                        {% endfor %}
-                                        <button class=" btn btn-primary py-2 bg-maal text-white">بحث</button>
-                                    </form>
-</div>
+                                                    {{ filed }}
+                                                </div>
+                                            {% endfor %}
+                                            <button class=" btn btn-primary py-2 bg-maal text-white">بحث</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     <th class="text-center text-xxs" style="width: 1.5rem;">
                                         الشركة
                                     </th>
-                                        <th class="text-center text-xxs" style="width: 2rem;">
+                                    <th class="text-center text-xxs" style="width: 2rem;">
                                         شركة الأبحاث
                                     </th>
                                     <th class="text-center   text-xxs " style="width: 2rem;">
@@ -118,11 +118,11 @@
                                     <th class="text-center   text-xxs " style="width: 2.5rem;">
                                         التغير
                                     </th>
-                                     <th class="text-center   text-xxs " style="width: 1.5rem;">
-                                         التقرير
+                                    <th class="text-center   text-xxs " style="width: 1.5rem;">
+                                        التقرير
                                     </th>
-                                  <th class="text-center   text-xxs " style="width: 2rem;">
-     تاريخ التوصية
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
+                                        تاريخ التوصية
                                     </th>
                                 </tr>
                                 </thead>
@@ -130,11 +130,12 @@
                                 {% for item in rates %}
                                     <tr>
                                         <td class="align-middle text-center text-xxs">
-                                           <a href="{{ item.CompanyEntered.link }}">
-                                               <p class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</p>
-                                           </a>
+                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                                            <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+                                                        </a>
+
                                         </td>
-                                      <td class="align-middle text-center text-xxs">
+                                        <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
                                         </td>
                                         <td class="align-middle text-center text-xxs">
@@ -168,14 +169,14 @@
                                             {% endif %}
                                         </td>
 
- <td class="align-middle text-center text-xxs">
+                                        <td class="align-middle text-center text-xxs">
                                             <a href="../../../static/images/reportspdf/{{ item.report.name }}">
-                                                            <i class="fas fa-file-pdf text-danger">
-                                                        </i>
+                                                <i class="fas fa-file-pdf text-danger">
+                                                </i>
                                             </a>
                                         </td>
-                                     <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d"  }}</p>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d" }}</p>
                                         </td>
 
                                     </tr>
@@ -242,7 +243,7 @@
                     <div class="card z-index-0 mx-auto box-shadow">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
-                                <p>أكثر الشركات المدرجة  تقييما</p>
+                                <p>أكثر الشركات المدرجة تقييما</p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -258,6 +259,8 @@
     </section>
 
 {% endblock body %}
+
+
 
 {% block scripts %}
 
@@ -321,22 +324,22 @@
                 }
             }
         }
-                    var configCompany = {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: {{ companydata1|safe }},
-                        backgroundColor: [
-                            '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
-                        ],
-                        label: 'اعلى شركات الأبحاث تقييما'
-                    }],
-                    labels: {{ companylabel1|safe }}
-                },
-                options: {
-                    responsive: true
-                }
-            };
+        var configCompany = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ companydata1|safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'اعلى شركات الأبحاث تقييما'
+                }],
+                labels: {{ companylabel1|safe }}
+            },
+            options: {
+                responsive: true
+            }
+        };
 
         window.onload = function () {
             var Fairctx = document.getElementById('fair-chart').getContext('2d');
@@ -363,14 +366,16 @@
         document.getElementById("id_end_of_rate").setAttribute('placeholder', 'التوصية من');
         document.getElementById("id_analyst").className = "form-control";
         document.getElementById("id_analyst").setAttribute('placeholder', 'البحث باسم المحلل');
-  var x = document.getElementById("myDIV");
-  x.style.display = "none";
+        var x = document.getElementById("myDIV");
+        x.style.display = "none";
+
         function myFunction() {
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
     </script>
+
 {% endblock scripts %}

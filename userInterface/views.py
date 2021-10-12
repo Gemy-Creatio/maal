@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast
-from office.filters import RatesFilter , EarnFilter
+from office.filters import RatesFilter, EarnFilter
 
 
 # Create your views here.
@@ -145,3 +145,9 @@ def expectrealList(request):
 
     }
     return render(request, 'userInterface/expectreal-list.html', context=context)
+
+
+def CapitalProfile(request, pk):
+    data = FinicialCompany.objects.get(pk=pk)
+    return render(request, 'userInterface/capital-profile.html', context={"data": data})
+
