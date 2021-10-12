@@ -49,7 +49,7 @@ def user_home(request):
         companydata1.append(company.CompanyEntered.count())
     rates = Rates.objects.all()
     rate_filter = RatesFilter(request.POST, queryset=rates)
-    rate = rate_filter.qs[:5]
+    rate = rate_filter.qs[:10]
     context = {
         "myfilter": rate_filter,
         "rates": rate,

@@ -23301,9 +23301,11 @@ p,
 }
 
 .text-xxs {
-  font-size: 0.65rem ;
-      line-height: 2vh !important;
+      font-weight: bolder;
+    font-size: 0.85rem;
+    line-height: 2vh !important;
     height: 2vh !important;
+
 }
 table, th, td {
   border: 1px solid #aa952d !important;
