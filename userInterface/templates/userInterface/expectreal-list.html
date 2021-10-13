@@ -178,8 +178,6 @@
          </div>
 
       </div>
-    </div>
-      </div>
     <div class="row pt-3">
                         <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
@@ -204,6 +202,37 @@
                         </div>
                         <div class="card-body justify-content-center">
                             <canvas id="fair1-chart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+    </div>
+
+    <div class="row pt-3">
+                        <div class="col-lg-6 pt-2">
+                    <div class="card z-index-0 mx-auto box-shadow">
+                        <div class="card-header">
+                            <div class="col-12 justify-content-center">
+                                <p>أكثر 5 شركات من حيث الأرباح فى الربع الثانى 2020 </p>
+                            </div>
+                        </div>
+                        <div class="card-body justify-content-center">
+                            <canvas id="fair2-chart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                                <div class="col-lg-6 pt-2">
+                    <div class="card z-index-0 mx-auto box-shadow">
+                        <div class="card-header">
+                            <div class="col-12 justify-content-center">
+                                <p>أكثر 5 شركات من حيث الأرباح فى الربع الثالث 2020 </p>
+                            </div>
+                        </div>
+                        <div class="card-body justify-content-center">
+                            <canvas id="fair3-chart"></canvas>
                         </div>
                     </div>
 
@@ -259,11 +288,58 @@
             }
         }
 
+                        var expect2_config = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    data: {{ expectdata2 |safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'صحفية مال'
+                }],
+                labels: {{ expectlabel2|safe }}
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        }
+                        var expect3_config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ expectdata3 |safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'صحفية مال'
+                }],
+                labels: {{ expectlabel3|safe }}
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        }
+
+
              window.onload = function () {
             var Expectctx = document.getElementById('fair-chart').getContext('2d');
             window.myPie = new Chart(Expectctx, expect_config);
              var Expect1ctx = document.getElementById('fair1-chart').getContext('2d');
             window.myPie = new Chart(Expect1ctx, expect1_config);
+             var Expect2ctx = document.getElementById('fair2-chart').getContext('2d');
+            window.myPie = new Chart(Expect2ctx, expect2_config);
+             var Expect3ctx = document.getElementById('fair3-chart').getContext('2d');
+            window.myPie = new Chart(Expect3ctx, expect3_config);
+
         }
 
 </script>

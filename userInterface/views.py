@@ -91,13 +91,25 @@ def rateslist(request):
 
 def expectList(request):
     expects = EarningsForecast.objects.all()
-    data = EarningsForecast.objects.order_by('realEarn')[:5]
+    data = EarningsForecast.objects.order_by('-realEarn')[:5]
     expectlabel = []
     expectdata = []
     for expect in data:
         expectlabel.append(expect.CompanyEntered.name)
         expectdata.append(expect.realEarn)
-    data1 = EarningsForecast.objects.order_by('total_earn')[:5]
+    data2 = EarningsForecast.objects.order_by('-third2020')[:5]
+    expectlabel2 = []
+    expectdata2 = []
+    for expect in data2:
+        expectlabel2.append(expect.CompanyEntered.name)
+        expectdata2.append(expect.third2020)
+    data3 = EarningsForecast.objects.order_by('-second2020')[:5]
+    expectlabel3 = []
+    expectdata3 = []
+    for expect in data3:
+        expectlabel3.append(expect.CompanyEntered.name)
+        expectdata3.append(expect.second2020)
+    data1 = EarningsForecast.objects.order_by('-total_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
     for expect in data1:
@@ -112,7 +124,11 @@ def expectList(request):
         "expectlabel": expectlabel,
         "expectdata": expectdata,
         "expectlabel1": expectlabel1,
-        "expectdata1": expectdata1
+        "expectdata1": expectdata1,
+        "expectlabel2": expectlabel2,
+        "expectdata2": expectdata2,
+        "expectlabel3": expectlabel3,
+        "expectdata3": expectdata3
 
     }
     return render(request, 'userInterface/expect-list.html', context=context)
@@ -120,18 +136,30 @@ def expectList(request):
 
 def expectrealList(request):
     expects = EarningsForecast.objects.all()
-    data = EarningsForecast.objects.order_by('realEarn')[:5]
+    data = EarningsForecast.objects.order_by('-realEarn')[:5]
     expectlabel = []
     expectdata = []
     for expect in data:
         expectlabel.append(expect.CompanyEntered.name)
         expectdata.append(expect.realEarn)
-    data1 = EarningsForecast.objects.order_by('total_earn')[:5]
+    data1 = EarningsForecast.objects.order_by('-total_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
     for expect in data1:
         expectlabel1.append(expect.CompanyEntered.name)
         expectdata1.append(expect.total_earn)
+    data2 = EarningsForecast.objects.order_by('-third2020')[:5]
+    expectlabel2 = []
+    expectdata2 = []
+    for expect in data2:
+        expectlabel2.append(expect.CompanyEntered.name)
+        expectdata2.append(expect.third2020)
+    data3 = EarningsForecast.objects.order_by('-second2020')[:5]
+    expectlabel3 = []
+    expectdata3 = []
+    for expect in data3:
+        expectlabel3.append(expect.CompanyEntered.name)
+        expectdata3.append(expect.second2020)
     expectss = EarningsForecast.objects.all()
     expect_filter = EarnFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
@@ -141,7 +169,11 @@ def expectrealList(request):
         "expectlabel": expectlabel,
         "expectdata": expectdata,
         "expectlabel1": expectlabel1,
-        "expectdata1": expectdata1
+        "expectdata1": expectdata1,
+        "expectlabel2": expectlabel2,
+        "expectdata2": expectdata2,
+        "expectlabel3": expectlabel3,
+        "expectdata3": expectdata3
 
     }
     return render(request, 'userInterface/expectreal-list.html', context=context)

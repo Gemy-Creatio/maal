@@ -94,30 +94,33 @@
                                         <table style="margin:0 auto;" class="table table-max table-bordered align-items-center mb-auto">
                                             <thead class="text_black">
                                             <tr>
-                                                 <th class="text-center text-xxs">
+                                                 <th class="text-center text-xxs sent" >
                                                    الشركة
                                                 </th>
+  <th class="text-center text-xxs sent" >
+                                                   شؤكة الأبحاث
+                                                </th>
 
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                     التوصية
                                                 </th>
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                     السعر وقت التوصية
                                                 </th>
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                    السعر المستهدف
                                                 </th>
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                    التغير
                                                 </th>
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                    السعر الحالى
                                                 </th>
-                                                <th class="text-center   text-xxs ">
+                                                <th class="text-center   text-xxs sent">
                                                     التغير
                                                 </th>
 
-                                                 <th class="text-center   text-xxs ">
+                                                 <th class="text-center   text-xxs sent">
                                                 </th>
                                             </tr>
                                             </thead>
@@ -129,7 +132,9 @@
                                                             <h6 class="text-xxs  mb-0">{{ item.CompanyEntered.name }}</h6>
                                                         </a>
                                                     </td>
-
+ <td class="align-middle text-center text-xxs">
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                    </td>
                                                     <td class="align-middle text-center text-xxs">
                                                         <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                                     </td>

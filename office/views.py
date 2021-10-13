@@ -10,6 +10,7 @@ from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, Compan
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 
+
 def RatesList(request):
     rates = Rates.objects.all()
     return render(request, 'office/rates-list.html', context={"rates": rates})
@@ -89,7 +90,7 @@ def EditCompany(request, pk):
         link = request.POST.get('link')
         company.name = name
         company.category_id = category
-        company.link=link
+        company.link = link
         company.EmpEntered_id = request.user.pk
         company.save()
         if company.pk:
