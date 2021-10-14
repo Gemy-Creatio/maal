@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast
+from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
 from office.filters import RatesFilter, EarnFilter
 
 
@@ -183,3 +183,7 @@ def CapitalProfile(request, pk):
     data = FinicialCompany.objects.get(pk=pk)
     return render(request, 'userInterface/capital-profile.html', context={"data": data})
 
+
+def ResearchProfile(request, pk):
+    data = ResearchCompany.objects.get(pk=pk)
+    return render(request, 'userInterface/researchProfile.html', context={"data": data})

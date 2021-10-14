@@ -66,7 +66,10 @@
                                                         </a>
                                                     </td>
  <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ rate.ResearchCompany.name }}</p>
+                                                         <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                             </a>
                                                     </td>
                                                  <td class="align-middle text-center text-xxs">
                                                        <a href="{% url 'user-interface' rate.AnalayticName.pk %}">

@@ -133,7 +133,10 @@
                                 </td>
                                 <td>
 
-                                        <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
+                                        <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                             </a>
                                 </td>
                                 <td>
 

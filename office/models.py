@@ -161,7 +161,7 @@ class EarningsForecast(models.Model):
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE,
                                        null=True, related_name='expects')
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
-                                        null=True)
+                                        null=True , related_name='Researchexpects')
     total_earn = models.IntegerField(blank=True, null=True)
     third2020 = models.IntegerField(blank=True, null=True)
 
