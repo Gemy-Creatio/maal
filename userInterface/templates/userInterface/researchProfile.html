@@ -157,11 +157,14 @@
             </div>
                                   <div class="card-body px-0 pb-2">
 <div class="row pt-2">
-                            <div class="table-responsive">
+                        <div class="table-responsive">
 
                     <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
                         <thead class="text-black">
                         <tr>
+                              <th class=" text-dark text-xxs" style="width: 2rem;">
+                              الشركة
+                            </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
                                 شركة الأبحاث
                             </th>
@@ -181,9 +184,6 @@
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                                 مدى الأنحراف
                             </th>
-                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                               الفارق على أساس سنوى
-                            </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                                 المرفق
@@ -191,11 +191,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for item in data.Researchexpects.all %}
+                        {% for item in expects %}
                             <tr>
+                              <td class="text-xxs">
+                                                                            <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                    <p class=" text-xxs"> {{ item.CompanyEntered.name }}</p>
+                                                                            </a>
+
+                                </td>
                                 <td>
 
-                                        <p class=" text-xxs">{{ item.ResearchCompany.name }}</p>
+                                          <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                             </a>
                                 </td>
                                 <td>
 
@@ -224,10 +233,7 @@
                                         <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
                                     {% endif %}
                                 </td>
-                              <td class="text-xxs">
-                                    <p class=" text-xxs"></p>
 
-                                </td>
                              <td class="  text-xxs">
                                    <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
                                 </td>
