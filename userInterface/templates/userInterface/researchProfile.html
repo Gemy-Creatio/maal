@@ -55,7 +55,7 @@
                                         الشركة
                                     </th>
                                     <th class="text-center text-xxs" style="width: 2rem;">
-                                        شركة الأبحاث
+                                         المحلل
                                     </th>
                                     <th class="text-center   text-xxs " style="width: 2rem;">
                                         التوصية
@@ -93,8 +93,11 @@
 
                                         </td>
                                         <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                        </td>
+                                            <a href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                                           <p class="text-xxs">{{ item.AnalayticName.name }}</p>
+                                                       </a>
+
+                                       </td>
                                         <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                         </td>
@@ -191,7 +194,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for item in expects %}
+                        {% for item in data.Researchexpects.all %}
                             <tr>
                               <td class="text-xxs">
                                                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
