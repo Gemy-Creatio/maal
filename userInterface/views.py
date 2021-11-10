@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
 from office.filters import RatesFilter, EarnFilter
-
+from owners.models import CompaniesArrow
 
 # Create your views here.
 
@@ -23,6 +23,7 @@ def rate_user_detail(request, pk):
 
 
 def user_home(request):
+    arrows = CompaniesArrow.objects.all()
     label = []
     data = []
     rates = Rates.objects.filter(Recommendation__exact=1)[:5]
@@ -60,7 +61,8 @@ def user_home(request):
         "companylabel": companylabel,
         "companydata": companydata,
         "companylabel1": companylabel1,
-        "companydata1": companydata1
+        "companydata1": companydata1,
+        "arrows":arrows
     }
     return render(request, 'userInterface/home-page.html', context=context)
 
@@ -181,7 +183,8 @@ def expectrealList(request):
 
 def CapitalProfile(request, pk):
     data = FinicialCompany.objects.get(pk=pk)
-    return render(request, 'userInterface/capital-profile.html', context={"data": data})
+    arrows = CompaniesArrow.objects.filter(company__id = pk)
+    return render(request, 'userInterface/capital-profile.html', context={"data": data , "arrows":arrows})
 
 
 def ResearchProfile(request, pk):

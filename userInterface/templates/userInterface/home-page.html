@@ -37,6 +37,7 @@
                         </div>
                     </a>
                 </div>
+                
                 <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
                     <a href="{% url 'all-user-expect' %}">
                         <div class="card">
@@ -60,6 +61,28 @@
                             </div>
                         </div>
 
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+                    <a href="#">
+                        <div class="card">
+                            <div class="card-body p-3">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="numbers">
+                                            <p class="text-sm mb-0 text-capitalize font-weight-bold">  كبار الملاك لأسهم الشركات
+                                                </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-4 text-start">
+                                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                                            <i class="fas fa-user-tie text-lg opacity-10" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -197,7 +220,56 @@
                     </div>
                 </div>
             </div>
-
+ 
+            <div class="row pt-1 pt-lg-1 pb-3">
+                <div class="col-12 col-xl-12 pt-5">
+                    <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">ملكيات الأسهم</h6>
+          </div>
+          
+          <div class="card-body px-0 pb-2">
+            <table style="margin:0 auto;"
+                   class="table table-bordered align-items-center mb-auto">
+                   <thead class="text_black">
+                    <tr>
+                        <th class="text-center text-xxs" style="width:auto;">
+                            المالك
+                        </th>
+                        <th class="text-center text-xxs" style="width:auto;">
+                            الشركةٍ
+                        </th>
+                        <th class="text-center text-xxs" style="width: auto;">
+         عدد الأسهم
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in arrows %}
+                            <tr>
+                                <td class="align-middle text-center text-xxs">
+                                    <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
+                                </td>
+                                <td class="align-middle text-center text-xxs">
+                                    <p class="text-xxs  mb-0">{{ item.company.name }}</p>
+                                </td>
+                                <td class="align-middle text-center text-xxs">
+                                    <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
+                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                   </table>
+                   </div>
+                   <div class="card-footer">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a href="#"><span
+                                class="badge badge-sm bg-maal">المزيد</span></a>
+                    </div>
+                </div>
+          </div>
+          </div>
+                </div>
             <div class="row pt-3">
                 <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
@@ -256,6 +328,7 @@
                 </div>
 
             </div>
+
         </div>
 
     </section>

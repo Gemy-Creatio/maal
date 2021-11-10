@@ -191,7 +191,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for item in expects %}
+                        {% for item in data.expects.all %}
                             <tr>
                               <td class="text-xxs">
                                                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
@@ -348,8 +348,45 @@
 
           </div>
         </div>
+    </div>
 
-    </div>
-    </div>
+    <div class="row pt-1 pt-lg-1 pb-3">
+        <div class="col-12 col-xl-12 pt-3">
+            <div class="card h-100">
+  <div class="card-header pb-0 p-3">
+    <h6 class="mb-0">ملكيات الأسهم</h6>
+  </div>
+  
+  <div class="card-body px-0 pb-2">
+    <table style="margin:0 auto;"
+           class="table table-bordered align-items-center mb-auto">
+           <thead class="text_black">
+            <tr>
+                <th class="text-center text-xxs" style="width:auto;">
+                    المالك
+                </th>
+                <th class="text-center text-xxs" style="width: auto;">
+ عدد الأسهم
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in arrows %}
+                    <tr>
+                        <td class="align-middle text-center text-xxs">
+                            <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
+                        </td>
+                        <td class="align-middle text-center text-xxs">
+                            <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
+                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+           </table>
+           </div>
+  </div>
+  </div>
+        </div>
+</div>
 </section>
 {% endblock body %}
