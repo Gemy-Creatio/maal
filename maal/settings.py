@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'main',
     'office',
     'userInterface',
+    'owners',
     # 3rd party package
     'django_filters',
     'xhtml2pdf',

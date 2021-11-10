@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('user/', include('accounts.urls')),
     path('office/', include('office.urls')),
+    path('owners/', include('owners.urls')),
     path('userInterface/', include('userInterface.urls')),
 
 ]
