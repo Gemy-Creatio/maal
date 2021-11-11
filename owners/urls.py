@@ -8,4 +8,7 @@ urlpatterns = [
     path('arrows/all', views.AllCompaniesArrow.as_view(), name='all-arrows'),
     path('arrows/add', views.AddArrow.as_view(), name='add-arrow'),
     path('arrows/update/<int:pk>', views.UpdateArrow.as_view(), name='update-arrow'),
+    path('owners/profile/<int:pk>', views.ownerProfile, name='owner-profile'),
+    path('owners/users/all', views.AllUserOwner.as_view(), name='all-user-owners'),
+
 ]

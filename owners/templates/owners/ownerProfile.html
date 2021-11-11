@@ -1,0 +1,88 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/home-back.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center pt-5">
+                     <div class="col-lg-12">
+                <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+          <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+                <i class="fas fa-user-tie text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="h-100">
+
+                       <h5 class="mb-1">
+
+          {{ data.name }}
+                             </h5>
+                             <p class="mb-1">
+                       {{data.description}}
+                             </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+            </div>
+
+      </div>
+              
+
+    <div class="row pt-1 pt-lg-1 pb-3">
+        <div class="col-12 col-xl-12 pt-3">
+            <div class="card h-100">
+  <div class="card-header pb-0 p-3">
+    <h6 class="mb-0">ملكيات الأسهم</h6>
+  </div>
+  
+  <div class="card-body px-0 pb-2">
+    <table style="margin:0 auto;"
+           class="table table-bordered align-items-center mb-auto">
+           <thead class="text_black">
+            <tr>
+                <th class="text-center text-xxs" style="width:auto;">
+                    الشركة
+                </th>
+                <th class="text-center text-xxs" style="width: auto;">
+ عدد الأسهم
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in arrows %}
+                    <tr>
+                        <td class="align-middle text-center text-xxs">
+                            <a href="{% url 'user-company' item.company.pk %}">
+
+                            <p class="text-xxs  mb-0">{{ item.company.name }}</p>
+                            </a>
+                        </td>
+                        <td class="align-middle text-center text-xxs">
+                            <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
+                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+           </table>
+           </div>
+  </div>
+  </div>
+        </div>
+</div>
+</section>
+{% endblock body %}

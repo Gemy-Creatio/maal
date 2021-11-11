@@ -6,6 +6,10 @@ from .forms import SeniorOwnerForm , ArrowsForm
 from django.urls import reverse
 # Create your views here.
 
+class AllUserOwner(View):
+    def get(self, request):
+        data = CompaniesArrow.objects.order_by('-numberOFArrows')
+        return render(request, 'owners/ownerUserlist.html', context={"arrows": data})
 
 class AllSeniorOwners(View):
     def get(self, request):
@@ -53,3 +57,9 @@ class UpdateArrow(UpdateView):
 
      def get_success_url(self):
         return reverse('all-arrows')        
+
+def ownerProfile(request , pk):
+    data = SeniorOwner.objects.get(pk = pk)
+    arrows = CompaniesArrow.objects.filter(owner__id = pk)
+    return render(request, 'owners/ownerProfile.html', context={"data": data , "arrows":arrows})  
+              

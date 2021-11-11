@@ -23,7 +23,7 @@ def rate_user_detail(request, pk):
 
 
 def user_home(request):
-    arrows = CompaniesArrow.objects.all()
+    arrows = CompaniesArrow.objects.order_by('-numberOFArrows')
     label = []
     data = []
     rates = Rates.objects.filter(Recommendation__exact=1)[:5]

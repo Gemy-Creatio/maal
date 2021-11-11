@@ -374,7 +374,10 @@
                 {% for item in arrows %}
                     <tr>
                         <td class="align-middle text-center text-xxs">
+
+                            <a href="{% url 'owner-profile' item.owner.pk %}">
                             <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
+                        </a>
                         </td>
                         <td class="align-middle text-center text-xxs">
                             <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
