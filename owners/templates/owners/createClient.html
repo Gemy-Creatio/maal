@@ -1,0 +1,53 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/ksa.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-6">
+            <div class="card h-50">
+            <div class="card-body">
+            <p class="text-danger text-xs  text-center">إشترك لدينا ليصلك جميع الأشعارات الخاصة بعالم الأقتصاد </p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+          <div class="col-6 mx-auto">
+              <div class="card z-index-0 box-shadow h-100 p-5">
+              <div class="card-header">
+              <div class="row col-10 text-align-center">
+              <h3 class="text-black text-center"> الأشتراك بخدمات الموقع</h3>
+              </div>
+              </div
+            <div class="card-body">
+              <form  method="post">
+    {% csrf_token %}
+                             {% for filed in form %}
+                                            <div class="form-group">
+                                            <label class="text-black"> {{filed.label}} </label>
+                                                {{ filed }}
+                                            </div>
+                                        {% endfor %}
+          <button type="submit" class="btn btn-sm text-white bg-maal">
+                           إشتراك
+                       </button>
+
+                        </form>
+            </div>
+        </div>
+          </div>
+      </div>
+    </div>
+</section>
+{% endblock body %}
+
+
+
