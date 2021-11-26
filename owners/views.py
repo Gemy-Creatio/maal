@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import SeniorOwner , CompaniesArrow , Client
+from .models import SeniorOwner , CompaniesArrow 
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import SeniorOwnerForm , ArrowsForm , ClientForm
+from .forms import SeniorOwnerForm , ArrowsForm 
 from django.urls import reverse
 # Create your views here.
 
@@ -63,11 +63,3 @@ def ownerProfile(request , pk):
     arrows = CompaniesArrow.objects.filter(owner__id = pk)
     return render(request, 'owners/ownerProfile.html', context={"data": data , "arrows":arrows})  
 
-
-class AddClient(CreateView):
-    model = Client
-    form_class = ClientForm
-    template_name = 'owners/createClient.html'
-
-    def get_success_url(self):
-        return reverse('user-home')             

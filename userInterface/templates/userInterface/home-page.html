@@ -152,11 +152,16 @@
                                 <tbody>
                                 {% for item in rates %}
                                     <tr>
-                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
                                              <a href="{% url 'user-company' item.CompanyEntered.pk %}">
                                                             <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
                                                         </a>
+      {% if request.user.user_type == 3 %}
+                                              <a href="{% url 'add_wish' item.CompanyEntered.pk %}">
+<i class="fas fa-heart text-lg"></i>                                                        
+</a>           
 
+      {% endif %}
                                         </td>
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
                                             <a href="{% url 'user-research' item.ResearchCompany.pk %}">

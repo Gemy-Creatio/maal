@@ -27,7 +27,7 @@ urlpatterns = [
     path('office/', include('office.urls')),
     path('owners/', include('owners.urls')),
     path('userInterface/', include('userInterface.urls')),
-
+    path('wishlist/', include('wishlist.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

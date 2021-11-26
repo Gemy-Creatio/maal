@@ -2,7 +2,7 @@ from django.shortcuts import render
 from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
 from office.filters import RatesFilter, EarnFilter
 from owners.models import CompaniesArrow
-
+from wishlist.models import Wishlist
 # Create your views here.
 
 
@@ -51,7 +51,24 @@ def user_home(request):
     rates = Rates.objects.all()
     rate_filter = RatesFilter(request.POST, queryset=rates)
     rate = rate_filter.qs[:10]
-    context = {
+    if request.user.pk :
+        wishes = Wishlist.objects.filter(user= request.user).count()
+        context = {
+        "myfilter": rate_filter,
+        "rates": rate,
+        "label": label,
+        "data": data,
+        "data1": data1,
+        "label1": label1,
+        "companylabel": companylabel,
+        "companydata": companydata,
+        "companylabel1": companylabel1,
+        "companydata1": companydata1,
+        "arrows":arrows , 
+        "wishes":wishes
+        }
+    else:
+           context = {
         "myfilter": rate_filter,
         "rates": rate,
         "label": label,
@@ -63,7 +80,7 @@ def user_home(request):
         "companylabel1": companylabel1,
         "companydata1": companydata1,
         "arrows":arrows
-    }
+    }    
     return render(request, 'userInterface/home-page.html', context=context)
 
 

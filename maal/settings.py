@@ -27,7 +27,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'login'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'office',
     'userInterface',
     'owners',
+    'wishlist',
     # 3rd party package
     'django_filters',
     'xhtml2pdf',

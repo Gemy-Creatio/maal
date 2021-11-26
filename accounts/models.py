@@ -55,6 +55,7 @@ class UserManager(BaseUserManager):
         )
         user.is_staff = True
         user.is_admin = True
+        user.is_Client = False
         user.is_emp = False
         user.user_type = 1
         user.save(using=self._db)
@@ -77,8 +78,33 @@ class UserManager(BaseUserManager):
         user.is_admin = False
         user.is_staff = True
         user.is_emp = True
+        user.is_Client = False
         user.is_active = True
         user.user_type = 2
+        user.save(using=self._db)
+        return user
+
+
+    def create_client(self, email, first_name, last_name, phone, address, password):
+        """
+        Creates and saves a Secondary Employee USer with the given email, first name,
+        last name and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone,
+            address=address,
+            commit=False,
+        )
+        user.is_admin = False
+        user.is_staff = False
+        user.is_emp = False
+        user.is_Client = True
+        user.is_active = True
+        user.user_type = 3
         user.save(using=self._db)
         return user
 
@@ -99,10 +125,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_emp = models.BooleanField(_('Employee'), default=False, help_text=_(
         'Designates whether this user should be treated as an Secondary Employee. '
     ))
-
+    is_Client = models.BooleanField(_('Client'), default=False, help_text=_(
+        'Designates whether this user should be treated as a Client. '
+    ))
     USER_TYPE_CHOICES = (
         (1, 'ممثل المؤسسة'),
         (2, 'موظف'),
+        (3, 'عميل'),
+
     )
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, verbose_name=_('User Type'),

@@ -27,14 +27,21 @@
                                         الملف الشخصى
                                     </a>
                                 </li>
-                                                                        <li class="nav-item">
+                                   {% if request.user.user_type == 3 %}
+                                     <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'user-home' %}">
+                                        <i class="fa fa-home opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        الصفحة الرئيسية
+                                    </a>
+                                </li>
+                                {% else %}
+                                      <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'home-page' %}">
                                         <i class="fa fa-chart-pie opacity-6 text-white me-1" aria-hidden="true"></i>
                                         لوحة التحكم
                                     </a>
                                 </li>
-
-
+ {% endif %}
                                         {% else %}
                                                                                        <li class="nav-item">
                                     <a class="nav-link me-2" href="{% url 'user-page' %}">
@@ -64,9 +71,15 @@
 
 
         <ul class="navbar-nav d-lg-block d-none">
+         {% if request.user.user_type == 3  %}
           <li class="nav-item">
-            <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro" class="btn btn-sm text-white bg-maal  btn-round mb-0 me-1">موقعنا</a>
+            <a href="{% url 'all_wish' %}" class="btn btn-sm text-white bg-maal  btn-round mb-0 me-1 text-lg">المحفظة <span class="text-white text-lg" style="margin-inline:0.2rem;">{{ wishes}}</span></a>
           </li>
+          {% else %}
+           <li class="nav-item">
+            <a href="https://www.maaal.com/" class="btn btn-sm text-white bg-maal  btn-round mb-0 me-1">موقعنا</a>
+          </li>
+         {% endif %}
         </ul>
       </div>
     </div>

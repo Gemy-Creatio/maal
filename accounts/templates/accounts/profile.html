@@ -68,12 +68,8 @@
                   </span>
                   <div class="timeline-content">
                     <h6 class="text-dark text-sm font-weight-bold mb-0">الوظيفة</h6>
-                      {% if user.user_type == 1 %}
-                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">أدمن</p>
-                          {% else %}
-                                              <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">محرر</p>
-
-                      {% endif %}
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{ request.user.get_user_type_display  }}</p>
+                      
                   </div>
                 </div>
                 <div class="timeline-block">

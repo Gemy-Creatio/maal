@@ -1,0 +1,72 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/tada.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+                      <div class="col-lg-10 col-md-10">
+          <div class="card h-100">
+            <div class="card-header pb-0">
+              <h6>صحفية مال الأقتصادية</h6>
+              <p class="text-xl-center">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="font-weight-bold">الشركات المفضلة</span>
+              </p>
+            </div>
+            <div class="card-body p-3">
+              <div class="table-responsive">
+
+                         <table style="margin:0 auto;"
+                                   class="table table-max table-bordered align-items-center mb-auto">
+                                <thead class="text_black">
+                                <tr>
+                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                    إسم الشركة</th>
+                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                     تاريخ التفضيل</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             {% for item in wishes %}
+                              <tr>
+                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+
+                                                   <a href="{% url 'user-company' item.wished_company.pk %}">
+                                                            <p class="text-xxs">{{ item.wished_company.name }}</p>
+                                                        </a>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+
+                                                    <h6 class="mb-0 text-sm">{{ item.added_date|date:"d-m-y" }}</h6>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete_wish' item.pk %}"><i class="fas fa-trash text-primary"></i></a>
+                                        </td>
+                                    </tr>
+                               {% endfor %}
+
+                            </tbody>
+                        </table>
+</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>
+{% endblock body %}
+
+

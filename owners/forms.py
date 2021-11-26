@@ -26,21 +26,3 @@ class ArrowsForm(forms.ModelForm):
             'company': forms.Select(choices=models.FinicialCompany.objects.all())
         }
 
-class ClientForm(forms.ModelForm):
-    class Meta:
-        model = models.Client
-        fields = ['name', 'phone', 'email']
-        labels = {
-            'name' : 'الأسم' , 
-            'phone' : 'الهاتف' , 
-            'email' : 'البريد الألكترونى' , 
-        }
-        widgets = {
-            'name': forms.TextInput(
-                attrs={'id': 'namefield', 'class': 'form-control', 'placeholder': 'الأسم'}),
-            'phone': forms.NumberInput(
-                attrs={'id': 'phonefield', 'class': 'form-control', 'placeholder': 'الهاتف'}),
-           
-            'email': forms.TextInput(
-                attrs={'id': 'emailfield', 'class': 'form-control', 'placeholder': 'البريد الألكترونى'}),
-        }

@@ -14,9 +14,4 @@ class CompaniesArrow(models.Model):
     def __str__(self) -> str:
         return self.owner.name
 
-class Client(models.Model):
-    name = models.CharField(max_length=255 , null=True , blank=True)
-    phone = models.IntegerField( null=True , blank=True)
-    email = models.EmailField(null=True , blank=True)
-    def __str__(self) -> str:
-        return super().name
+

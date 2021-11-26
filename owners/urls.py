@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from accounts.views import RegisterClient
 
 urlpatterns = [
     path('owners/all', views.AllSeniorOwners.as_view(), name='all-owners'),
@@ -10,6 +11,6 @@ urlpatterns = [
     path('arrows/update/<int:pk>', views.UpdateArrow.as_view(), name='update-arrow'),
     path('owners/profile/<int:pk>', views.ownerProfile, name='owner-profile'),
     path('owners/users/all', views.AllUserOwner.as_view(), name='all-user-owners'),
-    path('clients/add', views.AddClient.as_view(), name='add-client'),
+    path('clients/add', RegisterClient.as_view(), name='add-client'),
 
 ]

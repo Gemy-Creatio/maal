@@ -128,8 +128,16 @@
                         {% for item in expects %}
                             <tr>
                                 <td>
+                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
 
                                         <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+</a>
+                 {% if request.user.user_type == 3 %}
+                                              <a href="{% url 'add_wish' item.CompanyEntered.pk %}">
+<i class="fas fa-heart text-lg"></i>                                                        
+</a>           
+
+      {% endif %}
                                 </td>
                                 <td>
 

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import User
 from django.core.files.storage import FileSystemStorage
+from django.views import View
 
 
 def loginPage(request):
@@ -12,7 +13,11 @@ def loginPage(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home-page')
+            if user.user_type == 3:
+                return redirect ('user-home')
+            else:
+                return redirect('home-page')    
+            
         else:
             return JsonResponse({"status": 'Username OR password is incorrect'})
     context = {}
@@ -82,3 +87,22 @@ def edit_user(request, pk):
             return redirect('home-page')
     context = {}
     return render(request, 'accounts/user-edit.html', context={"user":user})
+
+
+class RegisterClient(View):
+    def post(self, request):
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        user = User.objects.create_client(email=email, first_name=first_name, last_name=last_name,
+                                            address=address, password=password, phone=phone)
+        if user is not None:
+            login(request, user)
+            return redirect('user-home')
+
+    def get(self, request):
+        context = {}
+        return render(request, 'owners/createClient.html', context)
