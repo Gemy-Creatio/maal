@@ -28,12 +28,12 @@
               <div class="table-responsive">
 
                          <table style="margin:0 auto;"
-                                   class="table table-max table-bordered align-items-center mb-auto">
+                                   class="table table-bordered align-items-center mb-auto">
                                 <thead class="text_black">
                                 <tr>
-                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                    <th class="text-center text-xxs" style="width:auto;">
                                     إسم الشركة</th>
-                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                    <th class="text-center text-xxs" style="width: auto;">
                                      تاريخ التفضيل</th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
@@ -41,17 +41,17 @@
                             <tbody>
                              {% for item in wishes %}
                               <tr>
-                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+                                        <td class="align-middle text-center text-xxs " style="width: auto;">
 
                                                    <a href="{% url 'user-company' item.wished_company.pk %}">
                                                             <p class="text-xxs">{{ item.wished_company.name }}</p>
                                                         </a>
                                         </td>
-                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+                                        <td class="align-middle text-center text-xxs " style="width: auto;">
 
                                                     <h6 class="mb-0 text-sm">{{ item.added_date|date:"d-m-y" }}</h6>
                                         </td>
-                                        <td class="align-middle text-center text-xxs " style="width: 1.2rem;">
+                                        <td class="align-middle text-center text-xxs " style="width:auto;">
                                             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete_wish' item.pk %}"><i class="fas fa-trash text-primary"></i></a>
                                         </td>
                                     </tr>

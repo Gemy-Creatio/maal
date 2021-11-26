@@ -51,24 +51,7 @@ def user_home(request):
     rates = Rates.objects.all()
     rate_filter = RatesFilter(request.POST, queryset=rates)
     rate = rate_filter.qs[:10]
-    if request.user.pk :
-        wishes = Wishlist.objects.filter(user= request.user).count()
-        context = {
-        "myfilter": rate_filter,
-        "rates": rate,
-        "label": label,
-        "data": data,
-        "data1": data1,
-        "label1": label1,
-        "companylabel": companylabel,
-        "companydata": companydata,
-        "companylabel1": companylabel1,
-        "companydata1": companydata1,
-        "arrows":arrows , 
-        "wishes":wishes
-        }
-    else:
-           context = {
+    context = {
         "myfilter": rate_filter,
         "rates": rate,
         "label": label,
@@ -80,7 +63,7 @@ def user_home(request):
         "companylabel1": companylabel1,
         "companydata1": companydata1,
         "arrows":arrows
-    }    
+    }  
     return render(request, 'userInterface/home-page.html', context=context)
 
 

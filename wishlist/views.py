@@ -15,6 +15,7 @@ def add_to_wishlist(request,pk):
    wished_Company = Wishlist.objects.get_or_create(wished_company=item,
    user = request.user,
    )
+   request.session['wish_count'] = Wishlist.objects.filter(user=request.user).count()
    messages.info(request,'The item was added to your wishlist')
    return redirect('user-home')
 
@@ -28,4 +29,5 @@ def view_wishList(request):
 def delete_wishList(request , pk):
     wishes = Wishlist.objects.get(pk=pk)
     wishes.delete()
+    request.session['wish_count'] = Wishlist.objects.filter(user=request.user).count()
     return redirect('all_wish')

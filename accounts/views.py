@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import User
 from django.core.files.storage import FileSystemStorage
 from django.views import View
-
+from wishlist.models import Wishlist
 
 def loginPage(request):
     if request.method == 'POST' and request.is_ajax:
@@ -14,6 +14,7 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             if user.user_type == 3:
+                request.session['wish_count'] = Wishlist.objects.filter(user=user).count()
                 return redirect ('user-home')
             else:
                 return redirect('home-page')    
