@@ -4,7 +4,7 @@ from wishlist.models import Wishlist
 from office.models import FinicialCompany
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-
+from office.models import CompanyCategory , FinicialCompany
 # Create your views here.
 
 
@@ -22,7 +22,9 @@ def add_to_wishlist(request,pk):
 @login_required
 def view_wishList(request):
     wishes = Wishlist.objects.filter(user= request.user)
-    context = {"wishes":wishes}
+    cats = CompanyCategory.objects.all()
+    companies = FinicialCompany.objects.all()
+    context = {"wishes":wishes , 'cats':cats , 'companies':companies}
     return render(request , 'wishlist/allWishes.html' , context)
 
 @login_required

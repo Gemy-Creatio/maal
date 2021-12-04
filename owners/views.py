@@ -63,3 +63,5 @@ def ownerProfile(request , pk):
     arrows = CompaniesArrow.objects.filter(owner__id = pk)
     return render(request, 'owners/ownerProfile.html', context={"data": data , "arrows":arrows})  
 
+
+

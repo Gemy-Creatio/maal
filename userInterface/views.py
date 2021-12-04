@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from office.models import FinicialAnalyst, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
+from office.models import FinicialAnalyst,CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
 from office.filters import RatesFilter, EarnFilter
 from owners.models import CompaniesArrow
 from wishlist.models import Wishlist
@@ -23,6 +23,8 @@ def rate_user_detail(request, pk):
 
 
 def user_home(request):
+    cats = CompanyCategory.objects.all()
+    comps = FinicialCompany.objects.all()
     arrows = CompaniesArrow.objects.order_by('-numberOFArrows')
     label = []
     data = []
@@ -52,6 +54,8 @@ def user_home(request):
     rate_filter = RatesFilter(request.POST, queryset=rates)
     rate = rate_filter.qs[:10]
     context = {
+         "cats":cats,
+        "comps":comps,
         "myfilter": rate_filter,
         "rates": rate,
         "label": label,
@@ -120,6 +124,7 @@ def expectList(request):
     expectss = EarningsForecast.objects.all()
     expect_filter = EarnFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
+    
     context = {
         "expects": expectz,
         "myfilter": expect_filter,
