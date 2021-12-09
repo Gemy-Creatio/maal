@@ -31,34 +31,35 @@
             <span class="font-weight-bold">ضف المزيد إلى المحفظة</span>
           </p>
          </div>
-         <div class="card-body">
-          <div class="accordion" id="accordionExample">
-            {% for cat in cats %}
-            <div class="accordion-item" style="border:1px solid #aa952d ">
-              <h2 class="accordion-header" id="headingTwo{{ cat.pk }}">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo{{ cat.pk }}" aria-expanded="false" aria-controls="collapseTwo{{ cat.pk }}">
-                  {{cat.name}}
-                </button>
-              </h2>
-              <div id="collapseTwo{{ cat.pk }}" class="accordion-collapse collapse" aria-labelledby="headingTwo{{ cat.pk }}" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                   {% for comp in companies  %}
-               {% if comp.category.pk == cat.pk %}
-               <div class="d-flex" style>
-                <a  href="{% url 'add_wish' comp.pk %}">
-                  <i class="fas fa-plus-circle"></i>
-        {{comp.name}}
- </a>        
-               </div>
-               {% endif %}
-                   {% endfor %}
-                </div>
-              </div>
-            </div>
-            {% endfor %}
-          
-            
-          </div>
+         <div class="card-body justify-content-center">
+          <form method="post" action="{% url 'add_wish_aync' %}">
+{% csrf_token %}
+<div class="form-group row ">
+  <div class="col-8 justify-content-center">
+    <label for="comp_id">إختر شركة لأضافهة للمحفظة:</label>
+    <input list="companies" name="comp_id" id="comp_id">
+    
+    <datalist id="companies">
+     
+     {% for comp in companies  %}
+     <option value="{{comp.name }}">
+     {% endfor %}
+       
+      
+    </datalist>
+  </div>
+  <div class="col-4">
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary text-white bg-maal" >
+      اضف
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+          </form>
          </div>
        </div>
       </div>
@@ -116,8 +117,7 @@
                       <a
                         class="btn btn-link text-dark px-3 mb-0"
                         href="{% url 'delete_wish' item.pk %}"
-                        ><i class="fas fa-trash text-primary"></i
-                      ></a>
+                        ><i class="far fa-bookmark"></i></a>
                     </td>
                   </tr>
                   {% endfor %}

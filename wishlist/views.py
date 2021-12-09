@@ -27,6 +27,21 @@ def view_wishList(request):
     context = {"wishes":wishes , 'cats':cats , 'companies':companies}
     return render(request , 'wishlist/allWishes.html' , context)
 
+def add_to_wishlist_aysnc (request):
+     if request.method =='POST':
+         company_name = request.POST.get('comp_id')
+         company = FinicialCompany.objects.get(name = company_name)
+         wished_Company = Wishlist.objects.get_or_create(wished_company=company,
+   user = request.user,
+   )
+         request.session['wish_count'] = Wishlist.objects.filter(user=request.user).count()
+         return redirect('user-home')
+
+
+
+
+
+
 @login_required
 def delete_wishList(request , pk):
     wishes = Wishlist.objects.get(pk=pk)

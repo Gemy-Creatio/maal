@@ -149,9 +149,9 @@
                             <td>
 
                                      {% if item.deviationreal < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-5 }} %</p>
+                                        <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-2 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-5 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
                                 <td class="text-xxs">
@@ -160,9 +160,9 @@
                                 </td>
                                 <td>
                                     {% if item.deviationsecond2020 < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
+                                        <p class="text-danger text-xxs ">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
 

@@ -155,8 +155,7 @@
                            <td class="d-flex" style="justify-content: center;">
                                              {% if request.user.user_type == 3 %}
                                               <a  href="{% url 'add_wish' item.CompanyEntered.pk %}">
-                 <i class="fas fa-plus-circle"></i>
-
+                                                <i class="far fa-bookmark"></i>
 </a>           
 
       {% endif %}
@@ -255,8 +254,8 @@
                         {% if comp.category.pk == cat.pk %}
                         <div class="d-flex" style>
                          <a  href="{% url 'add_wish' comp.pk %}">
-                           <i class="fas fa-plus-circle"></i>
-                 {{comp.name}}
+                            <i class="far fa-bookmark"></i>
+                                             {{comp.name}}
           </a>        
                         </div>
                         {% endif %}
