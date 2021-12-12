@@ -9,26 +9,39 @@ from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, Compan
     PerviousCompany, EarningsForecast, RateQuarter
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def RatesList(request):
     rates = Rates.objects.all()
-    return render(request, 'office/rates-list.html', context={"rates": rates})
+    paginator = Paginator(rates, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'office/rates-list.html', context={"rates":page_obj })
 
 
 def Research_List(request):
     companies = ResearchCompany.objects.all()
-    return render(request, 'office/research_list.html', context={"companies": companies})
+    paginator = Paginator(companies, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'office/research_list.html', context={"companies": page_obj})
 
 
 def Company_List(request):
     companies = FinicialCompany.objects.all()
-    return render(request, 'office/company_list.html', context={"companies": companies})
+    paginator = Paginator(companies, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'office/company_list.html', context={"companies": page_obj})
 
 
 def Category_List(request):
     category = CompanyCategory.objects.all()
-    return render(request, 'office/catgory-list.html', context={"categories": category})
+    paginator = Paginator(category, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'office/catgory-list.html', context={"categories": page_obj})
 
 
 def AddCategory(request):
@@ -138,7 +151,11 @@ def EditResearch(request, pk):
 
 def AnalystsList(request):
     analayts = FinicialAnalyst.objects.all()
-    return render(request, 'office/analysts-list.html', context={"analayts": analayts})
+    paginator = Paginator(analayts, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'office/analysts-list.html', context={"analayts": page_obj})
 
 
 def AddAnalyst(request):
@@ -355,7 +372,11 @@ def addPervCompany(request, pk):
 
 
 def ExpectationList(request):
+    expects = EarningsForecast.objects.all()
+    paginator = Paginator(expects, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        "expectations": EarningsForecast.objects.all()
+        "expectations": page_obj
     }
     return render(request, 'office/expectation-list.html', context=context)

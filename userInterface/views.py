@@ -3,6 +3,8 @@ from office.models import FinicialAnalyst,CompanyCategory, PerviousCompany, Rate
 from office.filters import RatesFilter, EarnFilter
 from owners.models import CompaniesArrow
 from wishlist.models import Wishlist
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 
@@ -72,8 +74,12 @@ def user_home(request):
 
 
 def analystslist(request):
+    analyts = FinicialAnalyst.objects.all()
+    paginator = Paginator(analyts, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        "analysts": FinicialAnalyst.objects.all(),
+        "analysts": page_obj,
     }
     return render(request, 'userInterface/analyst-list.html', context=context)
 
@@ -88,9 +94,12 @@ def rateslist(request):
     rates = Rates.objects.all()
     rate_filter = RatesFilter(request.GET, queryset=rates)
     rate = rate_filter.qs
+    paginator = Paginator(rate, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         "myfilter": rate_filter,
-        "rates": rate,
+        "rates": page_obj,
     }
     return render(request, 'userInterface/rate-list.html', context=context)
 
@@ -124,9 +133,12 @@ def expectList(request):
     expectss = EarningsForecast.objects.all()
     expect_filter = EarnFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
+    paginator = Paginator(expectz, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     context = {
-        "expects": expectz,
+        "expects": page_obj,
         "myfilter": expect_filter,
         "expectlabel": expectlabel,
         "expectdata": expectdata,
@@ -170,8 +182,11 @@ def expectrealList(request):
     expectss = EarningsForecast.objects.all()
     expect_filter = EarnFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
+    paginator = Paginator(expectz, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        "expects": expectz,
+        "expects": page_obj,
         "myfilter": expect_filter,
         "expectlabel": expectlabel,
         "expectdata": expectdata,

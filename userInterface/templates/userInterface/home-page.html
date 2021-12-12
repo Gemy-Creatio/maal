@@ -152,9 +152,9 @@
                                 <tbody>
                                 {% for item in rates %}
                                     <tr>
-                           <td class="d-flex" style="justify-content: center;">
+                           <td class="d-flex" style="justify-content: space-around; ">
                                              {% if request.user.user_type == 3 %}
-                                              <a  href="{% url 'add_wish' item.CompanyEntered.pk %}">
+                                              <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
                                                 <i class="far fa-bookmark"></i>
 </a>           
 
@@ -252,7 +252,7 @@
                          <div class="accordion-body">
                             {% for comp in comps  %}
                         {% if comp.category.pk == cat.pk %}
-                        <div class="d-flex" style>
+                        <div class="d-flex flex-direction-column" style>
                          <a  href="{% url 'add_wish' comp.pk %}">
                             <i class="far fa-bookmark"></i>
                                              {{comp.name}}

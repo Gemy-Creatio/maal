@@ -84,7 +84,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for item in expects %}
+                        {% for item in expectations %}
                             <tr>
                                 <td>
 
@@ -141,6 +141,8 @@
 
                         {% endif %}
                     </div>
+                    {% include 'partials/_pagination.html' with page_obj=expectations only %}
+
                 </div>
             </div>
         </div>

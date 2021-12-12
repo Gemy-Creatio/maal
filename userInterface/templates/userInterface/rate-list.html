@@ -127,19 +127,19 @@
                                             <tbody>
                                             {% for item in rates %}
                                                 <tr>
-                                                <td class="d-flex" style="justify-content: center;">
-                                             {% if request.user.user_type == 3 %}
-                                              <a  href="{% url 'add_wish' item.CompanyEntered.pk %}">
-                                                <i class="far fa-bookmark"></i>
-</a>           
-
-      {% endif %}
-                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
-
-                                        <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-</a>
-    
-                                </td>
+                                                    <td class="d-flex" style="justify-content: space-around; ">
+                                                        {% if request.user.user_type == 3 %}
+                                                         <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
+                                                           <i class="far fa-bookmark"></i>
+           </a>           
+           
+                 {% endif %}
+                                                        <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+           
+                                                   <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+           </a>
+               
+                                           </td>
  <td class="align-middle text-center text-xxs">
                                                              <a href="{% url 'user-research' item.ResearchCompany.pk %}">
 
@@ -191,6 +191,8 @@
 
 
               </div>
+              {% include 'partials/_pagination.html' with page_obj=rates only %}
+
             </div>
           </div>
          </div>

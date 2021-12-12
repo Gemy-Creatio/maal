@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 from accounts.models import User
-
+from django.db.models.signals import post_save
 
 class CompanyCategory(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
@@ -119,6 +119,9 @@ class Rates(models.Model):
 
     def __str__(self):
         return str(self.CompanyEntered)
+
+
+
 
 
 class PerviousCompany(models.Model):
