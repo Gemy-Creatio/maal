@@ -229,103 +229,7 @@
             </div>
  
             <div class="row pt-1 pt-lg-1 pb-3">
-            
-            {% if request.user.user_type == 3 %}
-            <div class="col-lg-6 col-12 pt-5">
-                <div class="card h-100">
-                  <div class="card-header">
-                   <p class="text-lg-center">
-                     <i class="fas fa-plus" aria-hidden="true"></i>
-                     <span class="font-weight-bold">ضف المزيد إلى المحفظة</span>
-                   </p>
-                  </div>
-                  <div class="card-body">
-                   <div class="accordion" id="accordionExample">
-                     {% for cat in cats %}
-                     <div class="accordion-item" style="border:1px solid #aa952d ">
-                       <h2 class="accordion-header" id="headingTwo{{ cat.pk }}">
-                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo{{ cat.pk }}" aria-expanded="false" aria-controls="collapseTwo{{ cat.pk }}">
-                           {{cat.name}}
-                         </button>
-                       </h2>
-                       <div id="collapseTwo{{ cat.pk }}" class="accordion-collapse collapse" aria-labelledby="headingTwo{{ cat.pk }}" data-bs-parent="#accordionExample">
-                         <div class="accordion-body">
-                            {% for comp in comps  %}
-                        {% if comp.category.pk == cat.pk %}
-                        <div class="d-flex flex-direction-column" style>
-                         <a  href="{% url 'add_wish' comp.pk %}">
-                            <i class="far fa-bookmark"></i>
-                                             {{comp.name}}
-          </a>        
-                        </div>
-                        {% endif %}
-                            {% endfor %}
-                         </div>
-                       </div>
-                     </div>
-                     {% endfor %}
-                   
-                     
-                   </div>
-                  </div>
-                </div>
-               </div>
-            <div class="col-12 col-xl-6 pt-5">
-                <div class="card h-100 pt-3">
-      <div class="card-header pb-0 p-3">
-        <h6 class="mb-0">ملكيات الأسهم</h6>
-      </div>
-      
-      <div class="card-body px-0 pb-2">
-        <table style="margin:0 auto;"
-               class="table table-bordered align-items-center mb-auto">
-               <thead class="text_black">
-                <tr>
-                    <th class="text-center text-xxs" style="width:auto;">
-                        المالك
-                    </th>
-                    <th class="text-center text-xxs" style="width:auto;">
-                        الشركةٍ
-                    </th>
-                    <th class="text-center text-xxs" style="width: auto;">
-     عدد الأسهم
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for item in arrows %}
-                        <tr>
-                            <td class="align-middle text-center text-xxs">
-                                <a href="{% url 'owner-profile' item.owner.pk %}">
-                                    <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
-                                </a>
-                            </td>
-                            <td class="align-middle text-center text-xxs">
-                                <a href="{% url 'user-company' item.company.pk %}">
-                                <p class="text-xxs  mb-0">{{ item.company.name }}</p>
-                                </a>
-                            </td>
-                            <td class="align-middle text-center text-xxs">
-                                <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
-                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                        </tbody>
-               </table>
-               </div>
-               <div class="card-footer">
-                <div class="col-12 d-flex justify-content-end">
-                    <a href="{% url 'all-user-owners' %}">
-                        <span
-                            class="badge badge-sm bg-maal">المزيد</span></a>
-                </div>
-            </div>
-      </div>
-    
-    
-    </div>
-     {% else %}
-     <div class="col-12 col-xl-12 pt-5">
+              <div class="col-12 col-xl-12 pt-5">
         <div class="card h-100 pt-3">
 <div class="card-header pb-0 p-3">
 <h6 class="mb-0">ملكيات الأسهم</h6>
@@ -379,8 +283,6 @@
 
 
 </div>
-
-            {% endif %}
                 
                 </div>
             <div class="row pt-3">

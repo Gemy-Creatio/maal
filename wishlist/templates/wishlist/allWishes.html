@@ -32,25 +32,29 @@
           </p>
          </div>
          <div class="card-body justify-content-center">
-          <form method="post" action="{% url 'add_wish_aync' %}">
-{% csrf_token %}
+          <form method="post">
+          {% csrf_token %}
 <div class="form-group row ">
   <div class="col-8 justify-content-center">
-    <label for="comp_id">إختر شركة لأضافهة للمحفظة:</label>
-    <input list="companies" name="comp_id" id="comp_id">
-    
-    <datalist id="companies">
-     
-     {% for comp in companies  %}
-     <option value="{{comp.name }}">
-     {% endfor %}
-       
-      
-    </datalist>
+    <label for="cat">إختر القطاع :</label>
+      <select id="cat" name="cat" class="form-select">
+          {% for cat in cats %}
+             <option value="{{ cat.pk }}">
+               {{ cat.name }}
+             </option>
+          {% endfor %}
+      </select>
+  </div>
+  <div class="form-group row">
+        <div class="col-8 justify-content-center" id="companies">
+             <label for="comp">إختر الشركة :</label>
+      <select id="comp" name="comp" class="form-select">
+      </select>
+        </div>
   </div>
   <div class="col-4">
     <div class="text-center">
-      <button type="submit" class="btn btn-primary text-white bg-maal" >
+      <button type="button" id="btn_add" class="btn btn-primary text-white bg-maal" >
       اضف
       </button>
     </div>
@@ -117,7 +121,7 @@
                       <a
                         class="btn btn-link text-dark px-3 mb-0"
                         href="{% url 'delete_wish' item.pk %}"
-                        ><i class="far fa-bookmark"></i></a>
+                        ><i class="fas fa-trash text-danger text-lg"></i></a>
                     </td>
                   </tr>
                   {% endfor %}
@@ -131,3 +135,62 @@
   </div>
 </section>
 {% endblock body %}
+{% block scripts %}
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+<script>
+ $(() => {
+            $("#cat").on('change', (event) => {
+                event.preventDefault();
+                $.ajax({
+                    method: 'POST',
+                    url: '{% url 'comp_aiax' %}',
+                    data: {
+                        'cat': $('#cat').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        var companies = [] ;
+                         var parsed= JSON.stringify(data);
+                          companies = JSON.parse(parsed);
+                          console.log(companies);
+                  if(companies.length >0){
+                          $("#comp").empty();
+                           for (let i = 0; i < companies.length; i++) {
+                           $("#comp").append(`<option value=${companies[i].id}> ${companies[i].name} </option>`);
+                           $("#btn_add").on('click', event => {
+                               event.preventDefault();
+                  $.ajax({
+                    method: 'POST',
+                    url: '{% url 'add_wish_aync' %}',
+                    data: {
+                        'comp_id': $('#comp').val(),
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function (data) {
+                        window.location.href = "{% url 'user-home' %}"
+
+                        }
+                    ,
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+            });
+                 }
+                  }
+                    },
+                    error: function (error) {
+                        alert(error.responseText)
+                    }
+                });
+
+            });
+        });
+
+
+</script>
+{% endblock scripts %}

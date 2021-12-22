@@ -16,33 +16,33 @@
                                   <ul class="navbar-nav navbar-nav-hover mx-auto">
                                                                    {% if request.user.first_name %}
                                                                         <li class="nav-item">
-                                    <a class="nav-link me-2" href="{% url 'logout' %}">
+                                    <a class="nav-link me-2 text-bold" href="{% url 'logout' %}">
                                         <i class="fas fa-power-off opacity-6 text-primary me-1" aria-hidden="true"></i>
                                         تسجيل خروج
                                     </a>
                                 </li>
                                                                         <li class="nav-item">
-                                    <a class="nav-link me-2" href="{% url 'profile' %}">
+                                    <a class="nav-link me-2 text-bold" href="{% url 'profile' %}">
                                         <i class="fa fa-user opacity-6 text-primary me-1" aria-hidden="true"></i>
                                         الملف الشخصى
                                     </a>
                                 </li>
                                    {% if request.user.user_type == 3 %}
                                      <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'user-home' %}">
+                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'user-home' %}">
                                         <i class="fa fa-home opacity-6 text-primary me-1" aria-hidden="true"></i>
                                         الصفحة الرئيسية
                                     </a>
                                 </li>
                                     <li class="nav-item  d-lg-none">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'all_wish' %}">
+                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'all_wish' %}">
                                         <i class="fa fa-heart opacity-6 text-primary me-1" aria-hidden="true"><span class="text-black text-bold" style="margin-inline:0.2rem;"> {{ request.session.wish_count }}</span></i>
 المحفظة                                  
   </a>
                                 </li>
                                 {% else %}
                                       <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'home-page' %}">
+                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'home-page' %}">
                                         <i class="fa fa-chart-pie opacity-6 text-primary me-1" aria-hidden="true"></i>
                                         لوحة التحكم
                                     </a>
@@ -50,14 +50,14 @@
  {% endif %}
                                         {% else %}
                                                                                        <li class="nav-item">
-                                    <a class="nav-link me-2" href="{% url 'user-page' %}">
+                                    <a class="nav-link me-2 text-bold" href="{% url 'user-page' %}">
                                         <i class="fas fa-home opacity-6 text-primary me-1" aria-hidden="true"></i>
                                        الصفحة الرئيسية
                                     </a>
 
                                 </li>
                                                                                     <li class="nav-item">
-                                    <a class="nav-link me-2" href="{% url 'login' %}">
+                                    <a class="nav-link me-2 text-bold" href="{% url 'login' %}">
                                         <i class="fas fa-key opacity-6 text-primary me-1" aria-hidden="true"></i>
                                         تسجيل دخول
                                     </a>
@@ -65,7 +65,7 @@
                                 </li>
                                     </li>
                                                                                     <li class="nav-item">
-                                    <a class="nav-link me-2" href="{% url 'add-client' %}">
+                                    <a class="nav-link me-2 text-bold" href="{% url 'add-client' %}">
                                         <i class="fas fa-user opacity-6 text-primary me-1" aria-hidden="true"></i>
                                        خدمات الموقع
                                     </a>
@@ -79,11 +79,11 @@
         <ul class="navbar-nav d-lg-block d-none">
          {% if request.user.user_type == 3  %}
           <li class="nav-item">
-            <a href="{% url 'all_wish' %}" class="btn btn-sm text-white bg-maal  btn-round mb-0 me-1 text-lg">المحفظة <span class="text-white text-lg" style="margin-inline:0.2rem;"> {{ request.session.wish_count }}</span></a>
+            <a href="{% url 'all_wish' %}" class="btn btn-sm text-white bg-maal text-bold  btn-round mb-0 me-1 text-lg">المحفظة <span class="text-white text-lg" style="margin-inline:0.2rem;"> {{ request.session.wish_count }}</span></a>
           </li>
           {% else %}
            <li class="nav-item">
-            <a href="https://www.maaal.com/" class="btn btn-sm text-white bg-maal  btn-round mb-0 me-1">موقعنا</a>
+            <a href="https://www.maaal.com/" class="btn btn-sm text-white bg-maal  btn-round text-bold mb-0 me-1">موقعنا</a>
           </li>
          {% endif %}
         </ul>

@@ -1,16 +1,17 @@
-<nav aria-label="navigation text-center">
+<div class="d-flex justify-content-center">
+    <nav aria-label="navigation text-center">
     <ul class="pagination justify-content-end mb-0">
 {% if page_obj.has_previous %}
     <li class="page-item">
         <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-            <i class="fas fa-angle-left"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="sr-only">السابق</span>
         </a>
     </li>
 {% else %}
     <li class="page-item disabled">
         <a class="page-link" href="#">
-            <i class="fas fa-angle-left"></i>
+            <i class="fas fa-angle-right"></i>
             <span class="sr-only">السابق</span>
         </a>
     </li>
@@ -35,16 +36,17 @@
 {% if page_obj.has_next %}
     <li class="page-item">
         <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-          <i class="fas fa-angle-right"></i>
+          <i class="fas fa-angle-left"></i>
           <span class="sr-only">التالى</span>
         </a>
       </li>
 {% else %}
     <li class="page-item disabled">
         <a class="page-link" href="#">
-            <i class="fas fa-angle-right"></i>
+            <i class="fas fa-angle-left"></i>
             <span class="sr-only">التالى</span>
         </a>
     </li>
 {% endif %}
 </ul>
+</div>
