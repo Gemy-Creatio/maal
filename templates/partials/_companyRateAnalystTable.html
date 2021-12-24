@@ -1,0 +1,98 @@
+  <table style="margin:0 auto;"
+                                   class="table table-max table-bordered align-items-center mb-auto">
+                                <thead class="text_black">
+                                <tr>
+                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                        الشركة
+                                    </th>
+                                    <th class="text-center text-xxs" style="width: 2rem;">
+                                         المحلل
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
+                                        التوصية
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
+                                        السعر وقت التوصية
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
+                                        السعر المستهدف
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
+                                        التغير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
+                                        أخر إغلاق
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
+                                        التغير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.5rem;">
+                                        التقرير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 2rem;">
+                                        تاريخ التوصية
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in data %}
+                                    <tr>
+                                        <td class="align-middle text-center text-xxs">
+                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                                            <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+                                                        </a>
+
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <a href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                                           <p class="text-xxs">{{ item.AnalayticName.name }}</p>
+                                                       </a>
+
+                                       </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            {% if item.changeFair %}
+                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
+                                                <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                            {% else %}
+                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
+                                                <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            {% if item.changeMarket %}
+                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
+                                                <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                            {% else %}
+                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
+                                                <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="align-middle text-center text-xxs">
+                                            <a href="../../../static/images/reportspdf/{{ item.report.name }}">
+                                                <i class="fas fa-file-pdf text-danger">
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs">
+                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d" }}</p>
+                                        </td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>

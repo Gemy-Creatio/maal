@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     # 3rd party package
     'django_filters',
     'xhtml2pdf',
-    'pywhatkit'
 ]
 AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [

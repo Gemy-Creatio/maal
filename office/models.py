@@ -23,7 +23,6 @@ class FinicialCompany(models.Model):
     category = models.ForeignKey(CompanyCategory, on_delete=models.CASCADE, null=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     link = models.URLField(null=True, blank=True)
-
     class Meta:
         indexes = [
             models.Index(fields=['name', 'category', ])

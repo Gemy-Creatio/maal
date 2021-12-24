@@ -15,53 +15,7 @@
     </div>
     <div class="container">
         <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-                <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-                   <a href="{% url 'real-user-expect' %}">
-                        <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">الأرباح الفعلية/ التوقعات
-                                            </p>
-
-                                    </div>
-                                </div>
-                                <div class="col-4 text-start">
-                                    <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                                        <i class="fas fa-sticky-note text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
-               <a href="{% url 'all-user-expect' %}">
-                                       <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">التوقعات لأرباح
-                                            الشركات</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            <span class="text-success text-sm font-weight-bolder"></span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-start">
-                                    <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                                        <i class="fas fa-coins text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-               </a>
-                </div>
+              {% include 'partials/menus/_expectMenu.html' %}
             </div>
       <div class="row pt-3">
                <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
@@ -90,102 +44,8 @@
                         </div>
 
             <div class="card-body px-0 pb-2">
-                <div class="table-responsive">
+            {% include 'partials/_expectTable.html' with expects=expects %}
 
-                    <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
-                        <thead class="text-black">
-                        <tr>
-                            <th class="text-dark text-xxs" style="width: 2rem;">
-                                الشركة
-                            </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
-                                شركة الأبحاث
-                            </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
-                                توقعات الأرباح
-                            </th>
-
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثالث 2020
-                            </th>
-
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
-                            </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثانى 2021
-                            </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
-                            </th>
-
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                المرفق
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in expects %}
-                            <tr>
-                                <td class="d-flex" style="justify-content: space-around; ">
-                                    {% if request.user.user_type == 3 %}
-                                     <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
-                                       <i class="far fa-bookmark"></i>
-</a>           
-
-{% endif %}
-                                    <a href="{% url 'user-company' item.CompanyEntered.pk %}">
-
-                               <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-</a>
-
-                       </td>
-                                <td>
-
-                                        <a href="{% url 'user-research' item.ResearchCompany.pk %}">
-
-                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                                             </a>
-                                </td>
-                                <td>
-
-                                    <p class=" text-xxs">{{ item.realEarn }}</p>
-                                </td>
-                                <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.third2020 }}</p>
-
-                                </td>
-                                <td>
-                                    {% if item.deviationthird2020 < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</p>
-                                    {% endif %}
-                                </td>
-                              <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.second2020 }}</p>
-
-                                </td>
-                              <td class="  text-xxs">
-                                    {% if item.deviationsecond2020 < 0 %}
-                                        <p class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
-                                    {% endif %}
-                                </td>
-
-                             <td class="  text-xxs">
-                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
-                                </td>
-
-
-                            </tr>
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
-
-                </div>
                 {% include 'partials/_pagination.html' with page_obj=expects only %}
 
             </div>

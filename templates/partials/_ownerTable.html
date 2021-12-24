@@ -1,0 +1,48 @@
+<table style="margin:0 auto;"
+       class="table table-bordered align-items-center mb-auto">
+       <thead class="text_black">
+        <tr>
+            <th class="text-center text-xxs" style="width:auto;">
+                الأسم
+            </th>
+            <th class="text-center text-xxs" style="width:auto;">
+                عدد الشركات (ملكية 5% أو أكثر )
+            </th>
+            <th class="text-center text-xxs" style="width: auto;">
+عدد الأسهم (مليون سهم)            </th>
+               <th class="text-center text-xxs" style="width: auto;">
+القيمة السوقية (مليون ريال)            </th>
+            {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+              <th class="text-center text-xxs" style="width: auto;">
+                    </th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in arrows %}
+                <tr>
+                    <td class="align-middle text-center text-xxs">
+                        <a href="{% url 'owner-profile' item.pk %}">
+                            <p class="text-xxs  mb-0">{{ item.name }}</p>
+                        </a>
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.NumberOfCompanies}}</p>
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOfArrows }}</p>
+
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                     <p class="text-xxs">{{ item.TotalPriceArrows  }}</p>
+                    </td>
+
+            {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+          <td class="ms-auto text-start">
+              <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-owner' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                        </td>
+            {% endif %}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+       </table>

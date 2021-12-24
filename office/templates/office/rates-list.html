@@ -46,77 +46,7 @@
 
 <div class="table-responsive">
 
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشركة المدرجة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">شركة الأبحاث</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم المحلل</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التوصية</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">القيمة العادلة</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر وقت التوصية</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">السعر السوقى </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الفارق %</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">التقرير</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> تاريخ التوصية</th>
-
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {% for item in rates %}
-                              <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.CompanyEntered }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.ResearchCompany }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-secondary">{{ item.AnalayticName }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ item.get_Recommendation_display }}</span>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.FairValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.CurrenncyValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.MarketValue }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ item.market_percentage |floatformat:-2  }}</p>
-                                        </td>
-                                        <td>
-                                            <a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs text-black-50 font-weight-bold mb-0">{{ item.RecommendDate }}</p>
-
-                                        </td>
-                                        <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
-
-                                        </td>
-
-
-                                    </tr>
-                               {% endfor %}
-
-                            </tbody>
-                        </table>
+                        {% include 'partials/_ratesTable.html' with rates=rates %}
 </div>
                   {% endif %}
                  {% include 'partials/_pagination.html' with page_obj=rates only %}

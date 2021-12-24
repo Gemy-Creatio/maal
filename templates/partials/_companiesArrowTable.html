@@ -1,0 +1,61 @@
+<table style="margin:0 auto;"
+       class="table table-bordered align-items-center mb-auto">
+       <thead class="text_black">
+        <tr>
+            <th class="text-center text-xxs" style="width:auto;">
+                الشركة
+            </th>
+            <th class="text-center text-xxs" style="width:auto;">
+               كبار الملاك
+            </th>
+            <th class="text-center text-xxs" style="width: auto;">
+نسبة الملكية            </th>
+               <th class="text-center text-xxs" style="width: auto;">
+عدد الأسهم            </th>
+             <th class="text-center text-xxs" style="width: auto;">
+اخر سعر للسهم            </th>
+             <th class="text-center text-xxs" style="width: auto;">
+القيمة السوقية للملكية            </th>
+              {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+              <th class="text-center text-xxs" style="width: auto;">
+                    </th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in companyarrows %}
+                <tr>
+                                    <td class="align-middle text-center text-xxs">
+                                        <a href="{% url 'user-company' item.company.pk %}">
+                            <p class="text-xxs  mb-0">{{ item.company.name }}</p>
+                        </a>
+                    </td>
+
+                    <td class="align-middle text-center text-xxs">
+                        <a href="{% url 'owner-profile' item.owner.pk %}">
+                            <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
+                        </a>
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.ownRatio}}</p>
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOFArrows }}</p>
+
+                    </td>
+                    <td class="align-middle text-center text-xxs">
+                     <p class="text-xxs">{{ item.arrowPrice  }}</p>
+                    </td>
+                   <td class="align-middle text-center text-xxs">
+                     <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
+                    </td>
+                  {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+               <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                        </td>
+            {% endif %}
+                                </tr>
+
+                                {% endfor %}
+                                </tbody>
+       </table>

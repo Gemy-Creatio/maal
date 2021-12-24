@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from office.models import FinicialAnalyst,CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
 from office.filters import RatesFilter, EarnFilter
-from owners.models import CompaniesArrow
+from owners.models import CompaniesArrow , SeniorOwner
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
 
@@ -27,7 +27,8 @@ def rate_user_detail(request, pk):
 def user_home(request):
     cats = CompanyCategory.objects.all()
     comps = FinicialCompany.objects.all()
-    arrows = CompaniesArrow.objects.order_by('-numberOFArrows')
+    arrows = SeniorOwner.objects.all()[:5]
+    companyarrows = CompaniesArrow.objects.all()[:5]
     label = []
     data = []
     rates = Rates.objects.filter(Recommendation__exact=1)[:5]
@@ -68,7 +69,8 @@ def user_home(request):
         "companydata": companydata,
         "companylabel1": companylabel1,
         "companydata1": companydata1,
-        "arrows":arrows
+        "arrows":arrows,
+        "companyarrows":companyarrows
     }  
     return render(request, 'userInterface/home-page.html', context=context)
 

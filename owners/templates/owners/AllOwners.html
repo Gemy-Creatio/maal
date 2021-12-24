@@ -46,44 +46,8 @@
 
 </div>
 
-<div class="table-responsive">
-
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأسم</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> الوصف</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {% for item in data %}
-                              <tr>
-                                        <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                                       <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.description }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-owner' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
-                                        </td>
-                                    </tr>
-                               {% endfor %}
-
-                            </tbody>
-                        </table>
-</div>
+    {% include 'partials/_ownerTable.html' with arrows=data %}
+                 {% include 'partials/_pagination.html' with page_obj=data only %}
 
                   {% endif %}
                 </div>

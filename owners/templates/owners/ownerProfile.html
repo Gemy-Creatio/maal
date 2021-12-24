@@ -15,7 +15,11 @@
     </div>
     <div class="container">
       <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center pt-5">
-                     <div class="col-lg-12">
+                     {% include 'partials/menus/_mainMenu.html' %}
+
+      </div>
+    <div class="row pt-8">
+        <div class="col-lg-12">
                 <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
           <div class="col-auto">
@@ -23,27 +27,29 @@
                 <i class="fas fa-user-tie text-lg opacity-10" aria-hidden="true"></i>
             </div>
           </div>
+          {% for d in data %}
           <div class="col-auto my-auto">
             <div class="h-100">
 
                        <h5 class="mb-1">
 
-          {{ data.name }}
+          {{ d.name }}
                              </h5>
                              <p class="mb-1">
-                       {{data.description}}
+                       {{d.description}}
                              </p>
             </div>
           </div>
+          {% endfor %}
+
         </div>
       </div>
 
             </div>
-
-      </div>
+    </div>
               
 
-    <div class="row pt-1 pt-lg-1 pb-3">
+    <div class="row pt-3 pt-lg-3 pb-3">
         <div class="col-12 col-xl-12 pt-3">
             <div class="card h-100">
   <div class="card-header pb-0 p-3">
@@ -51,34 +57,23 @@
   </div>
   
   <div class="card-body px-0 pb-2">
-    <table style="margin:0 auto;"
-           class="table table-bordered align-items-center mb-auto">
-           <thead class="text_black">
-            <tr>
-                <th class="text-center text-xxs" style="width:auto;">
-                    الشركة
-                </th>
-                <th class="text-center text-xxs" style="width: auto;">
- عدد الأسهم
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for item in arrows %}
-                    <tr>
-                        <td class="align-middle text-center text-xxs">
-                            <a href="{% url 'user-company' item.company.pk %}">
+     {% include 'partials/_ownerTable.html' with arrows=data %}
+           </div>
+  </div>
+  </div>
+        </div>
 
-                            <p class="text-xxs  mb-0">{{ item.company.name }}</p>
-                            </a>
-                        </td>
-                        <td class="align-middle text-center text-xxs">
-                            <p class="text-xxs  mb-0">{{ item.numberOFArrows }}</p>
-                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    </tbody>
-           </table>
+         <div class="row pt-3 pt-lg-3 pb-3">
+        <div class="col-12 col-xl-12 pt-3">
+            <div class="card h-100">
+  <div class="card-header pb-0 p-3">
+    <h6 class="mb-0">ملكيات للشركات</h6>
+  </div>
+
+  <div class="card-body px-0 pb-2">
+      {% for d in data %}
+     {% include 'partials/_companiesArrowTable.html' with companyarrows=d.companies_related.all %}
+      {% endfor %}
            </div>
   </div>
   </div>

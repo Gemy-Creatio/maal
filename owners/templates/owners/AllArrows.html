@@ -45,55 +45,9 @@
     </div>
 
 </div>
+{% include 'partials/_companiesArrowTable.html' with companyarrows=data %}
+                        {% include 'partials/_pagination.html' with page_obj=data only %}
 
-<div class="table-responsive">
-
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">المالك</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> الشركة</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> عدد الأسهم</th>
-
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             {% for item in data %}
-                              <tr>
-                                        <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.owner.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                                       <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.company.name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ item.numberOFArrows }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
-                                        </td>
-                                    </tr>
-                               {% endfor %}
-
-                            </tbody>
-                        </table>
-</div>
 
                   {% endif %}
                 </div>

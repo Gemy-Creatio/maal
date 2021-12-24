@@ -1,26 +1,38 @@
 from django.shortcuts import render
-from .models import SeniorOwner , CompaniesArrow 
+from .models import SeniorOwner, CompaniesArrow
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import SeniorOwnerForm , ArrowsForm 
+from .forms import SeniorOwnerForm, ArrowsForm
 from django.urls import reverse
+from django.core.paginator import Paginator
+
+
 # Create your views here.
 
 class AllUserOwner(View):
     def get(self, request):
         data = CompaniesArrow.objects.order_by('-numberOFArrows')
-        return render(request, 'owners/ownerUserlist.html', context={"arrows": data})
+        arrows = SeniorOwner.objects.all()
+        return render(request, 'owners/ownerUserlist.html', context={"data": arrows, "companyarrows": data})
+
 
 class AllSeniorOwners(View):
     def get(self, request):
         data = SeniorOwner.objects.all()
-        return render(request, 'owners/AllOwners.html', context={"data": data})
+        paginator = Paginator(data, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'owners/AllOwners.html', context={"data": page_obj})
 
 
 class AllCompaniesArrow(View):
     def get(self, request):
         data = CompaniesArrow.objects.all()
-        return render(request, 'owners/AllArrows.html', context={"data": data})
+        paginator = Paginator(data, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'owners/AllArrows.html', context={"data": page_obj})
+
 
 class AddOwner(CreateView):
     model = SeniorOwner
@@ -31,14 +43,14 @@ class AddOwner(CreateView):
         return reverse('all-owners')
 
 
-
 class UpdateOwner(UpdateView):
-     model = SeniorOwner
-     form_class = SeniorOwnerForm
-     template_name = 'owners/updateowner.html'
+    model = SeniorOwner
+    form_class = SeniorOwnerForm
+    template_name = 'owners/updateowner.html'
 
-     def get_success_url(self):
-        return reverse('all-owners')  
+    def get_success_url(self):
+        return reverse('all-owners')
+
 
 class AddArrow(CreateView):
     model = CompaniesArrow
@@ -49,19 +61,15 @@ class AddArrow(CreateView):
         return reverse('all-arrows')
 
 
-
 class UpdateArrow(UpdateView):
-     model = CompaniesArrow
-     form_class = ArrowsForm
-     template_name = 'owners/updatearrows.html'
+    model = CompaniesArrow
+    form_class = ArrowsForm
+    template_name = 'owners/updatearrows.html'
 
-     def get_success_url(self):
-        return reverse('all-arrows')        
-
-def ownerProfile(request , pk):
-    data = SeniorOwner.objects.get(pk = pk)
-    arrows = CompaniesArrow.objects.filter(owner__id = pk)
-    return render(request, 'owners/ownerProfile.html', context={"data": data , "arrows":arrows})  
+    def get_success_url(self):
+        return reverse('all-arrows')
 
 
-
+def ownerProfile(request, pk):
+    data = SeniorOwner.objects.filter(pk=pk)
+    return render(request, 'owners/ownerProfile.html', context={"data": data})

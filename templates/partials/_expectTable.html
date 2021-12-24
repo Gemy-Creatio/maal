@@ -1,0 +1,96 @@
+    <div class="table-responsive">
+
+                    <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
+                        <thead class="text-black">
+                        <tr>
+                            <th class="text-dark text-xxs" style="width: 2rem;">
+                                الشركة
+                            </th>
+                            <th class="text-dark text-xxs " style="width: 2rem;">
+                                شركة الأبحاث
+                            </th>
+                            <th class="text-dark text-xxs " style="width: 2rem;">
+                                توقعات الأرباح
+                            </th>
+
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                                الربع الثالث 2020
+                            </th>
+
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                                مدى الأنحراف
+                            </th>
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                                الربع الثانى 2021
+                            </th>
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                                مدى الأنحراف
+                            </th>
+
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                                المرفق
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in expects %}
+                            <tr>
+                                <td class="d-flex" style="justify-content: space-around; ">
+                                    {% if request.user.user_type == 3 %}
+                                     <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
+                                       <i class="far fa-bookmark"></i>
+</a>
+
+{% endif %}
+                                    <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+
+                               <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+</a>
+
+                       </td>
+                                <td>
+
+                                        <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                             </a>
+                                </td>
+                                <td>
+
+                                    <p class=" text-xxs">{{ item.realEarn }}</p>
+                                </td>
+                                <td class="text-xxs">
+                                    <p class=" text-xxs">{{ item.third2020 }}</p>
+
+                                </td>
+                                <td>
+                                    {% if item.deviationthird2020 < 0 %}
+                                        <p class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</p>
+                                    {% else %}
+                                        <p class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</p>
+                                    {% endif %}
+                                </td>
+                              <td class="text-xxs">
+                                    <p class=" text-xxs">{{ item.second2020 }}</p>
+
+                                </td>
+                              <td class="  text-xxs">
+                                    {% if item.deviationsecond2020 < 0 %}
+                                        <p class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
+                                    {% else %}
+                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
+                                    {% endif %}
+                                </td>
+
+                             <td class="  text-xxs">
+                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
+                                </td>
+
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>

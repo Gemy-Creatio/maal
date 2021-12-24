@@ -10,15 +10,14 @@ from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, Compan
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.core.paginator import Paginator
-from wishlist.models import Wishlist
-import pywhatkit
+
 
 def RatesList(request):
     rates = Rates.objects.all()
     paginator = Paginator(rates, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'office/rates-list.html', context={"rates":page_obj })
+    return render(request, 'office/rates-list.html', context={"rates": page_obj})
 
 
 def Research_List(request):
@@ -205,10 +204,7 @@ def AddRate(request):
                      CurrenncyValue=float(CurrenncyValue), RecommendDate=rdate, MarketValue=float(MarketValue),
                      FairValue=float(FairValue))
         rate.save()
-        wishes = Wishlist.objects.filter(wished_company__id = CompanyEntered )
         if rate.pk:
-            for wish in wishes:
-                pywhatkit.sendwhatmsg_instantly(wish.user.phone,"لقد تم إضافة تقييم خالص بشركتك")
             messages.success(request, "تمت بنجاح")
             return redirect('rates-list')
         else:
@@ -272,10 +268,7 @@ def UpdateRate(request, pk):
         rate.ResearchCompany_id = researchCompany
         rate.EmpEntered_id = request.user.pk
         rate.save()
-        wishes = Wishlist.objects.filter(wished_company__id = CompanyEntered)
         if rate.pk:
-            for wish in wishes:
-                pywhatkit.sendwhatmsg_instantly(wish.user.phone,"لقد تم تعديل تقييم خالص بشركتك")
             messages.success(request, "تمت بنجاح")
             return redirect('rates-list')
         else:

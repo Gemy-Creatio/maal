@@ -1,0 +1,115 @@
+    <table style="margin:0 auto;"
+                                   class="table table-max table-bordered align-items-center mb-auto">
+                                <thead class="text_black">
+                                <tr>
+                                    <th class="text-center text-xxs" style="width: 1.5rem;">
+                                        الشركة
+                                    </th>
+                                    <th class="text-center text-xxs" style="width: 1.2rem;">
+                                        شركة الأبحاث
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        التوصية
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        السعر وقت التوصية
+                                    </th>
+                                    <th class="text-center  text-xxs " style="width: 1.2rem;">
+                                        السعر المستهدف
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        التغير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        أخر إغلاق
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        التغير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        التقرير
+                                    </th>
+                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
+                                        تاريخ التوصية
+                                    </th>
+                                    {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                                     <th class="text-center   text-xxs " style="width: 0.2rem;">
+                                    </th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in rates %}
+                                    <tr>
+                           <td class="d-flex" style="justify-content: space-around; ">
+                                             {% if request.user.user_type == 3 %}
+                                              <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
+                                                <i class="far fa-bookmark"></i>
+</a>
+
+      {% endif %}
+                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+
+                                        <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+</a>
+
+                                </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                             </a>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            {% if item.changeFair %}
+                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true" ></i>
+                                                <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                            {% else %}
+                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
+                                                <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            {% if item.changeMarket %}
+                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
+                                                <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                            {% else %}
+                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
+                                                <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
+                                            <a href="../../../static/images/reportspdf/{{ item.report.name }}">
+                                                <i class="fas fa-file-pdf text-danger">
+                                                </i>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem; white-space: nowrap;">
+                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"d-m-y" }}</p>
+                                        </td>
+                                       {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                                      <td class="ms-auto text-start" style="width: 0.2rem;">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+
+                                        </td>
+                                    {% endif %}
+
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
