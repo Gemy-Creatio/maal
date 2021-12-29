@@ -20,8 +20,7 @@ class AddUserForm(forms.ModelForm):
         model = User
         fields = (
             'email', 'first_name', 'last_name', 'phone', 'is_admin',
-            'is_emp',
-            'is_superuser',
+            'is_emp', 'is_superuser',
             'is_active', 'is_staff', 'user_type')
 
     def clean_password2(self):

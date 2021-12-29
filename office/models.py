@@ -4,6 +4,7 @@ from django.db import models
 from accounts.models import User
 from django.db.models.signals import post_save
 
+
 class CompanyCategory(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -18,11 +19,12 @@ class CompanyCategory(models.Model):
 
 
 class FinicialCompany(models.Model):
-    logo = models.ImageField(null=True, )
+    logo = models.ImageField(null=True, blank=True, upload_to='logos/')
     name = models.CharField(max_length=255, null=True, blank=True)
-    category = models.ForeignKey(CompanyCategory, on_delete=models.CASCADE, null=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey(CompanyCategory, on_delete=models.SET_NULL, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     link = models.URLField(null=True, blank=True)
+
     class Meta:
         indexes = [
             models.Index(fields=['name', 'category', ])
@@ -50,11 +52,11 @@ class FinicialAnalyst(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
     currentCompany = models.ForeignKey(FinicialCompany, related_name='currentCompany', null=True,
-                                       on_delete=models.CASCADE)
+                                       on_delete=models.SET_NULL)
     email = models.EmailField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
     tiwtterAccount = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name_plural = "Analysts"
@@ -69,7 +71,7 @@ class FinicialAnalyst(models.Model):
 
 class ResearchCompany(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         indexes = [
@@ -87,17 +89,17 @@ class Rates(models.Model):
         (3, 'محايد'),
 
     )
-    CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='CompanyEntered',
+    CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.SET_NULL, related_name='CompanyEntered',
                                        null=True)
-    ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE, related_name='ResearchCompany',
+    ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.SET_NULL, related_name='ResearchCompany',
                                         null=True)
-    AnalayticName = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE, related_name='AnalayticName',
+    AnalayticName = models.ForeignKey(FinicialAnalyst, on_delete=models.SET_NULL, related_name='AnalayticName',
                                       null=True)
     Recommendation = models.SmallIntegerField(max_length=255, null=True, blank=True, choices=RECOMDATION_CHOICES)
     FairValue = models.FloatField(null=True, blank=True)
     CurrenncyValue = models.FloatField(null=True, blank=True)
     MarketValue = models.FloatField(null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     RecommendDate = models.DateField(auto_now_add=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
     changeFair = models.BooleanField(null=True)
@@ -118,9 +120,6 @@ class Rates(models.Model):
 
     def __str__(self):
         return str(self.CompanyEntered)
-
-
-
 
 
 class PerviousCompany(models.Model):
@@ -158,12 +157,12 @@ class RateQuarter(models.Model):
 
 
 class EarningsForecast(models.Model):
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE,
                                        null=True, related_name='expects')
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
-                                        null=True , related_name='Researchexpects')
+                                        null=True, related_name='Researchexpects')
     total_earn = models.IntegerField(blank=True, null=True)
     third2020 = models.IntegerField(blank=True, null=True)
 
@@ -173,7 +172,7 @@ class EarningsForecast(models.Model):
 
     @property
     def deviationsecond2020(self):
-        return (self.total_earn - self.second2020)/(self.second2020 * 100)
+        return (self.total_earn - self.second2020) / (self.second2020 * 100)
 
     @property
     def deviationthird2020(self):
