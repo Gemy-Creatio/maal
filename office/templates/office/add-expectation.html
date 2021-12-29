@@ -1,0 +1,135 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} توقعات الأبحاث {% endblock title %}
+
+
+{% block body %}
+    <div class="col-12 mt-4">
+        <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+                <h6 class="mb-1 text-bolder">إضافة</h6>
+            </div>
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-xl-10 col-md-10 mb-xl-0 mb-2">
+                        <div class="card card-blog card-plain">
+                           <div class="card-header">
+                                        <div class="row pt-2">
+                {% include 'partials/_messages.html' %}
+            </div>
+
+                        </div>
+                            <div class="card-body px-1 pb-0">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="CompanyEntered">
+                                                الشركة
+                                                المدرجة
+                                            </label>
+                                            <select name="CompanyEntered" id="CompanyEntered"
+                                                    class="form-control text-black-50">
+                                                {% for company in companies %}
+                                                    <option value="{{ company.pk }}">{{ company.name }}</option>
+
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="ResearchCompany">
+                                                شركة الأبحاث
+                                            </label>
+                                            <select name="ResearchCompany" id="ResearchCompany"
+                                                    class="form-control text-black-50">
+                                                {% for company in researches %}
+                                                    <option value="{{ company.pk }}">{{ company.name }}</option>
+                                                {% endfor %}
+                                            </select></div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="analyst">
+                                                إسم المحلل
+                                            </label>
+                                            <select name="analyst" id="analyst"
+                                                    class="form-control text-black-50">
+                                                {% for analyst in analysts %}
+                                                    <option value="{{ analyst.pk }}">{{ analyst.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="total_earn">
+                                                توقعات الأرباح
+                                            </label>
+                                           <input type="number" class="form-control" name="total_earn" id="total_earn"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="third2020">
+                                                الربع الثالث 2020
+                                            </label>
+                                            <input id="third2020" name="third2020" type="text"
+                                                   class="form-control text-black-50"
+                                                   placeholder="بالريال السعودى"/>
+                                        </div>
+                                    </div>
+
+                                     <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="second2020">
+                                               الربع الثانى 2021
+                                            </label>
+                                            <input id="second2020" name="second2020" type="text"
+                                                   class="form-control text-black-50"
+                                                   placeholder="بالريال السعودى"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="realEarn">
+                                               الأرباح الفعلية
+                                            </label>
+                                            <input id="realEarn" name="realEarn" type="text"
+                                                   class="form-control text-black-50"
+                                                   placeholder="بالريال السعودى"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column">
+                                            <label for="report">
+                                                التقرير
+                                            </label>
+                                            <input name="report" id="report" type="file"
+                                                   class="form-control text-black-50" placeholder="التقرير"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-10 d-flex flex-column justify-content-center">
+                                            <input type="submit" class="btn btn-primary text-black-50 bg-maal"
+                                                   value="إضافة"/>
+
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

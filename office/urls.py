@@ -10,6 +10,7 @@ urlpatterns = [
     path('company/<int:pk>', views.CompanyDetails, name='company-details'),
     path('rates/update/<int:pk>', views.UpdateRate, name='rate-update'),
     path('rates/add', views.AddRate, name='rate-add'),
+    path('expect/add', views.AddExpect, name='expect-add'),
     path('category/update/<int:pk>', views.EditCategory, name='category-update'),
     path('research/update/<int:pk>', views.EditResearch, name='research-update'),
     path('company/update/<int:pk>', views.EditCompany, name='company-update'),

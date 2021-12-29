@@ -5,9 +5,6 @@
             <th class="text-center text-xxs" style="width:auto;">
                الشركة المملوكة
             </th>
-            <th class="text-center text-xxs" style="width:auto;">
-               كبار الملاك
-            </th>
             <th class="text-center text-xxs" style="width: auto;">
 نسبة الملكية            </th>
                <th class="text-center text-xxs" style="width: auto;">
@@ -28,12 +25,6 @@
                                     <td class="align-middle text-center text-xxs">
                                         <a href="{% url 'user-company' item.company.pk %}">
                             <p class="text-xxs  mb-0">{{ item.company.name }}</p>
-                        </a>
-                    </td>
-
-                    <td class="align-middle text-center text-xxs">
-                        <a href="{% url 'owner-profile' item.owner.pk %}">
-                            <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
                         </a>
                     </td>
                     <td class="align-middle text-center text-xxs">

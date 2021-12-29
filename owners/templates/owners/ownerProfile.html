@@ -35,9 +35,6 @@
 
           {{ d.name }}
                              </h5>
-                             <p class="mb-1">
-                       {{d.description}}
-                             </p>
             </div>
           </div>
           {% endfor %}
@@ -52,12 +49,12 @@
     <div class="row pt-3 pt-lg-3 pb-3">
         <div class="col-12 col-xl-12 pt-3">
             <div class="card h-100">
-  <div class="card-header pb-0 p-3">
-    <h6 class="mb-0">ملكيات الأسهم</h6>
+  <div class="card-header pb-0 p-3 justify-content-center">
+    <h6 class="mb-0 text-center">ملكيات كبار الملاك</h6>
   </div>
   
   <div class="card-body px-0 pb-2">
-     {% include 'partials/_ownerTable.html' with arrows=data %}
+     {% include 'partials/_ownerProfileTable.html' with arrows=data %}
            </div>
   </div>
   </div>
@@ -66,8 +63,8 @@
          <div class="row pt-3 pt-lg-3 pb-3">
         <div class="col-12 col-xl-12 pt-3">
             <div class="card h-100">
-  <div class="card-header pb-0 p-3">
-    <h6 class="mb-0">ملكيات للشركات</h6>
+  <div class="card-header pb-0 p-3 justify-content-center">
+    <h6 class="mb-0 text-center">ملكيات كبار الملاك  "الشركات - المؤسسات"</h6>
   </div>
 
   <div class="card-body px-0 pb-2">

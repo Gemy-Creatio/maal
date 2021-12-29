@@ -58,7 +58,6 @@ def register_admin(request):
         user = User.objects.create_superuser(email=email, first_name=first_name, last_name=last_name,
                                              address=address, password=password, phone=phone)
         if user is not None:
-            login(request, user)
             return redirect('home-page')
     context = {}
     return render(request, 'accounts/register-admin.html', context)
@@ -101,7 +100,6 @@ class RegisterClient(View):
         user = User.objects.create_client(email=email, first_name=first_name, last_name=last_name,
                                             address=address, password=password, phone=phone)
         if user is not None:
-            login(request, user)
             return redirect('user-home')
 
     def get(self, request):

@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        {% if expectations.count.as_integer_ratio < 0 %}
+                        {% if expectations.count < 0 %}
 
                             <p>لا توجد بيانات</p>
                         {% else %}
@@ -24,7 +24,7 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="numbers">
-                                                        <a style="cursor: pointer;text-decoration: none" href="">
+                                                        <a style="cursor: pointer;text-decoration: none" href="{% url 'expect-add' %}">
                                                             <p class="text-sm mb-0 text-capitalize font-weight-bold">
                                                                 إضافة توقع</p>
 
@@ -33,7 +33,7 @@
                                                 </div>
                                                 <div class="col-4 text-start">
                                                     <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
-                                                        <a href="" style="cursor: pointer; text-decoration: none">
+                                                        <a href="{% url 'expect-add' %}" style="cursor: pointer; text-decoration: none">
                                                             <i class="fas fa-plus text-lg opacity-10"
                                                                aria-hidden="true"></i>
                                                         </a>

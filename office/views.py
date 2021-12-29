@@ -215,6 +215,36 @@ def AddRate(request):
                   context={"researches": research, "companies": company, "analysts": analyst})
 
 
+def AddExpect(request):
+    research = ResearchCompany.objects.all()
+    company = FinicialCompany.objects.all()
+    analyst = FinicialAnalyst.objects.all()
+    if request.method == 'POST' and request.FILES['report']:
+        CompanyEntered = request.POST.get('CompanyEntered')
+        report = request.FILES['report']
+        fs = FileSystemStorage()
+        filename = fs.save(report.name, report)
+        researchCompany = request.POST.get('ResearchCompany')
+        analyst = request.POST.get('analyst')
+        total_earn = request.POST.get('total_earn')
+        third2020 = request.POST.get('third2020')
+        second2020 = request.POST.get('second2020')
+        realEarn = request.POST.get('realEarn')
+        expect = EarningsForecast(realEarn=realEarn, report=report, total_earn=total_earn,
+                                  EmpEntered_id=request.user.id, CompanyEntered_id=CompanyEntered, third2020=third2020,
+                                  ResearchCompany_id=researchCompany,analyst_id=analyst , second2020=second2020 )
+        expect.save()
+        if expect.pk:
+            messages.success(request, "تمت بنجاح")
+            return redirect('expectations-list')
+        else:
+            messages.error(request, "حاول مرة أخرى")
+            return render(request, 'office/add-expectation.html',
+                          context={"researches": research, "companies": company, "analysts": analyst})
+    return render(request, 'office/add-expectation.html',
+                  context={"researches": research, "companies": company, "analysts": analyst})
+
+
 def UpdateAnalyst(request, pk):
     analyst = FinicialAnalyst.objects.get(pk=pk)
     company = FinicialCompany.objects.all()
