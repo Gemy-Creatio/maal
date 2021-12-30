@@ -28,3 +28,27 @@ class ArrowsForm(forms.ModelForm):
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'نسبة الملكية'}),
             'company': forms.Select(choices=models.FinicialCompany.objects.all())
         }
+
+
+class CompaniesArrowsForm(forms.ModelForm):
+    class Meta:
+        model = models.FinicalCompaniesArrow
+        fields = ['company', 'owner', 'numberOFArrows', 'arrowPrice', 'ownRatio']
+        widgets = {
+            'owner': forms.Select(choices=models.FinicialCompany.objects.all()),
+            'numberOFArrows': forms.NumberInput(
+                attrs={'id': 'numberOFArrowsfield', 'class': 'form-control', 'placeholder': 'عدد الأسهم'}),
+            'arrowPrice': forms.NumberInput(
+                attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'سعر السهم'}),
+            'ownRatio': forms.NumberInput(
+                attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'نسبة الملكية'}),
+            'company': forms.Select(choices=models.FinicialCompany.objects.all())
+        }
+        labels = {
+            'company': 'الشركة المالكة',
+            'owner': 'الشركة المملوكة',
+            'numberOFArrows': 'عدد الأسهم',
+            'arrowPrice': 'سعر السهم',
+            'ownRatio': 'نسبة الملكية',
+
+        }

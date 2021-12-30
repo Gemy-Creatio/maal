@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from .models import SeniorOwner, CompaniesArrow
+from django.views.generic import ListView
+
+from .models import SeniorOwner, CompaniesArrow  ,FinicalCompaniesArrow
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import SeniorOwnerForm, ArrowsForm
+from .forms import SeniorOwnerForm, ArrowsForm , CompaniesArrowsForm
 from django.urls import reverse
 from django.core.paginator import Paginator
 
@@ -73,3 +75,32 @@ class UpdateArrow(UpdateView):
 def ownerProfile(request, pk):
     data = SeniorOwner.objects.filter(pk=pk)
     return render(request, 'owners/ownerProfile.html', context={"data": data})
+
+
+class AllCompanyArrowsOwners(ListView):
+    # specify the model for list view
+    model = FinicalCompaniesArrow
+    template_name = 'owners/CompanyArrowsList.html'
+    paginate_by = 8
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class AddCompanyArrows(CreateView):
+    model = FinicalCompaniesArrow
+    form_class = CompaniesArrowsForm
+    template_name = 'owners/AddCompanyArrows.html'
+
+    def get_success_url(self):
+        return reverse('all-AllCompanyOwners')
+
+
+class EditCompanyArrows(UpdateView):
+    model = FinicalCompaniesArrow
+    form_class = CompaniesArrowsForm
+    template_name = 'owners/EditCompanyArrows.html'
+
+    def get_success_url(self):
+        return reverse('all-AllCompanyOwners')

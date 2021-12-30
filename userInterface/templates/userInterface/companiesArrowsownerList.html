@@ -1,0 +1,98 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/back_0pHE4R3.jpg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5  mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+              {% include 'partials/menus/_mainMenu.html' %}
+            </div>
+      <div class="row pt-3">
+               <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+          <div class="card z-index-0 ">
+
+
+            <div class="card-body px-0 pb-2">
+      {%  include 'partials/_companyArrowsOwnersTable.html' with companyarrows=object_list %}
+
+                {% include 'partials/_pagination.html' with page_obj=object_list only %}
+
+            </div>
+          </div>
+         </div>
+
+      </div>
+    </div>
+</section>
+{% endblock body %}
+
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+        var expect_config = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    data: {{ expectdata |safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'صحفية مال'
+                }],
+                labels: {{ expectlabel|safe }}
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        }
+                var expect1_config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ expectdata1 |safe }},
+                    backgroundColor: [
+                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                    ],
+                    label: 'صحفية مال'
+                }],
+                labels: {{ expectlabel1|safe }}
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        }
+
+
+
+             window.onload = function () {
+            var Expectctx = document.getElementById('fair-chart').getContext('2d');
+            window.myPie = new Chart(Expectctx, expect_config);
+             var Expect1ctx = document.getElementById('fair1-chart').getContext('2d');
+                         window.myPie = new Chart(Expect1ctx, expect1_config);
+
+        }
+
+</script>
+
+{% endblock scripts %}
+
+

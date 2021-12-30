@@ -60,15 +60,15 @@
                      <div class="col-12 col-xl-12 pt-5">
         <div class="card h-100 pt-3">
 <div class="card-header pb-0 p-3">
-<h6 class="mb-0">ملكيات الشركات</h6>
+    <h6 class="mb-0 text-center">ملكيات "الشركات - المؤسسات"</h6>
 </div>
 
 <div class="card-body px-0 pb-2">
-      {%  include 'partials/_companiesArrowTable.html' with companyarrows=companyarrows %}
+      {%  include 'partials/_companyArrowsOwnersTable.html' with companyarrows=companyarrows %}
        </div>
        <div class="card-footer">
         <div class="col-12 d-flex justify-content-end">
-            <a href="{% url 'all-user-owners' %}">
+            <a href="{% url 'all-arrows-owned' %}">
                 <span
                     class="badge badge-sm bg-maal">المزيد</span></a>
         </div>
@@ -82,7 +82,7 @@
                           <div class="col-12 col-xl-12 pt-5">
         <div class="card h-100 pt-3">
 <div class="card-header pb-0 p-3">
-<h6 class="mb-0">ملكيات الأسهم</h6>
+    <h6 class="mb-0 text-center">إجمالى ملكيات كبار الملاك</h6>
 </div>
 
 <div class="card-body px-0 pb-2">

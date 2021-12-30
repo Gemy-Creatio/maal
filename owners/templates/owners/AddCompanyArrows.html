@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-كبار الملاك 
+ملكية الأسهم 
 {% endblock %}
 
 {% block body %}
@@ -22,12 +22,12 @@
                             <form  method="post">
                                 {% include 'partials/_messages.html' %}
             {% csrf_token %}
-                                     {% for filed in form %}
-                                                    <div class="form-group">
-        
-                                                        {{ filed }}
-                                                    </div>
-                                                {% endfor %}
+                                  {% for filed in form %}
+                                            <div class="form-group">
+                                            <label class="text-black"> {{filed.label}} </label>
+                                                {{ filed }}
+                                            </div>
+                                        {% endfor %}
                   <button type="submit" class="btn btn-sm text-white bg-maal">
                                    إضافة
                                </button>
@@ -43,3 +43,9 @@
 </div>
 
 {% endblock body %}
+{% block script%}
+<script>
+ document.getElementById("id_company").className = "form-control";
+ document.getElementById("id_owner").className = "form-control";
+</script>
+{% endblock script %}

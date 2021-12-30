@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+كبار الملاك 
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6>كبار المؤسسات المالكة للشركات
+                </h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    {% if object_list.count < 0 %}
+
+                        <p>لا توجد بيانات</p>
+                    {% else %}
+                        <div class="row">
+    <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="numbers">
+<a style="cursor: pointer;text-decoration: none" href="{% url 'add-ِAddCompanyArrows' %}">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة ملكية مؤسسة</p>
+
+</a>
+                        </div>
+                    </div>
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                           <a href="{% url 'add-ِAddCompanyArrows' %}" style="cursor: pointer; text-decoration: none">
+                                <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    {% include 'partials/_companyArrowsOwnersTable.html' with companyarrows=page_obj %}
+                 {% include 'partials/_pagination.html' with page_obj=page_obj only %}
+
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

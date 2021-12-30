@@ -42,3 +42,18 @@ class CompaniesArrow(models.Model):
 
     def __str__(self) -> str:
         return self.owner.name
+
+
+class FinicalCompaniesArrow(models.Model):
+    company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company_owned')
+    owner = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company_that_owned')
+    numberOFArrows = models.IntegerField(null=True, blank=True)
+    ownRatio = models.FloatField(null=True, blank=True)
+    arrowPrice = models.FloatField(null=True, blank=True)
+
+    @property
+    def TotalArrowPrice(self):
+        return self.numberOFArrows * self.arrowPrice
+
+    def __str__(self) -> str:
+        return self.owner.name

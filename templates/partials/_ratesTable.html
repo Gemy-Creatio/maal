@@ -17,15 +17,15 @@
                                     <th class="text-center  text-xxs " style="width: 1.2rem;">
                                         السعر المستهدف
                                     </th>
-                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
-                                        التغير
-                                    </th>
+{#                                    <th class="text-center   text-xxs " style="width: 1.2rem;">#}
+{#                                        التغير#}
+{#                                    </th>#}
                                     <th class="text-center   text-xxs " style="width: 1.2rem;">
                                         أخر إغلاق
                                     </th>
-                                    <th class="text-center   text-xxs " style="width: 1.2rem;">
-                                        التغير
-                                    </th>
+{#                                    <th class="text-center   text-xxs " style="width: 1.2rem;">#}
+{#                                        التغير#}
+{#                                    </th>#}
                                     <th class="text-center   text-xxs " style="width: 1.2rem;">
                                         التقرير
                                     </th>
@@ -69,27 +69,27 @@
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
                                             <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
-                                            {% if item.changeFair %}
-                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true" ></i>
-                                                <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                            {% else %}
-                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
-                                                <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                            {% endif %}
-                                        </td>
+{#                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">#}
+{#                                            {% if item.changeFair %}#}
+{#                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true" ></i>#}
+{#                                                <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>#}
+{#                                            {% else %}#}
+{#                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>#}
+{#                                                <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>#}
+{#                                            {% endif %}#}
+{#                                        </td>#}
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
                                             <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
-                                            {% if item.changeMarket %}
-                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
-                                                <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
-                                            {% else %}
-                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
-                                                <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
-                                            {% endif %}
-                                        </td>
+{#                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">#}
+{#                                            {% if item.changeMarket %}#}
+{#                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>#}
+{#                                                <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>#}
+{#                                            {% else %}#}
+{#                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>#}
+{#                                                <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>#}
+{#                                            {% endif %}#}
+{#                                        </td>#}
 
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
                                             <a href="../../../static/images/reportspdf/{{ item.report.name }}">

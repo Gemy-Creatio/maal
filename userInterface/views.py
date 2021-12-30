@@ -1,9 +1,13 @@
 from django.shortcuts import render
-from office.models import FinicialAnalyst,CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, ResearchCompany
+from django.views.generic import ListView
+
+from office.models import FinicialAnalyst, CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, \
+    ResearchCompany
 from office.filters import RatesFilter, EarnFilter
-from owners.models import CompaniesArrow , SeniorOwner
+from owners.models import CompaniesArrow, SeniorOwner, FinicalCompaniesArrow
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
+
 
 # Create your views here.
 
@@ -28,7 +32,7 @@ def user_home(request):
     cats = CompanyCategory.objects.all()
     comps = FinicialCompany.objects.all()
     arrows = SeniorOwner.objects.all()[:5]
-    companyarrows = CompaniesArrow.objects.all()[:5]
+    companyarrows = FinicalCompaniesArrow.objects.all()[:5]
     label = []
     data = []
     rates = Rates.objects.filter(Recommendation__exact=1)[:5]
@@ -57,8 +61,8 @@ def user_home(request):
     rate_filter = RatesFilter(request.POST, queryset=rates)
     rate = rate_filter.qs[:10]
     context = {
-         "cats":cats,
-        "comps":comps,
+        "cats": cats,
+        "comps": comps,
         "myfilter": rate_filter,
         "rates": rate,
         "label": label,
@@ -69,9 +73,9 @@ def user_home(request):
         "companydata": companydata,
         "companylabel1": companylabel1,
         "companydata1": companydata1,
-        "arrows":arrows,
-        "companyarrows":companyarrows
-    }  
+        "arrows": arrows,
+        "companyarrows": companyarrows
+    }
     return render(request, 'userInterface/home-page.html', context=context)
 
 
@@ -138,7 +142,7 @@ def expectList(request):
     paginator = Paginator(expectz, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
         "expects": page_obj,
         "myfilter": expect_filter,
@@ -153,6 +157,29 @@ def expectList(request):
 
     }
     return render(request, 'userInterface/expect-list.html', context=context)
+
+
+def CompanyArrowsAll(request):
+    object_list = FinicalCompaniesArrow.objects.all()
+    paginator = Paginator(object_list, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # data = FinicalCompaniesArrow.objects.filter('-ownRatio')
+    # expectlabel = []
+    # expectdata = []
+    # for arrow in data:
+    #     expectlabel.append(arrow.company.name)
+    #     expectdata.append(arrow.ownRatio)
+    # data1 = FinicalCompaniesArrow.objects.filter('-arrowPrice')
+    # expectlabel1 = []
+    # expectdata1 = []
+    # for arrow in data1:
+    #     expectlabel1.append(arrow.company.name)
+    #     expectdata1.append(arrow.arrowPrice)
+    context = {
+        "object_list": page_obj,
+    }
+    return render(request, 'userInterface/companiesArrowsownerList.html', context=context)
 
 
 def expectrealList(request):
@@ -205,8 +232,8 @@ def expectrealList(request):
 
 def CapitalProfile(request, pk):
     data = FinicialCompany.objects.get(pk=pk)
-    arrows = CompaniesArrow.objects.filter(company__id = pk)
-    return render(request, 'userInterface/capital-profile.html', context={"data": data , "arrows":arrows})
+    arrows = CompaniesArrow.objects.filter(company__id=pk)
+    return render(request, 'userInterface/capital-profile.html', context={"data": data, "arrows": arrows})
 
 
 def ResearchProfile(request, pk):
