@@ -19869,7 +19869,7 @@ fieldset:disabled .btn {
 }
 .logo_login {
     height:auto;
-    width:3.7rem;
+    width:5.7rem;
 }
 .logo_user {
     height:auto;
@@ -20894,6 +20894,10 @@ hr.horizontal.gray-light {
     left: 0;
     right: auto;
   }
+}
+.logo_login {
+    height:auto;
+    width:3.7rem;
 }
 
 .navbar-vertical .navbar-brand>img,
