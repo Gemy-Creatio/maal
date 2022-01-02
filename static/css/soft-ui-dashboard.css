@@ -5174,6 +5174,7 @@ fieldset:disabled .btn {
   .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+      font-size: 1.2rem;
   }
 
   .navbar-expand-lg .navbar-nav-scroll {
@@ -19869,7 +19870,7 @@ fieldset:disabled .btn {
 }
 .logo_login {
     height:auto;
-    width:5.7rem;
+    width:3.7rem;
 }
 .logo_user {
     height:auto;
@@ -20897,7 +20898,7 @@ hr.horizontal.gray-light {
 }
 .logo_login {
     height:auto;
-    width:3.7rem;
+    width:5.7rem;
 }
 
 .navbar-vertical .navbar-brand>img,
