@@ -40,7 +40,8 @@ class CompaniesArrow(models.Model):
 
     @property
     def ChangeOwn(self):
-        return (self.totalOwnRatioYesterday - self.totalOwnRatioToday) / 100
+        if self.totalOwnRatioToday is not None:
+            return (self.totalOwnRatioYesterday - self.totalOwnRatioToday) / 100
 
     @property
     def TotalArrowPrice(self):
