@@ -85,6 +85,16 @@ DATABASES = {
         'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'maalDB',
+#         'USER': 'postgres',
+#         'PASSWORD': 'gemy2803150',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

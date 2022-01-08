@@ -5,7 +5,7 @@
 
 {% block body %}
 <section class="min-vh-85 mb-8">
-    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/home-back.jpg');">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/ksa-sea.jpg');">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto pt-lg-5">
@@ -64,12 +64,12 @@
         <div class="col-12 col-xl-12 pt-3">
             <div class="card h-100">
   <div class="card-header pb-0 p-3 justify-content-center">
-    <h6 class="mb-0 text-center">ملكيات كبار الملاك   "الشركات - المؤسسات"</h6>
+      <h6 class="mb-0 text-center">ملكيات {% for d in data %} {{ d.name }} {% endfor %}  <strong>الشركات - المؤسسات</strong></h6>
   </div>
 
   <div class="card-body px-0 pb-2">
       {% for d in data %}
-     {% include 'partials/_companiesArrowTable.html' with companyarrows=d.companies_related.all %}
+     {% include 'partials/_ownerProfileTable.html' with companyarrows=d.companies_related.all %}
       {% endfor %}
            </div>
   </div>

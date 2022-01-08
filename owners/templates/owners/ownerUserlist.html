@@ -21,25 +21,41 @@
                 <div class="col-12 col-xl-12 pt-5">
                     <div class="card h-100">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">ملكيات الشركات <strong>أفراد</strong> </h6>
+            <h6 class="mb-0">أخر التغيرات فى قوائم <strong>كبار الملاك</strong> </h6>
           </div>
           
           <div class="card-body px-0 pb-2">
-            {% include 'partials/_ownerTable.html' with arrows=data %}
+            {% include 'partials/_companiesArrowTable.html' with companyarrows=seniorArrows %}
                    </div>
                    
           </div>
           </div>
                 </div>
+        <div class="row pt-lg-3 pt-3 pb-3">
+                 <div class="col-12 col-xl-12 pt-5">
+                    <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0"> كبار الملاك بسوق الأسهم <strong>أفراد</strong> </h6>
+          </div>
+
+          <div class="card-body px-0 pb-2">
+            {% include 'partials/_ownerTable.html' with arrows=data %}
+
+                   </div>
+
+          </div>
+          </div>
+        </div>
         <div class="row pt-3 pt-lg-3 pb-3">
                 <div class="col-12 col-xl-12 pt-5">
                     <div class="card h-100">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">ملكيات الشركات <strong> المؤسسات - الحكومة</strong></h6>
+            <h6 class="mb-0">كبار الملاك بسوق الأسهم <strong> المؤسسات - الحكومة</strong></h6>
           </div>
 
           <div class="card-body px-0 pb-2">
             {% include 'partials/_companyArrowsOwnersTable.html' with companyarrows=companyarrows %}
+
                    </div>
 
           </div>

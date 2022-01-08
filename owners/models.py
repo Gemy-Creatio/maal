@@ -35,6 +35,12 @@ class CompaniesArrow(models.Model):
     numberOFArrows = models.IntegerField(null=True, blank=True)
     ownRatio = models.FloatField(null=True, blank=True)
     arrowPrice = models.FloatField(null=True, blank=True)
+    totalOwnRatioToday = models.FloatField(null=True, blank=True)
+    totalOwnRatioYesterday = models.FloatField(null=True, blank=True)
+
+    @property
+    def ChangeOwn(self):
+        return (self.totalOwnRatioYesterday - self.totalOwnRatioToday) / 100
 
     @property
     def TotalArrowPrice(self):

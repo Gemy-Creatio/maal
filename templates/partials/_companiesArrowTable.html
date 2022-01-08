@@ -3,19 +3,19 @@
        <thead class="text_black">
         <tr>
             <th class="text-center text-xxs" style="width:auto;">
-               الشركة المملوكة
+                الشركة
             </th>
             <th class="text-center text-xxs" style="width:auto;">
-               كبار الملاك
+               المالك
             </th>
             <th class="text-center text-xxs" style="width: auto;">
-نسبة الملكية            </th>
+إجمالى نسبة الملكية <p class="text-muted text-xxs">أخر يوم تداول </p>          </th>
                <th class="text-center text-xxs" style="width: auto;">
-عدد الأسهم            </th>
+إجمالى نسبة الملكية <p class="text-muted text-xxs">اليوم السابق </p>             </th>
              <th class="text-center text-xxs" style="width: auto;">
-اخر سعر للسهم            </th>
+التغير            </th>
              <th class="text-center text-xxs" style="width: auto;">
-القيمة السوقية للملكية            </th>
+عدد الأسهم           </th>
               {% if request.user.user_type == 1 or request.user.user_type == 2  %}
               <th class="text-center text-xxs" style="width: auto;">
                     </th>
@@ -37,14 +37,18 @@
                         </a>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.ownRatio}} %</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioToday}} %</p>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOFArrows }}</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioYesterday }} %</p>
 
                     </td>
                     <td class="align-middle text-center text-xxs">
-                     <p class="text-xxs">{{ item.arrowPrice  }}</p>
+                         {% if item.ChnageOwn > 0 %}
+                       <p class="text-xxs text-success">{{ item.ChangeOwn |floatformat:-2 }} %</p>
+                       {% else %}
+                       <p class="text-xxs text-danger">{{ item.ChangeOwn |floatformat:-2 }} %</p>
+                        {% endif %}
                     </td>
                    <td class="align-middle text-center text-xxs">
                      <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>

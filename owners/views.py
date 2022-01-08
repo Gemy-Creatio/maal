@@ -15,7 +15,8 @@ class AllUserOwner(View):
     def get(self, request):
         data = FinicalCompaniesArrow.objects.order_by('-numberOFArrows')
         arrows = SeniorOwner.objects.all()
-        return render(request, 'owners/ownerUserlist.html', context={"data": arrows, "companyarrows": data})
+        seniorArrows = CompaniesArrow.objects.all()
+        return render(request, 'owners/ownerUserlist.html', context={"data": arrows, "companyarrows": data , "seniorArrows":seniorArrows})
 
 
 class AllSeniorOwners(View):

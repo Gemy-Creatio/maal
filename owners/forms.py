@@ -17,13 +17,19 @@ class SeniorOwnerForm(forms.ModelForm):
 class ArrowsForm(forms.ModelForm):
     class Meta:
         model = models.CompaniesArrow
-        fields = ['company', 'owner', 'numberOFArrows', 'arrowPrice', 'ownRatio']
+        fields = ['company', 'owner', 'numberOFArrows', 'arrowPrice', 'ownRatio', 'totalOwnRatioToday',
+                  'totalOwnRatioYesterday']
         widgets = {
             'owner': forms.Select(choices=models.SeniorOwner.objects.all()),
             'numberOFArrows': forms.NumberInput(
                 attrs={'id': 'numberOFArrowsfield', 'class': 'form-control', 'placeholder': 'عدد الأسهم'}),
             'arrowPrice': forms.NumberInput(
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'سعر السهم'}),
+            'totalOwnRatioYesterday': forms.NumberInput(
+                attrs={'id': 'totalOwnRatioYesterday', 'class': 'form-control', 'placeholder': 'إجمالى نسبة الملكية اليوم السابق'}),
+            'totalOwnRatioToday': forms.
+                (
+                attrs={'id': 'totalOwnRatioToday', 'class': 'form-control', 'placeholder': 'إجمالى نسبة الملكية اليوم '}),
             'ownRatio': forms.NumberInput(
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'نسبة الملكية'}),
             'company': forms.Select(choices=models.FinicialCompany.objects.all())
