@@ -27,8 +27,7 @@ class ArrowsForm(forms.ModelForm):
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'سعر السهم'}),
             'totalOwnRatioYesterday': forms.NumberInput(
                 attrs={'id': 'totalOwnRatioYesterday', 'class': 'form-control', 'placeholder': 'إجمالى نسبة الملكية اليوم السابق'}),
-            'totalOwnRatioToday': forms.
-                (
+            'totalOwnRatioToday': forms.NumberInput(
                 attrs={'id': 'totalOwnRatioToday', 'class': 'form-control', 'placeholder': 'إجمالى نسبة الملكية اليوم '}),
             'ownRatio': forms.NumberInput(
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'نسبة الملكية'}),
