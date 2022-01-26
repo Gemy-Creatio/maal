@@ -48,11 +48,24 @@ class CompanyCode(models.Model):
         return self.code
 
 
+class ResearchCompany(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name', ])
+        ]
+
+    def __str__(self):
+        return self.name
+
+
 class FinicialAnalyst(models.Model):
     logo = models.ImageField(null=True, )
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
-    currentCompany = models.ForeignKey(FinicialCompany, related_name='currentCompany', null=True,
+    currentCompany = models.ForeignKey(ResearchCompany, related_name='currentCompany', null=True,
                                        on_delete=models.SET_NULL)
     email = models.EmailField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
@@ -64,19 +77,6 @@ class FinicialAnalyst(models.Model):
         ordering = ["id", ]
         indexes = [
             models.Index(fields=['name', 'phone', 'tiwtterAccount', 'email'])
-        ]
-
-    def __str__(self):
-        return self.name
-
-
-class ResearchCompany(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['name', ])
         ]
 
     def __str__(self):

@@ -194,7 +194,7 @@ def AnalystsList(request):
 
 
 def AddAnalyst(request):
-    company = FinicialCompany.objects.all()
+    company = ResearchCompany.objects.all()
     if request.method == 'POST' and request.FILES['logo']:
         name = request.POST.get('name')
         logo = request.FILES['logo']
