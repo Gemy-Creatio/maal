@@ -19,8 +19,11 @@
                         <span class="mb-2 text-xl">الأسم <span class="text-dark font-weight-bold ms-sm-2">{{ company.name }}</span></span>
                                         <span class="mb-2 text-xl">ايضا تعرف بأسم <span class="text-dark font-weight-bold ms-sm-2"></span></span>
 {% for code in codes %}
+    <div class="row d-flex flex-row justify-content-center">
 
     <span class="mb-2 text-xl"> <span class="text-dark font-weight-bold ms-sm-2"></span>{{ code.code }}</span>
+    <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'code-update' code.pk %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>تعديل</a>
+    </div>
 
                         {% endfor %}
                     </div>

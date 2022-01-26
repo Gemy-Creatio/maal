@@ -10,6 +10,10 @@ from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, Compan
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.views.generic import CreateView
+from office.forms import *
+from django.urls import reverse
+from django.views.generic.edit import UpdateView
 
 
 def RatesList(request):
@@ -44,33 +48,82 @@ def Category_List(request):
     return render(request, 'office/catgory-list.html', context={"categories": page_obj})
 
 
-def AddCategory(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        category = CompanyCategory(name=name, EmpEntered_id=request.user.pk)
-        category.save()
+class AddCategory(CreateView):
+    form_class = CategoryForm
+    model = CompanyCategory
+    template_name = 'office/add-category.html'
 
-        if category.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('category-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-category.html')
-    return render(request, 'office/add-category.html')
+    def form_valid(self, form):
+        category = form.save(commit=True)
+        category.EmpEntered = self.request.user
+        category.save
+        return super(AddCategory, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('category-list')
 
 
-def AddResearch(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        company = ResearchCompany(name=name, EmpEntered_id=request.user.pk)
-        company.save()
-        if company.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('research-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-research.html')
-    return render(request, 'office/add-research.html')
+class UpdateCategory(UpdateView):
+    form_class = CategoryForm
+    model = CompanyCategory
+    template_name = 'office/edit-category.html'
+
+    def form_valid(self, form):
+        category = form.save(commit=True)
+        category.EmpEntered = self.request.user
+        category.save
+        return super(UpdateCategory, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('category-list')
+
+
+class AddCode(CreateView):
+    form_class = CompanyCodeForm
+    model = CompanyCode
+    template_name = 'office/add-code.html'
+
+    def get_success_url(self):
+        return reverse('company-list')
+
+
+class UpdateCode(UpdateView):
+    form_class = CompanyCodeForm
+    model = CompanyCode
+    template_name = 'office/update-code.html'
+
+    def get_success_url(self):
+        return reverse('company-list')
+
+
+class AddReserchCompany(CreateView):
+    form_class = ResearchCompanyForm
+    model = ResearchCompany
+    template_name = 'office/add-research.html'
+
+    def form_valid(self, form):
+        research = form.save(commit=True)
+        research.EmpEntered = self.request.user
+        research.save
+        return super(AddReserchCompany, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('research-list')
+
+
+class UpdateReserchCompany(UpdateView):
+    form_class = ResearchCompanyForm
+    model = ResearchCompany
+    template_name = 'office/edit-research.html'
+
+    def form_valid(self, form):
+        research = form.save(commit=True)
+        research.EmpEntered = self.request.user
+        research.save
+        return super(UpdateReserchCompany, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('research-list')
 
 
 def AddCompany(request):
@@ -113,24 +166,6 @@ def EditCompany(request, pk):
             messages.error(request, "حاول مرة أخرى")
             return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
     return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
-
-
-def EditCategory(request, pk):
-    catgeory = CompanyCategory.objects.get(pk=pk)
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        category_id = request.POST.get('category')
-        catgeory.name = name
-        catgeory.category_id = category_id
-        catgeory.EmpEntered_id = request.user.pk
-        catgeory.save()
-        if catgeory.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('category-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/edit-category.html', context={"category": catgeory})
-    return render(request, 'office/edit-category.html', context={"category": catgeory})
 
 
 def EditResearch(request, pk):
@@ -232,7 +267,7 @@ def AddExpect(request):
         realEarn = request.POST.get('realEarn')
         expect = EarningsForecast(realEarn=realEarn, report=report, total_earn=total_earn,
                                   EmpEntered_id=request.user.id, CompanyEntered_id=CompanyEntered, third2020=third2020,
-                                  ResearchCompany_id=researchCompany,analyst_id=analyst , second2020=second2020 )
+                                  ResearchCompany_id=researchCompany, analyst_id=analyst, second2020=second2020)
         expect.save()
         if expect.pk:
             messages.success(request, "تمت بنجاح")

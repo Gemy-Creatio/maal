@@ -10,11 +10,11 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-                <h6>شركات الأبحاث</h6>
+                <h6> الشركات المدرجة</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    {% if companies.count.bit_length < 0 %}
+                    {% if companies.count < 0 %}
 
                         <p>لا توجد بيانات</p>
                     {% else %}
@@ -34,6 +34,24 @@
                     <div class="col-4 text-start">
                         <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
                            <a href="{% url 'company-add' %}" style="cursor: pointer; text-decoration: none">
+                                <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="row pt-2">
+                    <div class="col-6">
+                        <div class="numbers">
+<a style="cursor: pointer;text-decoration: none" href="{% url 'code-add' %}">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">إضافة كود لشركة</p>
+
+</a>
+                        </div>
+                    </div>
+                    <div class="col-4 text-start">
+                        <div class="icon icon-shape bg-maal shadow text-center border-radius-md">
+                           <a href="{% url 'code-add' %}" style="cursor: pointer; text-decoration: none">
                                 <i class="fas fa-plus text-lg opacity-10" aria-hidden="true"></i>
                            </a>
                         </div>
