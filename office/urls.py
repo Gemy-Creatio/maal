@@ -29,4 +29,12 @@ urlpatterns = [
     path('expectations/list', views.ExpectationList, name='expectations-list'),
     path('code/update/<int:pk>', views.UpdateCode.as_view(), name='code-update'),
     path('code/add', views.AddCode.as_view(), name='code-add'),
+    path('code/delete/<int:pk>', views.DeleteCompanyCode.as_view(), name='code-delete'),
+    path('category/delete/<int:pk>', views.DeleteCompanyCategory.as_view(), name='category-delete'),
+    path('company/delete/<int:pk>', views.DeleteFinicialCompany.as_view(), name='company-delete'),
+    path('research/delete/<int:pk>', views.DeleteResearchCompany.as_view(), name='research-delete'),
+    path('rates/delete/<int:pk>', views.DeleteRate.as_view(), name='rate-delete'),
+    path('expect/delete/<int:pk>', views.DeleteEarningsForecast.as_view(), name='expect-delete'),
+    path('analyst/delete/<int:pk>', views.DeleteFinicialAnalyst.as_view(), name='analyst-delete'),
+    path('perv/delete/<int:pk>', views.DeletePervCompany.as_view(), name='perv-delete'),
 ]

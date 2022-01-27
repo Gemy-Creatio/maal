@@ -35,6 +35,8 @@
                                     {% if request.user.user_type == 1 or request.user.user_type == 2 %}
                                      <th class="text-center   text-xxs " style="width: 0.2rem;">
                                     </th>
+                                          <th class="text-center   text-xxs " style="width: 0.2rem;">
+                                    </th>
                                     {% endif %}
                                 </tr>
                                 </thead>
@@ -43,19 +45,19 @@
                                     <tr>
                            <td class="d-flex" style="justify-content: space-around; ">
                                              {% if request.user.user_type == 3 %}
-                                              <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
+                                              <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2rem ;">
                                                 <i class="far fa-bookmark"></i>
 </a>
 
       {% endif %}
-                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                             <a href="{% url 'user-company' item.CompanyEntered.id %}">
 
                                         <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
 </a>
 
                                 </td>
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
-                                            <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+                                            <a href="{% url 'user-research' item.ResearchCompany.id %}">
 
                                                         <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
                                                              </a>
@@ -102,8 +104,11 @@
                                         </td>
                                        {% if request.user.user_type == 1 or request.user.user_type == 2 %}
                                       <td class="ms-auto text-start" style="width: 0.2rem;">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
 
+                                        </td>
+                                               <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-delete' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
                                         </td>
                                     {% endif %}
 

@@ -14,7 +14,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    {% if categories.count.bit_length < 0 %}
+                    {% if categories.count < 0 %}
 
                         <p>لا توجد بيانات</p>
                     {% else %}
@@ -52,6 +52,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">إسم القطاع</th>
                                     <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +68,9 @@
                                         </td>
                                         <td class="ms-auto text-start">
                                             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'category-details' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+                                        </td>
+                                    <td class="ms-auto text-start">
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'category-delete' item.pk %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
                                         </td>
                                     </tr>
                                {% endfor %}

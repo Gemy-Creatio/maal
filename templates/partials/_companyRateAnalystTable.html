@@ -38,13 +38,13 @@
                                 {% for item in data %}
                                     <tr>
                                         <td class="align-middle text-center text-xxs">
-                                             <a href="{% url 'user-company' item.CompanyEntered.pk %}">
+                                             <a href="{% url 'user-company' item.CompanyEntered.id %}">
                                                             <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
                                                         </a>
 
                                         </td>
                                         <td class="align-middle text-center text-xxs">
-                                            <a href="{% url 'user-interface' item.AnalayticName.pk %}">
+                                            <a href="{% url 'user-interface' item.AnalayticName.id %}">
                                                            <p class="text-xxs">{{ item.AnalayticName.name }}</p>
                                                        </a>
 

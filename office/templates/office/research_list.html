@@ -66,7 +66,7 @@
 
                                         <td class="ms-auto text-start">
                 {% if request.user.user_type == 1 %}
-                        <a class="btn btn-link text-danger  px-3 mb-0" href="#"><i class="far fa-trash-alt text-danger me-2" aria-hidden="true"></i>مسح</a>
+                        <a class="btn btn-link text-danger  px-3 mb-0" href="{% url 'research-delete' item.pk %}"><i class="far fa-trash-alt text-danger me-2" aria-hidden="true"></i>حذف</a>
                        {% endif %}
                         <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'research-update' item.pk %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>تعديل</a>                                        </td>
                                     </tr>

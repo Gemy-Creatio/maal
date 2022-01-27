@@ -26,13 +26,13 @@
             {% for item in companyarrows %}
                 <tr>
                                     <td class="align-middle text-center text-xxs">
-                                        <a href="{% url 'user-company' item.company.pk %}">
+                                        <a href="{% url 'user-company' item.company.id %}">
                             <p class="text-xxs  mb-0">{{ item.company.name }}</p>
                         </a>
                     </td>
 
                     <td class="align-middle text-center text-xxs">
-                        <a href="{% url 'user-company' item.owner.pk %}">
+                        <a href="{% url 'user-company' item.owner.id %}">
                             <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
                         </a>
                     </td>
@@ -51,7 +51,7 @@
                     </td>
                   {% if request.user.user_type == 1 or request.user.user_type == 2  %}
                <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-ِCompanyArrows' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-ِCompanyArrows' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
                                         </td>
             {% endif %}
                                 </tr>

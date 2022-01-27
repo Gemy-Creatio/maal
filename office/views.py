@@ -12,8 +12,57 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.views.generic import CreateView
 from office.forms import *
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
+
+
+class DeleteRate(DeleteView):
+    model = Rates
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('rates-list')
+
+
+class DeleteFinicialCompany(DeleteView):
+    model = FinicialCompany
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('company-list')
+
+
+class DeleteResearchCompany(DeleteView):
+    model = ResearchCompany
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('research-list')
+
+
+class DeleteFinicialAnalyst(DeleteView):
+    model = FinicialAnalyst
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('analyst-list')
+
+
+class DeletePervCompany(DeleteView):
+    model = PerviousCompany
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('pervcompany-list')
+
+
+class DeleteCompanyCode(DeleteView):
+    model = CompanyCode
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('company-list')
+
+
+class DeleteCompanyCategory(DeleteView):
+    model = CompanyCode
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('category-list')
+
+
+class DeleteEarningsForecast(DeleteView):
+    model = EarningsForecast
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('expectations-list')
 
 
 def RatesList(request):

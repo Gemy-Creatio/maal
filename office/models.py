@@ -101,7 +101,7 @@ class Rates(models.Model):
     CurrenncyValue = models.FloatField(null=True, blank=True)
     MarketValue = models.FloatField(null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    RecommendDate = models.DateField(auto_now_add=True, null=True)
+    RecommendDate = models.DateField(null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
     changeFair = models.BooleanField(null=True)
     changeMarket = models.BooleanField(null=True)

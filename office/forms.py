@@ -27,6 +27,6 @@ class CompanyCodeForm(forms.ModelForm):
         model = models.CompanyCode
         fields = '__all__'
         labels = {
-            'code' : 'كود الشركة',
-            'company' : 'إختر الشركة'
+            'code': 'كود الشركة',
+            'company': 'إختر الشركة'
         }
