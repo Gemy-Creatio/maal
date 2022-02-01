@@ -1,0 +1,41 @@
+{% extends 'masterpage.html' %}
+{% load static %}
+{% block title %}  صحفية مال {% endblock title %}
+
+
+{% block body %}
+<section class="min-vh-85 mb-8">
+    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/maalbg.jpeg');">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+          <div class="col-12 mx-auto">
+              <div class="card z-index-0">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>التوقعات</h6>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              {% include  'partials/_expectTable.html' with expects=object_list %}
+              {% include 'partials/_pagination.html' with page_obj=object_list only %}
+
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+</section>
+{% endblock body %}
+
+
+
+

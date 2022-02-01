@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 المحللين المالين
@@ -21,73 +22,8 @@
                         <div class="card-body px-1 pb-0">
                             <form method="post" enctype="multipart/form-data">
                              {% csrf_token %}
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="name">
-                                            إسم المحلل
-                                        </label>
-                                        <input id="name" name="name" type="text" class="form-control text-black-50"  />
+                                                   {{ form|crispy }}
 
-                                    </div>
-                                </div>
-                                 <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="name">
-                                            صورة المحلل
-                                        </label>
-                                        <input id="logo" name="logo" type="file" class="form-control text-black-50"  />
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="currentCompany">
-                                       شركة الأبحاث الحالية
-                                        </label>
-<select name="currentCompany" id="currentCompany" class="form-control text-black-50">
-  {% for company in companies %}
-          <option value="{{ company.pk }}">{{ company.name }}</option>
-
-    {% endfor  %}
-</select>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="currentJob">
-                                            الوظيفة
-                                        </label>
-                                        <input id="currentJob" name="currentJob" type="text" class="form-control text-black-50" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="phone">
-                                            الهاتف
-                                        </label>
-                                        <input id="phone" name="phone" type="text" class="form-control text-black-50" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="email">
-                                            البريد الألكترونى
-                                        </label>
-                                        <input id="email" name="email" type="email" class="form-control text-black-50" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="twitterAccount">
-                                            الحساب على تويتر
-                                        </label>
-                                        <input id="twitterAccount" name="twitterAccount" type="text" class="form-control text-black-50" />
-                                    </div>
-                                </div>
                                 <div class="form-group row ">
                                     <div class="col-10 d-flex flex-column justify-content-center">
                                             <input type="submit" class="btn btn-primary text-black-50 bg-maal" value="إضافة"/>

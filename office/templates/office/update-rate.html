@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %} التقييم البحثى {% endblock title %}
 
 
@@ -23,114 +23,8 @@
                         <div class="card-body px-1 pb-0">
                             <form method="post" enctype="multipart/form-data">
                              {% csrf_token %}
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="CompanyEntered">
-                                            الشركة
-                                            المدرجة
-                                        </label>
+                                                           {{ form|crispy }}
 
-<select name="CompanyEntered" id="CompanyEntered" class="form-control text-black-50" >
-  {% for company in companies %}
-    {% if rate.CompanyEntered.pk == company.pk %}
-        <option selected="selected" value="{{ company.pk }}">{{ company.name }}</option>
-    {% else %}
-          <option value="{{ company.pk }}">{{ company.name }}</option>
-
-    {% endif %}
-
-    {% endfor  %}
-</select>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="ResearchCompany">
-                                            شركة الأبحاث
-                                        </label>
-<select name="ResearchCompany" id="ResearchCompany" class="form-control text-black-50" >
-  {% for company in researches %}
-    {% if rate.CompanyEntered.pk == company.pk %}
-        <option selected="selected" value="{{ company.pk }}">{{ company.name }}</option>
-    {% else %}
-          <option value="{{ company.pk }}">{{ company.name }}</option>
-
-    {% endif %}
-
-    {% endfor  %}
-</select>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="AnalayticName">
-                                            إسم المحلل
-                                        </label>
-<select name="AnalayticName" id="AnalayticName" class="form-control text-black-50" >
-  {% for analyst in analysts %}
-    {% if rate.AnalayticName.pk == analyst.pk %}
-        <option selected="selected" value="{{ analyst.pk }}">{{ analyst.name }}</option>
-    {% else %}
-          <option value="{{ analyst.pk }}">{{ analyst.name }}</option>
-
-    {% endif %}
-
-    {% endfor  %}
-</select>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="Recommendation">
-                                            التوصية
-                                        </label>
-                                        <input value="{{ rate.Recommendation }}"  id="Recommendation" name="Recommendation" type="text" class="form-control text-black-50" asp-for="Recommendation" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="FairValue">
-                                            القيمة العادلة
-                                        </label>
-                                        <input value="{{ rate.FairValue }}"  id="FairValue" name="FairValue" type="text" class="form-control text-black-50" asp-for="FairValue" placeholder="بالريال السعودى" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="CurrenncyValue">
-                                            السعر وقت التوصية
-                                        </label>
-                                        <input value="{{ rate.CurrenncyValue }}"  id="CurrenncyValue" name="CurrenncyValue" type="text" class="form-control text-black-50" asp-for="CurrenncyValue" placeholder="بالريال السعودى" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="MarketValue">
-                                            السعر السوقى
-                                        </label>
-                                        <input value="{{ rate.MarketValue }}"  id="MarketValue" name="MarketValue" type="text" class="form-control text-black-50" asp-for="MarketValue" placeholder="بالريال السعودى" />
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="rdate">
-                                               تاريخ التوصية
-                                        </label>
-                                        <input value="{{ rate.RecommendDate }}" id="rdate" name="rdate" type="date" class="form-control text-black-50" placeholder="   تاريخ التوصية" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="report">
-                                            التقرير
-                                        </label>
-                                        <input name="report" value="{{ rate.report }}" id="report" type="file" class="form-control text-black-50"  placeholder="التقرير" />
-                                    </div>
-                                </div>
                                 <div class="form-group row ">
                                     <div class="col-10 d-flex flex-column justify-content-center">
                                             <input type="submit" class="btn btn-primary text-black-50 bg-maal" value="تعديل"/>

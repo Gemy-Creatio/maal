@@ -13,10 +13,7 @@ class SeniorOwner(models.Model):
 
     @property
     def numberOfArrows(self):
-        count = 0
-        for num in self.companies_related.all():
-            count = count + num.numberOFArrows
-        return count
+        return self.companies_related.all().count()
 
     @property
     def TotalPriceArrows(self):
@@ -32,11 +29,10 @@ class SeniorOwner(models.Model):
 class CompaniesArrow(models.Model):
     company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name="owners_arrow")
     owner = models.ForeignKey(SeniorOwner, on_delete=models.CASCADE, related_name="companies_related")
-    numberOFArrows = models.IntegerField(null=True, blank=True)
     ownRatio = models.FloatField(null=True, blank=True)
-    arrowPrice = models.FloatField(null=True, blank=True)
     totalOwnRatioToday = models.FloatField(null=True, blank=True)
     totalOwnRatioYesterday = models.FloatField(null=True, blank=True)
+    total_arrows_owned = models.IntegerField(null=True, blank=True, default=0)
 
     @property
     def ChangeOwn(self):
@@ -45,7 +41,11 @@ class CompaniesArrow(models.Model):
 
     @property
     def TotalArrowPrice(self):
-        return self.numberOFArrows * self.arrowPrice
+        if self.total_arrows_owned is None:
+            return 0
+        else:
+            result = self.total_arrows_owned * self.company.arrow_value
+            return result
 
     def __str__(self) -> str:
         return self.owner.name
@@ -56,11 +56,14 @@ class FinicalCompaniesArrow(models.Model):
     owner = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company_that_owned')
     numberOFArrows = models.IntegerField(null=True, blank=True)
     ownRatio = models.FloatField(null=True, blank=True)
-    arrowPrice = models.FloatField(null=True, blank=True)
 
     @property
     def TotalArrowPrice(self):
-        return self.numberOFArrows * self.arrowPrice
+        if self.numberOFArrows is None or self.company.arrow_value is None:
+            return 0
+        else:
+            result = self.numberOFArrows * self.company.arrow_value
+            return result
 
     def __str__(self) -> str:
         return self.owner.name

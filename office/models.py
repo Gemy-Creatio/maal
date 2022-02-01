@@ -16,7 +16,7 @@ class CompanyCategory(models.Model):
         ]
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 class FinicialCompany(models.Model):
@@ -25,6 +25,8 @@ class FinicialCompany(models.Model):
     category = models.ForeignKey(CompanyCategory, on_delete=models.SET_NULL, null=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     link = models.URLField(null=True, blank=True)
+    total_arrows = models.IntegerField(null=True , blank=True)
+    arrow_value = models.IntegerField(null=True , blank=True)
 
     class Meta:
         indexes = [
@@ -105,6 +107,7 @@ class Rates(models.Model):
     report = models.FileField(upload_to='reportspdf/', null=True)
     changeFair = models.BooleanField(null=True)
     changeMarket = models.BooleanField(null=True)
+    is_recommended = models.BooleanField(null=True, blank=True, default=False)
 
     class Meta:
         indexes = [
@@ -170,6 +173,7 @@ class EarningsForecast(models.Model):
     second2020 = models.IntegerField(blank=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
     realEarn = models.IntegerField(blank=True, null=True)
+    is_recommended = models.BooleanField(null=True, blank=True, default=False)
 
     @property
     def deviationsecond2020(self):

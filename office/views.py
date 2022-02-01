@@ -175,62 +175,34 @@ class UpdateReserchCompany(UpdateView):
         return reverse('research-list')
 
 
-def AddCompany(request):
-    categories = CompanyCategory.objects.all()
-    context = {"categories": categories}
-    if request.method == 'POST' and request.FILES['logo']:
-        name = request.POST.get('name')
-        logo = request.FILES['logo']
-        link = request.POST.get('link')
-        fs = FileSystemStorage()
-        filename = fs.save(logo.name, logo)
-        category = request.POST.get('category')
-        company = FinicialCompany(link=link, logo=logo, name=name, EmpEntered_id=request.user.pk, category_id=category)
-        company.save()
-        if company.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('company-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-company.html', context=context)
-    return render(request, 'office/add-company.html', context=context)
+class AddCompany(CreateView):
+    form_class = FinicalCompanyForm
+    model = models.FinicialCompany
+    template_name = 'office/add-company.html'
+
+    def form_valid(self, form):
+        company = form.save(commit=True)
+        company.EmpEntered = self.request.user
+        company.save
+        return super(AddCompany, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('company-list')
 
 
-def EditCompany(request, pk):
-    company = FinicialCompany.objects.get(pk=pk)
-    categories = CompanyCategory.objects.all()
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        category = request.POST.get('category')
-        link = request.POST.get('link')
-        company.name = name
-        company.category_id = category
-        company.link = link
-        company.EmpEntered_id = request.user.pk
-        company.save()
-        if company.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('company-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
-    return render(request, 'office/edit-company.html', context={"company": company, "categories": categories})
+class EditCompany(UpdateView):
+    form_class = FinicalCompanyForm
+    model = models.FinicialCompany
+    template_name = 'office/edit-company.html'
 
+    def form_valid(self, form):
+        company = form.save(commit=True)
+        company.EmpEntered = self.request.user
+        company.save
+        return super(EditCompany, self).form_valid(form)
 
-def EditResearch(request, pk):
-    company = ResearchCompany.objects.get(pk=pk)
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        company.name = name
-        company.EmpEntered_id = request.user.pk
-        company.save()
-        if company.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('research-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/edit-research.html', context={"company": company})
-    return render(request, 'office/edit-research.html', context={"company": company})
+    def get_success_url(self):
+        return reverse('company-list')
 
 
 def AnalystsList(request):
@@ -242,154 +214,58 @@ def AnalystsList(request):
     return render(request, 'office/analysts-list.html', context={"analayts": page_obj})
 
 
-def AddAnalyst(request):
-    company = ResearchCompany.objects.all()
-    if request.method == 'POST' and request.FILES['logo']:
-        name = request.POST.get('name')
-        logo = request.FILES['logo']
-        fs = FileSystemStorage()
-        filename = fs.save(logo.name, logo)
-        currentCompany = request.POST.get('currentCompany')
-        currentJob = request.POST.get('currentJob')
-        phone = int(request.POST.get('phone'))
-        email = request.POST.get('email')
-        twitterAccount = request.POST.get('twitterAccount')
+class AddAnalyst(CreateView):
+    model = models.FinicialAnalyst
+    template_name = 'office/add-analyst.html'
+    form_class = AnalystForm
 
-        analyst = FinicialAnalyst.objects.create(logo=logo, name=name, phone=phone, tiwtterAccount=twitterAccount,
-                                                 email=email,
-                                                 currentCompany_id=currentCompany, CurrentJob=currentJob)
-        if analyst.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('analyst-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-analyst.html', context={"companies": company})
-    return render(request, 'office/add-analyst.html', context={"companies": company})
+    def get_success_url(self):
+        return reverse('analyst-list')
 
 
-def AddRate(request):
-    research = ResearchCompany.objects.all()
-    company = FinicialCompany.objects.all()
-    analyst = FinicialAnalyst.objects.all()
-    if request.method == 'POST' and request.FILES['report']:
-        CompanyEntered = request.POST.get('CompanyEntered')
-        report = request.FILES['report']
-        fs = FileSystemStorage()
-        filename = fs.save(report.name, report)
-        researchCompany = request.POST.get('ResearchCompany')
-        AnalayticName = request.POST.get('AnalayticName')
-        Recommendation = request.POST.get('Recommendation')
-        CurrenncyValue = request.POST.get('CurrenncyValue')
-        rdate = request.POST.get('rdate')
-        FairValue = request.POST.get('FairValue')
-        MarketValue = request.POST.get('MarketValue')
-        rate = Rates(CompanyEntered_id=CompanyEntered, EmpEntered_id=request.user.pk, Recommendation=Recommendation,
-                     ResearchCompany_id=researchCompany, AnalayticName_id=AnalayticName, report=report,
-                     CurrenncyValue=float(CurrenncyValue), RecommendDate=rdate, MarketValue=float(MarketValue),
-                     FairValue=float(FairValue))
-        rate.save()
-        if rate.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('rates-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-rate.html',
-                          context={"researches": research, "companies": company, "analysts": analyst})
-    return render(request, 'office/add-rate.html',
-                  context={"researches": research, "companies": company, "analysts": analyst})
+class AddRate(CreateView):
+    model = models.Rates
+    template_name = 'office/add-rate.html'
+    form_class = RateForm
+
+    def get_success_url(self):
+        return reverse('rates-list')
 
 
-def AddExpect(request):
-    research = ResearchCompany.objects.all()
-    company = FinicialCompany.objects.all()
-    analyst = FinicialAnalyst.objects.all()
-    if request.method == 'POST' and request.FILES['report']:
-        CompanyEntered = request.POST.get('CompanyEntered')
-        report = request.FILES['report']
-        fs = FileSystemStorage()
-        filename = fs.save(report.name, report)
-        researchCompany = request.POST.get('ResearchCompany')
-        analyst = request.POST.get('analyst')
-        total_earn = request.POST.get('total_earn')
-        third2020 = request.POST.get('third2020')
-        second2020 = request.POST.get('second2020')
-        realEarn = request.POST.get('realEarn')
-        expect = EarningsForecast(realEarn=realEarn, report=report, total_earn=total_earn,
-                                  EmpEntered_id=request.user.id, CompanyEntered_id=CompanyEntered, third2020=third2020,
-                                  ResearchCompany_id=researchCompany, analyst_id=analyst, second2020=second2020)
-        expect.save()
-        if expect.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('expectations-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/add-expectation.html',
-                          context={"researches": research, "companies": company, "analysts": analyst})
-    return render(request, 'office/add-expectation.html',
-                  context={"researches": research, "companies": company, "analysts": analyst})
+class AddExpect(CreateView):
+    form_class = ExpectationForm
+    model = models.EarningsForecast
+    template_name = 'office/add-expectation.html'
+
+    def get_success_url(self):
+        return reverse('expectations-list')
 
 
-def UpdateAnalyst(request, pk):
-    analyst = FinicialAnalyst.objects.get(pk=pk)
-    company = FinicialCompany.objects.all()
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        currentCompany = request.POST.get('currentCompany')
-        currentJob = request.POST.get('currentJob')
-        phone = int(request.POST.get('phone'))
-        email = request.POST.get('email')
-        twitterAccount = request.POST.get('twitterAccount')
-        analyst.name = name
-        analyst.currentCompany_id = currentCompany
-        analyst.CurrentJob = currentJob
-        analyst.phone = phone
-        analyst.email = email
-        analyst.tiwtterAccount = twitterAccount
-        if analyst.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('analyst-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/update-analyst.html')
-    return render(request, 'office/update-analyst.html', context={"analyst": analyst, "companies": company})
+class UpdateExpect(UpdateView):
+    form_class = ExpectationForm
+    model = models.EarningsForecast
+    template_name = 'office/edit-expect.html'
+
+    def get_success_url(self):
+        return reverse('expectations-list')
 
 
-def UpdateRate(request, pk):
-    research = ResearchCompany.objects.all()
-    rate = Rates.objects.get(pk=pk)
-    company = FinicialCompany.objects.all()
-    analyst = FinicialAnalyst.objects.all()
-    if request.method == 'POST' and request.FILES['report']:
-        CompanyEntered = request.POST.get('CompanyEntered')
-        report = request.FILES['report']
-        fs = FileSystemStorage()
-        filename = fs.save(report.name, report)
-        researchCompany = request.POST.get('ResearchCompany')
-        AnalayticName = request.POST.get('AnalayticName')
-        Recommendation = request.POST.get('Recommendation')
-        CurrenncyValue = request.POST.get('CurrenncyValue')
-        FairValue = request.POST.get('FairValue')
-        rdate = request.POST.get('rdate')
-        MarketValue = request.POST.get('MarketValue')
-        rate.CompanyEntered_id = CompanyEntered
-        rate.report = report
-        rate.AnalayticName_id = AnalayticName
-        rate.FairValue = float(FairValue)
-        rate.RecommendDate = rdate
-        rate.MarketValue = float(MarketValue)
-        rate.CurrenncyValue = float(CurrenncyValue)
-        rate.Recommendation = Recommendation
-        rate.ResearchCompany_id = researchCompany
-        rate.EmpEntered_id = request.user.pk
-        rate.save()
-        if rate.pk:
-            messages.success(request, "تمت بنجاح")
-            return redirect('rates-list')
-        else:
-            messages.error(request, "حاول مرة أخرى")
-            return render(request, 'office/update-rate.html')
-    return render(request, 'office/update-rate.html',
-                  context={"researches": research, "rate": rate, "companies": company, "analysts": analyst})
+class UpdateRate(UpdateView):
+    form_class = RateForm
+    template_name = 'office/update-rate.html'
+    model = models.Rates
+
+    def get_success_url(self):
+        return reverse('rates-list')
+
+
+class UpdateAnalyst(UpdateView):
+    form_class = AnalystForm
+    template_name = 'office/update-analyst.html'
+    model = models.FinicialAnalyst
+
+    def get_success_url(self):
+        return reverse('analyst-list')
 
 
 def RateDetails(request, pk):

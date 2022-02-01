@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %} توقعات الأبحاث {% endblock title %}
 
@@ -23,96 +24,7 @@
                             <div class="card-body px-1 pb-0">
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="CompanyEntered">
-                                                الشركة
-                                                المدرجة
-                                            </label>
-                                            <select name="CompanyEntered" id="CompanyEntered"
-                                                    class="form-control text-black-50">
-                                                {% for company in companies %}
-                                                    <option value="{{ company.pk }}">{{ company.name }}</option>
-
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="ResearchCompany">
-                                                شركة الأبحاث
-                                            </label>
-                                            <select name="ResearchCompany" id="ResearchCompany"
-                                                    class="form-control text-black-50">
-                                                {% for company in researches %}
-                                                    <option value="{{ company.pk }}">{{ company.name }}</option>
-                                                {% endfor %}
-                                            </select></div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="analyst">
-                                                إسم المحلل
-                                            </label>
-                                            <select name="analyst" id="analyst"
-                                                    class="form-control text-black-50">
-                                                {% for analyst in analysts %}
-                                                    <option value="{{ analyst.pk }}">{{ analyst.name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="total_earn">
-                                                توقعات الأرباح
-                                            </label>
-                                           <input type="number" class="form-control" name="total_earn" id="total_earn"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="third2020">
-                                                الربع الثالث 2020
-                                            </label>
-                                            <input id="third2020" name="third2020" type="text"
-                                                   class="form-control text-black-50"
-                                                   placeholder="بالريال السعودى"/>
-                                        </div>
-                                    </div>
-
-                                     <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="second2020">
-                                               الربع الثانى 2021
-                                            </label>
-                                            <input id="second2020" name="second2020" type="text"
-                                                   class="form-control text-black-50"
-                                                   placeholder="بالريال السعودى"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="realEarn">
-                                               الأرباح الفعلية
-                                            </label>
-                                            <input id="realEarn" name="realEarn" type="text"
-                                                   class="form-control text-black-50"
-                                                   placeholder="بالريال السعودى"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <div class="col-10 d-flex flex-column">
-                                            <label for="report">
-                                                التقرير
-                                            </label>
-                                            <input name="report" id="report" type="file"
-                                                   class="form-control text-black-50" placeholder="التقرير"/>
-                                        </div>
-                                    </div>
+                                                  {{ form|crispy }}
                                     <div class="form-group row ">
                                         <div class="col-10 d-flex flex-column justify-content-center">
                                             <input type="submit" class="btn btn-primary text-black-50 bg-maal"

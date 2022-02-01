@@ -57,7 +57,7 @@ def user_home(request):
     for company in companies:
         companylabel1.append(company.name)
         companydata1.append(company.CompanyEntered.count())
-    rates = Rates.objects.all()
+    rates = Rates.objects.filter(is_recommended=True)
     rate_filter = RatesFilter(request.POST, queryset=rates)
     rate = rate_filter.qs[:10]
     context = {
@@ -81,7 +81,7 @@ def user_home(request):
 
 def analystslist(request):
     analyts = FinicialAnalyst.objects.all()
-    paginator = Paginator(analyts, 8)
+    paginator = Paginator(analyts, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
@@ -100,7 +100,7 @@ def rateslist(request):
     rates = Rates.objects.all()
     rate_filter = RatesFilter(request.GET, queryset=rates)
     rate = rate_filter.qs
-    paginator = Paginator(rate, 8)
+    paginator = Paginator(rate, 30)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
@@ -111,7 +111,6 @@ def rateslist(request):
 
 
 def expectList(request):
-    expects = EarningsForecast.objects.all()
     data = EarningsForecast.objects.order_by('-realEarn')[:5]
     expectlabel = []
     expectdata = []
@@ -136,10 +135,10 @@ def expectList(request):
     for expect in data1:
         expectlabel1.append(expect.CompanyEntered.name)
         expectdata1.append(expect.total_earn)
-    expectss = EarningsForecast.objects.all()
-    expect_filter = EarnFilter(request.POST, queryset=expectss)
+    expects = EarningsForecast.objects.filter(is_recommended=True)
+    expect_filter = EarnFilter(request.POST, queryset=expects)
     expectz = expect_filter.qs
-    paginator = Paginator(expectz, 8)
+    paginator = Paginator(expectz, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -161,7 +160,7 @@ def expectList(request):
 
 def CompanyArrowsAll(request):
     object_list = FinicalCompaniesArrow.objects.all()
-    paginator = Paginator(object_list, 8)
+    paginator = Paginator(object_list, 15)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     # data = FinicalCompaniesArrow.objects.filter('-ownRatio')
@@ -180,6 +179,17 @@ def CompanyArrowsAll(request):
         "object_list": page_obj,
     }
     return render(request, 'userInterface/companiesArrowsownerList.html', context=context)
+
+
+def ExpectAll(request):
+    object_list = EarningsForecast.objects.all()
+    paginator = Paginator(object_list, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "object_list": page_obj,
+    }
+    return render(request, 'userInterface/all_expectation.html', context=context)
 
 
 def expectrealList(request):

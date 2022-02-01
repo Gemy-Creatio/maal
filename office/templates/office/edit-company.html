@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
-
 {% block title %}
 
 {% endblock %}
@@ -24,59 +24,8 @@
                         <div class="card-body px-1 pb-0">
                             <form method="post">
                              {% csrf_token %}
-                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="name">
-                                            إسم الشركة
-                                        </label>
-                                        <input id="name" value="{{ company.name }}" name="name" type="text" class="form-control text-black-50"  />
+                                                                          {{ form|crispy }}
 
-                                    </div>
-                                </div>
-                                                             <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="link">
-                                            المسار                                        </label>
-                                        <input value="{{ company.link }}" id="link" name="link" type="url" class="form-control text-black-50"  />
-
-                                    </div>
-                                </div>
-
-                                                                <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="category">
-                                            القطاع
-                                        </label>
-
-<select name="category" id="category" class="form-control text-black-50" >
-  {% for category_ in categories %}
-    {% if category.pk == category_.pk %}
-        <option selected="selected" value="{{ category_.pk }}">{{ category_.name }}</option>
-    {% else %}
-          <option value="{{ category_.pk }}">{{ category_.name }}</option>
-
-    {% endif %}
-
-    {% endfor  %}
-</select>
-                                    </div>
-                                </div>
-              <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="totalArrow">
-                                            إجمالى عدد الأسهم                                        </label>
-                                        <input value="{{ company.totalArrows }}" id="totalArrow" name="totalArrow" type="number" class="form-control text-black-50" placeholder="إجمالى عدد الأسهم  "  />
-
-                                    </div>
-                                </div>
-                             <div class="form-group row ">
-                                    <div class="col-10 d-flex flex-column">
-                                        <label for="arrowPrice">
-                                            سعر السهم                                        </label>
-                                        <input value="{{ company.arrowPrice }}" id="arrowPrice" name="arrowPrice" type="number" class="form-control text-black-50" placeholder="سعر السهم  "  />
-
-                                    </div>
-                                </div>
                                 <div class="form-group row ">
                                     <div class="col-10 d-flex flex-column justify-content-center">
                                             <input type="submit" class="btn btn-primary text-black-50 bg-maal" value="تعديل"/>

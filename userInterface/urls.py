@@ -9,9 +9,10 @@ urlpatterns = [
     path('analyst/all', views.analystslist, name='all-user-analyst'),
     path('home', views.user_home, name='user-home'),
     path('arrows/owned/all', views.CompanyArrowsAll, name='all-arrows-owned'),
-    path('expects/all', views.expectList, name='all-user-expect'),
+    path('expects/all/recommened', views.expectList, name='all-user-expect'),
     path('real/all', views.expectrealList, name='real-user-expect'),
     path('company/<int:pk>', views.CapitalProfile, name='user-company'),
     path('research/<int:pk>', views.ResearchProfile, name='user-research'),
+    path('expect/all', views.ExpectAll, name='all_expect'),
 
 ]

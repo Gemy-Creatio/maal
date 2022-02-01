@@ -17,14 +17,12 @@ class SeniorOwnerForm(forms.ModelForm):
 class ArrowsForm(forms.ModelForm):
     class Meta:
         model = models.CompaniesArrow
-        fields = ['company', 'owner', 'numberOFArrows', 'arrowPrice', 'ownRatio', 'totalOwnRatioToday',
+        fields = ['company', 'owner', 'total_arrows_owned', 'ownRatio', 'totalOwnRatioToday',
                   'totalOwnRatioYesterday']
         widgets = {
             'owner': forms.Select(choices=models.SeniorOwner.objects.all()),
-            'numberOFArrows': forms.NumberInput(
+            'total_arrows_owned': forms.NumberInput(
                 attrs={'id': 'numberOFArrowsfield', 'class': 'form-control', 'placeholder': 'عدد الأسهم'}),
-            'arrowPrice': forms.NumberInput(
-                attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'سعر السهم'}),
             'totalOwnRatioYesterday': forms.NumberInput(
                 attrs={'id': 'totalOwnRatioYesterday', 'class': 'form-control', 'placeholder': 'إجمالى نسبة الملكية اليوم السابق'}),
             'totalOwnRatioToday': forms.NumberInput(
@@ -38,13 +36,11 @@ class ArrowsForm(forms.ModelForm):
 class CompaniesArrowsForm(forms.ModelForm):
     class Meta:
         model = models.FinicalCompaniesArrow
-        fields = ['company', 'owner', 'numberOFArrows', 'arrowPrice', 'ownRatio']
+        fields = ['company', 'owner', 'numberOFArrows', 'ownRatio']
         widgets = {
             'owner': forms.Select(choices=models.FinicialCompany.objects.all()),
             'numberOFArrows': forms.NumberInput(
                 attrs={'id': 'numberOFArrowsfield', 'class': 'form-control', 'placeholder': 'عدد الأسهم'}),
-            'arrowPrice': forms.NumberInput(
-                attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'سعر السهم'}),
             'ownRatio': forms.NumberInput(
                 attrs={'id': 'arrowPricefield', 'class': 'form-control', 'placeholder': 'نسبة الملكية'}),
             'company': forms.Select(choices=models.FinicialCompany.objects.all())
@@ -53,7 +49,6 @@ class CompaniesArrowsForm(forms.ModelForm):
             'company': 'الشركة المالكة',
             'owner': 'الشركة المملوكة',
             'numberOFArrows': 'عدد الأسهم',
-            'arrowPrice': 'سعر السهم',
             'ownRatio': 'نسبة الملكية',
 
         }
