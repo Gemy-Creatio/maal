@@ -13,69 +13,90 @@
         </span>
       </button>
       <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-                                  <ul class="navbar-nav navbar-nav-hover mx-auto">
+   <ul class="navbar-nav navbar-nav-hover mx-auto">
+                                {% if LANGUAGE_CODE == 'ar' %}
+
                                                                    {% if request.user.first_name %}
                                                                         <li class="nav-item">
-                                    <a class="nav-link me-2 text-bold" href="{% url 'logout' %}">
-                                        <i class="fas fa-power-off opacity-6 text-primary me-1" aria-hidden="true"></i>
+                                    <a class="nav-link me-2" href="{% url 'logout' %}">
+                                        <i class="fas fa-power-off opacity-6 text-white me-1" aria-hidden="true"></i>
                                         تسجيل خروج
                                     </a>
                                 </li>
                                                                         <li class="nav-item">
-                                    <a class="nav-link me-2 text-bold" href="{% url 'profile' %}">
-                                        <i class="fa fa-user opacity-6 text-primary me-1" aria-hidden="true"></i>
+                                    <a class="nav-link me-2" href="{% url 'profile' %}">
+                                        <i class="fa fa-user opacity-6 text-white me-1" aria-hidden="true"></i>
                                         الملف الشخصى
                                     </a>
                                 </li>
-                                   {% if request.user.user_type == 3 %}
-                                     <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'user-home' %}">
-                                        <i class="fa fa-home opacity-6 text-primary me-1" aria-hidden="true"></i>
-                                        الصفحة الرئيسية
-                                    </a>
-                                </li>
-                                    <li class="nav-item  d-lg-none">
-                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'all_wish' %}">
-                                        <i class="fa fa-heart opacity-6 text-primary me-1" aria-hidden="true"><span class="text-black text-bold" style="margin-inline:0.2rem;"> {{ request.session.wish_count }}</span></i>
-المحفظة                                  
-  </a>
-                                </li>
-                                {% else %}
-                                      <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active text-bold" aria-current="page" href="{% url 'home-page' %}">
-                                        <i class="fa fa-chart-pie opacity-6 text-primary me-1" aria-hidden="true"></i>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'home-page' %}">
+                                        <i class="fa fa-chart-pie opacity-6 text-white me-1" aria-hidden="true"></i>
                                         لوحة التحكم
                                     </a>
                                 </li>
- {% endif %}
+
+
                                         {% else %}
                                                                                        <li class="nav-item">
-                                    <a class="nav-link me-2 text-bold" href="{% url 'user-page' %}">
-                                        <i class="fas fa-home opacity-6 text-primary me-1" aria-hidden="true"></i>
+                                    <a class="nav-link me-2" href="{% url 'user-page' %}">
+                                        <i class="fas fa-home opacity-6 text-white me-1" aria-hidden="true"></i>
                                        الصفحة الرئيسية
                                     </a>
 
                                 </li>
                                                                                     <li class="nav-item">
-                                    <a class="nav-link me-2 text-bold" href="{% url 'login' %}">
-                                        <i class="fas fa-key opacity-6 text-primary me-1" aria-hidden="true"></i>
+                                    <a class="nav-link me-2" href="{% url 'login' %}">
+                                        <i class="fas fa-key opacity-6 text-white me-1" aria-hidden="true"></i>
                                         تسجيل دخول
                                     </a>
 
                                 </li>
-                                    </li>
-                                                                                    <li class="nav-item">
-                                    <a class="nav-link me-2 text-bold" href="{% url 'add-client' %}">
-                                        <i class="fas fa-user opacity-6 text-primary me-1" aria-hidden="true"></i>
-                                       خدمات الموقع
+
+                                    {% endif %}
+                                    {% else %}
+                                      {% if request.user.first_name %}
+                                                                        <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'logout' %}">
+                                        <i class="fas fa-power-off opacity-6 text-white me-1" aria-hidden="true"></i>
+                                       logout
+                                    </a>
+                                </li>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'profile' %}">
+                                        <i class="fa fa-user opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'home-page' %}">
+                                        <i class="fa fa-chart-pie opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+
+
+                                        {% else %}
+                                                                                       <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'user-page' %}">
+                                        <i class="fas fa-home opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Home
                                     </a>
 
                                 </li>
+                                                                                    <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'login' %}">
+                                        <i class="fas fa-key opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Login
+                                    </a>
+
+                                </li>
+
                                     {% endif %}
+                            {% endif %}
+                             <li style="margin-inline: 1rem;">{% include 'partials/menus/_language.html' %}</li>
 
                             </ul>
-
-
         <ul class="navbar-nav d-lg-block d-none">
          {% if request.user.user_type == 3  %}
           <li class="nav-item">

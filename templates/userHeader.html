@@ -24,6 +24,8 @@
                         </button>
                         <div class="collapse navbar-collapse ps" id="navigation">
                             <ul class="navbar-nav mx-auto">
+                                {% if LANGUAGE_CODE == 'ar' %}
+
                                                                    {% if request.user.first_name %}
                                                                         <li class="nav-item">
                                     <a class="nav-link me-2" href="{% url 'logout' %}">
@@ -62,6 +64,47 @@
                                 </li>
                               
                                     {% endif %}
+                                    {% else %}
+                                      {% if request.user.first_name %}
+                                                                        <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'logout' %}">
+                                        <i class="fas fa-power-off opacity-6 text-white me-1" aria-hidden="true"></i>
+                                       logout
+                                    </a>
+                                </li>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'profile' %}">
+                                        <i class="fa fa-user opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Profile
+                                    </a>
+                                </li>
+                                                                        <li class="nav-item">
+                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{% url 'home-page' %}">
+                                        <i class="fa fa-chart-pie opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+
+
+                                        {% else %}
+                                                                                       <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'user-page' %}">
+                                        <i class="fas fa-home opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Home
+                                    </a>
+
+                                </li>
+                                                                                    <li class="nav-item">
+                                    <a class="nav-link me-2" href="{% url 'login' %}">
+                                        <i class="fas fa-key opacity-6 text-white me-1" aria-hidden="true"></i>
+                                        Login
+                                    </a>
+
+                                </li>
+
+                                    {% endif %}
+                            {% endif %}
+                             <li style="margin-inline: 1rem;">{% include 'partials/menus/_language.html' %}</li>
 
                             </ul>
                             <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
