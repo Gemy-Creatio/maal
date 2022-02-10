@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from .models import SeniorOwner, CompaniesArrow  ,FinicalCompaniesArrow
+from .models import SeniorOwner, CompaniesArrow, FinicalCompaniesArrow
 from django.views import View
-from django.views.generic.edit import CreateView, UpdateView
-from .forms import SeniorOwnerForm, ArrowsForm , CompaniesArrowsForm
-from django.urls import reverse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import SeniorOwnerForm, ArrowsForm, CompaniesArrowsForm
+from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 
 
@@ -16,7 +16,8 @@ class AllUserOwner(View):
         data = FinicalCompaniesArrow.objects.order_by('-numberOFArrows')
         arrows = SeniorOwner.objects.all()
         seniorArrows = CompaniesArrow.objects.all()
-        return render(request, 'owners/ownerUserlist.html', context={"data": arrows, "companyarrows": data , "seniorArrows":seniorArrows})
+        return render(request, 'owners/ownerUserlist.html',
+                      context={"data": arrows, "companyarrows": data, "seniorArrows": seniorArrows})
 
 
 class AllSeniorOwners(View):
@@ -96,6 +97,24 @@ class AddCompanyArrows(CreateView):
 
     def get_success_url(self):
         return reverse('all-AllCompanyOwners')
+
+
+class DeleteOwner(DeleteView):
+    model = SeniorOwner
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('all-owners')
+
+
+class DeleteCompanyOwner(DeleteView):
+    model = FinicalCompaniesArrow
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('all-AllCompanyOwners')
+
+
+class DeleteOwnerCompany(DeleteView):
+    model = CompaniesArrow
+    template_name = 'office/deleteentry.html'
+    success_url = reverse_lazy('all-arrows')
 
 
 class EditCompanyArrows(UpdateView):

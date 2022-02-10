@@ -19,6 +19,8 @@
               {% if request.user.user_type == 1 or request.user.user_type == 2  %}
               <th class="text-center text-xxs" style="width: auto;">
                     </th>
+                   <th class="text-center text-xxs" style="width: auto;">
+                    </th>
             {% endif %}
         </tr>
         </thead>
@@ -51,11 +53,18 @@
                         {% endif %}
                     </td>
                    <td class="align-middle text-center text-xxs">
-                     <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
+                     {% if item.TotalArrowPrice is not None %}
+                       <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
+                       {% else %}
+                         <p class="text-xxs">0</p>
+                       {% endif %}
                     </td>
                   {% if request.user.user_type == 1 or request.user.user_type == 2  %}
                <td class="ms-auto text-start">
                                             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                        </td>
+                           <td class="ms-auto text-start">
+                               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete-arrow' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
                                         </td>
             {% endif %}
                                 </tr>

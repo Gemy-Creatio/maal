@@ -29,10 +29,10 @@ class SeniorOwner(models.Model):
 class CompaniesArrow(models.Model):
     company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name="owners_arrow")
     owner = models.ForeignKey(SeniorOwner, on_delete=models.CASCADE, related_name="companies_related")
-    ownRatio = models.FloatField(null=True, blank=True)
-    totalOwnRatioToday = models.FloatField(null=True, blank=True)
-    totalOwnRatioYesterday = models.FloatField(null=True, blank=True)
-    total_arrows_owned = models.IntegerField(null=True, blank=True, default=0)
+    ownRatio = models.FloatField(blank=True, default=1)
+    totalOwnRatioToday = models.FloatField(blank=True, default=1)
+    totalOwnRatioYesterday = models.FloatField(blank=True, default=1)
+    total_arrows_owned = models.BigIntegerField(blank=True, default=0)
 
     @property
     def ChangeOwn(self):
@@ -41,11 +41,11 @@ class CompaniesArrow(models.Model):
 
     @property
     def TotalArrowPrice(self):
-        if self.total_arrows_owned is None:
-            return 0
-        else:
+        if self.total_arrows_owned is not None:
             result = self.total_arrows_owned * self.company.arrow_value
             return result
+        else:
+            return 0
 
     def __str__(self) -> str:
         return self.owner.name
@@ -54,8 +54,8 @@ class CompaniesArrow(models.Model):
 class FinicalCompaniesArrow(models.Model):
     company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company_owned')
     owner = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company_that_owned')
-    numberOFArrows = models.IntegerField(null=True, blank=True)
-    ownRatio = models.FloatField(null=True, blank=True)
+    numberOFArrows = models.FloatField(blank=True, default=1)
+    ownRatio = models.FloatField(blank=True, default=1)
 
     @property
     def TotalArrowPrice(self):

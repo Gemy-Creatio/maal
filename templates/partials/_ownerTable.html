@@ -15,6 +15,8 @@
             {% if request.user.user_type == 1 or request.user.user_type == 2  %}
               <th class="text-center text-xxs" style="width: auto;">
                     </th>
+                 <th class="text-center text-xxs" style="width: auto;">
+                    </th>
             {% endif %}
         </tr>
         </thead>
@@ -40,6 +42,9 @@
             {% if request.user.user_type == 1 or request.user.user_type == 2  %}
           <td class="ms-auto text-start">
               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-owner' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                        </td>
+                  <td class="ms-auto text-start">
+              <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete-owner' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
                                         </td>
             {% endif %}
                                 </tr>

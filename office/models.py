@@ -25,8 +25,8 @@ class FinicialCompany(models.Model):
     category = models.ForeignKey(CompanyCategory, on_delete=models.SET_NULL, null=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     link = models.URLField(null=True, blank=True)
-    total_arrows = models.IntegerField(null=True , blank=True)
-    arrow_value = models.IntegerField(null=True , blank=True)
+    total_arrows = models.FloatField(null=True, blank=True)
+    arrow_value = models.FloatField(null=True, blank=True)
 
     class Meta:
         indexes = [
