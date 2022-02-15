@@ -13,7 +13,7 @@
 اخر سعر للسهم            </th>
              <th class="text-center text-xxs" style="width: auto;">
 القيمة السوقية للملكية            </th>
-              {% if request.user.user_type == 1 or request.user.user_type == 2  %}
+              {% if request.user.user_type != 3  %}
               <th class="text-center text-xxs" style="width: auto;">
                     </th>
             {% endif %}
@@ -40,8 +40,8 @@
                    <td class="align-middle text-center text-xxs">
                      <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
                     </td>
-                  {% if request.user.user_type == 1 or request.user.user_type == 2  %}
-               <td class="ms-auto text-start">
+                  {% if request.user.user_type != 3  %}
+               <td class="ms-auto text-start" style="width: 1.2rem">
                                             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
                                         </td>
             {% endif %}

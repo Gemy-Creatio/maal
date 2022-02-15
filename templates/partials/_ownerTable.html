@@ -40,10 +40,10 @@
                     </td>
 
             {% if request.user.user_type != 3  %}
-          <td class="ms-auto text-start">
+          <td class="ms-auto text-start" style="width: 1.2rem">
               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-owner' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
                                         </td>
-                  <td class="ms-auto text-start">
+                  <td class="ms-auto text-start" style="width: 1.2rem">
               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete-owner' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
                                         </td>
             {% endif %}
