@@ -105,8 +105,6 @@ class Rates(models.Model):
     EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     RecommendDate = models.DateField(null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
-    changeFair = models.BooleanField(null=True)
-    changeMarket = models.BooleanField(null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
 
     class Meta:
@@ -116,11 +114,11 @@ class Rates(models.Model):
 
     @property
     def fair_percentage(self):
-        return (self.FairValue / self.CurrenncyValue) * 100
+        return (self.FairValue - self.CurrenncyValue) / (self.CurrenncyValue * 100)
 
     @property
     def market_percentage(self):
-        return (self.MarketValue / self.CurrenncyValue) * 100
+        return (self.MarketValue - self.FairValue) / (self.FairValue * 100)
 
     def __str__(self):
         return str(self.CompanyEntered)

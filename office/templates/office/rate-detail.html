@@ -23,7 +23,7 @@
                         <span class="text-lg">الفارق % <span class="text-dark ms-sm-2 font-weight-bold">{{ rate.fair_percentage }}</span></span>
                         <span class="text-lg">السعر السوقى <span class="text-dark ms-sm-2 font-weight-bold">{{ rate.CurrenncyValue }}</span></span>
                         <span class="text-lg">الفارق %<span class="text-dark ms-sm-2 font-weight-bold">{{ rate.market_percentage }}</span></span>
-                        <span class="text-lg" style="cursor:pointer;">التقرير <span class="text-dark ms-sm-2 font-weight-bold"><a href="{{ MEDIA_URL }}{{ rate.report.name }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a></span></span>
+                        <span class="text-lg" style="cursor:pointer;">التقرير <span class="text-dark ms-sm-2 font-weight-bold"><a href="{{ rate.report.url }}"><i class="far fa-file-pdf font-weight-bold mb-0"></i></a></span></span>
                         <span class="text-lg">تاريخ التوصية <span class="text-dark ms-sm-2 text-lg font-weight-bold">{{ rate.RecommendDate.Date }}</span></span>
 
                     </div>

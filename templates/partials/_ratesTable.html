@@ -102,7 +102,7 @@
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem; white-space: nowrap;">
                                             <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"d-m-y" }}</p>
                                         </td>
-                                       {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                                       {% if request.user.user_type != 3 %}
                                       <td class="ms-auto text-start" style="width: 0.2rem;">
                                             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'rate-details' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
 
