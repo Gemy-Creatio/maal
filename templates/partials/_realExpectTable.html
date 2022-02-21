@@ -63,12 +63,17 @@
                                     <p class=" text-xxs">{{ item.realEarn }}</p>
                                 </td>
                             <td>
-
-                                     {% if item.deviationreal < 0 %}
+ {% if item.deviationreal == None %}
+     <p class="text-danger text-xxs ">{{ 0|floatformat:-2 }} %</p>
+                                {% else %}
+         {% if item.deviationreal < 0  %}
                                         <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-2 }} %</p>
                                     {% else %}
                                         <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-2 }} %</p>
                                     {% endif %}
+
+                                {% endif %}
+
                                 </td>
                                 <td class="text-xxs">
                                     <p class=" text-xxs">{{ item.second2020 }}</p>

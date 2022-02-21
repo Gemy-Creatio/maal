@@ -20,7 +20,12 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="../../../static/images/{{ data.logo.name }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                {% if data.logo.url != None %}
+                    <img src="{{ data.logo.url }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                {% else %}
+                    <img src="{% static 'images/company_logo.png' %}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+
+                {% endif %}
             </div>
           </div>
           <div class="col-auto my-auto">
@@ -130,7 +135,7 @@
                                         </td>
 
                                         <td class="align-middle text-center text-xxs">
-                                            <a href="../../../static/images/reportspdf/{{ item.report.name }}">
+                                            <a href="{{ item.report.url }}">
                                                 <i class="fas fa-file-pdf text-danger">
                                                 </i>
                                             </a>

@@ -1,14 +1,11 @@
 import datetime
-
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from accounts.models import User
-from django.db.models.signals import post_save
 
 
 class CompanyCategory(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.CASCADE, null=True , blank=True)
 
     class Meta:
         indexes = [
@@ -22,9 +19,9 @@ class CompanyCategory(models.Model):
 class FinicialCompany(models.Model):
     logo = models.ImageField(null=True, blank=True, upload_to='logos/')
     name = models.CharField(max_length=255, null=True, blank=True)
-    category = models.ForeignKey(CompanyCategory, on_delete=models.SET_NULL, null=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    link = models.URLField(null=True, blank=True)
+    category = models.ForeignKey(CompanyCategory, on_delete=models.SET_NULL, null=True , blank=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    link = models.URLField(null=True, blank=True )
     total_arrows = models.FloatField(null=True, blank=True)
     arrow_value = models.FloatField(null=True, blank=True)
 
@@ -39,7 +36,7 @@ class FinicialCompany(models.Model):
 
 class CompanyCode(models.Model):
     code = models.CharField(null=True, max_length=255, blank=True)
-    company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company', null=True)
+    company = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE, related_name='company', null=True,blank=True)
 
     class Meta:
         indexes = [
@@ -52,7 +49,7 @@ class CompanyCode(models.Model):
 
 class ResearchCompany(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True)
 
     class Meta:
         indexes = [
@@ -68,11 +65,11 @@ class FinicialAnalyst(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     CurrentJob = models.CharField(max_length=255, null=True, blank=True)
     currentCompany = models.ForeignKey(ResearchCompany, related_name='currentCompany', null=True,
-                                       on_delete=models.SET_NULL)
+                                       on_delete=models.SET_NULL , blank=True)
     email = models.EmailField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
     tiwtterAccount = models.CharField(max_length=255, null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True ,blank=True)
 
     class Meta:
         verbose_name_plural = "Analysts"
@@ -93,16 +90,16 @@ class Rates(models.Model):
 
     )
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.SET_NULL, related_name='CompanyEntered',
-                                       null=True)
+                                       null=True, blank=True)
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.SET_NULL, related_name='ResearchCompany',
-                                        null=True)
+                                        null=True, blank=True)
     AnalayticName = models.ForeignKey(FinicialAnalyst, on_delete=models.SET_NULL, related_name='AnalayticName',
-                                      null=True)
+                                      null=True , blank=True)
     Recommendation = models.SmallIntegerField(max_length=255, null=True, blank=True, choices=RECOMDATION_CHOICES)
     FairValue = models.FloatField(null=True, blank=True)
     CurrenncyValue = models.FloatField(null=True, blank=True)
     MarketValue = models.FloatField(null=True, blank=True)
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True)
     RecommendDate = models.DateField(null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
@@ -126,7 +123,7 @@ class Rates(models.Model):
 
 class PerviousCompany(models.Model):
     job = models.CharField(max_length=255, null=True, blank=True, )
-    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
+    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE, blank=True)
     company = models.CharField(max_length=255, null=True, blank=True, )
 
     class Meta:
@@ -149,9 +146,9 @@ class RateQuarter(models.Model):
         ('الربع الثالث', 'الربع الثالث'),
         ('الربع الرابع', 'الربع الرابع'),
     ]
-    year = models.IntegerField(null=True, default=current_year)
-    quaratar = models.CharField(max_length=255, choices=QURATARYEARS, default='الربع الأول')
-    value = models.PositiveIntegerField(null=True, default=0)
+    year = models.IntegerField(null=True, default=current_year, blank=True)
+    quaratar = models.CharField(max_length=255, choices=QURATARYEARS, default='الربع الأول', blank=True)
+    value = models.PositiveIntegerField(null=True, default=0, blank=True)
     deviation_range = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -159,17 +156,17 @@ class RateQuarter(models.Model):
 
 
 class EarningsForecast(models.Model):
-    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE)
+    EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    analyst = models.ForeignKey(FinicialAnalyst, on_delete=models.CASCADE, blank=True)
     CompanyEntered = models.ForeignKey(FinicialCompany, on_delete=models.CASCADE,
-                                       null=True, related_name='expects')
+                                       null=True, related_name='expects', blank=True)
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
-                                        null=True, related_name='Researchexpects')
+                                        null=True, related_name='Researchexpects', blank=True)
     total_earn = models.IntegerField(blank=True, null=True)
     third2020 = models.IntegerField(blank=True, null=True)
 
     second2020 = models.IntegerField(blank=True, null=True)
-    report = models.FileField(upload_to='reportspdf/', null=True)
+    report = models.FileField(upload_to='reportspdf/', null=True, blank=True)
     realEarn = models.IntegerField(blank=True, null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
 
@@ -183,7 +180,10 @@ class EarningsForecast(models.Model):
 
     @property
     def deviationreal(self):
-        return (self.total_earn - self.realEarn) / (self.realEarn * 100)
+        if self.total_earn is None or self.realEarn is None:
+            return 0
+        else:
+            return (self.total_earn - self.realEarn) / (self.realEarn * 100)
 
     def __str__(self):
         return str(self.CompanyEntered.name)

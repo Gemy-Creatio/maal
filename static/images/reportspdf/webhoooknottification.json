@@ -1,0 +1,52 @@
+{
+    "notificationId": "cf329176-0e3f-42a5-a02d-f6c4672465e2",
+    "contextId": "2665246",
+    "event": "inventoryitem_changed",
+    "relativeResourceUri": "api/v1/inventory/1166778899++++++++++",
+    "resourceUri": "https://integration.visma.net/API/controller/api/v1/inventory/1166778899++++++++++",
+    "action": "UPDATED",
+    "timeStamp": 637806931737270000
+}
+
+
+
+{
+    "notificationId": "19323110-e11d-42e2-bfe1-5ca88c0c9bfd",
+    "contextId": "2665246",
+    "event": "inventoryitem_changed",
+    "relativeResourceUri": "api/v1/inventory/22335577++++++++++++",
+    "resourceUri": "https://integration.visma.net/API/controller/api/v1/inventory/22335577++++++++++++",
+    "action": "UPDATED",
+    "timeStamp": 637806955406670000
+}
+
+
+{
+    "notificationId": "12c014f3-d446-41cd-800c-15016b80d1df",
+    "contextId": "2665246",
+    "event": "inventoryitem_changed",
+    "relativeResourceUri": "api/v1/inventory/3344558899++++++++++",
+    "resourceUri": "https://integration.visma.net/API/controller/api/v1/inventory/3344558899++++++++++",
+    "action": "UPDATED",
+    "timeStamp": 637807013626700000
+}
+
+{
+    "notificationId": "b8dd35d2-05b9-49f8-9cc2-5fe90fdde1e4",
+    "contextId": "2665246",
+    "event": "inventoryitem_changed",
+    "relativeResourceUri": "api/v1/inventory/1166778899++++++++++",
+    "resourceUri": "https://integration.visma.net/API/controller/api/v1/inventory/1166778899++++++++++",
+    "action": "UPDATED",
+    "timeStamp": 637806931842000000
+}
+
+{
+    "notificationId": "ee44e511-715b-48d7-88c2-aa51f964c069",
+    "contextId": "2665246",
+    "event": "inventoryitem_changed",
+    "relativeResourceUri": "api/v1/inventory/22335577++++++++++++",
+    "resourceUri": "https://integration.visma.net/API/controller/api/v1/inventory/22335577++++++++++++",
+    "action": "CREATED",
+    "timeStamp": 637806932307630000
+}
