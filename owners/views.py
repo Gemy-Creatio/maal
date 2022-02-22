@@ -13,9 +13,18 @@ from django.core.paginator import Paginator
 
 class AllUserOwner(View):
     def get(self, request):
-        data = FinicalCompaniesArrow.objects.order_by('-numberOFArrows')
-        arrows = SeniorOwner.objects.all()
-        seniorArrows = CompaniesArrow.objects.all()
+        companyarrows = FinicalCompaniesArrow.objects.order_by('-numberOFArrows')
+        paginator = Paginator(companyarrows, 8)
+        page_number = request.GET.get('page')
+        data = paginator.get_page(page_number)
+        arrows_page = SeniorOwner.objects.all()
+        paginator = Paginator(arrows_page, 8)
+        page_number = request.GET.get('page1')
+        arrows = paginator.get_page(page_number)
+        seniorArrows_page = CompaniesArrow.objects.all()
+        paginator = Paginator(seniorArrows_page, 8)
+        page_number = request.GET.get('page2')
+        seniorArrows = paginator.get_page(page_number)
         return render(request, 'owners/ownerUserlist.html',
                       context={"data": arrows, "companyarrows": data, "seniorArrows": seniorArrows})
 

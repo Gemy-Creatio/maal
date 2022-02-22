@@ -36,7 +36,11 @@
 
                     </td>
                     <td class="align-middle text-center text-xxs">
+                          {% if item.TotalArrowPrice is not None %}
                      <p class="text-xxs">{{ item.TotalPriceArrows  }}</p>
+                        {% else %}
+                                           <p class="text-xxs">0</p>
+                        {% endif %}
                     </td>
 
                                    {% if request.user.is_emp or request.user.is_admin   %}

@@ -94,12 +94,17 @@
                                 <tbody>
                                 {% for item in data.CompanyEntered.all %}
                                     <tr>
-                                        <td class="align-middle text-center text-xxs">
-                                             <a href="{% url 'user-interface' item.AnalayticName.pk %}">
-                                                            <p class="text-xxs">{{ item.AnalayticName.name }}</p>
-                                                        </a>
+                                                                             <td class="align-middle text-center text-xxs">
+                                           {% if item.AnalayticName == None %}
+                                          <p class="text-xxs text-muted">-------- </p>
+                                               {% else %}
+                                                <a href="{% url 'user-interface' item.AnalayticName.id %}">
+                                                           <p class="text-xxs">{{ item.AnalayticName.name }}</p>
+                                                       </a>
+                                            {% endif %}
 
-                                        </td>
+                                       </td>
+
                                         <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
                                         </td>

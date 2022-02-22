@@ -26,6 +26,7 @@
           
           <div class="card-body px-0 pb-2">
             {% include 'partials/_companiesArrowTable.html' with companyarrows=seniorArrows %}
+              {% include 'partials/_pagination.html' with page_obj=seniorArrows page="page" %}
                    </div>
                    
           </div>
@@ -40,6 +41,7 @@
 
           <div class="card-body px-0 pb-2">
             {% include 'partials/_ownerTable.html' with arrows=data %}
+              {% include 'partials/_pagination.html' with page_obj=data page="page1" %}
 
                    </div>
 
@@ -55,6 +57,7 @@
 
           <div class="card-body px-0 pb-2">
             {% include 'partials/_companyArrowsOwnersTable.html' with companyarrows=companyarrows %}
+              {% include 'partials/_pagination.html' with page_obj=companyarrows page="page2" %}
 
                    </div>
 

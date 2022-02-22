@@ -45,7 +45,7 @@
                                         </td>
                                         <td class="align-middle text-center text-xxs">
                                            {% if item.AnalayticName == None %}
-                                          <p class="text-xxs text-muted">لا يوجد محلل </p>
+                                          <p class="text-xxs text-muted">-------- </p>
                                                {% else %}
                                                 <a href="{% url 'user-interface' item.AnalayticName.id %}">
                                                            <p class="text-xxs">{{ item.AnalayticName.name }}</p>
