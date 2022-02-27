@@ -4,6 +4,31 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+@font-face {
+  font-family: "alarabiya";
+  src: url("./fonts/alarabiyaBoutros2020-ExtraBold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "alarabiya";
+  src: url("./fonts/alarabiyaBoutros2020-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: "Noto Naskh Arabic Bold";
+  src: url("./fonts/NotoNaskhArabic-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 .header {
     width: 100%;
     background-color: transparent;
@@ -52,7 +77,7 @@
 }
 body {
     margin: 0;
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'alarabiya'!important;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -101,7 +126,7 @@ h6,
     font-weight: 400;
     line-height: 1.2;
     color: #344767;
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'alarabiya', sans-serif !important;
 }
 
 h1,
@@ -268,7 +293,7 @@ pre,
 code,
 kbd,
 samp {
-    font-family: font-family: 'Cairo', sans-serif;
+    font-family:  'alarabiya', sans-serif;
     var(--bs-font-monospace);
     font-size: 1em;
     direction: ltr
@@ -6839,7 +6864,7 @@ fieldset:disabled .btn {
     z-index: 1070;
     display: block;
     margin: 0;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -6966,7 +6991,7 @@ fieldset:disabled .btn {
     z-index: 1060;
     display: block;
     max-width: 276px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -9721,7 +9746,7 @@ fieldset:disabled .btn {
 }
 
 .font-monospace {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
 }
 
 .fs-1 {
@@ -19433,7 +19458,7 @@ fieldset:disabled .btn {
 }
 
     .card .card-body {
-        font-family: 'Cairo', sans-serif;
+        font-family: 'alarabiya', sans-serif;
         padding: 1.5rem;
     }
 
@@ -22951,7 +22976,7 @@ height: 2vh !important;
     margin: 10px 0;
   }
 .text-xxs {
-    font-size: 0.35rem !important;
+    font-size: 0.60rem !important;
       line-height: 2vh !important;
     height: 2vh !important;
 }
@@ -23298,7 +23323,7 @@ p,
 }
 
 .text-sm {
-  font-size: 0.875rem !important;
+  font-size: 0.98rem !important;
 }
 
 .text-xs {
@@ -23311,7 +23336,7 @@ p,
 .text-xxs {
     text-align: center;
       font-weight: bolder;
-    font-size: 0.85rem;
+    font-size: 0.99rem;
     line-height: 2vh !important;
     height: 2vh !important;
 }
@@ -23326,11 +23351,11 @@ p {
 }
 
 .text-sans-serif {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
 }
 
 .text-monospace {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
 }
 
 .text-justify {
@@ -24809,7 +24834,7 @@ pre[class*="language-"] {
     color: black;
     background: none;
     text-shadow: 0 1px white;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'alarabiya', sans-serif;
     font-size: 1em;
     text-align: left;
     white-space: pre;

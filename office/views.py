@@ -7,15 +7,16 @@ from accounts.models import User
 from django.shortcuts import render, redirect
 from .models import Rates, FinicialCompany, FinicialAnalyst, CompanyCode, CompanyCategory, ResearchCompany, \
     PerviousCompany, EarningsForecast, RateQuarter
-from django.core.files.storage import FileSystemStorage
-from django.contrib import messages
+
 from django.core.paginator import Paginator
 from django.views.generic import CreateView
 from office.forms import *
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
-
+from main.models import (
+EarningHeader
+)
 
 class DeleteRate(DeleteView):
     model = Rates
@@ -366,7 +367,9 @@ def ExpectationList(request):
     paginator = Paginator(expects, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    headers = EarningHeader.get_solo()
     context = {
-        "expectations": page_obj
+        "expectations": page_obj,
+        "headers":headers
     }
     return render(request, 'office/expectation-list.html', context=context)

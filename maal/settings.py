@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'login'
 INSTALLED_APPS = [
+    "admin_interface",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +48,8 @@ INSTALLED_APPS = [
     'django_filters',
     'xhtml2pdf',
     'crispy_forms',
-
+    'solo',
+    'colorfield',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -79,7 +81,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'maal.wsgi.application'
-
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 

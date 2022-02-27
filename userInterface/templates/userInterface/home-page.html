@@ -59,11 +59,12 @@
                      <div class="col-12 col-xl-12 pt-5">
         <div class="card h-100 pt-3">
 <div class="card-header pb-0 p-3">
-    <h6 class="mb-0 text-center">ملكيات <strong>الشركات - المؤسسات</strong></h6>
+    <h6 class="mb-0 text-center">اخر التغيرات فى قوائم <strong>كبار الملاك</strong></h6>
+    <p>بتاريخ :<strong style="margin-inline: 0.2rem;">{{ last_date }}</strong> </p>
 </div>
 
 <div class="card-body px-0 pb-2">
-      {%  include 'partials/_companyArrowsOwnersTable.html' with companyarrows=companyarrows %}
+            {% include 'partials/_companiesArrowTable.html' with companyarrows=arrows %}
        </div>
        <div class="card-footer">
         <div class="col-12 d-flex justify-content-end">

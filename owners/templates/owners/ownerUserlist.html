@@ -21,7 +21,7 @@
                 <div class="col-12 col-xl-12 pt-5">
                     <div class="card h-100">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">أخر التغيرات فى قوائم <strong>كبار الملاك</strong> </h6>
+            <h6 class="mb-0">قوائم <strong>كبار الملاك</strong> </h6>
           </div>
           
           <div class="card-body px-0 pb-2">
@@ -52,13 +52,12 @@
                 <div class="col-12 col-xl-12 pt-5">
                     <div class="card h-100">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">كبار الملاك بسوق الأسهم <strong> المؤسسات - الحكومة</strong></h6>
+            <h6 class="mb-0">كبار الملاك بسوق الأسهم <strong> الشركات -المؤسسات الحكومية</strong></h6>
           </div>
 
           <div class="card-body px-0 pb-2">
-            {% include 'partials/_companyArrowsOwnersTable.html' with companyarrows=companyarrows %}
+            {% include 'partials/_companiesArrowTable.html' with companyarrows=companyarrows %}
               {% include 'partials/_pagination.html' with page_obj=companyarrows page="page2" %}
-
                    </div>
 
           </div>

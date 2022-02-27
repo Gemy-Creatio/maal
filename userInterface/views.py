@@ -7,7 +7,9 @@ from office.filters import RatesFilter, EarnFilter
 from owners.models import CompaniesArrow, SeniorOwner, FinicalCompaniesArrow
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
-
+from main.models import (
+EarningHeader
+)
 
 # Create your views here.
 
@@ -32,22 +34,23 @@ def user_home(request):
     cats = CompanyCategory.objects.all()
     comps = FinicialCompany.objects.all()
     arrows = SeniorOwner.objects.all()[:5]
-    companyarrows = FinicalCompaniesArrow.objects.all()[:5]
+    max_date = CompaniesArrow.objects.latest('date').date
+    arrows = CompaniesArrow.objects.filter(date=max_date)
     label = []
     data = []
-    rates = Rates.objects.filter(Recommendation__exact=1)[:5]
+    rates = Rates.objects.filter(Recommendation=1)[:5]
     for rate in rates:
         label.append(rate.CompanyEntered.name)
         data.append(rate.FairValue)
     label1 = []
     data1 = []
-    rates = Rates.objects.filter(Recommendation__exact=2)[:5]
+    rates = Rates.objects.filter(Recommendation=2)[:5]
     for rate in rates:
         label1.append(rate.CompanyEntered.name)
         data1.append(rate.FairValue)
     companylabel = []
     companydata = []
-    companies = Rates.objects.filter(Recommendation__exact=3)[:5]
+    companies = Rates.objects.filter(Recommendation=3)[:5]
     for company in companies:
         companylabel.append(company.CompanyEntered.name)
         companydata.append(company.FairValue)
@@ -74,7 +77,8 @@ def user_home(request):
         "companylabel1": companylabel1,
         "companydata1": companydata1,
         "arrows": arrows,
-        "companyarrows": companyarrows
+        "companyarrows": arrows,
+        "last_date":max_date,
     }
     return render(request, 'userInterface/home-page.html', context=context)
 
@@ -132,6 +136,7 @@ def expectList(request):
     data1 = EarningsForecast.objects.order_by('-total_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
+    content = EarningHeader.get_solo()
     for expect in data1:
         expectlabel1.append(expect.CompanyEntered.name)
         expectdata1.append(expect.total_earn)
@@ -152,8 +157,8 @@ def expectList(request):
         "expectlabel2": expectlabel2,
         "expectdata2": expectdata2,
         "expectlabel3": expectlabel3,
-        "expectdata3": expectdata3
-
+        "expectdata3": expectdata3,
+        "content":content,
     }
     return render(request, 'userInterface/expect-list.html', context=context)
 
@@ -234,7 +239,8 @@ def expectrealList(request):
         "expectlabel2": expectlabel2,
         "expectdata2": expectdata2,
         "expectlabel3": expectlabel3,
-        "expectdata3": expectdata3
+        "expectdata3": expectdata3,
+        "content": EarningHeader.get_solo()
 
     }
     return render(request, 'userInterface/expectreal-list.html', context=context)

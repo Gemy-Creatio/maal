@@ -52,34 +52,35 @@
                         <thead class="text-black">
                         <tr>
                             <th class="text-dark text-xxs" style="width: 2rem;">
-                                الشركة
+                                {{ headers.first_header|safe }}
                             </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
-                                شركة الأبحاث
+                                {{ headers.second_header|safe }}
                             </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
-                                توقعات الأرباح
+                          {{ headers.third_header|safe }}
                             </th>
 
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                الربع الثالث 2020
+                              {{ headers.fourth_header | safe }}
                             </th>
 
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
+               {{ headers.fifth_header|safe }}
                             </th>
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                الربع الثانى 2021
+                                                                {{ headers.fifth_header|safe }}
+
                             </th>
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
+                                {{ headers.sixth_header|safe }}
                             </th>
                              <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                               الأرباح الفعلية
+                                                               {{ headers.seventh_header|safe }}
                             </th>
 
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
-                                المرفق
+                             {{ headers.eight_header|safe }}
                             </th>
                             <th class="text-center text-dark text-xxs" style="width: 2rem;">
 
@@ -102,7 +103,7 @@
                                 </td>
                                 <td>
 
-                                    <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
+                                    <p class="mb-0 text-xxs">{{ item.total_earn }}</p>
                                 </td>
                                 <td class="align-middle text-center text-xxs">
                                     <p class="mb-0 text-xxs">{{ item.third2020 }}</p>

@@ -42,7 +42,7 @@
                             </div>
                         </div>
             <div class="card-body px-0 pb-2">
-                       {% include 'partials/_realExpectTable.html' with expects=expects %}
+                       {% include 'partials/_realExpectTable.html' with expects=expects content=content %}
                 {% include 'partials/_pagination.html' with page_obj=expects only %}
 
             </div>

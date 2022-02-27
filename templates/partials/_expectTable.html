@@ -4,31 +4,31 @@
                         <thead class="text-black">
                         <tr>
                             <th class="text-dark text-xxs" style="width: 2rem;">
-                                الشركة
+                                {{ content.first_header|safe }}
                             </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
-                                شركة الأبحاث
+                                {{ content.second_header|safe }}
                             </th>
                             <th class="text-dark text-xxs " style="width: 2rem;">
-                                توقعات الأرباح
+                                {{ content.third_header|safe }}
                             </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثالث 2020
+                                {{ content.fourth_header|safe }}
                             </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
+                                {{ content.fifth_header|safe }}
                             </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثانى 2021
+                                {{ content.sixth_header|safe }}
                             </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
+                                {{ content.seventh_header|safe }}
                             </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                                المرفق
+                                {{ content.eight_header|safe }}
                             </th>
                         </tr>
                         </thead>
@@ -63,6 +63,10 @@
                                     <p class=" text-xxs">{{ item.third2020 }}</p>
 
                                 </td>
+                            <td class="text-xxs">
+                                    <p class=" text-xxs">{{ item.second2020 }}</p>
+
+                                </td>
                                 <td>
                                     {% if item.deviationthird2020 < 0 %}
                                         <p class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</p>
@@ -70,10 +74,7 @@
                                         <p class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
-                              <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.second2020 }}</p>
 
-                                </td>
                               <td class="  text-xxs">
                                     {% if item.deviationsecond2020 < 0 %}
                                         <p class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
@@ -83,7 +84,11 @@
                                 </td>
 
                              <td class="  text-xxs">
-                                   <a href="{{ item.report.url }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
+                                 {% if item.report %}
+                                     <a href="{{ item.report.url }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
+                                 {% else %}
+                                     <p class="text-xxs text-muted">لا يوجد مرفق</p>
+                                 {% endif %}
                                 </td>
 
 
