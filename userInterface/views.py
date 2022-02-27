@@ -8,8 +8,9 @@ from owners.models import CompaniesArrow, SeniorOwner, FinicalCompaniesArrow
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
 from main.models import (
-EarningHeader
+    EarningHeader
 )
+
 
 # Create your views here.
 
@@ -35,7 +36,11 @@ def user_home(request):
     comps = FinicialCompany.objects.all()
     arrows = SeniorOwner.objects.all()[:5]
     max_date = CompaniesArrow.objects.latest('date').date
-    arrows = CompaniesArrow.objects.filter(date=max_date)
+    if max_date is None:
+        arrows = CompaniesArrow.objects.filter(owner_type = 1)
+    else:
+        arrows = CompaniesArrow.objects.filter(date__gte=max_date)
+
     label = []
     data = []
     rates = Rates.objects.filter(Recommendation=1)[:5]
@@ -78,7 +83,7 @@ def user_home(request):
         "companydata1": companydata1,
         "arrows": arrows,
         "companyarrows": arrows,
-        "last_date":max_date,
+        "last_date": max_date,
     }
     return render(request, 'userInterface/home-page.html', context=context)
 
@@ -158,7 +163,7 @@ def expectList(request):
         "expectdata2": expectdata2,
         "expectlabel3": expectlabel3,
         "expectdata3": expectdata3,
-        "content":content,
+        "content": content,
     }
     return render(request, 'userInterface/expect-list.html', context=context)
 

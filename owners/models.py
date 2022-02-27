@@ -39,7 +39,7 @@ class CompaniesArrow(models.Model):
         (2, 'شركة'),
         (3, 'مؤسسة حكومية'),
     )
-    owner_type = models.SmallIntegerField(null=True, blank=True)
+    owner_type = models.SmallIntegerField(null=True, blank=True,choices=OWNER_TYPES)
 
     @property
     def ChangeOwn(self):

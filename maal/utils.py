@@ -6,6 +6,10 @@ import arabic_reshaper
 from bidi.algorithm import get_display
 
 
+def get_filename(filename):
+    return filename.upper()
+
+
 def render_to_pdf(template_src, context_dict=None):
     if context_dict is None:
         context_dict = {}

@@ -34,6 +34,7 @@ class ArrowsForm(forms.ModelForm):
             'company': forms.Select(choices=models.FinicialCompany.objects.all()),
             'date': forms.TextInput(
                 attrs={'id': 'datefield', 'type': 'date', 'class': 'form-control'}),
+            'owner_type':forms.Select(choices=models.CompaniesArrow.OWNER_TYPES),
         }
         labels = {
             'owner': 'المالك',

@@ -50,8 +50,17 @@ INSTALLED_APPS = [
     'crispy_forms',
     'solo',
     'colorfield',
+    'django_extensions',
+    'ckeditor',
 ]
+CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
+CKEDITOR_UPLOAD_PATH = "uploads/"
 AUTH_USER_MODEL = 'accounts.User'
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+}
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
