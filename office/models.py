@@ -178,11 +178,6 @@ class EarningsForecast(models.Model):
 
 
 class ExpectationYear(models.Model):
-    TABLE_CHOICES = (
-        (1, 'الأرباح الفعلية/ التوقعات'),
-        (2, 'التوقعات لأرباح الشركات'),
-    )
-    is_show = models.SmallIntegerField(null=True , blank=True , choices=TABLE_CHOICES)
     real_earn = models.FloatField(null=True, blank=True)
     expect_earn = models.FloatField(null=True, blank=True)
     quarter_now = models.FloatField(null=True, blank=True)

@@ -117,6 +117,5 @@ class ExpectationYearForm(forms.ModelForm):
             'expect_earn': 'توقعات الأرباح',
             'quarter_past': 'الربع المقابل ',
             'quarter_now': ' الربع الحالي',
-            'is_show':'يعرض فى صفحة '
         }
 
