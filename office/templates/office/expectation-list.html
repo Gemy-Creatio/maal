@@ -88,6 +88,9 @@
                         <th class="text-center text-dark text-xxs" style="width: 2rem;">
 
                             </th>
+                          <th class="text-center text-dark text-xxs" style="width: 2rem;">
+
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -103,32 +106,32 @@
                                 </td>
                                 <td>
 
-                                    <p class="mb-0 text-xxs">{{ item.total_earn }}</p>
+{#                                    <p class="mb-0 text-xxs">{{ item.total_earn }}</p>#}
                                 </td>
                                 <td class="align-middle text-center text-xxs">
-                                    <p class="mb-0 text-xxs">{{ item.third2020 }}</p>
+{#                                    <p class="mb-0 text-xxs">{{ item.third2020 }}</p>#}
 
                                 </td>
                                 <td class="align-middle text-center">
-                                    {% if item.deviationthird2020 < 0 %}
-                                        <span class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</span>
-                                    {% else %}
-                                        <span class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</span>
-                                    {% endif %}
+{#                                    {% if item.deviationthird2020 < 0 %}#}
+{#                                        <span class="text-danger text-xxs ">{{ item.deviationthird2020|floatformat:-2 }} %</span>#}
+{#                                    {% else %}#}
+{#                                        <span class="text-success text-xxs">{{ item.deviationthird2020|floatformat:-2 }} %</span>#}
+{#                                    {% endif %}#}
                                 </td>
                               <td class="align-middle text-center text-xxs">
                                     <p class="mb-0 text-xxs">{{ item.second2020 }}</p>
 
                                 </td>
                               <td class="align-middle text-center text-xxs">
-                                    {% if item.deviationsecond2020 < 0 %}
-                                        <span class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
-                                    {% else %}
-                                        <span class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>
-                                    {% endif %}
+{#                                    {% if item.deviationsecond2020 < 0 %}#}
+{#                                        <span class="text-danger text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>#}
+{#                                    {% else %}#}
+{#                                        <span class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</span>#}
+{#                                    {% endif %}#}
                                 </td>
  <td class="align-middle text-center text-xxs">
-                                    <p class="mb-0 text-xxs">{{ item.realEarn }}</p>
+{#                                    <p class="mb-0 text-xxs">{{ item.realEarn }}</p>#}
 
                                 </td>
 
@@ -142,6 +145,10 @@
                                         </td>
    <td class="ms-auto text-start">
        <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-update' item.pk %}"><i class="fas fa-pencil-alt text-success"></i>تعديل</a>
+
+   </td>
+                              <td class="ms-auto text-start">
+       <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'add-year' item.pk %}"><i class="fas fa-plus text-dark"></i>اضافة ربع</a>
 
    </td>
                             </tr>

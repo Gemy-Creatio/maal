@@ -101,10 +101,22 @@ class ExpectationForm(forms.ModelForm):
             'CompanyEntered': 'الشركة المدرجة',
             'ResearchCompany': 'شركة الأبحاث ',
             'analyst': 'إسم المحلل',
-            'total_earn': 'توقعات الأرباح',
-            'third2020': 'الربع الثالث 2020',
-            'second2020': 'الربع الثانى 2021',
-            'realEarn': 'الأرباح الفعلية',
             'report': ' التقرير',
-            'is_recommended':'مرشح للقارئ'
+            'is_recommended':'مرشح للقارئ',
+
         }
+
+
+class ExpectationYearForm(forms.ModelForm):
+    class Meta:
+        model = models.ExpectationYear
+        fields = '__all__'
+        exclude = ('year' ,)
+        labels = {
+            'real_earn': 'الأرباح الفعلية',
+            'expect_earn': 'توقعات الأرباح',
+            'quarter_past': 'الربع المقابل ',
+            'quarter_now': ' الربع الحالي',
+            'is_show':'يعرض فى صفحة '
+        }
+

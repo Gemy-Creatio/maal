@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from office.models import FinicialAnalyst, CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, \
-    ResearchCompany
-from office.filters import RatesFilter, EarnFilter
+from office.models import (
+    FinicialAnalyst, CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, \
+    ResearchCompany , ExpectationYear
+)
+from office.filters import RatesFilter, EarnFilter , YearFilter
 from owners.models import CompaniesArrow, SeniorOwner, FinicalCompaniesArrow
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
@@ -37,7 +39,7 @@ def user_home(request):
     arrows = SeniorOwner.objects.all()[:5]
     max_date = CompaniesArrow.objects.latest('date').date
     if max_date is None:
-        arrows = CompaniesArrow.objects.filter(owner_type = 1)
+        arrows = CompaniesArrow.objects.filter(owner_type=1)
     else:
         arrows = CompaniesArrow.objects.filter(date__gte=max_date)
 
@@ -120,32 +122,32 @@ def rateslist(request):
 
 
 def expectList(request):
-    data = EarningsForecast.objects.order_by('-realEarn')[:5]
+    data = ExpectationYear.objects.order_by('-real_earn')[:5]
     expectlabel = []
     expectdata = []
     for expect in data:
-        expectlabel.append(expect.CompanyEntered.name)
-        expectdata.append(expect.realEarn)
-    data2 = EarningsForecast.objects.order_by('-third2020')[:5]
+        expectlabel.append(expect.year.CompanyEntered.name)
+        expectdata.append(expect.real_earn)
+    data2 = ExpectationYear.objects.order_by('-quarter_now')[:5]
     expectlabel2 = []
     expectdata2 = []
     for expect in data2:
-        expectlabel2.append(expect.CompanyEntered.name)
-        expectdata2.append(expect.third2020)
-    data3 = EarningsForecast.objects.order_by('-second2020')[:5]
+        expectlabel2.append(expect.year.CompanyEntered.name)
+        expectdata2.append(expect.quarter_now)
+    data3 = ExpectationYear.objects.order_by('-quarter_past')[:5]
     expectlabel3 = []
     expectdata3 = []
     for expect in data3:
-        expectlabel3.append(expect.CompanyEntered.name)
-        expectdata3.append(expect.second2020)
-    data1 = EarningsForecast.objects.order_by('-total_earn')[:5]
+        expectlabel3.append(expect.year.CompanyEntered.name)
+        expectdata3.append(expect.quarter_past)
+    data1 = ExpectationYear.objects.order_by('-real_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
     content = EarningHeader.get_solo()
     for expect in data1:
-        expectlabel1.append(expect.CompanyEntered.name)
-        expectdata1.append(expect.total_earn)
-    expects = EarningsForecast.objects.filter(is_recommended=True)
+        expectlabel1.append(expect.year.CompanyEntered.name)
+        expectdata1.append(expect.real_earn)
+    expects = EarningsForecast.objects.all()
     expect_filter = EarnFilter(request.POST, queryset=expects)
     expectz = expect_filter.qs
     paginator = Paginator(expectz, 10)
@@ -192,7 +194,7 @@ def CompanyArrowsAll(request):
 
 
 def ExpectAll(request):
-    object_list = EarningsForecast.objects.all()
+    object_list = ExpectationYear.objects.all()
     paginator = Paginator(object_list, 15)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -204,32 +206,32 @@ def ExpectAll(request):
 
 def expectrealList(request):
     expects = EarningsForecast.objects.all()
-    data = EarningsForecast.objects.order_by('-realEarn')[:5]
+    data = ExpectationYear.objects.order_by('-real_earn')[:5]
     expectlabel = []
     expectdata = []
     for expect in data:
-        expectlabel.append(expect.CompanyEntered.name)
-        expectdata.append(expect.realEarn)
-    data1 = EarningsForecast.objects.order_by('-total_earn')[:5]
+        expectlabel.append(expect.year.CompanyEntered.name)
+        expectdata.append(expect.real_earn)
+    data1 = ExpectationYear.objects.order_by('-expect_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
     for expect in data1:
-        expectlabel1.append(expect.CompanyEntered.name)
-        expectdata1.append(expect.total_earn)
-    data2 = EarningsForecast.objects.order_by('-third2020')[:5]
+        expectlabel1.append(expect.year.CompanyEntered.name)
+        expectdata1.append(expect.expect_earn)
+    data2 = ExpectationYear.objects.order_by('-quarter_now')[:5]
     expectlabel2 = []
     expectdata2 = []
     for expect in data2:
-        expectlabel2.append(expect.CompanyEntered.name)
-        expectdata2.append(expect.third2020)
-    data3 = EarningsForecast.objects.order_by('-second2020')[:5]
+        expectlabel2.append(expect.year.CompanyEntered.name)
+        expectdata2.append(expect.quarter_now)
+    data3 = ExpectationYear.objects.order_by('-quarter_past')[:5]
     expectlabel3 = []
     expectdata3 = []
     for expect in data3:
-        expectlabel3.append(expect.CompanyEntered.name)
-        expectdata3.append(expect.second2020)
-    expectss = EarningsForecast.objects.all()
-    expect_filter = EarnFilter(request.POST, queryset=expectss)
+        expectlabel3.append(expect.year.CompanyEntered.name)
+        expectdata3.append(expect.quarter_past)
+    expectss = ExpectationYear.objects.filter(is_show=1)
+    expect_filter = YearFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
     paginator = Paginator(expectz, 8)
     page_number = request.GET.get('page')

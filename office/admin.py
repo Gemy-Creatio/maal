@@ -8,5 +8,5 @@ admin.site.register(models.CompanyCode)
 admin.site.register(models.CompanyCategory)
 admin.site.register(models.RateQuarter)
 admin.site.register(models.EarningsForecast)
-
+admin.site.register(models.ExpectationYear)
 admin.site.register(models.ResearchCompany)

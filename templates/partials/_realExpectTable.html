@@ -37,62 +37,60 @@
                             <tr>
                                 <td class="d-flex" style="justify-content: space-around; ">
                                     {% if request.user.user_type == 3 %}
-                                     <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2 ;">
+                                     <a  href="{% url 'add_wish' item.year.CompanyEntered.id %}" style="margin-inline:0.2 ;">
                                        <i class="far fa-bookmark"></i>
 </a>
 
 {% endif %}
-                                    <a href="{% url 'user-company' item.CompanyEntered.id %}">
+                                    <a href="{% url 'user-company' item.year.CompanyEntered.id %}">
 
-                               <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+                               <p class="text-xxs">{{ item.year.CompanyEntered.name }}</p>
 </a>
 
                        </td>
                                 <td>
 
-                                          <a href="{% url 'user-research' item.ResearchCompany.id %}">
+                                          <a href="{% url 'user-research' item.year.ResearchCompany.id %}">
 
-                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.year.ResearchCompany.name }}</p>
                                                              </a>
                                 </td>
                                 <td>
 
-                                    <p class=" text-xxs">{{ item.total_earn }}</p>
+                                    <p class=" text-xxs">{{ item.expect_earn }}</p>
                                 </td>
                             <td>
 
-                                    <p class=" text-xxs">{{ item.realEarn }}</p>
+                                    <p class=" text-xxs">{{ item.real_earn }}</p>
                                 </td>
                             <td>
- {% if item.deviationreal == None %}
+ {% if item.deviation_on_expect == None %}
      <p class="text-danger text-xxs ">{{ 0|floatformat:-2 }} %</p>
                                 {% else %}
-         {% if item.deviationreal < 0  %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-2 }} %</p>
+         {% if item.deviation_on_expect < 0  %}
+                                        <p class="text-danger text-xxs ">{{ item.deviation_on_expect|floatformat:-2 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-2 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviation_on_expect|floatformat:-2 }} %</p>
                                     {% endif %}
 
                                 {% endif %}
 
                                 </td>
                                 <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.second2020 }}</p>
+                                    <p class=" text-xxs">{{ item.quarter_now }}</p>
 
                                 </td>
                                 <td>
-                                    {% if item.deviationsecond2020 < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
+                                    {% if item.deviation_real_now < 0 %}
+                                        <p class="text-danger text-xxs ">{{ item.deviation_real_now|floatformat:-2 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-2 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviation_real_now|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
 
                              <td class="  text-xxs">
                                    <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
                                 </td>
-
-
                             </tr>
                         {% endfor %}
 

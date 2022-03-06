@@ -1,4 +1,6 @@
 import datetime
+from msilib.schema import Property
+
 from django.db import models
 from accounts.models import User
 
@@ -163,28 +165,8 @@ class EarningsForecast(models.Model):
                                        null=True, related_name='expects', blank=True)
     ResearchCompany = models.ForeignKey(ResearchCompany, on_delete=models.CASCADE,
                                         null=True, related_name='Researchexpects', blank=True)
-    total_earn = models.IntegerField(blank=True, null=True)
-    third2020 = models.IntegerField(blank=True, null=True)
-
-    second2020 = models.IntegerField(blank=True, null=True)
     report = models.FileField(upload_to='reportspdf/', null=True, blank=True)
-    realEarn = models.IntegerField(blank=True, null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
-
-    @property
-    def deviationsecond2020(self):
-        return (self.total_earn - self.second2020) / (self.second2020 * 100)
-
-    @property
-    def deviationthird2020(self):
-        return (self.total_earn - self.third2020) / (self.third2020 * 100)
-
-    @property
-    def deviationreal(self):
-        if self.total_earn is None or self.realEarn is None:
-            return 0
-        else:
-            return (self.total_earn - self.realEarn) / (self.realEarn * 100)
 
     def __str__(self):
         return str(self.CompanyEntered.name)
@@ -193,3 +175,50 @@ class EarningsForecast(models.Model):
         indexes = [
             models.Index(fields=['analyst'])
         ]
+
+
+class ExpectationYear(models.Model):
+    TABLE_CHOICES = (
+        (1, 'الأرباح الفعلية/ التوقعات'),
+        (2, 'التوقعات لأرباح الشركات'),
+    )
+    is_show = models.SmallIntegerField(null=True , blank=True , choices=TABLE_CHOICES)
+    real_earn = models.FloatField(null=True, blank=True)
+    expect_earn = models.FloatField(null=True, blank=True)
+    quarter_now = models.FloatField(null=True, blank=True)
+    quarter_past = models.FloatField(null=True, blank=True)
+    year = models.ForeignKey(EarningsForecast, on_delete=models.SET_NULL, null=True, blank=True,
+                             related_name='deviations')
+
+    class Meta:
+        pass
+
+    @property
+    def deviation_real_now(self):
+        result = float(self.real_earn) - float(self.quarter_now)
+        deviation = result / self.quarter_now
+        return deviation
+
+    @property
+    def deviation_expect_now(self):
+        result = float(self.expect_earn) - float(self.quarter_now)
+        deviation = result / self.quarter_now
+        return deviation
+
+    @property
+    def deviation_on_expect(self):
+        result = float(self.real_earn) - float(self.expect_earn)
+        deviation = result / self.real_earn
+        return deviation
+
+    @property
+    def deviation_real_past(self):
+        result = float(self.real_earn) - float(self.quarter_past)
+        deviation = result / self.quarter_past
+        return deviation
+
+    @property
+    def deviation_expect_past(self):
+        result = float(self.expect_earn) - float(self.quarter_past)
+        deviation = result / self.quarter_past
+        return deviation
