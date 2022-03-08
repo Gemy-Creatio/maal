@@ -1,5 +1,4 @@
 import datetime
-from msilib.schema import Property
 
 from django.db import models
 from accounts.models import User

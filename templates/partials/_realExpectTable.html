@@ -13,15 +13,15 @@
                        {{ content.third_header|safe }}
                             </th>
   <th class="text-dark text-xxs " style="width: 2rem;">
-                       {{ content.nine_header|safe }}
+                       {{ content.fourth_header|safe }}
                             </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                       {{ content.seventh_header|safe }}
+                       {{ content.fifth_header|safe }}
 
                             </th>
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
-                   {{ content.fifth_header|safe }}
+                   {{ content.sixth_header|safe }}
                             </th>
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                           {{ content.seventh_header|safe }}
@@ -29,6 +29,12 @@
 
                             <th class=" text-dark text-xxs" style="width: 2rem;">
                            {{ content.eight_header|safe }}
+                            </th>
+                             <th class=" text-dark text-xxs" style="width: 2rem;">
+                           {{ content.nine_header|safe }}
+                            </th>
+                             <th class=" text-dark text-xxs" style="width: 2rem;">
+                           {{ content.tenth_header|safe }}
                             </th>
                         </tr>
                         </thead>
@@ -85,6 +91,17 @@
                                         <p class="text-danger text-xxs ">{{ item.deviation_real_now|floatformat:-2 }} %</p>
                                     {% else %}
                                         <p class="text-success text-xxs">{{ item.deviation_real_now|floatformat:-2 }} %</p>
+                                    {% endif %}
+                                </td>
+                              <td class="text-xxs">
+                                    <p class=" text-xxs">{{ item.quarter_past }}</p>
+
+                                </td>
+                                <td>
+                                    {% if item.deviation_real_now < 0 %}
+                                        <p class="text-danger text-xxs ">{{ item.deviation_real_past|floatformat:-2 }} %</p>
+                                    {% else %}
+                                        <p class="text-success text-xxs">{{ item.deviation_real_past|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
 

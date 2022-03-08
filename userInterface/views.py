@@ -3,14 +3,15 @@ from django.views.generic import ListView
 
 from office.models import (
     FinicialAnalyst, CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, \
-    ResearchCompany , ExpectationYear
+    ResearchCompany, ExpectationYear
 )
-from office.filters import RatesFilter, EarnFilter , YearFilter
+from office.filters import RatesFilter, EarnFilter, YearFilter
 from owners.models import CompaniesArrow, SeniorOwner, FinicalCompaniesArrow
 from wishlist.models import Wishlist
 from django.core.paginator import Paginator
 from main.models import (
-    EarningHeader
+    EarningHeader,
+    EarningHeaderSecond
 )
 
 
@@ -230,7 +231,7 @@ def expectrealList(request):
     for expect in data3:
         expectlabel3.append(expect.year.CompanyEntered.name)
         expectdata3.append(expect.quarter_past)
-    expectss = ExpectationYear.objects.filter(is_show=1)
+    expectss = ExpectationYear.objects.all()
     expect_filter = YearFilter(request.POST, queryset=expectss)
     expectz = expect_filter.qs
     paginator = Paginator(expectz, 8)
@@ -247,7 +248,7 @@ def expectrealList(request):
         "expectdata2": expectdata2,
         "expectlabel3": expectlabel3,
         "expectdata3": expectdata3,
-        "content": EarningHeader.get_solo()
+        "content": EarningHeaderSecond.get_solo()
 
     }
     return render(request, 'userInterface/expectreal-list.html', context=context)
