@@ -21,6 +21,7 @@
                     <div class="card card-blog card-plain">
                         <div class="card-body px-1 pb-0">
                             <form  method="post">
+                                {% csrf_token %}
                                                              {{ form|crispy }}
                   <button type="submit" class="btn btn-sm text-white bg-maal">
                                    إضافة
