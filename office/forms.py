@@ -96,26 +96,17 @@ class ExpectationForm(forms.ModelForm):
     class Meta:
         model = models.EarningsForecast
         fields = '__all__'
-        exclude = ('EmpEntered',)
+        exclude = ('EmpEntered','analyst')
         labels = {
             'CompanyEntered': 'الشركة المدرجة',
             'ResearchCompany': 'شركة الأبحاث ',
-            'analyst': 'إسم المحلل',
             'report': ' التقرير',
             'is_recommended':'مرشح للقارئ',
+            'pervquarter':'الربع المقابل',
+            'quarter_past':'الربع السابق',
+            'real_earn':'التوقعات',
+            'expect_earn':'الأرباح الفعلية',
 
         }
 
-
-class ExpectationYearForm(forms.ModelForm):
-    class Meta:
-        model = models.ExpectationYear
-        fields = '__all__'
-        exclude = ('year' ,)
-        labels = {
-            'real_earn': 'الأرباح الفعلية',
-            'expect_earn': 'توقعات الأرباح',
-            'quarter_past': 'الربع المقابل ',
-            'quarter_now': ' الربع الحالي',
-        }
 

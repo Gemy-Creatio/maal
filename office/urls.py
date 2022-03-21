@@ -38,6 +38,5 @@ urlpatterns = [
     path('expect/delete/<int:pk>', views.DeleteEarningsForecast.as_view(), name='expect-delete'),
     path('analyst/delete/<int:pk>', views.DeleteFinicialAnalyst.as_view(), name='analyst-delete'),
     path('perv/delete/<int:pk>', views.DeletePervCompany.as_view(), name='perv-delete'),
-    path('expect/year/add/<int:pk>', views.AddExpectYear.as_view(), name='add-year'),
 
 ]

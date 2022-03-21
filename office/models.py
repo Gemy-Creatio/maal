@@ -105,7 +105,7 @@ class Rates(models.Model):
     RecommendDate = models.DateField(null=True)
     report = models.FileField(upload_to='reportspdf/', null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
-
+    Date_Entered = models.DateField(auto_now_add=True , null=True)
     class Meta:
         indexes = [
             models.Index(fields=['FairValue', 'AnalayticName', 'CompanyEntered'])
@@ -113,11 +113,11 @@ class Rates(models.Model):
 
     @property
     def fair_percentage(self):
-        return (self.FairValue - self.CurrenncyValue) / (self.CurrenncyValue * 100)
+        return (self.FairValue - self.CurrenncyValue) / self.CurrenncyValue * 100
 
     @property
     def market_percentage(self):
-        return (self.MarketValue - self.FairValue) / (self.FairValue * 100)
+        return (self.MarketValue - self.FairValue) / self.FairValue * 100
 
     def __str__(self):
         return str(self.CompanyEntered)
@@ -166,6 +166,51 @@ class EarningsForecast(models.Model):
                                         null=True, related_name='Researchexpects', blank=True)
     report = models.FileField(upload_to='reportspdf/', null=True, blank=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
+    pervquarter =  models.FloatField(null=True, blank=True)
+    quarter_past =  models.FloatField(null=True, blank=True)
+    real_earn =  models.FloatField(null=True, blank=True)
+    expect_earn =  models.FloatField(null=True, blank=True)
+    date_entered = models.DateField(null=True , blank=True , auto_now_add=True)
+    @property
+    def deviation_first(self):
+        if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
+            return 0 
+        else:
+            result = float(self.expect_earn) - float(self.pervquarter)
+            deviation = result / self.pervquarter * 100
+            return deviation
+    @property
+    def deviation_second(self):
+        if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
+            return 0 
+        else:
+            result = float(self.expect_earn) - float(self.quarter_past)
+            deviation = result / self.quarter_past * 100
+            return deviation
+    @property
+    def deviation_third(self):
+        if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
+            return 0 
+        else:
+            result = float(self.real_earn) - float(self.expect_earn)
+            deviation = result / self.expect_earn * 100
+            return deviation
+    @property
+    def deviation_fourth(self):
+        if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
+            return 0 
+        else:
+            result = float(self.real_earn) - float(self.quarter_past)
+            deviation = result / self.quarter_past * 100
+            return deviation
+    @property
+    def deviation_fifth(self):
+        if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
+            return 0 
+        else:
+            result = float(self.real_earn) - float(self.pervquarter)
+            deviation = result / self.pervquarter * 100
+            return deviation
 
     def __str__(self):
         return str(self.CompanyEntered.name)

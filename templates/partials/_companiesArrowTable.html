@@ -1,3 +1,6 @@
+{% load humanize %}
+{% load humanize %}
+
 <table style="margin:0 auto;"
        class="table table-bordered align-items-center mb-auto">
        <thead class="text_black">
@@ -54,7 +57,7 @@
                     </td>
                    <td class="align-middle text-center text-xxs">
                      {% if item.TotalArrowPrice is not None %}
-                       <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
+                       <p class="text-xxs">{{ item.TotalArrowPrice | intcomma   }}</p>
                        {% else %}
                          <p class="text-xxs">0</p>
                        {% endif %}

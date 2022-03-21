@@ -17,7 +17,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from main.models import (
-    EarningHeader
+    EarningHeaderSecond
 )
 
 
@@ -366,29 +366,14 @@ def addPervCompany(request, pk):
 
 
 def ExpectationList(request):
-    expects = EarningsForecast.objects.all()
+    expects = EarningsForecast.objects.order_by('-date_entered')
     paginator = Paginator(expects, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    headers = EarningHeader.get_solo()
+    headers = EarningHeaderSecond.get_solo()
     context = {
         "expectations": page_obj,
         "headers": headers
     }
     return render(request, 'office/expectation-list.html', context=context)
 
-
-class AddExpectYear(View):
-    expectForm = ExpectationYearForm
-
-    def get(self, request, pk):
-        return render(request, 'office/add_year.html',
-                      context={'form': self.expectForm})
-
-    def post(self, request, pk):
-        expectForm = ExpectationYearForm(request.POST)
-        if expectForm.is_valid():
-            expect = expectForm.save(commit=False)
-            expect.year = EarningsForecast.objects.get(pk=pk)
-            expect.save()
-            return redirect('expectations-list')

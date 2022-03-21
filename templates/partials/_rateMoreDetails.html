@@ -1,3 +1,4 @@
+{% load humanize %}
  <div class="table-responsive">
                                         <table style="margin:0 auto;" class="table table-max table-bordered align-items-center mb-auto">
                                             <thead class="text_black">
@@ -19,13 +20,13 @@
                                                    السعر المستهدف
                                                 </th>
                                                 <th class="text-center   text-xxs sent">
-                                                   التغير
+                                                    التغير % 
                                                 </th>
                                                 <th class="text-center   text-xxs sent">
                                                    السعر الحالى
                                                 </th>
                                                 <th class="text-center   text-xxs sent">
-                                                    التغير
+                                                    التغير % 
                                                 </th>
 
                                                  <th class="text-center   text-xxs sent">
@@ -58,37 +59,37 @@
                                                         <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue | intcomma  }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.FairValue | intcomma  }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.fair_percentage < 0 %}
                                                            <div class="d-flex justify-content-around">
                                                            <i class="fas fa-arrow-down text-xxs text-danger"></i>
-                                                           <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-3 }}</p>
+                                                           <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:2|intcomma  }}</p>
                                                            </div>
                                                         {% else %}
                                                            <div class="d-flex justify-content-around">
                                                            <i class="fas fa-arrow-up text-xxs text-success"></i>
-                                                           <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-3 }}</p>
+                                                           <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:2|intcomma  }}</p>
                                                            </div>
                                                        {% endif %}
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.MarketValue | intcomma  }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.market_percentage < 0 %}
                                                           <div class="d-flex justify-content-around">
                                                             <i class="fas fa-arrow-down text-xxs text-danger"></i>
-                                                           <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-3 }}</p>
+                                                           <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:2|intcomma  }}</p>
                                                           </div>
                                                         {% else %}
                                                           <div class="d-flex justify-content-around">
                                                            <i class="fas fa-arrow-up text-xxs text-success"></i>
-                                                           <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-3 }}</p>
+                                                           <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:2|intcomma  }}</p>
                                                           </div>
                                                        {% endif %}
                                                     </td>
