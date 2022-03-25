@@ -18,5 +18,8 @@ urlpatterns = [
     path('owners/profile/<int:pk>', views.ownerProfile, name='owner-profile'),
     path('owners/users/all', views.AllUserOwner.as_view(), name='all-user-owners'),
     path('clients/add', RegisterClient.as_view(), name='add-client'),
+    path('all/companiesarrows', views.AllCompanyArrowsUser.as_view(), name='arrows-comp-users'),
+    path('all/seniors', views.AllSeniorArrowsUser.as_view(), name='arrows-sen-users'),
+    path('update/csv', views.UpdateCompaniesByCSV.as_view(), name='update-csv'),
 
 ]

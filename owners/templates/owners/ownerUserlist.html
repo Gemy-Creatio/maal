@@ -1,68 +1,72 @@
-{% extends 'masterpage.html' %}
-{% load static %}
-{% block title %}  صحفية مال {% endblock title %}
-
-
-{% block body %}
+{% extends 'masterpage.html' %} {% load static %} {% block title %} صحفية مال {% endblock title %} {% block body %}
 <section class="min-vh-85 mb-8">
-    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/maalbg.jpeg');">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5 text-center mx-auto pt-lg-5">
+  <div
+    class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+    style="background-image: url('../../../static/images/maalbg.jpeg')"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto pt-lg-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+      {% include 'partials/menus/_mainMenu.html' %}
+    </div>
+    <div class="row pt-3 pt-lg-3 pb-3">
+      <div class="col-12 col-xl-12 pt-5">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">كبار الملاك بسوق الأسهم (أفراد)</h6>
+          </div>
+
+          <div class="card-body px-0 pb-2">
+            {% include 'partials/_companiesArrowTable.html' with companyarrows=seniorArrows %}
+             {% include 'partials/_pagination.html' with page_obj=seniorArrows %}
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
-           {% include 'partials/menus/_mainMenu.html' %}
-        </div>
-            <div class="row pt-3 pt-lg-3 pb-3">
-                <div class="col-12 col-xl-12 pt-5">
-                    <div class="card h-100">
+    <div class="row pt-3 pt-lg-3 pb-3">
+      <div class="col-12 col-xl-12 pt-5">
+        <div class="card h-100">
           <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">قوائم <strong>كبار الملاك</strong> </h6>
-          </div>
-          
-          <div class="card-body px-0 pb-2">
-            {% include 'partials/_companiesArrowTable.html' with companyarrows=seniorArrows %}
-              {% include 'partials/_pagination.html' with page_obj=seniorArrows page="page" %}
-                   </div>
-                   
-          </div>
-          </div>
-                </div>
-        <div class="row pt-lg-3 pt-3 pb-3">
-                 <div class="col-12 col-xl-12 pt-5">
-                    <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-            <h6 class="mb-0"> كبار الملاك بسوق الأسهم <strong>أفراد</strong> </h6>
-          </div>
-
-          <div class="card-body px-0 pb-2">
-            {% include 'partials/_ownerTable.html' with arrows=data %}
-              {% include 'partials/_pagination.html' with page_obj=data page="page1" %}
-
-                   </div>
-
-          </div>
-          </div>
-        </div>
-        <div class="row pt-3 pt-lg-3 pb-3">
-                <div class="col-12 col-xl-12 pt-5">
-                    <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">كبار الملاك بسوق الأسهم <strong> الشركات -المؤسسات الحكومية</strong></h6>
+            <h6 class="mb-0">
+              كبار الملاك بسوق الأسهم (الشركات - المؤسسات الحكومية)
+            </h6>
           </div>
 
           <div class="card-body px-0 pb-2">
             {% include 'partials/_companiesArrowTable.html' with companyarrows=companyarrows %}
-              {% include 'partials/_pagination.html' with page_obj=companyarrows page="page2" %}
-                   </div>
-
           </div>
+          <div class="card-footer">
+            <a class="btn btn-primary bg-maal text-white" href="{% url 'arrows-comp-users' %}">المزيد </a>
           </div>
-                </div>
+        </div>
+      </div>
     </div>
+  
+  
+    <div class="row pt-lg-3 pt-3 pb-3">
+      <div class="col-12 col-xl-12 pt-5">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">كبار الملاك (عدد الأسهم - القيمة السوقية)</h6>
+          </div>
+
+          <div class="card-body px-0 pb-2">
+            {% include 'partials/_ownerTable.html' with arrows=data %}
+          </div>
+          <div class="card-footer">
+            <a class="btn btn-sm btn-primary bg-maal text-white" href="{% url 'arrows-sen-users' %}"
+              >المزيد
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
 </section>
 {% endblock body %}

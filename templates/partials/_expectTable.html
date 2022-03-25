@@ -1,99 +1,105 @@
-    <div class="table-responsive">
+{% load humanize %}
+
+<div class="table-responsive">
 
                     <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
                         <thead class="text-black">
                         <tr>
-                            <th class="text-dark text-xxs" style="width: 2rem;">
+                            <th class="text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.first_header|safe }}
                             </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
+                            <th class="text-dark text-xxs " style="wpkth: 2rem;">
                                 {{ content.second_header|safe }}
                             </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
+                            <th class="text-dark text-xxs " style="wpkth: 2rem;">
                                 {{ content.third_header|safe }}
                             </th>
 
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th class=" text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.fourth_header|safe }}
                             </th>
 
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th class=" text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.fifth_header|safe }}
                             </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th class=" text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.sixth_header|safe }}
                             </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th class=" text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.seventh_header|safe }}
                             </th>
 
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th class=" text-dark text-xxs" style="wpkth: 2rem;">
                                 {{ content.eight_header|safe }}
                             </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for item in expects %}
-                            <tr>
-                                <td class="d-flex" style="justify-content: space-around; ">
-                                    {% if request.user.user_type == 3 %}
-                                     <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2 ;">
-                                       <i class="far fa-bookmark"></i>
+                         {% if item.real_earn < 0 or item.real_earn == None %}
+                              
+                         {% else %}
+                         <tr>
+                            <td class="d-flex" style="justify-content: space-around; ">
+                                {% if request.user.user_type == 3 %}
+                                 <a  href="{% url 'add_wish' item.CompanyEntered.pk %}" style="margin-inline:0.2 ;">
+                                   <i class="far fa-bookmark"></i>
 </a>
 
 {% endif %}
-                                    <a href="{% url 'user-company' item.CompanyEntered.id %}">
+                                <a href="{% url 'user-company' item.CompanyEntered.pk %}">
 
-                               <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+                           <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
 </a>
 
-                       </td>
+                   </td>
+                            <td>
+
+                                    <a href="{% url 'user-research' item.ResearchCompany.pk %}">
+
+                                                    <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                         </a>
+                            </td>
+                            <td>
+
+                                <p class=" text-xxs">{{ item.expect_earn | intcomma }}</p>
+                            </td>
                                 <td>
 
-                                        <a href="{% url 'user-research' item.ResearchCompany.id %}">
+                                <p class=" text-xxs">{{ item.pervquarter | intcomma }}</p>
+                            </td>
+                                                        <td class="  text-xxs">
+       {% if item.deviation_first < 0 %}
+                                    <p class="text-danger text-xxs ">{{ item.deviation_first|floatformat:-2 }} %</p>
+                                {% else %}
+                                    <p class="text-success text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
+                                {% endif %}
+                            </td>
 
-                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                                             </a>
-                                </td>
-                                <td>
+                        <td class="text-xxs">
+                                <p class=" text-xxs">{{ item.quarter_past }}</p>
 
-                                    <p class=" text-xxs">{{ item.expect_earn }}</p>
-                                </td>
-                                    <td>
-
-                                    <p class=" text-xxs">{{ item.pervquarter }}</p>
-                                </td>
-                                                            <td class="  text-xxs">
-           {% if item.deviation_first < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_first|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
-                                    {% endif %}
-                                </td>
-
-                            <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.quarter_past }}</p>
-
-                                </td>
-                                <td>
-                                    {% if item.deviation_second < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_second|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2 }} %</p>
-                                    {% endif %}
-                                </td>
+                            </td>
+                            <td>
+                                {% if item.deviation_second < 0 %}
+                                    <p class="text-danger text-xxs ">{{ item.deviation_second|floatformat:-2  | intcomma}} %</p>
+                                {% else %}
+                                    <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2  | intcomma}} %</p>
+                                {% endif %}
+                            </td>
 
 
-                             <td class="  text-xxs">
-                                 {% if item.report %}
-                                     <a href="{{ item.report.url }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
-                                 {% else %}
-                                     <p class="text-xxs text-muted">لا يوجد مرفق</p>
-                                 {% endif %}
-                                </td>
+                         <td class="  text-xxs">
+                             {% if item.report %}
+                                 <a href="{{ item.report.url }}"><i class="fas fa-file-pdf text-xxs" aria-hpkden="true"></i></a>
+                             {% else %}
+                                 <p class="text-xxs text-muted">لا يوجد مرفق</p>
+                             {% endif %}
+                            </td>
 
 
-                            </tr>
+                        </tr>
+                         {% endif %}
                         {% endfor %}
 
                         </tbody>

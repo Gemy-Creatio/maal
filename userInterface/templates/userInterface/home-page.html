@@ -73,7 +73,7 @@
        </div>
        <div class="card-footer">
         <div class="col-12 d-flex justify-content-end">
-            <a href="{% url 'all-arrows-owned' %}">
+            <a href="{% url 'arrows-sen-users' %}">
                 <span
                     class="badge badge-sm bg-maal">المزيد</span></a>
         </div>
@@ -91,11 +91,11 @@
 </div>
 
 <div class="card-body px-0 pb-2">
-      {%  include 'partials/_ownerTable.html' with arrows=arrows %}
+      {% include 'partials/_ownerTable.html' with arrows=companyarrows %}
        </div>
        <div class="card-footer">
         <div class="col-12 d-flex justify-content-end">
-            <a href="{% url 'all-user-owners' %}">
+            <a href="{% url 'arrows-sen-users' %}">
                 <span
                     class="badge badge-sm bg-maal">المزيد</span></a>
         </div>
@@ -109,9 +109,8 @@
             <div class="row pt-3">
                 <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
-                        <div class="card-header">
+                        <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
-                                <p>أخر 5 شركات تمت التوصية عليها بزيادة الوزن مع السعر المستهدف</p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -138,9 +137,8 @@
             <div class="row pt-3">
                 <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow">
-                        <div class="card-header">
+                        <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
-                                <p>أخر 5 شركات تمت التوصية عليها بمحايد مع السعر المستهدف</p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -185,7 +183,7 @@
                     backgroundColor: [
                         '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                     ],
-                    label: 'صحفية مال'
+                    label: 'أخر 5 شركات تمت التوصية عليها بزيادة الوزن مع السعر المستهدف'
                 }],
                 labels: {{ label|safe }}
             },
@@ -224,6 +222,8 @@
                     backgroundColor: [
                         '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                     ],
+                    label: 'أخر 5 شركات تمت التوصية عليها بمحايد مع السعر المستهدف'
+
                 }],
                 labels: {{ companylabel|safe }}
             },
@@ -243,12 +243,16 @@
                     backgroundColor: [
                         '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
                     ],
-                    label: 'اعلى شركات الأبحاث تقييما'
                 }],
                 labels: {{ companylabel1|safe }}
             },
             options: {
-                responsive: true
+                responsive: true,
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
             }
         };
 

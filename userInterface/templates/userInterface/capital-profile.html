@@ -55,106 +55,7 @@
               <h6 class="mb-0">التقيمات</h6>
             </div>
                                               <div class="card-body px-0 pb-2">
-                            <table style="margin:0 auto;"
-                                   class="table table-max table-bordered align-items-center mb-auto">
-                                <thead class="text_black">
-                                <tr>
-                                    <th class="text-center text-xxs" style="width: 1.5rem;">
-                                        المحلل
-                                    </th>
-                                    <th class="text-center text-xxs" style="width: 2rem;">
-                                        شركة الأبحاث
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2rem;">
-                                        التوصية
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2rem;">
-                                        السعر وقت التوصية
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
-                                        السعر المستهدف
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
-                                        التغير
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
-                                        أخر إغلاق
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2.5rem;">
-                                        التغير
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 1.5rem;">
-                                        التقرير
-                                    </th>
-                                    <th class="text-center   text-xxs " style="width: 2rem;">
-                                        تاريخ التوصية
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for item in data.CompanyEntered.all %}
-                                    <tr>
-                                                                             <td class="align-middle text-center text-xxs">
-                                           {% if item.AnalayticName == None %}
-                                          <p class="text-xxs text-muted">-------- </p>
-                                               {% else %}
-                                                <a href="{% url 'user-interface' item.AnalayticName.id %}">
-                                                           <p class="text-xxs">{{ item.AnalayticName.name }}</p>
-                                                       </a>
-                                            {% endif %}
-
-                                       </td>
-
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            {% if item.changeFair %}
-                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
-                                                <p class="text-xxs text-danger  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                            {% else %}
-                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
-                                                <p class="text-xxs text-success  mb-0">{{ item.fair_percentage |floatformat:-2 }}</p>
-                                            {% endif %}
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.MarketValue }}</p>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            {% if item.changeMarket %}
-                                                <i class="fas fa-arrow-down text-danger" aria-hidden="true"></i>
-                                                <p class="text-xxs text-danger  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
-                                            {% else %}
-                                                <i class="fas fa-arrow-up text-success" aria-hidden="true"></i>
-                                                <p class="text-xxs text-success  mb-0">{{ item.market_percentage |floatformat:-2 }}</p>
-                                            {% endif %}
-                                        </td>
-
-                                        <td class="align-middle text-center text-xxs">
-                                            <a href="{{ item.report.url }}">
-                                                <i class="fas fa-file-pdf text-danger">
-                                                </i>
-                                            </a>
-                                        </td>
-                                        <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d" }}</p>
-                                        </td>
-
-                                    </tr>
-
-                                {% endfor %}
-
-                                </tbody>
-                            </table>
+                                                {% include 'partials/_rateMoreDetails.html' with rates=data.CompanyEntered.all %}
                         </div>
 
           </div>
@@ -166,106 +67,38 @@
               <h6 class="mb-0"> الأرباح الفعلية  </h6>
             </div>
                                   <div class="card-body px-0 pb-2">
+{% if data.expects.first.real_earn == None  %}
 <div class="row pt-2">
-                        <div class="table-responsive">
-
-                    <table style="margin: 0 auto;" class="table table-max table-bordered align-items-center">
-                        <thead class="text-black">
-                        <tr>
-                              <th class=" text-dark text-xxs" style="width: 2rem;">
-                              الشركة
-                            </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
-                                شركة الأبحاث
-                            </th>
-                            <th class="text-dark text-xxs " style="width: 2rem;">
-                                توقعات الأرباح
-                            </th>
-  <th class="text-dark text-xxs " style="width: 2rem;">
-                           الأرباح الفعلية
-                            </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-مدى الأنحراف
-                            </th>
-
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                الربع الثانى 2021
-                            </th>
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                مدى الأنحراف
-                            </th>
-
-                            <th class=" text-dark text-xxs" style="width: 2rem;">
-                                المرفق
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in data.expects.all %}
-                            <tr>
-                              <td class="text-xxs">
-                                                                            <a href="{% url 'user-company' item.CompanyEntered.pk %}">
-                                    <p class=" text-xxs"> {{ item.CompanyEntered.name }}</p>
-                                                                            </a>
-
-                                </td>
-                                <td>
-
-                                          <a href="{% url 'user-research' item.ResearchCompany.pk %}">
-
-                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                                             </a>
-                                </td>
-                                <td>
-
-                                    <p class=" text-xxs">{{ item.total_earn }}</p>
-                                </td>
-                            <td>
-
-                                    <p class=" text-xxs">{{ item.realEarn }}</p>
-                                </td>
-                            <td>
-
-                                     {% if item.deviationreal < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationreal|floatformat:-5 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationreal|floatformat:-5 }} %</p>
-                                    {% endif %}
-                                </td>
-                                <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.second2020 }}</p>
-
-                                </td>
-                                <td>
-                                    {% if item.deviationsecond2020 < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviationsecond2020|floatformat:-5 }} %</p>
-                                    {% endif %}
-                                </td>
-
-                             <td class="  text-xxs">
-                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
-                                </td>
-
-
-                            </tr>
-                        {% endfor %}
-
-                        </tbody>
-                    </table>
-
-                </div>
+  <h5 class="text-center text-muted text-xs"> لا يوجد أرباح فعلية معلنة لهذة الشركة  </h5>
 
 </div>
+{% else %}
+<div class="row pt-2">
+  {% include 'partials/_realExpectTable.html' with expects=data.expects.all content=secondHeader %}
+
+</div>
+{% endif %}
+
                                   <div class="row pt-4">
-                                      <div class="card card-plain h-100">
+                                      <div class="card card-plain h-100 pt-6">
                                           <div class="card-header">
               <h6 class="mb-0">توقعات الأرباح</h6>
 
                                           </div>
                                            <div class="card-body px-0 pb-2">
-               {% include 'partials/_expectTable.html' with expects=data.expects.all %}
+                                            {% if data.expects.first.expect_earn == None  %}
+                                            <div class="row pt-2">
+                                              <h5 class="text-center text-muted text-xs"> لا يوجد أرباح فعلية معلنة لهذة الشركة  </h5>
+                                            
+                                            </div>
+                                            {% else %}
+                                            <div class="row pt-2">
+                                              {% include 'partials/_expectTable.html' with expects=data.expects.all content=firstHeader %}
+                                            
+                                            </div>
+                                            {% endif %}
+                                            
+                                            
             </div>
                                       </div>
 

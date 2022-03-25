@@ -184,7 +184,7 @@ class EarningsForecast(models.Model):
         if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:
             return 0 
         else:
-            result = float(self.expect_earn) - float(self.quarter_past)
+            result = self.expect_earn - self.quarter_past
             deviation = result / self.quarter_past * 100
             return deviation
     @property

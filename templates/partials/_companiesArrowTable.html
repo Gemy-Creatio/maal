@@ -5,24 +5,24 @@
        class="table table-bordered align-items-center mb-auto">
        <thead class="text_black">
         <tr>
-            <th class="text-center text-xxs" style="width:auto;">
+            <th class="text-center text-xxs" style="wpkth:auto;">
                 الشركة
             </th>
-            <th class="text-center text-xxs" style="width:auto;">
+            <th class="text-center text-xxs" style="wpkth:auto;">
                المالك
             </th>
-            <th class="text-center text-xxs" style="width: auto;">
+            <th class="text-center text-xxs" style="wpkth: auto;">
 إجمالى نسبة الملكية <p class="text-muted text-xxs">أخر يوم تداول </p>          </th>
-               <th class="text-center text-xxs" style="width: auto;">
+               <th class="text-center text-xxs" style="wpkth: auto;">
 إجمالى نسبة الملكية <p class="text-muted text-xxs">اليوم السابق </p>             </th>
-             <th class="text-center text-xxs" style="width: auto;">
+             <th class="text-center text-xxs" style="wpkth: auto;">
 التغير            </th>
-             <th class="text-center text-xxs" style="width: auto;">
+             <th class="text-center text-xxs" style="wpkth: auto;">
 عدد الأسهم           </th>
                                    {% if request.user.is_emp or request.user.is_admin   %}
-              <th class="text-center text-xxs" style="width: auto;">
+              <th class="text-center text-xxs" style="wpkth: auto;">
                     </th>
-                   <th class="text-center text-xxs" style="width: auto;">
+                   <th class="text-center text-xxs" style="wpkth: auto;">
                     </th>
             {% endif %}
         </tr>
@@ -30,32 +30,32 @@
         <tbody>
             {% for item in companyarrows %}
                 <tr>
-                                    <td class="align-middle text-center text-xxs">
-                                        <a href="{% url 'user-company' item.company.id %}">
+                                    <td class="align-mpkdle text-center text-xxs">
+                                        <a href="{% url 'user-company' item.company.pk %}">
                             <p class="text-xxs  mb-0">{{ item.company.name }}</p>
                         </a>
                     </td>
 
-                    <td class="align-middle text-center text-xxs">
-                        <a href="{% url 'owner-profile' item.owner.id %}">
+                    <td class="align-mpkdle text-center text-xxs">
+                        <a href="{% url 'owner-profile' item.owner.pk %}">
                             <p class="text-xxs  mb-0">{{ item.owner.name }}</p>
                         </a>
                     </td>
-                    <td class="align-middle text-center text-xxs">
+                    <td class="align-mpkdle text-center text-xxs">
                         <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioToday}} %</p>
                     </td>
-                    <td class="align-middle text-center text-xxs">
+                    <td class="align-mpkdle text-center text-xxs">
                         <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioYesterday }} %</p>
 
                     </td>
-                    <td class="align-middle text-center text-xxs">
+                    <td class="align-mpkdle text-center text-xxs">
                          {% if item.ChnageOwn > 0 %}
                        <p class="text-xxs text-success">{{ item.ChangeOwn |floatformat:-2 }} %</p>
                        {% else %}
                        <p class="text-xxs text-danger">{{ item.ChangeOwn |floatformat:-2 }} %</p>
                         {% endif %}
                     </td>
-                   <td class="align-middle text-center text-xxs">
+                   <td class="align-mpkdle text-center text-xxs">
                      {% if item.TotalArrowPrice is not None %}
                        <p class="text-xxs">{{ item.TotalArrowPrice | intcomma   }}</p>
                        {% else %}
@@ -64,10 +64,10 @@
                     </td>
                                    {% if request.user.is_emp or request.user.is_admin   %}
                <td class="ms-auto text-start">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>تعديل</a>
+                                            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'update-arrow' item.pk %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hpkden="true"></i>تعديل</a>
                                         </td>
                            <td class="ms-auto text-start">
-                               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete-arrow' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
+                               <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'delete-arrow' item.pk %}"><i class="fas fa-trash text-danger me-2" aria-hpkden="true"></i>حذف</a>
                                         </td>
             {% endif %}
                                 </tr>

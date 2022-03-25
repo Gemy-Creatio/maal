@@ -36,6 +36,12 @@
                              <th class=" text-dark text-xxs" style="width: 2rem;">
                            {{ content.tenth_header|safe }}
                             </th>
+                            {% if request.user.is_emp or request.user.is_admin   %}
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            <th/>
+                            <th class=" text-dark text-xxs" style="width: 2rem;">
+                            </th>
+                            {% endif %}
                         </tr>
                         </thead>
                         <tbody>
@@ -99,18 +105,27 @@
                                 </td>
                                 <td>
                                     {% if item.deviation_fourth < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                                        <p class="text-danger text-xxs ">{{ item.deviation_fifth|floatformat:-2 }} %</p>
                                     {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                                        <p class="text-success text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>
                                     {% endif %}
                                 </td>
 
                              <td class="  text-xxs">
                                    <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
                                 </td>
+                                {% if request.user.is_emp or request.user.is_admin   %}
+                                <td class="ms-auto text-start" style="width: 0.2rem;">
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-update' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+        
+                                </td>
+                                       <td class="ms-auto text-start" style="width: 0.2rem;">
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-delete' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
+                                </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
-
+                    
                         </tbody>
                     </table>
 

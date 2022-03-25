@@ -1,4 +1,6 @@
-  <table style="margin:0 auto;"
+
+ {% load humanize %}
+<table style="margin:0 auto;"
                                    class="table table-max table-bordered align-items-center mb-auto">
                                 <thead class="text_black">
                                 <tr>
@@ -57,10 +59,10 @@
                                             <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                         </td>
                                         <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.CurrenncyValue }}</p>
+                                            <p class="text-xxs  mb-0">{{ item.CurrenncyValue | intcomma }}</p>
                                         </td>
                                         <td class="align-middle text-center text-xxs">
-                                            <p class="text-xxs  mb-0">{{ item.FairValue }}</p>
+                                            <p class="text-xxs  mb-0">{{ item.FairValue | intcomma }}</p>
                                         </td>
                                         <td class="align-middle text-center text-xxs">
                                             {% if item.changeFair %}

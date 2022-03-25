@@ -1,81 +1,78 @@
-{% extends 'masterpage.html' %}
-{% load static %}
-{% block title %}  صحفية مال {% endblock title %}
-
-
+{% extends 'masterpage.html' %} 
+{% load static %} 
+{% block title %} صحفية مال 
+{% endblock title %} 
 {% block body %}
 <section class="min-vh-85 mb-8">
-    <div class=" page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style=" background-image: url('../../../static/images/maalbg.jpeg');">
-      <div class="container">
-      <div class="container">
+  <div
+    class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+    style="background-image: url('../../../static/images/maalbg.jpeg')"
+  >
+    <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-5 text-center mx-auto pt-lg-5">
-          </div>
+          <div class="col-lg-5 text-center mx-auto pt-lg-5"></div>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center pt-5">
-                     {% include 'partials/menus/_mainMenu.html' %}
-
+        {% include 'partials/menus/_mainMenu.html' %}
       </div>
-    <div class="row pt-8">
+      <div class="row pt-8">
         <div class="col-lg-12">
-                <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-        <div class="row gx-4">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-                <i class="fas fa-user-tie text-lg opacity-10" aria-hidden="true"></i>
+          <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+            <div class="row gx-4">
+              <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                  <i
+                    class="fas fa-user-tie text-lg opacity-10"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              </div>
+              {% for d in data %}
+              <div class="col-auto my-auto">
+                <div class="h-100">
+                  <h5 class="mb-1">{{ d.name }}</h5>
+                </div>
+              </div>
+              {% endfor %}
             </div>
           </div>
-          {% for d in data %}
-          <div class="col-auto my-auto">
-            <div class="h-100">
-
-                       <h5 class="mb-1">
-
-          {{ d.name }}
-                             </h5>
-            </div>
-          </div>
-          {% endfor %}
-
         </div>
       </div>
-
-            </div>
-    </div>
-              
-
-    <div class="row pt-3 pt-lg-3 pb-3">
-        <div class="col-12 col-xl-12 pt-3">
-            <div class="card h-100">
-  <div class="card-header pb-0 p-3 justify-content-center">
-    <h6 class="mb-0 text-center">إجمالى ملكيات كبار الملاك</h6>
-  </div>
   
-  <div class="card-body px-0 pb-2">
-     {% include 'partials/_ownerTable.html' with arrows=data %}
-           </div>
-  </div>
-  </div>
-        </div>
-
-         <div class="row pt-3 pt-lg-3 pb-3">
+      <div class="row pt-3 pt-lg-3 pb-3">
         <div class="col-12 col-xl-12 pt-3">
-            <div class="card h-100">
-  <div class="card-header pb-0 p-3 justify-content-center">
-      <h6 class="mb-0 text-center">ملكيات {% for d in data %} {{ d.name }} {% endfor %}  <strong>الشركات - المؤسسات</strong></h6>
-  </div>
-
-  <div class="card-body px-0 pb-2">
-      {% for d in data %}
-     {% include 'partials/_ownerProfileTable.html' with companyarrows=d.companies_related.all %}
-      {% endfor %}
-           </div>
-  </div>
-  </div>
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3 justify-content-center">
+              <h6 class="mb-0 text-center">إجمالى ملكيات كبار الملاك</h6>
+            </div>
+  
+            <div class="card-body px-0 pb-2">
+              {% include 'partials/_ownerTable.html' with arrows=data %}
+            </div>
+          </div>
         </div>
-</div>
+      </div>
+  
+      <div class="row pt-3 pt-lg-3 pb-3">
+        <div class="col-12 col-xl-12 pt-3">
+          <div class="card h-100">
+            <div class="card-header pb-0 p-3 justify-content-center">
+              <h6 class="mb-0 text-center">
+                ملكيات {% for d in data %} {{ d.name }} {% endfor %}
+                <strong>الشركات - المؤسسات</strong>
+              </h6>
+            </div>
+  
+            <div class="card-body px-0 pb-2">
+              {% for d in data %} {% include 'partials/_ownerProfileTable.html' with companyarrows=d.companies_related.all %}
+               {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
 {% endblock body %}

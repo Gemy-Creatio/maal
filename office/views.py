@@ -70,7 +70,7 @@ class DeleteEarningsForecast(DeleteView):
 
 
 def RatesList(request):
-    rates = Rates.objects.all()
+    rates = Rates.objects.all().order_by('-pk')
     paginator = Paginator(rates, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -78,7 +78,7 @@ def RatesList(request):
 
 
 def Research_List(request):
-    companies = ResearchCompany.objects.all()
+    companies = ResearchCompany.objects.all().order_by('-pk')
     paginator = Paginator(companies, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -86,7 +86,7 @@ def Research_List(request):
 
 
 def Company_List(request):
-    companies = FinicialCompany.objects.all()
+    companies = FinicialCompany.objects.all().order_by('-pk')
     paginator = Paginator(companies, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -94,7 +94,7 @@ def Company_List(request):
 
 
 def Category_List(request):
-    category = CompanyCategory.objects.all()
+    category = CompanyCategory.objects.all().order_by('-pk')
     paginator = Paginator(category, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -210,7 +210,7 @@ class EditCompany(UpdateView):
 
 
 def AnalystsList(request):
-    analayts = FinicialAnalyst.objects.all()
+    analayts = FinicialAnalyst.objects.all().order_by('-pk')
     paginator = Paginator(analayts, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -279,13 +279,13 @@ def RateDetails(request, pk):
 
 def CompanyDetails(request, pk):
     company = FinicialCompany.objects.get(pk=pk)
-    codes = CompanyCode.objects.filter(company=company)
+    codes = CompanyCode.objects.filter(company=company).order_by('-pk')
     return render(request, 'office/company-detail.html', context={"company": company, "codes": codes})
 
 
 def CategoryDetails(request, pk):
     category = CompanyCategory.objects.get(pk=pk)
-    companies = FinicialCompany.objects.filter(category=category)
+    companies = FinicialCompany.objects.filter(category=category).order_by('-pk')
     return render(request, 'office/category-detail.html', context={"category": category, "companies": companies})
 
 
@@ -297,7 +297,7 @@ def AnalystDetails(request, pk):
 class RatesAllReport(View):
     def get(self, request, *args, **kwargs):
         template = get_template('rates-all-pdf.html')
-        rates = Rates.objects.all()
+        rates = Rates.objects.all().order_by('-pk')
         user_obj = User.objects.get(pk=request.user.pk)
         context = {
             "company": "صحفية مال الأقتصادية ",
@@ -323,7 +323,7 @@ class RatesAllReport(View):
 class AnalystsAllReport(View):
     def get(self, request, *args, **kwargs):
         template = get_template('analysts-all-pdf.html')
-        analayts = FinicialAnalyst.objects.all()
+        analayts = FinicialAnalyst.objects.all().order_by('-pk')
         user_obj = User.objects.get(pk=request.user.pk)
         context = {
             "company": "صحفية مال الأقتصادية ",
@@ -347,7 +347,7 @@ class AnalystsAllReport(View):
 
 
 def PervCompanyList(request, pk):
-    pervcopmainies = PerviousCompany.objects.filter(analyst_id=pk)
+    pervcopmainies = PerviousCompany.objects.filter(analyst_id=pk).order_by('-pk')
     analyst = FinicialAnalyst.objects.get(pk=pk)
     return render(request, 'office/percompany-list.html', context={"companies": pervcopmainies, 'analyst': analyst})
 
@@ -366,7 +366,7 @@ def addPervCompany(request, pk):
 
 
 def ExpectationList(request):
-    expects = EarningsForecast.objects.order_by('-date_entered')
+    expects = EarningsForecast.objects.order_by('-pk')
     paginator = Paginator(expects, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

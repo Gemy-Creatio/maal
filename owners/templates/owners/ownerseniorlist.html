@@ -1,0 +1,36 @@
+{% extends 'masterpage.html' %} {% load static %} {% block title %} صحفية مال {% endblock title %} {% block body %}
+<section class="min-vh-85 mb-8">
+  <div
+    class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+    style="background-image: url('../../../static/images/maalbg.jpeg')"
+  >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 text-center mx-auto pt-lg-5"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+      {% include 'partials/menus/_mainMenu.html' %}
+    </div>
+  
+    <div class="row pt-lg-3 pt-3 pb-3">
+      <div class="col-12 col-xl-12 pt-5">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-0">كبار الملاك (عدد الأسهم - القيمة السوقية)</h6>
+          </div>
+
+          <div class="card-body px-0 pb-2">
+            {% include 'partials/_ownerTable.html' with arrows=data %}
+            {% include 'partials/_pagination.html' with page_obj=data %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</section>
+{% endblock body %}

@@ -47,7 +47,7 @@
             </div>
                                   <div class="card-body px-0 pb-2">
 <div class="row pt-2">
-                       {% include 'partials/_realExpectTable.html' with expects=data.Researchexpects.all %}
+  {% include 'partials/_realExpectTable.html' with expects=data.Researchexpects.all content=secondHeader %}
 
 </div>
                                   <div class="row pt-4">
@@ -57,8 +57,7 @@
 
                                           </div>
                                            <div class="card-body px-0 pb-2">
-
-              {% include 'partials/_expectTable.html' with expects=data.Researchexpects.all %}
+                {% include 'partials/_expectTable.html' with expects=data.Researchexpects.all content=firstHeader %}
             </div>
                                       </div>
 

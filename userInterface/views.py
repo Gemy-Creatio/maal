@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
-import datetime
+from datetime import date
 
 from office.models import (
     FinicialAnalyst, CompanyCategory, PerviousCompany, Rates, FinicialCompany, EarningsForecast, \
@@ -22,8 +22,8 @@ from main.models import (
 def user_interface(request, pk):
     context = {
         "analyst": FinicialAnalyst.objects.get(pk=pk),
-        "pervcompanies": PerviousCompany.objects.filter(analyst_id=pk),
-        "rates": Rates.objects.filter(AnalayticName_id=pk)
+        "pervcompanies": PerviousCompany.objects.filter(analyst_id=pk).order_by('-pk'),
+        "rates": Rates.objects.filter(AnalayticName_id=pk).order_by('-pk')
     }
     return render(request, 'userInterface/analyst-profile.html', context=context)
 
@@ -36,11 +36,12 @@ def rate_user_detail(request, pk):
 
 
 def user_home(request):
-    cats = CompanyCategory.objects.all()
-    comps = FinicialCompany.objects.all()
-    arrows = SeniorOwner.objects.all()[:5]
+    cats = CompanyCategory.objects.all().order_by('-pk')
+    comps = FinicialCompany.objects.all().order_by('-pk')
+    arrows = CompaniesArrow.objects.all()
+    sens = SeniorOwner.objects.all()[:5]
     max_date = CompaniesArrow.objects.latest('date').date
-    if max_date == datetime.datetime.date:
+    if max_date == date.today():
         arrows = CompaniesArrow.objects.filter(date__gte=max_date)
     else:
         arrows = None
@@ -64,7 +65,7 @@ def user_home(request):
     for company in companies:
         companylabel.append(company.CompanyEntered.name)
         companydata.append(company.FairValue)
-    companies = FinicialCompany.objects.order_by('CompanyEntered')[:5]
+    companies = FinicialCompany.objects.order_by('pk')[:5]
     companylabel1 = []
     companydata1 = []
     for company in companies:
@@ -87,14 +88,14 @@ def user_home(request):
         "companylabel1": companylabel1,
         "companydata1": companydata1,
         "arrows": arrows,
-        "companyarrows": arrows,
+        "companyarrows": sens,
         "last_date": max_date,
     }
     return render(request, 'userInterface/home-page.html', context=context)
 
 
 def analystslist(request):
-    analyts = FinicialAnalyst.objects.all()
+    analyts = FinicialAnalyst.objects.all().order_by('-pk')
     paginator = Paginator(analyts, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -105,13 +106,13 @@ def analystslist(request):
 
 
 def PervList(request, pk):
-    pervcopmainies = PerviousCompany.objects.filter(analyst_id=pk)
+    pervcopmainies = PerviousCompany.objects.filter(analyst_id=pk).order_by('-pk')
     analyst = FinicialAnalyst.objects.get(pk=pk)
     return render(request, 'userInterface/perlist.html', context={"companies": pervcopmainies, 'analyst': analyst})
 
 
 def rateslist(request):
-    rates = Rates.objects.order_by('-RecommendDate')
+    rates = Rates.objects.order_by('-pk')
     rate_filter = RatesFilter(request.GET, queryset=rates)
     rate = rate_filter.qs
     paginator = Paginator(rate, 30)
@@ -130,19 +131,28 @@ def expectList(request):
     expectdata = []
     for expect in data:
         expectlabel.append(expect.CompanyEntered.name)
-        expectdata.append(expect.real_earn)
+        if expect.real_earn == None:
+            expectdata.append(0)
+        else:
+            expectdata.append(expect.real_earn)
     data2 = EarningsForecast.objects.order_by('-pervquarter')[:5]
     expectlabel2 = []
     expectdata2 = []
     for expect in data2:
         expectlabel2.append(expect.CompanyEntered.name)
-        expectdata2.append(expect.pervquarter)
+        if expect.pervquarter == None:
+            expectdata.append(0)
+        else:
+            expectdata2.append(expect.pervquarter)
     data3 = EarningsForecast.objects.order_by('-quarter_past')[:5]
     expectlabel3 = []
     expectdata3 = []
     for expect in data3:
         expectlabel3.append(expect.CompanyEntered.name)
-        expectdata3.append(expect.quarter_past)
+        if expect.quarter_past == None:
+            expectdata.append(0)
+        else:
+            expectdata3.append(expect.quarter_past)
     data1 = EarningsForecast.objects.order_by('-real_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
@@ -152,7 +162,7 @@ def expectList(request):
         expectdata1.append(expect.real_earn)
     expects = EarningsForecast.objects.order_by('-date_entered')
     expect_filter = EarnFilter(request.POST, queryset=expects)
-    expectz = expect_filter.qs
+    expectz = expect_filter.qs.order_by('-pk')
     paginator = Paginator(expectz, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -174,7 +184,7 @@ def expectList(request):
 
 
 def CompanyArrowsAll(request):
-    object_list = FinicalCompaniesArrow.objects.all()
+    object_list = FinicalCompaniesArrow.objects.all().order_by('-pk')
     paginator = Paginator(object_list, 15)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -197,7 +207,7 @@ def CompanyArrowsAll(request):
 
 
 def ExpectAll(request):
-    object_list = ExpectationYear.objects.all()
+    object_list = ExpectationYear.objects.all().order_by('-pk')
     paginator = Paginator(object_list, 15)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -208,37 +218,47 @@ def ExpectAll(request):
 
 
 def expectrealList(request):
-    expects = EarningsForecast.objects.all()
     data = EarningsForecast.objects.order_by('-real_earn')[:5]
     expectlabel = []
     expectdata = []
     for expect in data:
         expectlabel.append(expect.CompanyEntered.name)
-        expectdata.append(expect.real_earn)
-    data1 = EarningsForecast.objects.order_by('-expect_earn')[:5]
-    expectlabel1 = []
-    expectdata1 = []
-    for expect in data1:
-        expectlabel1.append(expect.CompanyEntered.name)
-        expectdata1.append(expect.expect_earn)
+        if expect.real_earn == None:
+            expectdata.append(0)
+        else:
+            expectdata.append(expect.real_earn)
     data2 = EarningsForecast.objects.order_by('-pervquarter')[:5]
     expectlabel2 = []
     expectdata2 = []
     for expect in data2:
         expectlabel2.append(expect.CompanyEntered.name)
-        expectdata2.append(expect.pervquarter)
+        if expect.pervquarter == None:
+            expectdata.append(0)
+        else:
+            expectdata2.append(expect.pervquarter)
     data3 = EarningsForecast.objects.order_by('-quarter_past')[:5]
     expectlabel3 = []
     expectdata3 = []
     for expect in data3:
         expectlabel3.append(expect.CompanyEntered.name)
-        expectdata3.append(expect.quarter_past)
-    expectss = EarningsForecast.objects.order_by('-date_entered')
-    expect_filter = YearFilter(request.POST, queryset=expectss)
-    expectz = expect_filter.qs
-    paginator = Paginator(expectz, 8)
+        if expect.quarter_past == None:
+            expectdata.append(0)
+        else:
+            expectdata3.append(expect.quarter_past)
+    data1 = EarningsForecast.objects.order_by('-real_earn')[:5]
+    expectlabel1 = []
+    expectdata1 = []
+    content = EarningHeader.get_solo()
+    for expect in data1:
+        expectlabel1.append(expect.CompanyEntered.name)
+        expectdata1.append(expect.real_earn)
+    expects = EarningsForecast.objects.order_by('-date_entered')
+    expect_filter = EarnFilter(request.POST, queryset=expects)
+    expectz = expect_filter.qs.order_by('-pk')
+    paginator = Paginator(expectz, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
     context = {
         "expects": page_obj,
         "myfilter": expect_filter,
@@ -250,18 +270,21 @@ def expectrealList(request):
         "expectdata2": expectdata2,
         "expectlabel3": expectlabel3,
         "expectdata3": expectdata3,
-        "content": EarningHeaderSecond.get_solo()
-
+        "content": content,
     }
     return render(request, 'userInterface/expectreal-list.html', context=context)
 
 
 def CapitalProfile(request, pk):
+    headersone = EarningHeader.get_solo()
+    secondheaders = EarningHeaderSecond.get_solo()
     data = FinicialCompany.objects.get(pk=pk)
-    arrows = CompaniesArrow.objects.filter(company__id=pk)
-    return render(request, 'userInterface/capital-profile.html', context={"data": data, "arrows": arrows})
+    arrows = CompaniesArrow.objects.filter(company__id=pk).order_by('-pk')
+    return render(request, 'userInterface/capital-profile.html', context={"data": data, "arrows": arrows , "firstHeader":headersone , "secondHeader":secondheaders})
 
 
 def ResearchProfile(request, pk):
-    data = ResearchCompany.objects.get(pk=pk)
-    return render(request, 'userInterface/researchProfile.html', context={"data": data})
+    data = ResearchCompany.objects.get(pk=pk).order_by('-pk')
+    headersone = EarningHeader.get_solo()
+    secondheaders = EarningHeaderSecond.get_solo()
+    return render(request, 'userInterface/researchProfile.html', context={"data": data , "firstHeader":headersone , "secondHeader":secondheaders})

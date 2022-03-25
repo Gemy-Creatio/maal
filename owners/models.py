@@ -1,5 +1,12 @@
 from django.db import models
 from office.models import FinicialCompany
+from accounts.models import User
+
+class CSVUpdate(models.Model):
+    file_csv = models.FileField(null=True , blank=True ,upload_to='csv/')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL , null=True , blank=True)
+    class Meta:
+        pass
 
 
 # Create your models here.
@@ -9,17 +16,23 @@ class SeniorOwner(models.Model):
 
     @property
     def NumberOfCompanies(self):
-        return self.companies_related.all().count()
+        num = 0 
+        for comp in self.companies_related.all():
+            num += 1
+        return num
 
     @property
     def numberOfArrows(self):
-        return self.companies_related.all().count()
+        num = 0 
+        for comp in self.companies_related.all():
+            num += comp.total_arrows_owned
+        return num
 
     @property
     def TotalPriceArrows(self):
         price = 0
         for num in self.companies_related.all():
-            price = price + num.TotalArrowPrice
+            price  +=  num.company.arrow_value * num.total_arrows_owned
         return price
 
     def __str__(self) -> str:

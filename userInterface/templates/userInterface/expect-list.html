@@ -61,10 +61,10 @@
       </div>
     <div class="row pt-3">
                         <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
-                        <div class="card-header">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
+                        <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
-                                <p>أكثر 5 شركات قربا للتوقعات</p>
+                               
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -75,7 +75,7 @@
                 </div>
 
                                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header">
                             <div class="col-12 justify-content-center">
                                 <p>أكثر 5 شركات حيث الأرباح الفعلية</p>
@@ -91,10 +91,9 @@
     </div>
      <div class="row pt-3">
                         <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
-                        <div class="card-header">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
+                        <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
-                                <p>أكثر 5 شركات من حيث الأرباح فى الربع الثانى 2020 </p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -105,8 +104,8 @@
                 </div>
 
                                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
-                        <div class="card-header">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
+                        <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
                                 <p>أكثر 5 شركات من حيث الأرباح فى الربع الثالث 2020 </p>
                             </div>
@@ -125,102 +124,99 @@
 
 
 {% block scripts %}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
-        var expect_config = {
-            type: 'bar',
-            data: {
-                datasets: [{
-                    data: {{ expectdata |safe }},
-                    backgroundColor: [
-                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
-                    ],
-                    label: 'صحفية مال'
-                }],
-                labels: {{ expectlabel|safe }}
-            },
-            options: {
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
+    var rateFair_config = {
+        type: 'bar',
+        data: {
+            datasets: [{
+                data: {{ expectdata |safe }},
+                backgroundColor: [
+                    '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                ],
+                label: 'أكثر 5 شركات قربا للتوقعات'
+            }],
+            labels: {{ expectlabel|safe }}
+        },
+        options: {
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
             }
         }
-                var expect1_config = {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: {{ expectdata1 |safe }},
-                    backgroundColor: [
-                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
-                    ],
-                    label: 'صحفية مال'
-                }],
-                labels: {{ expectlabel1|safe }}
-            },
-            options: {
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
+    }
+    var rateFair1_config = {
+        type: 'polarArea',
+        data: {
+            datasets: [{
+                data: {{ expectdata1 |safe }},
+                backgroundColor: [
+                    '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                ],
+            }],
+            labels: {{ expectlabel1|safe }}
+        },
+        options: {
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
             }
         }
+    }
+    var rateFair2_config = {
+        type: 'bar',
+        data: {
+            datasets: [{
+                data: {{ expectdata2 |safe }},
+                backgroundColor: [
+                    '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
+                ],
+                label: ' أكثر 5 شركات من حيث الأرباح فى الربع الثانى 2020'
 
-                        var expect2_config = {
-            type: 'bar',
-            data: {
-                datasets: [{
-                    data: {{ expectdata2 |safe }},
-                    backgroundColor: [
-                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
-                    ],
-                    label: 'صحفية مال'
-                }],
-                labels: {{ expectlabel2|safe }}
-            },
-            options: {
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
+            }],
+            labels: {{ expectlabel2|safe }}
+        },
+        options: {
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
             }
         }
-                        var expect3_config = {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: {{ expectdata3 |safe }},
-                    backgroundColor: [
-                        '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
-                    ],
-                    label: 'صحفية مال'
-                }],
-                labels: {{ expectlabel3|safe }}
-            },
-            options: {
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
+    }
+    var configCompany = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{ expectlabel3|safe }},
+                backgroundColor: [
+                    '#696969', '#A9942A', '#000000', '#A9942A', '#D3D3D3'
+                ],
+            }],
+            labels: {{ expectlabel3|safe }}
+        },
+        options: {
+            responsive: true,
+            elements: {
+                line: {
+                    borderWidth: 3
                 }
             }
         }
+    };
 
-
-             window.onload = function () {
-            var Expectctx = document.getElementById('fair-chart').getContext('2d');
-            window.myPie = new Chart(Expectctx, expect_config);
-             var Expect1ctx = document.getElementById('fair1-chart').getContext('2d');
-            window.myPie = new Chart(Expect1ctx, expect1_config);
-             var Expect2ctx = document.getElementById('fair2-chart').getContext('2d');
-            window.myPie = new Chart(Expect2ctx, expect2_config);
-             var Expect3ctx = document.getElementById('fair3-chart').getContext('2d');
-            window.myPie = new Chart(Expect3ctx, expect3_config);
-
-        }
+    window.onload = function () {
+        var Fairctx = document.getElementById('fair-chart').getContext('2d');
+        window.myPie = new Chart(Fairctx, rateFair_config);
+        var Fair1ctx = document.getElementById('fair1-chart').getContext('2d');
+        window.myPie = new Chart(Fair1ctx, rateFair1_config);
+        var Fair2ctx = document.getElementById('fair2-chart').getContext('2d');
+        window.myPie = new Chart(Fair2ctx, rateFair2_config);
+        var Fair3ctx = document.getElementById('fair3-chart').getContext('2d');
+        window.myPie = new Chart(Fair3ctx, configCompany);
+    }
 
 </script>
     <script>
