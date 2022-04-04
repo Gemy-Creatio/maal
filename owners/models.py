@@ -26,14 +26,14 @@ class SeniorOwner(models.Model):
         num = 0 
         for comp in self.companies_related.all():
             num += comp.total_arrows_owned
-        return num
+        return num/1000000
 
     @property
     def TotalPriceArrows(self):
         price = 0
         for num in self.companies_related.all():
             price  +=  num.company.arrow_value * num.total_arrows_owned
-        return price
+        return price/1000000
 
     def __str__(self) -> str:
         return self.name
@@ -63,7 +63,7 @@ class CompaniesArrow(models.Model):
     def TotalArrowPrice(self):
         if self.total_arrows_owned is not None:
             result = self.total_arrows_owned * self.company.arrow_value
-            return result
+            return result / 1000000
         else:
             return 0
 
@@ -84,6 +84,5 @@ class FinicalCompaniesArrow(models.Model):
         else:
             result = self.numberOFArrows * self.company.arrow_value
             return result
-
     def __str__(self) -> str:
         return self.owner.name

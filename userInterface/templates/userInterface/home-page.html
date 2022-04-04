@@ -108,9 +108,11 @@
         </div>
             <div class="row pt-3">
                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
+                                <p>                    أخر 5 شركات تمت التوصية عليها بزيادة الوزن مع السعر المستهدف
+                                </p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -120,9 +122,9 @@
 
                 </div>
                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header">
-                            <div class="col-12 justify-content-center">
+                            <div class="col-12 justify-content-center pt-4">
                                 <p>أخر 5 شركات تمت التوصية عليها بتخفيض الوزن مع السعر المستهدف</p>
                             </div>
                         </div>
@@ -136,9 +138,11 @@
             </div>
             <div class="row pt-3">
                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
+                                <p>                     أخر 5 شركات تمت التوصية عليها بمحايد مع السعر المستهدف
+                                </p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -148,9 +152,9 @@
 
                 </div>
                 <div class="col-lg-6 pt-2">
-                    <div class="card z-index-0 mx-auto box-shadow">
+                    <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header">
-                            <div class="col-12 justify-content-center">
+                            <div class="col-12 justify-content-center pt-4">
                                 <p>أكثر الشركات المدرجة تقييما</p>
                             </div>
                         </div>
@@ -183,7 +187,6 @@
                     backgroundColor: [
                         '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                     ],
-                    label: 'أخر 5 شركات تمت التوصية عليها بزيادة الوزن مع السعر المستهدف'
                 }],
                 labels: {{ label|safe }}
             },
@@ -192,7 +195,15 @@
                     line: {
                         borderWidth: 3
                     }
-                }
+                },
+                tooltips: {
+                    callbacks: {
+                       title: function() {}
+                    }
+                 },
+                 legend: {
+                    display: false
+                  },
             }
         }
         var rateFair1_config = {
@@ -211,7 +222,8 @@
                     line: {
                         borderWidth: 3
                     }
-                }
+                },
+                
             }
         }
         var rateFair2_config = {
@@ -222,7 +234,6 @@
                     backgroundColor: [
                         '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                     ],
-                    label: 'أخر 5 شركات تمت التوصية عليها بمحايد مع السعر المستهدف'
 
                 }],
                 labels: {{ companylabel|safe }}
@@ -232,7 +243,15 @@
                     line: {
                         borderWidth: 3
                     }
-                }
+                },
+                tooltips: {
+                    callbacks: {
+                       title: function() {}
+                    }
+                 },
+                 legend: {
+                    display: false
+                  },
             }
         }
         var configCompany = {

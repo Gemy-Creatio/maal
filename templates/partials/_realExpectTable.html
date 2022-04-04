@@ -46,84 +46,92 @@
                         </thead>
                         <tbody>
                         {% for item in expects %}
-                            <tr>
-                                <td class="d-flex" style="justify-content: space-around; ">
-                                    {% if request.user.user_type == 3 %}
-                                     <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2 ;">
-                                       <i class="far fa-bookmark"></i>
+                          <tr>
+                            <td class="d-flex" style="justify-content: space-around; ">
+                                {% if request.user.user_type == 3 %}
+                                 <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2 ;">
+                                   <i class="far fa-bookmark"></i>
 </a>
 
 {% endif %}
-                                    <a href="{% url 'user-company' item.CompanyEntered.id %}">
+                                <a href="{% url 'user-company' item.CompanyEntered.id %}">
 
-                               <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+                           <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
 </a>
 
-                       </td>
-                                <td>
-
-                                          <a href="{% url 'user-research' item.ResearchCompany.id %}">
-
-                                                        <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
-                                                             </a>
-                                </td>
-                                <td>
-
-                                    <p class=" text-xxs">{{ item.expect_earn }}</p>
-                                </td>
+                   </td>
                             <td>
 
-                                    <p class=" text-xxs">{{ item.real_earn }}</p>
-                                </td>
+                                      <a href="{% url 'user-research' item.ResearchCompany.id %}">
+
+                                                    <p class="text-xxs  mb-0">{{ item.ResearchCompany.name }}</p>
+                                                         </a>
+                            </td>
                             <td>
- {% if item.deviation_third == None %}
-     <p class="text-danger text-xxs ">{{ 0|floatformat:-2 }} %</p>
+
+                                <p class=" text-xxs"> {% if item.expect_earn == None %}
+                                    لا يوجد ارباح معلنه
+                                     {% else %}
+                                     {{ item.expect_earn }}
+                                    {% endif %}
+                                 </p>
+                            </td>
+                        <td>
+
+                            <p class=" text-xxs">
+                                {% if item.real_earn == None %}
+                                لا يوجد ارباح معلنة
                                 {% else %}
-         {% if item.deviation_third < 0  %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_third|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_third|floatformat:-2 }} %</p>
-                                    {% endif %}
-
+                                {{ item.real_earn }}
                                 {% endif %}
+                                </p>
 
-                                </td>
-                                <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.quarter_past }}</p>
+                            </td>
+                        <td>
+                            {% if item.real_earn < 0 or item.expect_earn < 0   %}
+                            <p class="text-danger text-xxs ">-----</p>
+                            {% else %}
+                            <p class="text-success text-xxs">{{ item.deviation_third|floatformat:-2 }} %</p>
+                            {% endif %}
 
-                                </td>
-                                <td>
-                                    {% if item.deviation_fourth < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_fourth|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                            </td>
+                            <td class="text-xxs">
+                                <p class=" text-xxs">{{ item.quarter_past }}</p>
+
+                            </td>
+                            <td>
+                                {% if item.real_earn < 0 or item.quarter_past < 0   %}
+                                <p class="text-danger text-xxs ">-----</p>
+                                {% else %}
+                                    <p class="text-success text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
                                     {% endif %}
-                                </td>
-                              <td class="text-xxs">
-                                    <p class=" text-xxs">{{ item.pervquarter }}</p>
+                            </td>
+                          <td class="text-xxs">
+                                <p class=" text-xxs">{{ item.pervquarter }}</p>
 
-                                </td>
-                                <td>
-                                    {% if item.deviation_fourth < 0 %}
-                                        <p class="text-danger text-xxs ">{{ item.deviation_fifth|floatformat:-2 }} %</p>
-                                    {% else %}
-                                        <p class="text-success text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>
+                            </td>
+                            <td>
+                                {% if item.pervquarter < 0 or item.real_earn < 0   %}
+                                <p class="text-danger text-xxs ">-----</p>
+                                {% else %}
+                                    <p class="text-success text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>
                                     {% endif %}
-                                </td>
 
-                             <td class="  text-xxs">
-                                   <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
-                                </td>
-                                {% if request.user.is_emp or request.user.is_admin   %}
-                                <td class="ms-auto text-start" style="width: 0.2rem;">
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-update' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
-        
-                                </td>
-                                       <td class="ms-auto text-start" style="width: 0.2rem;">
-                                    <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-delete' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
-                                </td>
-                                {% endif %}
-                            </tr>
+                            </td>
+
+                         <td class="  text-xxs">
+                               <a href="{{ item.report }}"><i class="fas fa-file-pdf text-xxs" aria-hidden="true"></i></a>
+                            </td>
+                            {% if request.user.is_emp or request.user.is_admin   %}
+                            <td class="ms-auto text-start" style="width: 0.2rem;">
+                                <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-update' item.id %}"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i>المزيد</a>
+    
+                            </td>
+                                   <td class="ms-auto text-start" style="width: 0.2rem;">
+                                <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'expect-delete' item.id %}"><i class="fas fa-trash text-danger me-2" aria-hidden="true"></i>حذف</a>
+                            </td>
+                            {% endif %}
+                        </tr>
                         {% endfor %}
                     
                         </tbody>

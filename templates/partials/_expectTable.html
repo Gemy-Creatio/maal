@@ -36,9 +36,6 @@
                         </thead>
                         <tbody>
                         {% for item in expects %}
-                         {% if item.real_earn < 0 or item.real_earn == None %}
-                              
-                         {% else %}
                          <tr>
                             <td class="d-flex" style="justify-content: space-around; ">
                                 {% if request.user.user_type == 3 %}
@@ -62,15 +59,15 @@
                             </td>
                             <td>
 
-                                <p class=" text-xxs">{{ item.expect_earn | intcomma }}</p>
+                                <p class=" text-xxs">{{ item.expect_earn }}</p>
                             </td>
                                 <td>
 
-                                <p class=" text-xxs">{{ item.pervquarter | intcomma }}</p>
+                                <p class=" text-xxs">{{ item.pervquarter }}</p>
                             </td>
                                                         <td class="  text-xxs">
-       {% if item.deviation_first < 0 %}
-                                    <p class="text-danger text-xxs ">{{ item.deviation_first|floatformat:-2 }} %</p>
+       {% if item.expect_earn < 0 or item.pervquarter < 0  %}
+                                    <p class="text-danger text-xxs ">-------</p>
                                 {% else %}
                                     <p class="text-success text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
                                 {% endif %}
@@ -81,10 +78,10 @@
 
                             </td>
                             <td>
-                                {% if item.deviation_second < 0 %}
-                                    <p class="text-danger text-xxs ">{{ item.deviation_second|floatformat:-2  | intcomma}} %</p>
+                                {% if item.expect_earn < 0 or item.quarter_past < 0  %}
+                                    <p class="text-danger text-xxs ">------</p>
                                 {% else %}
-                                    <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2  | intcomma}} %</p>
+                                    <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2 }} %</p>
                                 {% endif %}
                             </td>
 
@@ -99,7 +96,6 @@
 
 
                         </tr>
-                         {% endif %}
                         {% endfor %}
 
                         </tbody>

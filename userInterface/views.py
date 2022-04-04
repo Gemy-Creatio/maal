@@ -41,11 +41,12 @@ def user_home(request):
     arrows = CompaniesArrow.objects.all()
     sens = SeniorOwner.objects.all()[:5]
     max_date = CompaniesArrow.objects.latest('date').date
-    if max_date == date.today():
-        arrows = CompaniesArrow.objects.filter(date__gte=max_date)
-    else:
-        arrows = None
-        max_date = None
+    arrows = CompaniesArrow.objects.filter(date__gte=max_date)
+    # if max_date == date.today():
+    #     arrows = CompaniesArrow.objects.filter(date__gte=max_date)
+    # else:
+    #     arrows = None
+    #     max_date = None
 
     label = []
     data = []
@@ -248,7 +249,7 @@ def expectrealList(request):
     data1 = EarningsForecast.objects.order_by('-real_earn')[:5]
     expectlabel1 = []
     expectdata1 = []
-    content = EarningHeader.get_solo()
+    content = EarningHeaderSecond.get_solo()
     for expect in data1:
         expectlabel1.append(expect.CompanyEntered.name)
         expectdata1.append(expect.real_earn)
@@ -284,7 +285,7 @@ def CapitalProfile(request, pk):
 
 
 def ResearchProfile(request, pk):
-    data = ResearchCompany.objects.get(pk=pk).order_by('-pk')
+    data = ResearchCompany.objects.get(pk=pk)
     headersone = EarningHeader.get_solo()
     secondheaders = EarningHeaderSecond.get_solo()
     return render(request, 'userInterface/researchProfile.html', context={"data": data , "firstHeader":headersone , "secondHeader":secondheaders})

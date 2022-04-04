@@ -30,14 +30,14 @@
                         </a>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.NumberOfCompanies | intcomma   }}</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.NumberOfCompanies    }}</p>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOfArrows | intcomma  }}</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOfArrows  |floatformat:2   }}</p>
 
                     </td>
                     <td class="align-middle text-center text-xxs">
-                     <p class="text-xxs">{{ item.TotalPriceArrows | intcomma   }}</p>
+                     <p class="text-xxs">{{ item.TotalPriceArrows |floatformat:2    }}</p>
                     </td>
 
                                    {% if request.user.is_emp or request.user.is_admin   %}

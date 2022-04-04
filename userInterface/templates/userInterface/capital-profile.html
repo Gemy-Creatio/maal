@@ -20,7 +20,7 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-                {% if data.logo.url != None %}
+                {% if data.logo %}
                     <img src="{{ data.logo.url }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                 {% else %}
                     <img src="{% static 'images/company_logo.png' %}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
@@ -55,7 +55,7 @@
               <h6 class="mb-0">التقيمات</h6>
             </div>
                                               <div class="card-body px-0 pb-2">
-                                                {% include 'partials/_rateMoreDetails.html' with rates=data.CompanyEntered.all %}
+                                                {% include 'partials/_rateMoreDetails.html' with rates=data.CompanyEntered.all  %}
                         </div>
 
           </div>
@@ -74,7 +74,7 @@
 </div>
 {% else %}
 <div class="row pt-2">
-  {% include 'partials/_realExpectTable.html' with expects=data.expects.all content=secondHeader %}
+  {% include 'partials/_realExpectTable.html' with content=secondHeader expects=data.expects.all  %}
 
 </div>
 {% endif %}
@@ -118,7 +118,7 @@
   </div>
   
   <div class="card-body px-0 pb-2">
-   {% include 'partials/_companyArrowsOwnersTable.html' with companyarrows=data.company_that_owned.all %}
+   {% include 'partials/_companiesArrowTable.html' with companyarrows=arrows %}
            </div>
   </div>
   </div>

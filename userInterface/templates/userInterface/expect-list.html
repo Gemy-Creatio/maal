@@ -64,7 +64,8 @@
                     <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
-                               
+                               <p>                أكثر 5 شركات قربا للتوقعات
+                            </p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -77,7 +78,7 @@
                                 <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header">
-                            <div class="col-12 justify-content-center">
+                            <div class="col-12 justify-content-center pt-4">
                                 <p>أكثر 5 شركات حيث الأرباح الفعلية</p>
                             </div>
                         </div>
@@ -94,6 +95,7 @@
                     <div class="card z-index-0 mx-auto box-shadow h-100">
                         <div class="card-header pt-6">
                             <div class="col-12 justify-content-center">
+                                <p>أكثر 5 شركات من حيث الأرباح فى الربع الثانى 2020 </p>
                             </div>
                         </div>
                         <div class="card-body justify-content-center">
@@ -105,7 +107,7 @@
 
                                 <div class="col-lg-6 pt-2">
                     <div class="card z-index-0 mx-auto box-shadow h-100">
-                        <div class="card-header pt-6">
+                        <div class="card-header pt-4">
                             <div class="col-12 justify-content-center">
                                 <p>أكثر 5 شركات من حيث الأرباح فى الربع الثالث 2020 </p>
                             </div>
@@ -134,7 +136,6 @@
                 backgroundColor: [
                     '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                 ],
-                label: 'أكثر 5 شركات قربا للتوقعات'
             }],
             labels: {{ expectlabel|safe }}
         },
@@ -143,7 +144,15 @@
                 line: {
                     borderWidth: 3
                 }
-            }
+            },
+            tooltips: {
+                callbacks: {
+                   title: function() {}
+                }
+             },
+             legend: {
+                display: false
+              },
         }
     }
     var rateFair1_config = {
@@ -173,7 +182,6 @@
                 backgroundColor: [
                     '#696969', '#A9942A', '#696969', '#A9942A', '#D3D3D3'
                 ],
-                label: ' أكثر 5 شركات من حيث الأرباح فى الربع الثانى 2020'
 
             }],
             labels: {{ expectlabel2|safe }}
@@ -183,7 +191,15 @@
                 line: {
                     borderWidth: 3
                 }
-            }
+            },
+            tooltips: {
+                callbacks: {
+                   title: function() {}
+                }
+             },
+             legend: {
+                display: false
+              },
         }
     }
     var configCompany = {
