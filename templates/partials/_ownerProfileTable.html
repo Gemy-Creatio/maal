@@ -28,17 +28,17 @@
                         </a>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.ownRatio}} %</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.ownRatio |floatformat:-2  }} %</p>
                     </td>
                     <td class="align-middle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOFArrows }}</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.numberOFArrows |floatformat:-2  }}</p>
 
                     </td>
                     <td class="align-middle text-center text-xxs">
-                     <p class="text-xxs">{{ item.arrowPrice  }}</p>
+                     <p class="text-xxs">{{ item.arrowPrice |floatformat:-2  }}</p>
                     </td>
                    <td class="align-middle text-center text-xxs">
-                     <p class="text-xxs">{{ item.TotalArrowPrice  }}</p>
+                     <p class="text-xxs">{{ item.TotalArrowPrice |floatformat:-2   }}</p>
                     </td>
                                    {% if request.user.is_emp or request.user.is_admin   %}
                <td class="ms-auto text-start" style="width: 1.2rem">

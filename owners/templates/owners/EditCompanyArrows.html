@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %}
 ملكية الأسهم 
 {% endblock %}
@@ -22,12 +22,7 @@
                             <form  method="post">
                                 {% include 'partials/_messages.html' %}
             {% csrf_token %}
-                                  {% for filed in form %}
-                                            <div class="form-group">
-                                            <label class="text-black"> {{filed.label}} </label>
-                                                {{ filed }}
-                                            </div>
-                                        {% endfor %}
+            {{ form|crispy }}
                   <button type="submit" class="btn btn-sm text-white bg-maal">
                                    تعديل
                                </button>

@@ -59,29 +59,39 @@
                             </td>
                             <td>
 
-                                <p class=" text-xxs">{{ item.expect_earn }}</p>
+                                <p class=" text-xxs">{{ item.expect_earn  |floatformat:-2 }}</p>
                             </td>
                                 <td>
 
-                                <p class=" text-xxs">{{ item.pervquarter }}</p>
+                                <p class=" text-xxs">{{ item.pervquarter  |floatformat:-2 }}</p>
                             </td>
                                                         <td class="  text-xxs">
        {% if item.expect_earn < 0 or item.pervquarter < 0  %}
                                     <p class="text-danger text-xxs ">-------</p>
                                 {% else %}
-                                    <p class="text-success text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
+                                {% if item.deviation_first < 0 %}
+                                <p class="text-danger text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
+
+                                {% else %}
+                                <p class="text-success text-xxs">{{ item.deviation_first|floatformat:-2 }} %</p>
+
+                                {% endif %}
                                 {% endif %}
                             </td>
 
                         <td class="text-xxs">
-                                <p class=" text-xxs">{{ item.quarter_past }}</p>
+                                <p class=" text-xxs">{{ item.quarter_past  |floatformat:-2 }}</p>
 
                             </td>
                             <td>
-                                {% if item.expect_earn < 0 or item.quarter_past < 0  %}
+                                {% if item.expect_earn < 0 or item.quarter_past < 0   %}
                                     <p class="text-danger text-xxs ">------</p>
                                 {% else %}
-                                    <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2 }} %</p>
+                                {% if item.deviation_second < 0 %}
+                                <p class="text-danger text-xxs">{{ item.deviation_second|floatformat:-2 }} %</p>       
+                                {% else %}
+                                <p class="text-success text-xxs">{{ item.deviation_second|floatformat:-2 }} %</p>
+                                {% endif %}
                                 {% endif %}
                             </td>
 

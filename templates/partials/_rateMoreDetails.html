@@ -59,10 +59,10 @@
                                                         <p class="text-xxs  mb-0">{{ item.get_Recommendation_display }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue   }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.CurrenncyValue |floatformat:-2   }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.FairValue  }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.FairValue |floatformat:-2  }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.fair_percentage < 0 %}
@@ -78,7 +78,7 @@
                                                        {% endif %}
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <p class="text-xxs  mb-0">{{ item.CompanyEntered.arrow_value   }}</p>
+                                                        <p class="text-xxs  mb-0">{{ item.CompanyEntered.arrow_value |floatformat:-2   }}</p>
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                        {% if item.market_percentage < 0 %}

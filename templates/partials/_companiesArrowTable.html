@@ -47,24 +47,28 @@
                         </a>
                     </td>
                     <td class="align-mpkdle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioToday}} %</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioToday  |floatformat:-2 }} %</p>
                     </td>
                     <td class="align-mpkdle text-center text-xxs">
-                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioYesterday }} %</p>
+                        <p class="text-xxs  mb-0 text-black-50">{{ item.totalOwnRatioYesterday  |floatformat:-2 }} %</p>
 
                     </td>
                     <td class="align-mpkdle text-center text-xxs">
-                         {% if item.ChnageOwn > 0 %}
+                         {% if item.ChangeOwn > 0 %}
                        <p class="text-xxs text-success">{{ item.ChangeOwn |floatformat:-2 }} %</p>
                        {% else %}
                        <p class="text-xxs text-danger">{{ item.ChangeOwn |floatformat:-2 }} %</p>
                         {% endif %}
                     </td>
                    <td class="align-mpkdle text-center text-xxs">
-                     {% if item.TotalArrowPrice is not None %}
-                       <p class="text-xxs">{{ item.TotalArrowPrice | intcomma   }}</p>
+                     {% if item.TotalArrowPrice is  None %}
+                     <p class="text-xxs text-black-50">لا يوجد قيمة سوقية</p>
                        {% else %}
-                         <p class="text-xxs">0</p>
+                       {% if item.TotalArrowPrice < 1000 %}
+                       <p class="text-xxs text-black-50">{{ item.TotalArrowPrice  |floatformat:-2 |intcomma }}</p>
+                       {% else %}
+                       <p class="text-xxs text-black-50">{{ item.TotalArrowPrice  |floatformat:-2 |intcomma   }}</p>     
+                       {% endif %}
                        {% endif %}
                     </td>
                                    {% if request.user.is_emp or request.user.is_admin   %}

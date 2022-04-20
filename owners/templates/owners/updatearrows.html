@@ -24,12 +24,8 @@
                             <form  method="post">
                                 {% include 'partials/_messages.html' %}
             {% csrf_token %}
-                                     {% for filed in form %}
-                                                    <div class="form-group">
-        
-                                                        {{ filed }}
-                                                    </div>
-                                                {% endfor %}
+            {{ form|crispy }}
+
                   <button type="submit" class="btn btn-sm text-white bg-maal">
                                    تعديل
                                </button>

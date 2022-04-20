@@ -177,7 +177,7 @@ class EarningsForecast(models.Model):
             return 0 
         else:
             result = float(self.expect_earn) - float(self.pervquarter)
-            deviation = result / self.pervquarter * 100
+            deviation = (result / self.pervquarter) * 100
             return deviation
     @property
     def deviation_second(self):
@@ -185,7 +185,7 @@ class EarningsForecast(models.Model):
             return 0 
         else:
             result = self.expect_earn - self.quarter_past
-            deviation = result / self.quarter_past * 100
+            deviation = (result / self.quarter_past) * 100
             return deviation
     @property
     def deviation_third(self):
@@ -193,7 +193,7 @@ class EarningsForecast(models.Model):
             return 0 
         else:
             result = float(self.real_earn) - float(self.expect_earn)
-            deviation = result / self.expect_earn * 100
+            deviation = (result / self.expect_earn) * 100
             return deviation
     @property
     def deviation_fourth(self):
@@ -201,7 +201,7 @@ class EarningsForecast(models.Model):
             return 0 
         else:
             result = float(self.real_earn) - float(self.quarter_past)
-            deviation = result / self.quarter_past * 100
+            deviation = (result / self.quarter_past) * 100
             return deviation
     @property
     def deviation_fifth(self):
@@ -209,7 +209,7 @@ class EarningsForecast(models.Model):
             return 0 
         else:
             result = float(self.real_earn) - float(self.pervquarter)
-            deviation = result / self.pervquarter * 100
+            deviation = (result / self.pervquarter) * 100
             return deviation
 
     def __str__(self):

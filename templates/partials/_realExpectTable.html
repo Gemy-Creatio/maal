@@ -88,33 +88,45 @@
 
                             </td>
                         <td>
-                            {% if item.real_earn < 0 or item.expect_earn < 0   %}
+                            {% if item.real_earn < 0 or item.expect_earn < 0  %}
                             <p class="text-danger text-xxs ">-----</p>
                             {% else %}
+                            {% if item.deviation_third < 0 %}
+                            <p class="text-danger text-xxs">{{ item.deviation_third|floatformat:-2 }} %</p>
+                            {% else %}
                             <p class="text-success text-xxs">{{ item.deviation_third|floatformat:-2 }} %</p>
+                            {% endif %}
                             {% endif %}
 
                             </td>
                             <td class="text-xxs">
-                                <p class=" text-xxs">{{ item.quarter_past }}</p>
+                                <p class=" text-xxs">{{ item.quarter_past |floatformat:-2 }}</p>
 
                             </td>
                             <td>
-                                {% if item.real_earn < 0 or item.quarter_past < 0   %}
+                                {% if item.real_earn < 0 or item.quarter_past < 0  %}
                                 <p class="text-danger text-xxs ">-----</p>
                                 {% else %}
-                                    <p class="text-success text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                                {% if item.deviation_fourth < 0 %}
+                                <p class="text-danger text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                                {% else %}
+                                <p class="text-success text-xxs">{{ item.deviation_fourth|floatformat:-2 }} %</p>
+                                {% endif %}
                                     {% endif %}
                             </td>
                           <td class="text-xxs">
-                                <p class=" text-xxs">{{ item.pervquarter }}</p>
+                                <p class=" text-xxs">{{ item.pervquarter |floatformat:-2  }}</p>
 
                             </td>
                             <td>
                                 {% if item.pervquarter < 0 or item.real_earn < 0   %}
                                 <p class="text-danger text-xxs ">-----</p>
                                 {% else %}
-                                    <p class="text-success text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>
+                                {% if  item.deviation_fifth < 0 %}
+                                <p class="text-danger text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>  
+                                {% else %}
+                                <p class="text-success text-xxs">{{ item.deviation_fifth|floatformat:-2 }} %</p>
+                                {% endif %}
                                     {% endif %}
 
                             </td>
