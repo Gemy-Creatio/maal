@@ -1,7 +1,8 @@
 import datetime
-
+from django.templatetags.static import static
 from django.db import models
 from accounts.models import User
+import os
 
 
 class CompanyCategory(models.Model):
@@ -25,6 +26,15 @@ class FinicialCompany(models.Model):
     link = models.URLField(null=True, blank=True)
     total_arrows = models.FloatField(null=True, blank=True)
     arrow_value = models.FloatField(null=True, blank=True)
+    @property
+    def logo_url(self):
+        if self.logo and hasattr(self.logo, 'url'):
+            if os.path.isfile(self.logo.url):
+                return self.logo.url
+            else:
+                return static("images/logo.png")
+        else:
+            return static("images/logo.png")
 
     class Meta:
         indexes = [
@@ -72,7 +82,15 @@ class FinicialAnalyst(models.Model):
     phone = models.IntegerField(null=True, blank=True)
     tiwtterAccount = models.CharField(max_length=255, null=True, blank=True)
     EmpEntered = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
+    @property
+    def logo_url(self):
+        if self.logo and hasattr(self.logo, 'url'):
+            if os.path.isfile(self.logo.url):
+                return self.logo.url
+            else:
+                return static("images/user.png")
+        else:
+            return static("images/user.png")
     class Meta:
         verbose_name_plural = "Analysts"
         ordering = ["id", ]
@@ -106,6 +124,15 @@ class Rates(models.Model):
     report = models.FileField(upload_to='reportspdf/', null=True)
     is_recommended = models.BooleanField(null=True, blank=True, default=False)
     Date_Entered = models.DateField(auto_now_add=True , null=True)
+    @property
+    def report_url(self):
+        if self.report and hasattr(self.report, 'url'):
+            if os.path.isfile(self.report.url):
+                return self.report.url
+            else:
+                return None
+        else:
+            return None
     class Meta:
         indexes = [
             models.Index(fields=['FairValue', 'AnalayticName', 'CompanyEntered'])
@@ -171,6 +198,15 @@ class EarningsForecast(models.Model):
     real_earn =  models.FloatField(null=True, blank=True)
     expect_earn =  models.FloatField(null=True, blank=True)
     date_entered = models.DateField(null=True , blank=True , auto_now_add=True)
+    @property
+    def report_url(self):
+        if self.report and hasattr(self.report, 'url'):
+            if os.path.isfile(self.report.url):
+                return self.report.url
+            else:
+                return None
+        else:
+            return None
     @property
     def deviation_first(self):
         if self.pervquarter == None or self.quarter_past == None or self.real_earn == None or self.expect_earn == None:

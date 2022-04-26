@@ -20,13 +20,8 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="{% static 'images/logo.png' %}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                {% comment %} {% if data.logo %}
-                    <img src="{{ data.logo.url }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                {% else %}
-                    <img src="{% static 'images/logo.png' %}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-
-                {% endif %} {% endcomment %}
+              <img src="{{ data.logo_url }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+             
             </div>
           </div>
           <div class="col-auto my-auto">

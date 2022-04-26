@@ -50,10 +50,16 @@
 </a>
 
       {% endif %}
-                                             <a href="{% url 'user-company' item.CompanyEntered.id %}">
+        {% if item.CompanyEntered.id %}
+        <a href="{% url 'user-company' item.CompanyEntered.id %}">
 
-                                        <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-</a>
+            <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+</a>  
+        {% else %}
+
+            <p class="text-xxs">لا يوجد شركة لهذا البحث</p>
+        {% endif %}
+   
 
                                 </td>
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
@@ -93,11 +99,15 @@
 {#                                            {% endif %}#}
 {#                                        </td>#}
 
-                                        <td class="align-middle text-center text-xxs" style="width: 1.2rem;">
-                                            <a href="{{ item.report.url }}">
+                                        <td class="align-middle text-center text-xxs">
+                                            {% if item.report_url is None  %}
+                                           <p class="text-xxs">لا يوجد مرفق </p>
+                                            {% else %}
+                                            <a href="{{ item.report_url }}">
                                                 <i class="fas fa-file-pdf text-danger">
                                                 </i>
                                             </a>
+                                            {% endif %}
                                         </td>
                                         <td class="align-middle text-center text-xxs" style="width: 1.2rem; white-space: nowrap;">
                                             <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"d-m-y" }}</p>

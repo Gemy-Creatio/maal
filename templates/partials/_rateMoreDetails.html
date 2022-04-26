@@ -43,11 +43,15 @@
            </a>
 
                  {% endif %}
-                                                        <a href="{% url 'user-company' item.CompanyEntered.pk %}">
-
-                                                   <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-           </a>
-
+                 {% if item.CompanyEntered.id %}
+                 <a href="{% url 'user-company' item.CompanyEntered.id %}">
+         
+                     <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+         </a>  
+                 {% else %}
+         
+                     <p class="text-xxs">لا يوجد شركة لهذا البحث</p>
+                 {% endif %}
                                            </td>
  <td class="align-middle text-center text-xxs">
                                                              <a href="{% url 'user-research' item.ResearchCompany.pk %}">

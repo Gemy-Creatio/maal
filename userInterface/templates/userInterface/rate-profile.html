@@ -64,20 +64,24 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="align-middle text-center text-xxs">
-                                                        <a href="{% url 'user-company' rate.CompanyEntered.pk %}">
+                                                        <a href="{% url 'user-company' rate.CompanyEntered.id %}">
                                                             <h6 class="text-xxs  mb-0">{{ rate.CompanyEntered.name }}</h6>
                                                         </a>
                                                     </td>
  <td class="align-middle text-center text-xxs">
-                                                         <a href="{% url 'user-research' rate.ResearchCompany.pk %}">
+                                                         <a href="{% url 'user-research' rate.ResearchCompany.id %}">
 
                                                         <p class="text-xxs  mb-0">{{ rate.ResearchCompany.name }}</p>
                                                              </a>
                                                     </td>
                                                  <td class="align-middle text-center text-xxs">
-                                                       <a href="{% url 'user-interface' rate.AnalayticName.pk %}">
-                                                            <p class="text-xxs  mb-0">{{ rate.AnalayticName.name }}</p>
-                                                       </a>
+                                                     {% if rate.AnalayticName.id  %}
+                                                     <a href="{% url 'user-interface' rate.AnalayticName.id %}">
+                                                      <p class="text-xxs  mb-0">{{ rate.AnalayticName.name }}</p>
+                                                 </a>
+                                                     {% else %}
+                                                     <p class="text-xxs  mb-0">لا يوجد محلل </p>
+                                                     {% endif %}
                                                     </td>
                                                     <td class="align-middle text-center text-xxs">
                                                         <p class="text-xxs  mb-0">{{ rate.get_Recommendation_display }}</p>

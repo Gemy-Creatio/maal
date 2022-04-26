@@ -96,12 +96,15 @@
                             </td>
 
 
-                         <td class="  text-xxs">
-                             {% if item.report %}
-                                 <a href="{{ item.report.url }}"><i class="fas fa-file-pdf text-xxs" aria-hpkden="true"></i></a>
-                             {% else %}
-                                 <p class="text-xxs text-muted">لا يوجد مرفق</p>
-                             {% endif %}
+                        <td class="align-middle text-center text-xxs">
+                                {% if item.report_url is None  %}
+                               <p class="text-xxs">لا يوجد مرفق </p>
+                                {% else %}
+                                <a href="{{ item.report_url }}">
+                                    <i class="fas fa-file-pdf text-danger">
+                                    </i>
+                                </a>
+                                {% endif %}
                             </td>
 
 

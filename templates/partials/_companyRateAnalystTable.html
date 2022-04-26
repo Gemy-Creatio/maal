@@ -39,12 +39,25 @@
                                 <tbody>
                                 {% for item in data %}
                                     <tr>
-                                        <td class="align-middle text-center text-xxs">
-                                             <a href="{% url 'user-company' item.CompanyEntered.id %}">
-                                                            <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
-                                                        </a>
+                                        <td style="justify-content: space-around; ">
+                                            {% if request.user.user_type == 3 %}
+                                             <a  href="{% url 'add_wish' item.CompanyEntered.id %}" style="margin-inline:0.2rem ;">
+                                               <i class="far fa-bookmark"></i>
+</a>
 
-                                        </td>
+     {% endif %}
+       {% if item.CompanyEntered.id %}
+       <a href="{% url 'user-company' item.CompanyEntered.id %}">
+
+           <p class="text-xxs">{{ item.CompanyEntered.name }}</p>
+</a>  
+       {% else %}
+
+           <p class="text-xxs">لا يوجد شركة لهذا البحث</p>
+       {% endif %}
+  
+
+                               </td>
                                         <td class="align-middle text-center text-xxs">
                                            {% if item.AnalayticName == None %}
                                           <p class="text-xxs text-muted">-------- </p>
@@ -87,10 +100,14 @@
                                         </td>
 
                                         <td class="align-middle text-center text-xxs">
-                                            <a href="{{ item.report.url }}">
+                                            {% if item.report_url is None  %}
+                                           <p class="text-xxs">لا يوجد مرفق </p>
+                                            {% else %}
+                                            <a href="{{ item.report_url }}">
                                                 <i class="fas fa-file-pdf text-danger">
                                                 </i>
                                             </a>
+                                            {% endif %}
                                         </td>
                                         <td class="align-middle text-center text-xxs">
                                             <p class="text-xxs text-black-50  mb-0">{{ item.RecommendDate|date:"Y-m-d" }}</p>
