@@ -3,6 +3,8 @@ from django.templatetags.static import static
 from django.db import models
 from accounts.models import User
 import os
+import arabic_reshaper
+from bidi.algorithm import get_display
 
 
 class CompanyCategory(models.Model):
@@ -29,10 +31,11 @@ class FinicialCompany(models.Model):
     @property
     def logo_url(self):
         if self.logo and hasattr(self.logo, 'url'):
-            if os.path.isfile(self.logo.url):
+            if os.path.isfile(self.logo.path) and os.access(self.logo.path, os.R_OK):
                 return self.logo.url
             else:
-                return static("images/logo.png")
+                return static("images/logo.png")            
+        
         else:
             return static("images/logo.png")
 
@@ -127,8 +130,9 @@ class Rates(models.Model):
     @property
     def report_url(self):
         if self.report and hasattr(self.report, 'url'):
-            if os.path.isfile(self.report.url):
-                return self.report.url
+            if os.path.isfile(self.report.path) and os.access(self.report.path, os.R_OK):
+                reshaped_text = arabic_reshaper.reshape(self.report.name)   
+                return f"static/images/{reshaped_text}"
             else:
                 return None
         else:
@@ -201,8 +205,9 @@ class EarningsForecast(models.Model):
     @property
     def report_url(self):
         if self.report and hasattr(self.report, 'url'):
-            if os.path.isfile(self.report.url):
-                return self.report.url
+            if os.path.isfile(self.report.path) and os.access(self.report.path, os.R_OK):
+                reshaped_text = arabic_reshaper.reshape(self.report.name)   
+                return f"static/images/{reshaped_text}"
             else:
                 return None
         else:

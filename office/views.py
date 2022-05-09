@@ -109,7 +109,7 @@ class AddCategory(CreateView):
     def form_valid(self, form):
         category = form.save(commit=True)
         category.EmpEntered = self.request.user
-        category.save
+        category.save()
         return super(AddCategory, self).form_valid(form)
 
     def get_success_url(self):
@@ -124,7 +124,7 @@ class UpdateCategory(UpdateView):
     def form_valid(self, form):
         category = form.save(commit=True)
         category.EmpEntered = self.request.user
-        category.save
+        category.save()
         return super(UpdateCategory, self).form_valid(form)
 
     def get_success_url(self):
@@ -157,7 +157,7 @@ class AddReserchCompany(CreateView):
     def form_valid(self, form):
         research = form.save(commit=True)
         research.EmpEntered = self.request.user
-        research.save
+        research.save()
         return super(AddReserchCompany, self).form_valid(form)
 
     def get_success_url(self):
@@ -172,7 +172,7 @@ class UpdateReserchCompany(UpdateView):
     def form_valid(self, form):
         research = form.save(commit=True)
         research.EmpEntered = self.request.user
-        research.save
+        research.save()
         return super(UpdateReserchCompany, self).form_valid(form)
 
     def get_success_url(self):
@@ -187,7 +187,7 @@ class AddCompany(CreateView):
     def form_valid(self, form):
         company = form.save(commit=True)
         company.EmpEntered = self.request.user
-        company.save
+        company.save()
         return super(AddCompany, self).form_valid(form)
 
     def get_success_url(self):
@@ -202,7 +202,8 @@ class EditCompany(UpdateView):
     def form_valid(self, form):
         company = form.save(commit=True)
         company.EmpEntered = self.request.user
-        company.save
+        company.logo = form.cleaned_data['logo']
+        company.save()
         return super(EditCompany, self).form_valid(form)
 
     def get_success_url(self):
